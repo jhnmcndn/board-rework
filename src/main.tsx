@@ -1,7 +1,7 @@
 import { homeRoute } from '@/routes/home';
 import { personalInfoRoute } from '@/routes/personalInfo';
 import { rootRoute } from '@/routes/root';
-import '@/styles/index.scss';
+import '@/styles/main.scss';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import React from 'react';
