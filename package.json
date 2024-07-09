@@ -26,6 +26,7 @@
     "classnames": "^2.5.1",
     "dayjs": "^1.11.11",
     "eslint-config-airbnb-typescript": "^18.0.0",
+    "howler": "^2.2.4",
     "husky": "^9.0.11",
     "lodash-es": "^4.17.21",
     "react": "^18.3.1",
