@@ -4,20 +4,20 @@
   "version": "3.7.8.1",
   "type": "module",
   "scripts": {
+    "8801": "VITE_APP_SERVER=8801 vite",
+    "8802": "VITE_APP_SERVER=8802 vite",
+    "8803": "VITE_APP_SERVER=8803 vite",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "8801": "VITE_APP_SERVER=8801 vite",
-    "8802": "VITE_APP_SERVER=8802 vite",
-    "8803": "VITE_APP_SERVER=8803 vite",
     "dev-8801": "export VITE_APP_SERVER=8801 vite",
     "dev-8802": "export VITE_APP_SERVER=8802 vite",
     "dev-8803": "export VITE_APP_SERVER=8803 vite",
     "build-8801": "export VITE_APP_SERVER=8801 && tsc -b && vite build",
     "build-8802": "export VITE_APP_SERVER=8802 && tsc -b && vite build",
     "build-8803": "export VITE_APP_SERVER=8803 && tsc -b && vite build",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.50.1",
@@ -26,6 +26,7 @@
     "classnames": "^2.5.1",
     "dayjs": "^1.11.11",
     "eslint-config-airbnb-typescript": "^18.0.0",
+    "husky": "^9.0.11",
     "lodash-es": "^4.17.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
