@@ -40,7 +40,7 @@ export const gamesRoute = createRoute({
 
 export const mailBoxRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/mail-box',
+  path: '/mailbox',
   component: Mailbox,
 });
 
