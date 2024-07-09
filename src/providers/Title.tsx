@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const server = import.meta.env.VITE_APP_SITE;
+const server = import.meta.env.VITE_APP_SERVER;
 
 const Title = () => {
   useEffect(() => {
