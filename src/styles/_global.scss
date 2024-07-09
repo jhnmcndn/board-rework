@@ -7,6 +7,10 @@ body {
   padding: 0;
   background: #000;
   color: #dec28c;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+  'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 *,
@@ -43,3 +47,4 @@ img {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
