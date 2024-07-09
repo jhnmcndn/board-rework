@@ -22,5 +22,6 @@ const initialUserInfoState = {
 
 export const useUserInfoStore = create<UserInfoState>()((set) => ({
   userInfo: initialUserInfoState,
-  setUserInfo: (userInfo) => set((state) => ({ userInfo: { ...state.userInfo, ...userInfo } })),
+  setUserInfo: (userInfo) =>
+    set((state) => ({ userInfo: { ...state.userInfo, ...userInfo } })),
 }));
