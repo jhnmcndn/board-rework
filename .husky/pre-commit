@@ -1,1 +1,1 @@
-bun run prepare
+bun run lint-staged
