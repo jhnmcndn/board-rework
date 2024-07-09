@@ -1,5 +1,19 @@
 import { homeRoute } from '@/routes/home';
-import { personalInfoRoute } from '@/routes/personalInfo';
+import {
+  codeWashRoute,
+  customerServiceRoute,
+  faqRoute,
+  gamesRoute,
+  mailBoxRoute,
+  personalInfoRoute,
+  promotionRoute,
+  rechargeHistoryRoute,
+  rechargeRoute,
+  safeBoxRoute,
+  shareRoute,
+  webviewRoute,
+  withdrawRoute,
+} from '@/routes/pritvate-routes';
 import { rootRoute } from '@/routes/root';
 import '@/styles/main.scss';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -8,7 +22,22 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Title from './providers/Title';
 
-const routeTree = rootRoute.addChildren([homeRoute, personalInfoRoute]);
+const routeTree = rootRoute.addChildren([
+  homeRoute,
+  personalInfoRoute,
+  codeWashRoute,
+  customerServiceRoute,
+  faqRoute,
+  gamesRoute,
+  mailBoxRoute,
+  promotionRoute,
+  rechargeRoute,
+  rechargeHistoryRoute,
+  safeBoxRoute,
+  shareRoute,
+  webviewRoute,
+  withdrawRoute,
+]);
 const router = createRouter({ routeTree });
 const queryClient = new QueryClient();
 
