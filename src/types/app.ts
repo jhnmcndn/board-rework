@@ -1,3 +1,5 @@
+import { THEME } from './enums';
+
 export type UserInfo = {
   token: any;
   id: string;
@@ -20,4 +22,9 @@ export type UserInfo = {
 export interface UserInfoState {
   userInfo: UserInfo;
   setUserInfo: (userInfo: UserInfo) => void;
+}
+
+export interface ThemeState {
+  theme: THEME;
+  setTheme: (theme: THEME) => void;
 }
