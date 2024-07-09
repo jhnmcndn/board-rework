@@ -28,3 +28,14 @@ export interface ThemeState {
   theme: THEME;
   setTheme: (theme: THEME) => void;
 }
+
+export type Music = {
+  music: boolean;
+  pop: boolean;
+};
+
+export interface MusicState {
+  playState: Music;
+  setMusic: (play: boolean) => void;
+  setPop: (play: boolean) => void;
+}
