@@ -13,7 +13,7 @@ import {
   shareRoute,
   webviewRoute,
   withdrawRoute,
-} from '@/routes/pritvate-routes';
+} from '@/routes/privateRoutes';
 import { rootRoute } from '@/routes/root';
 import '@/styles/main.scss';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
