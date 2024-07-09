@@ -26,7 +26,6 @@
     "classnames": "^2.5.1",
     "dayjs": "^1.11.11",
     "howler": "^2.2.4",
-    "husky": "^9.0.11",
     "lodash-es": "^4.17.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -52,11 +51,18 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "globals": "^15.8.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
     "prettier": "^3.3.2",
     "typescript": "^5.2.2",
     "typescript-eslint": "^7.16.0",
     "vite": "^5.3.1",
     "vite-plugin-dynamic-import": "^1.5.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.{js,css,ts,tsx,jsx}": [
