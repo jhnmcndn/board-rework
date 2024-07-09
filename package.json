@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "8801": "VITE_APP_SERVER=8801 vite",
     "8802": "VITE_APP_SERVER=8802 vite",
-    "8803": "VITE_APP_SERVER=8803 && vite",
+    "8803": "VITE_APP_SERVER=8803 vite",
     "dev-8801": "export VITE_APP_SERVER=8801 vite",
     "dev-8802": "export VITE_APP_SERVER=8802 vite",
     "dev-8803": "export VITE_APP_SERVER=8803 vite",
