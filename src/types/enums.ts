@@ -5,3 +5,14 @@ export enum APP_ROUTE {
   PAY_APP = 'game88-pay-app/',
   PLATFORM = 'game88-platform-app/',
 }
+
+export enum THEME {
+  BLACK_GOLD = 'blackGold',
+  BROWN_GOLD = 'brownGold',
+  YELLOW_WHITE = 'yellowWhite',
+  GREEN_YELLOW = 'greenYellow',
+  SKY_BLUE = 'skyBlue',
+  DARK_BLUE = 'darkBlue',
+  RED_GOLD = 'redGold',
+  WHITE_GOLD = 'whiteGold',
+}
