@@ -1,35 +1,43 @@
 import backgroundMusic from '@/assets/music/music.mp3';
-import popSound from '@/assets/music/pop.mp3';
 import { useMusicStore } from '@/store/music';
-import { Howl } from 'howler';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const Music = () => {
-  const musicPlayState = useMusicStore((state) => state.playState.music);
-  const popPlayState = useMusicStore((state) => state.playState.pop);
-  const music = new Howl({
-    src: [backgroundMusic],
-    loop: true,
-  });
-  const pop = new Audio(popSound);
+  const isBackgroundMusicOn = useMusicStore((state) => state.playState.music);
+  const [didUserInteract, setDidUserInteract] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const shouldPlayMusic = didUserInteract && isBackgroundMusicOn;
 
   useEffect(() => {
+    const bgMusic = audioRef.current;
     const playMusic = () => {
-      if (!musicPlayState) return music.pause();
-      return music.play();
+      if (bgMusic) {
+        bgMusic.loop = true;
+        bgMusic.play();
+      }
     };
-    playMusic();
-  }, [musicPlayState]);
-
-  useEffect(() => {
-    const playPop = () => {
-      if (!popPlayState) return;
-      return pop.play();
+    const pauseMusic = () => {
+      if (!bgMusic) return;
+      bgMusic.pause();
     };
-    playPop();
-  }, [popPlayState]);
+    const handleBackgroundMusic = () => {
+      if (document.visibilityState === 'visible' && shouldPlayMusic) {
+        playMusic();
+      } else {
+        pauseMusic();
+      }
+    };
+    handleBackgroundMusic();
+    const handleUserInteract = () => setDidUserInteract(true);
+    addEventListener('click', handleUserInteract);
+    document.addEventListener('visibilitychange', handleUserInteract);
+    return () => {
+      removeEventListener('click', handleUserInteract);
+      document.removeEventListener('visibilitychange', handleUserInteract);
+    };
+  }, [isBackgroundMusicOn, didUserInteract]);
 
-  return null;
+  return <audio ref={audioRef} src={backgroundMusic} />;
 };
 
 export default Music;
