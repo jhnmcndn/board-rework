@@ -1,7 +1,7 @@
-import { THEME } from './enums';
+import type { THEME } from './enums';
 
-export type UserInfo = {
-  token: any;
+export type AccountInfo = {
+  token: string;
   id: string;
   nickName: string;
   vip: number;
@@ -15,7 +15,7 @@ export type UserInfo = {
   status: number;
   inviterCode: string;
   registerType: number;
-  phone: any;
+  phone: string;
   newAccount: boolean;
 };
 
@@ -23,9 +23,9 @@ export type AccountNow = {
   userBalance: number;
 };
 
-export interface UserInfoState {
-  userInfo: UserInfo;
-  setUserInfo: (userInfo: UserInfo) => void;
+export interface AccountInfoState {
+  userInfo: AccountInfo;
+  setUserInfo: (userInfo: AccountInfo) => void;
 }
 export interface AccountNowState {
   accountNow: AccountNow;

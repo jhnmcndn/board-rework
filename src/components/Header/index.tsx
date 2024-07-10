@@ -1,9 +1,9 @@
 import { isLoggedIn } from '@/utils/app';
 import defaultIcon from '../../assets/blackGold/header/defaultIcon.png';
 
-import { getAccountInfo } from '@/api/platformApp';
+import { getAccountInfo } from '@/api/gameApp';
+import { useUserInfoStore } from '@/store/accountInfo';
 import { useThemeStore } from '@/store/theme';
-import { useUserInfoStore } from '@/store/userInfo';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import register_btn from '../../assets/blackGold/header/btn3.png';
@@ -22,7 +22,7 @@ const Header = () => {
   const userData = useUserInfoStore((state) => state.userInfo);
   const theme = useThemeStore((state) => state.theme);
   const [expBar, setExpBar] = useState(0);
-  const [appName, setAppName] = useState('');
+  const [, setAppName] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -32,11 +32,7 @@ const Header = () => {
   });
 
   useEffect(() => {
-    setExpBar(
-      (userData?.codeTotal /
-        (userData?.codeTotal + (data?.nextLevelIntegral || 0))) *
-        100 || 0
-    );
+    setExpBar((userData?.codeTotal / (userData?.codeTotal + (data?.nextLevelIntegral || 0))) * 100 || 0);
   }, [expBar, userData, data]);
 
   const onCopy = () => {
@@ -65,18 +61,11 @@ const Header = () => {
           <div className={styles.userDetails}>
             <div className={styles.userInfo}>
               <span>{userData?.id ? userData?.id : '未登录'}</span>
-              {isLoggedIn() && (
-                <span className={styles.vip}>
-                  VIP{userData?.vip ? userData?.vip : ''}
-                </span>
-              )}
+              {isLoggedIn() && <span className={styles.vip}>VIP{userData?.vip ? userData?.vip : ''}</span>}
             </div>
             {isLoggedIn() && (
               <div className={styles.copyIcon} onClick={onCopy}>
-                <img
-                  src={require(`../../assets/${theme}/header/copyIcon.png`)}
-                  alt="copy"
-                />
+                <img src={require(`../../assets/${theme}/header/copyIcon.png`)} alt="copy" />
               </div>
             )}
           </div>
@@ -97,10 +86,7 @@ const Header = () => {
             <>
               {server !== '8803' && (
                 <div className={styles.btn_wrapper}>
-                  <button
-                    style={{ width: '80%' }}
-                    className={styles.loginButton}
-                  >
+                  <button style={{ width: '80%' }} className={styles.loginButton}>
                     <img
                       onClick={() => {
                         // popSound();

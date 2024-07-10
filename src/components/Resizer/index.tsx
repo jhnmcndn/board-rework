@@ -1,35 +1,34 @@
 import { useLocation } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
-import { isIOS, isMacOs, isMobile, isWindows } from 'react-device-detect';
+import { useEffect } from 'react';
+import { isMobile } from 'react-device-detect';
 
 const Resizer = () => {
-  const orientation = screen.orientation.type;
-  const [shouldRotate, setShouldRotate] = useState(orientation.includes('portrait'));
   const location = useLocation();
-  const setAppSize = () => {
+  const handleAppSize = () => {
+    const root = document.getElementById('root') as HTMLDivElement;
     if (!location.pathname.includes('game') && !location.pathname.includes('webView')) {
-      const root = document.getElementById('root') as HTMLDivElement;
       if (isMobile) {
-        root.style.height =
-          (orientation.includes('portrait') ? window.innerWidth : window.innerHeight) + 'px';
-        root.style.width = (orientation.includes('portrait') ? window.innerHeight : window.innerWidth) + 'px';
-        root.style.transform = orientation.includes('portrait') ? 'rotate(90deg)' : 'rotate(0deg)';
+        root.style.width = window.innerHeight + 'px';
+        root.style.height = window.innerWidth + 'px';
+        root.style.transform = 'rotate(90deg)';
+      } else {
+        root.style.width = window.innerWidth + 'px';
+        root.style.height = window.innerHeight + 'px';
+        root.style.transform = 'rotate(0deg)';
       }
     }
   };
   useEffect(() => {
-    window.addEventListener('orientationchange', () => {
-      setAppSize();
-      if (shouldRotate) return setShouldRotate(true);
-      return false;
-    });
-  }, [shouldRotate]);
-  useEffect(() => {
-    if (!isWindows && !isMacOs && isIOS) {
-      document.addEventListener('touchmove', () => {
-        // if (e.scale)
-      });
-    }
+    window.addEventListener('resize', handleAppSize);
+    window.addEventListener('orientationchange', handleAppSize);
+    window.addEventListener('pageshow', handleAppSize);
+    document.addEventListener('visibilitychange', handleAppSize);
+    return () => {
+      window.removeEventListener('resize', handleAppSize);
+      window.removeEventListener('orientationchange', handleAppSize);
+      window.removeEventListener('pageshow', handleAppSize);
+      document.removeEventListener('visibilitychange', handleAppSize);
+    };
   }, []);
   return null;
 };
