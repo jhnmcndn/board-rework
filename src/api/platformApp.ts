@@ -18,9 +18,7 @@ export const getInit = async () => {
     id: loginNow ? loginNow.token : '23',
   };
 
-  const response: AxiosResponse<RootResponse<any>> = await request.post(APP_ROUTE.PLATFORM + 'init', {
-    body: params,
-  });
+  const response: AxiosResponse<RootResponse<any>> = await request.post(APP_ROUTE.PLATFORM + 'init', params);
   const { data } = response.data;
   return data;
 };
