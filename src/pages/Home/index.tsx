@@ -13,13 +13,11 @@ const Home = () => {
   // To be deleted!
   console.log(data?.rspGameTypes);
   return (
-    <>
-      <div className={'main-color'} data-theme={theme}>
-        <Header />
-        {/* <Main /> */}
-        {/* <Footer /> */}
-      </div>
-    </>
+    <div className={'main-color'} data-theme={theme}>
+      <Header />
+      {/* <Main /> */}
+      {/* <Footer /> */}
+    </div>
   );
 };
 

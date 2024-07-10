@@ -1,5 +1,3 @@
-@import '/src/styles/_helpers.scss';
-
 .header {
   display: flex;
   width: 100%;
@@ -32,7 +30,7 @@
     }
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       right: 0;
@@ -81,17 +79,13 @@
           width: auto;
         }
         &::before {
-          content: "";
+          content: '';
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          background-image: linear-gradient(
-            to right,
-            rgba(255, 0, 0, 0.5),
-            rgba(0, 255, 0, 0.5)
-          );
+          background-image: linear-gradient(to right, rgba(255, 0, 0, 0.5), rgba(0, 255, 0, 0.5));
           pointer-events: none; /* Ensure the gradient layer doesn't interfere with any interactions on the image */
         }
       }
@@ -141,7 +135,6 @@
         }
       }
     }
-
   }
 }
 

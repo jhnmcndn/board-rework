@@ -9,5 +9,13 @@ export default defineConfig({
       '@': path.join(__dirname, './src'),
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "./styles/_fonts.scss", "./styles/_helpers.scss", "@/styles/_sizes.scss";`,
+        includePaths: ['./src/styles'],
+      },
+    },
+  },
   plugins: [react(), dynamicImport()],
 });
