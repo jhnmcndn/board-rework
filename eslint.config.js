@@ -1,25 +1,20 @@
-import pluginJs from '@eslint/js';
-import reactRefresh from 'eslint-plugin-react-refresh';
-import pluginReactConfig from 'eslint-plugin-react/configs/recommended.js';
+import eslint from '@eslint/js';
+import react from 'eslint-plugin-react';
 import globals from 'globals';
-import tseslint from 'typescript-eslint';
+import tsEslint from 'typescript-eslint';
 
 export default [
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     // extends: [
-    //   'eslint:recommended',
-    //   'plugin:@typescript-eslint/recommended',
     //   'airbnb',
     //   'airbnb/hooks',
-    //   'plugin:react-hooks/recommended',
     // ],
     ignores: ['dist', '.eslintrc.cjs'],
     plugins: {
-      'react-refresh': reactRefresh,
+      react,
     },
     rules: {
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'react/jsx-uses-react': 0,
       'react/react-in-jsx-scope': 0,
       'react-hooks/exhaustive-deps': 'off',
@@ -40,7 +35,6 @@ export default [
       },
     },
   },
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-  pluginReactConfig,
+  eslint.configs.recommended,
+  ...tsEslint.configs.recommended,
 ];
