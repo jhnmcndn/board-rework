@@ -9,3 +9,16 @@ export const getAccountNow = async () => {
   const { data } = response.data;
   return data;
 };
+
+export const getInit = async () => {
+  const loginNow: any = localStorage.getItem('loginNow');
+
+  var params = {
+    token: loginNow ? loginNow.token : 'adhhjaksdhjk',
+    id: loginNow ? loginNow.token : '23',
+  };
+
+  const response: AxiosResponse<RootResponse<any>> = await request.post(APP_ROUTE.PLATFORM + 'init', params);
+  const { data } = response.data;
+  return data;
+};
