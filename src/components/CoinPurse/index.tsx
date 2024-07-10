@@ -19,7 +19,6 @@ type TProps = {
 
 const CoinPurse: FC<TProps> = (props) => {
   const { userBalance } = useAccountNowStore((state) => state.accountNow);
-  console.log(userBalance, 'qweqweqwe');
   const theme = useThemeStore((state) => state.theme);
   const [animateSpin, setAnimateSpin] = useState(false);
 
@@ -61,15 +60,15 @@ const CoinPurse: FC<TProps> = (props) => {
       {!props.noShuffle && (
         <div className={classNames(styles.shuffles, { shuffleSpin: animateSpin })}>
           <img
-            // onClick={() => {
-            //   popSound();
-            //   if (!isLoggedIn()) {
-            //     dispatch(setShowLoginModal(true));
-            //   } else {
-            //     setAnimateSpin(true);
-            //     dispatch(updateBalance());
-            //   }
-            // }}
+            onClick={() => {
+              // popSound();
+              if (!isLoggedIn()) {
+                // dispatch(setShowLoginModal(true));
+              } else {
+                setAnimateSpin(true);
+                // dispatch(updateBalance());
+              }
+            }}
             src={`/src/assets/${theme}/header/reload.png`}
             alt=""
             style={{ left: props.left }}
