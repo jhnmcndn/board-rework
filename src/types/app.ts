@@ -19,9 +19,17 @@ export type UserInfo = {
   newAccount: boolean;
 };
 
+export type AccountNow = {
+  userBalance: number;
+};
+
 export interface UserInfoState {
   userInfo: UserInfo;
   setUserInfo: (userInfo: UserInfo) => void;
+}
+export interface AccountNowState {
+  accountNow: AccountNow;
+  setAccountNow: (accountNow: AccountNow) => void;
 }
 
 export interface ThemeState {
