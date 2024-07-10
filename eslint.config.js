@@ -15,8 +15,8 @@ export default [
       react,
     },
     rules: {
-      'react/jsx-uses-react': 0,
-      'react/react-in-jsx-scope': 0,
+      'react/jsx-uses-react': 'off',
+      'react/react-in-jsx-scope': 'off',
       'react-hooks/exhaustive-deps': 'off',
       'react/button-has-type': 'off',
       'react/no-danger': 'off',
@@ -25,10 +25,10 @@ export default [
       '@typescript-eslint/consistent-type-imports': 'error',
     },
   },
-  { languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
   {
     languageOptions: {
       parser: '@typescript-eslint/parser',
+      parserOptions: { ecmaFeatures: { jsx: true } },
       globals: {
         ...globals.browser,
         ...globals.node,
