@@ -2,8 +2,8 @@ import { isLoggedIn } from '@/utils/app';
 import defaultIcon from '../../assets/blackGold/header/defaultIcon.png';
 
 import { getAccountInfo } from '@/api/gameApp';
+import { useUserInfoStore } from '@/store/accountInfo';
 import { useThemeStore } from '@/store/theme';
-import { useUserInfoStore } from '@/store/userInfo';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import register_btn from '../../assets/blackGold/header/btn3.png';
