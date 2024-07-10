@@ -1,14 +1,15 @@
-import { Music, Resizer, Title } from '@/providers';
+import Music from '@/components/Music';
+import Title from '@/components/Title';
 import { Outlet } from '@tanstack/react-router';
+import * as React from 'react';
 
 const Root = () => {
   return (
-    <>
+    <React.Fragment>
       <Title />
       <Music />
-      <Resizer />
       <Outlet />
-    </>
+    </React.Fragment>
   );
 };
 

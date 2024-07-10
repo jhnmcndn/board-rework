@@ -20,8 +20,8 @@ export default [
     },
     rules: {
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-      'react/jsx-uses-react': 'off',
-      'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-react': 0,
+      'react/react-in-jsx-scope': 0,
       'react-hooks/exhaustive-deps': 'off',
       'react/button-has-type': 'off',
       'react/no-danger': 'off',
