@@ -1,14 +1,14 @@
 import backgroundMusic from '@/assets/music/music.mp3';
 import { useMusicStore } from '@/store/music';
-import { useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 
 const Music = () => {
   const isBackgroundMusicOn = useMusicStore((state) => state.playState.music);
-  const [didUserInteract, setDidUserInteract] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const [didUserInteract, setDidUserInteract] = React.useState(false);
+  const audioRef = React.useRef<HTMLAudioElement>(null);
   const shouldPlayMusic = didUserInteract && isBackgroundMusicOn;
 
-  useEffect(() => {
+  React.useEffect(() => {
     const bgMusic = audioRef.current;
     const playMusic = () => {
       if (bgMusic) {
