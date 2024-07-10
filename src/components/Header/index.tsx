@@ -1,14 +1,16 @@
-import { isLoggedIn } from '@/utils/app';
-import defaultIcon from '../../assets/blackGold/header/defaultIcon.png';
-
 import { getAccountInfo } from '@/api/gameApp';
 import { useUserInfoStore } from '@/store/accountInfo';
 import { useThemeStore } from '@/store/theme';
+import { isLoggedIn } from '@/utils/app';
 import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import register_btn from '../../assets/blackGold/header/btn3.png';
 import login_btn from '../../assets/blackGold/header/btn3_2.png';
 import button from '../../assets/blackGold/header/button2.png';
+import defaultIcon from '../../assets/blackGold/header/defaultIcon.png';
+import CoinPurse from '../CoinPurse';
 import styles from './index.module.scss';
 
 const server = import.meta.env.VITE_APP_SERVER;
@@ -19,21 +21,34 @@ const Header = () => {
     queryFn: getAccountInfo,
   });
 
+  const navigate = useNavigate();
   const userData = useUserInfoStore((state) => state.userInfo);
   const theme = useThemeStore((state) => state.theme);
   const [expBar, setExpBar] = useState(0);
   const [, setAppName] = useState('');
 
   useEffect(() => {
-    (async () => {
+    const handleAsyncImport = async () => {
       const { APP_NAME } = await import(`@/servers/${server}`);
       setAppName(APP_NAME);
-    })();
-  });
+    };
+    handleAsyncImport();
+  }, []);
 
   useEffect(() => {
     setExpBar((userData?.codeTotal / (userData?.codeTotal + (data?.nextLevelIntegral || 0))) * 100 || 0);
   }, [expBar, userData, data]);
+
+  const gotoVip = () => {
+    navigate({ to: '/personal-info' });
+  };
+
+  const gotoPromotion = () => {
+    navigate({ to: '/promotion-agent' });
+  };
+  const gotoRecharge = () => {
+    navigate({ to: '/recharge' });
+  };
 
   const onCopy = () => {
     navigator.clipboard.writeText(userData?.id ? userData?.id : '未登录');
@@ -65,7 +80,7 @@ const Header = () => {
             </div>
             {isLoggedIn() && (
               <div className={styles.copyIcon} onClick={onCopy}>
-                <img src={require(`../../assets/${theme}/header/copyIcon.png`)} alt="copy" />
+                <img src={`/src/assets/${theme}/header/copyIcon.png`} alt="copy" />
               </div>
             )}
           </div>
@@ -84,22 +99,20 @@ const Header = () => {
 
           {!isLoggedIn() && (
             <>
-              {server !== '8803' && (
+              {server !== '8803' ? (
                 <div className={styles.btn_wrapper}>
-                  <button style={{ width: '80%' }} className={styles.loginButton}>
+                  <button className={styles.loginButton}>
                     <img
                       onClick={() => {
                         // popSound();
                         // dispatch(setShowLoginModal(true));
                       }}
-                      style={{ width: '100%' }}
                       src={button}
                       alt="gold-button"
                     />
                   </button>
                 </div>
-              )}
-              {server === '8803' && (
+              ) : (
                 <div className={styles.btn_wrapper}>
                   <button className={styles.loginButton}>
                     <img
@@ -127,6 +140,19 @@ const Header = () => {
               )}
             </>
           )}
+        </div>
+      </div>
+
+      <div className={styles.headerDetails}>
+        <div className={styles.coinPurseWrapper}>
+          <div className={styles.coinPurseContainer}>
+            <CoinPurse
+              posi="relative"
+              accountNow={userData?.accountNow ? userData?.accountNow : '0.00'}
+              top={0}
+              left={isMobile ? '0.15rem' : '0'}
+            />
+          </div>
         </div>
       </div>
     </div>
