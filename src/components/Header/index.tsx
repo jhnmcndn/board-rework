@@ -25,7 +25,7 @@ const Header = () => {
   const userData = useUserInfoStore((state) => state.userInfo);
   const theme = useThemeStore((state) => state.theme);
   const [expBar, setExpBar] = useState(0);
-  const [, setAppName] = useState('');
+  const [appName, setAppName] = useState('');
 
   useEffect(() => {
     const handleAsyncImport = async () => {
@@ -51,7 +51,7 @@ const Header = () => {
   };
 
   const onCopy = () => {
-    navigator.clipboard.writeText(userData?.id ? userData?.id : '未登录');
+    navigator.clipboard.writeText(userData?.id || '未登录');
     // setCopyUserNick(true);
     // AlertDelay();
     // popSound();
@@ -75,8 +75,8 @@ const Header = () => {
         <div className={styles.userDetailsContainer}>
           <div className={styles.userDetails}>
             <div className={styles.userInfo}>
-              <span>{userData?.id ? userData?.id : '未登录'}</span>
-              {isLoggedIn() && <span className={styles.vip}>VIP{userData?.vip ? userData?.vip : ''}</span>}
+              <span>{userData?.id || '未登录'}</span>
+              {isLoggedIn() && <span className={styles.vip}>VIP{userData?.vip || ''}</span>}
             </div>
             {isLoggedIn() && (
               <div className={styles.copyIcon} onClick={onCopy}>
@@ -148,7 +148,7 @@ const Header = () => {
           <div className={styles.coinPurseContainer}>
             <CoinPurse
               posi="relative"
-              accountNow={userData?.accountNow ? userData?.accountNow : '0.00'}
+              accountNow={userData?.accountNow || '0.00'}
               top={0}
               left={isMobile ? '0.15rem' : '0'}
             />
