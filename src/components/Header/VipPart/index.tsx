@@ -1,5 +1,5 @@
 import { SERVER } from '@/constants/app';
-import { useUserInfoStore } from '@/store/accountInfo';
+import { useAccountInfoStore } from '@/store/accountInfo';
 import { useThemeStore } from '@/store/theme';
 import { isLoggedIn } from '@/utils/app';
 import { useNavigate } from '@tanstack/react-router';
@@ -12,7 +12,7 @@ import defaultIcon from '/src/assets/blackGold/header/defaultIcon.png';
 
 const VipPart = () => {
   const navigate = useNavigate();
-  const userInfo = useUserInfoStore((state) => state.userInfo);
+  const userInfo = useAccountInfoStore((state) => state.accountInfo);
   const theme = useThemeStore((state) => state.theme);
   const [expBar, setExpBar] = useState(0);
   const xpBar = (userInfo?.codeTotal / (userInfo?.codeTotal + (userInfo?.nextLevelIntegral || 0))) * 100 || 0;
