@@ -1,6 +1,6 @@
 import { useGetGameTypes } from '@/actions';
 import styles from './index.module.scss';
-import blackGoldTitle from '/src/assets/blackGold/main/sidebar_title.png';
+import blackGoldTitle from '/src/assets/blackGold/main/sidebarTitle.png';
 
 import { activeSideBarItem, useGameStore } from '@/store/gameTypes';
 import { useAppStore } from '@/store/useAppStore';
