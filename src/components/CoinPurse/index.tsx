@@ -2,28 +2,30 @@ import { useAccountNowStore } from '@/store/accountNow';
 import { useThemeStore } from '@/store/theme';
 import { isLoggedIn } from '@/utils/app';
 import classNames from 'classnames';
-import { FC, useEffect, useState } from 'react';
+import type { FC} from 'react';
+import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import coinIcon from '/src/assets/blackGold/header/coin.png';
 
 type TProps = {
-  posi: any;
+  position: any;
   accountNow: string | number;
   top: number;
   left: string;
-  Icolor?: string;
-  betlog?: boolean;
+  iColor?: string;
+  betLog?: boolean;
   inputBg?: string;
   noShuffle?: boolean;
 };
 
 const CoinPurse: FC<TProps> = (props) => {
+  const { position, accountNow, top, left, iColor, betLog, inputBg, noShuffle } = props;
   const { userBalance } = useAccountNowStore((state) => state.accountNow);
   const theme = useThemeStore((state) => state.theme);
   const [animateSpin, setAnimateSpin] = useState(false);
 
   useEffect(() => {
-    let spinTimer = setTimeout(() => setAnimateSpin(false), 500);
+    const spinTimer = setTimeout(() => setAnimateSpin(false), 500);
     return () => {
       clearTimeout(spinTimer);
     };
@@ -32,32 +34,32 @@ const CoinPurse: FC<TProps> = (props) => {
   return (
     <>
       <div
-        className={styles.coinpurseWrapper}
+        className={styles.coinPurseWrapper}
         style={{
-          color: props.Icolor ? props.Icolor : 'white',
-          position: props.posi ? props.posi : 'relative',
-          top: props.top,
-          left: props.left,
+          color: iColor || 'white',
+          position: position || 'relative',
+          top,
+          left,
         }}
       >
         <img src={coinIcon} className={styles.img2} alt="" />
 
-        {!props.betlog && (
+        {!betLog && (
           <div className={styles.coinInput2}>
             <input
               className={styles.userBalanceInput}
               value={isLoggedIn() ? userBalance : 0}
               disabled={true}
               style={{
-                background: props.inputBg,
+                background: inputBg,
                 width: '90%',
-                color: props.Icolor,
+                color: iColor,
               }}
             />
           </div>
         )}
       </div>
-      {!props.noShuffle && (
+      {!noShuffle && (
         <div className={classNames(styles.shuffles, { shuffleSpin: animateSpin })}>
           <img
             onClick={() => {
@@ -71,7 +73,7 @@ const CoinPurse: FC<TProps> = (props) => {
             }}
             src={`/src/assets/${theme}/header/reload.png`}
             alt=""
-            style={{ left: props.left }}
+            style={{ left }}
           />
         </div>
       )}

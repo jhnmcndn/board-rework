@@ -22,10 +22,11 @@ const Header = () => {
   });
 
   const navigate = useNavigate();
-  const userData = useUserInfoStore((state) => state.userInfo);
-  const theme = useThemeStore((state) => state.theme);
   const [expBar, setExpBar] = useState(0);
   const [appName, setAppName] = useState('');
+  const theme = useThemeStore((state) => state.theme);
+  const userData = useUserInfoStore((state) => state.userInfo);
+  const xpBar = (userData?.codeTotal / (userData?.codeTotal + (data?.nextLevelIntegral || 0))) * 100 || 0;
 
   useEffect(() => {
     const handleAsyncImport = async () => {
@@ -36,17 +37,17 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    setExpBar((userData?.codeTotal / (userData?.codeTotal + (data?.nextLevelIntegral || 0))) * 100 || 0);
+    setExpBar(xpBar);
   }, [expBar, userData, data]);
 
-  const gotoVip = () => {
+  const goToVip = () => {
     navigate({ to: '/personal-info' });
   };
 
-  const gotoPromotion = () => {
+  const goToPromotion = () => {
     navigate({ to: '/promotion-agent' });
   };
-  const gotoRecharge = () => {
+  const goToRecharge = () => {
     navigate({ to: '/recharge' });
   };
 
@@ -59,7 +60,7 @@ const Header = () => {
 
   return (
     <div className={styles.header}>
-      <div className={styles.vippart}>
+      <div className={styles.vipPart}>
         <div className={styles.avatarContainer}>
           <img
             src={defaultIcon}
@@ -100,7 +101,7 @@ const Header = () => {
           {!isLoggedIn() && (
             <>
               {server !== '8803' ? (
-                <div className={styles.btn_wrapper}>
+                <div className={styles.btnWrapper}>
                   <button className={styles.loginButton}>
                     <img
                       onClick={() => {
@@ -113,7 +114,7 @@ const Header = () => {
                   </button>
                 </div>
               ) : (
-                <div className={styles.btn_wrapper}>
+                <div className={styles.btnWrapper}>
                   <button className={styles.loginButton}>
                     <img
                       onClick={() => {
@@ -147,7 +148,7 @@ const Header = () => {
         <div className={styles.coinPurseWrapper}>
           <div className={styles.coinPurseContainer}>
             <CoinPurse
-              posi="relative"
+              position="relative"
               accountNow={userData?.accountNow || '0.00'}
               top={0}
               left={isMobile ? '0.15rem' : '0'}
