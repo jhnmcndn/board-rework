@@ -1,5 +1,6 @@
+import type { AccountInfo } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
-import type { GetAccountInfo, GetGameTypes, RootResponse } from '@/types/response';
+import type { GetGameTypes, RootResponse } from '@/types/response';
 import type { AxiosResponse } from 'axios';
 import { request } from './request';
 
@@ -12,7 +13,7 @@ export const getGameTypes = async () => {
 };
 
 export const getAccountInfo = async () => {
-  const response: AxiosResponse<RootResponse<GetAccountInfo>> = await request.post(
+  const response: AxiosResponse<RootResponse<AccountInfo>> = await request.post(
     APP_ROUTE.GAME_APP + API_ENDPOINT.ACCOUNT_INFO
   );
   const { data } = response.data;

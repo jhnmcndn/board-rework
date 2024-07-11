@@ -52,8 +52,8 @@ export interface InitState {
 }
 
 export interface AccountInfoState {
-  userInfo: AccountInfo;
-  setUserInfo: (userInfo: AccountInfo) => void;
+  accountInfo: AccountInfo;
+  setAccountInfo: (accountInfo: AccountInfo) => void;
 }
 export interface AccountNowState {
   accountNow: AccountNow;
