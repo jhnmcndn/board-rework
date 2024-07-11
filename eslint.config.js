@@ -35,6 +35,7 @@ export default [
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-use-before-define': 'off',
       '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/ban-types': 'off',
     },
   },
 ];
