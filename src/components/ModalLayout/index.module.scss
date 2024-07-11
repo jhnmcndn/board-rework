@@ -1,0 +1,17 @@
+.modalOverlay {
+  $root: &;
+
+  @include flex-xy;
+
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  overflow-y: auto;
+
+  &__container {
+    border-radius: 6px;
+    max-height: 90vh;
+  }
+}
