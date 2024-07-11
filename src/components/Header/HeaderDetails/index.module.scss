@@ -1,0 +1,18 @@
+.headerDetails {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+  height: 76%;
+
+  .coinPurseWrapper {
+    display: flex;
+    width: 100%;
+
+    .coinPurseContainer {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      width: 100%;
+    }
+  }
+}

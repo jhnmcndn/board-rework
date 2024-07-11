@@ -138,44 +138,4 @@
       }
     }
   }
-
-  .headerDetails {
-    display: flex;
-    justify-content: space-between;
-    width: 30%;
-    height: 76%;
-
-    .coinPurseWrapper {
-      display: flex;
-      width: 100%;
-
-      .coinPurseContainer {
-        display: flex;
-        justify-content: end;
-        align-items: center;
-        width: 100%;
-      }
-    }
-  }
-}
-
-.settingContainer {
-  @include flex-xy;
-  flex-direction: column;
-  margin-right: 0.05rem;
-  padding: 0.05rem 0;
-  position: relative;
-  width: 0.25rem;
-  > img {
-    width: 80%;
-    height: auto;
-  }
-  .settingText {
-    font-size: 0.1rem;
-    background: var(--settings-header);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-  }
 }

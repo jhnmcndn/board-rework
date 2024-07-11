@@ -8,13 +8,12 @@ import { isLoggedIn } from '@/utils/app';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
-import { isMobile } from 'react-device-detect';
 import register_btn from '../../assets/blackGold/header/btn3.png';
 import login_btn from '../../assets/blackGold/header/btn3_2.png';
 import button from '../../assets/blackGold/header/button2.png';
 import defaultIcon from '../../assets/blackGold/header/defaultIcon.png';
-import CoinPurse from '../CoinPurse';
 import HeaderButtons from './HeaderButtons';
+import HeaderDetails from './HeaderDetails';
 import HeaderTitle from './HeaderTitle';
 import styles from './index.module.scss';
 
@@ -148,19 +147,7 @@ const Header = () => {
         </div>
       </div>
 
-      <div className={styles.headerDetails}>
-        <div className={styles.coinPurseWrapper}>
-          <div className={styles.coinPurseContainer}>
-            <CoinPurse
-              position="relative"
-              accountNow={userData?.accountNow || '0.00'}
-              top={0}
-              left={isMobile ? '0.15rem' : '0'}
-            />
-          </div>
-        </div>
-      </div>
-
+      <HeaderDetails />
       <HeaderTitle />
       <HeaderButtons />
     </div>
