@@ -1,7 +1,7 @@
 import type { Init, InitState } from '@/types/app';
 import { create } from 'zustand';
 
-const initialInitState = {
+export const initialInitState = {
   latestVersion: null,
   latestFore: null,
   downUrl: null,
