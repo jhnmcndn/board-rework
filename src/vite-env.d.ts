@@ -2,6 +2,7 @@
 
 interface ImportMetaEnv {
   readonly VITE_APP_SERVER: '8801' | '8802' | '8803';
+  readonly VITE_APP_VERSION: string;
   // more env variables...
 }
 
