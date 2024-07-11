@@ -12,7 +12,7 @@ export const getAccountNow = async () => {
   return data;
 };
 
-export const getInit = async () => {
+export const init = async () => {
   const loginNow: any = localStorage.getItem('loginNow');
 
   const params = {
