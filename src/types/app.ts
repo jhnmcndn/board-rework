@@ -38,11 +38,6 @@ export type AccountNow = {
   userBalance: number;
 };
 
-export type Music = {
-  music: boolean;
-  pop: boolean;
-};
-
 export interface HeCai6 {
   reds: string[];
   blue: string[];
