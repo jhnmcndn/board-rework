@@ -1,3 +1,4 @@
+import { Init } from '@/types/app';
 import { APP_ROUTE } from '@/types/enums';
 import type { RootResponse } from '@/types/response';
 import type { AxiosResponse } from 'axios';
@@ -18,7 +19,7 @@ export const getInit = async () => {
     id: loginNow ? loginNow.token : '23',
   };
 
-  const response: AxiosResponse<RootResponse<any>> = await request.post(APP_ROUTE.PLATFORM + 'init', params);
+  const response: AxiosResponse<RootResponse<Init>> = await request.post(APP_ROUTE.PLATFORM + 'init', params);
   const { data } = response.data;
   return data;
 };
