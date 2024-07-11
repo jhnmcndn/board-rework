@@ -1,11 +1,11 @@
 import { useGetAccountInfo } from '@/actions/';
-import { useAccountInfoStore } from '@/store/accountInfo';
+import { useAccountStore } from '@/store/useAccountStore';
 import { Navigate, Outlet } from '@tanstack/react-router';
 import { useEffect } from 'react';
 
 const Auth = () => {
   const { data: accountInfo } = useGetAccountInfo();
-  const setAccountInfo = useAccountInfoStore((state) => state.setAccountInfo);
+  const setAccountInfo = useAccountStore((state) => state.setAccountInfo);
 
   useEffect(() => {
     if (accountInfo) {
