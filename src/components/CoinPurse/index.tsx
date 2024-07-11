@@ -2,7 +2,7 @@ import { useAccountNowStore } from '@/store/accountNow';
 import { useThemeStore } from '@/store/theme';
 import { isLoggedIn } from '@/utils/app';
 import classNames from 'classnames';
-import type { FC} from 'react';
+import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import coinIcon from '/src/assets/blackGold/header/coin.png';
@@ -42,19 +42,15 @@ const CoinPurse: FC<TProps> = (props) => {
           left,
         }}
       >
-        <img src={coinIcon} className={styles.img2} alt="" />
+        <img src={coinIcon} className={styles.coin} alt="" />
 
         {!betLog && (
-          <div className={styles.coinInput2}>
+          <div className={styles.coinInput}>
             <input
               className={styles.userBalanceInput}
               value={isLoggedIn() ? userBalance : 0}
               disabled={true}
-              style={{
-                background: inputBg,
-                width: '90%',
-                color: iColor,
-              }}
+              style={{ background: inputBg, color: iColor }}
             />
           </div>
         )}
@@ -62,6 +58,9 @@ const CoinPurse: FC<TProps> = (props) => {
       {!noShuffle && (
         <div className={classNames(styles.shuffles, { shuffleSpin: animateSpin })}>
           <img
+            src={`/src/assets/${theme}/header/reload.png`}
+            alt=""
+            style={{ left }}
             onClick={() => {
               // popSound();
               if (!isLoggedIn()) {
@@ -71,9 +70,6 @@ const CoinPurse: FC<TProps> = (props) => {
                 // dispatch(updateBalance());
               }
             }}
-            src={`/src/assets/${theme}/header/reload.png`}
-            alt=""
-            style={{ left }}
           />
         </div>
       )}
