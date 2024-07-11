@@ -1,12 +1,10 @@
 import { useInit } from '@/actions/';
 import Header from '@/components/Header';
-import { useInitStore } from '@/store/init';
-import { useThemeStore } from '@/store/theme';
+import { useAppStore } from '@/store/useAppStore';
 import { useEffect } from 'react';
 
 const Home = () => {
-  const theme = useThemeStore((state) => state.theme);
-  const setInit = useInitStore((state) => state.setInit);
+  const { theme, setInit } = useAppStore();
   const { data: initData } = useInit();
 
   useEffect(() => {

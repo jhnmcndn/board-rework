@@ -1,11 +1,11 @@
 import { SERVER } from '@/constants/app';
 import useAppName from '@/hooks/useAppName';
-import { useInitStore } from '@/store/init';
+import { useAppStore } from '@/store/useAppStore';
 import styles from './index.module.scss';
 import HeaderLogo from '/src/assets/blackGold/header/header_logo.png';
 
 const HeaderTitle = () => {
-  const init = useInitStore((state) => state.init);
+  const init = useAppStore((state) => state.init);
   const { appName } = useAppName();
 
   return (

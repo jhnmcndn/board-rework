@@ -1,10 +1,10 @@
 import CoinPurse from '@/components/CoinPurse';
-import { useAccountInfoStore } from '@/store/accountInfo';
+import { useAccountStore } from '@/store/useAccountStore';
 import { isMobile } from 'react-device-detect';
 import styles from './index.module.scss';
 
 const HeaderDetails = () => {
-  const userData = useAccountInfoStore((state) => state.accountInfo);
+  const userData = useAccountStore((state) => state.accountInfo);
 
   return (
     <div className={styles.headerDetails}>

@@ -1,7 +1,7 @@
 import { getAccountInfo, getGameTypes } from '@/api/gameApp';
 import { init } from '@/api/platformApp';
-import { initialAccountInfoState } from '@/store/accountInfo';
-import { initialInitState } from '@/store/init';
+import { initialAccountInfoState } from '@/store/useAccountStore';
+import { initialInitState } from '@/store/useAppStore';
 import { API_ENDPOINT } from '@/types/enums';
 import { useQuery } from '@tanstack/react-query';
 
