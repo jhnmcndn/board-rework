@@ -1,4 +1,4 @@
-import { useGetAccountInfo } from '@/actions/gameApp';
+import { useGetAccountInfo } from '@/actions/useGetAccountInfo';
 import { useAccountInfoStore } from '@/store/accountInfo';
 import { Navigate, Outlet } from '@tanstack/react-router';
 import { useEffect } from 'react';

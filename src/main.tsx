@@ -38,7 +38,7 @@ const routeTree = rootRoute.addChildren([
   withdrawRoute,
 ]);
 const router = createRouter({ routeTree });
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 declare module '@tanstack/react-router' {
   interface Register {
