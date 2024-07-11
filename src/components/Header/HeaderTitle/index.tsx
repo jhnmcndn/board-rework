@@ -8,8 +8,6 @@ const HeaderTitle = () => {
   const init = useInitStore((state) => state.init);
   const { appName } = useAppName();
 
-  console.log(init, 'qweqweqwe');
-
   return (
     <div className={styles.headerTitle}>
       {SERVER === '8803' ? (
