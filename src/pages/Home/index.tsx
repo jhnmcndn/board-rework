@@ -1,4 +1,4 @@
-import { useInit } from '@/actions/useInit';
+import { useInit } from '@/actions/';
 import Header from '@/components/Header';
 import { useInitStore } from '@/store/init';
 import { useThemeStore } from '@/store/theme';
