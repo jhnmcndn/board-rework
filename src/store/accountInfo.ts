@@ -1,7 +1,7 @@
 import type { AccountInfo, AccountInfoState } from '@/types/app';
 import { create } from 'zustand';
 
-const initialAccountInfoState = {
+export const initialAccountInfoState = {
   token: '',
   id: '',
   nickName: '',

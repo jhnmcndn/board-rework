@@ -1,25 +1,16 @@
-import { init } from '@/api/platformApp';
+import { useInit } from '@/actions/useInit';
 import Header from '@/components/Header';
 import { useInitStore } from '@/store/init';
 import { useThemeStore } from '@/store/theme';
-import { API_ENDPOINT } from '@/types/enums';
-import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
 const Home = () => {
   const theme = useThemeStore((state) => state.theme);
   const setInit = useInitStore((state) => state.setInit);
-
-  // API calls
-  const { data: initData } = useQuery({
-    queryKey: [API_ENDPOINT.INIT],
-    queryFn: init,
-  });
+  const { data: initData } = useInit();
 
   useEffect(() => {
-    if (initData) {
-      setInit(initData);
-    }
+    setInit(initData);
   }, [initData]);
 
   return (
