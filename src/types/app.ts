@@ -23,6 +23,34 @@ export type AccountNow = {
   userBalance: number;
 };
 
+export interface HeCai6 {
+  reds: string[];
+  blue: string[];
+  green: string[];
+}
+
+export interface Init {
+  latestVersion: any;
+  latestFore: any;
+  downUrl: any;
+  hasNew: boolean;
+  updateText: any;
+  customerUrl: string;
+  customerUrl2: string;
+  webUrl: string;
+  starPic: string;
+  heCai6: HeCai6;
+  captchaId: string;
+  actionSwitch: string;
+  productId: string;
+  firstRechargeUrl: string;
+}
+
+export interface InitState {
+  init: Init;
+  setInit: (init: Init) => void;
+}
+
 export interface AccountInfoState {
   userInfo: AccountInfo;
   setUserInfo: (userInfo: AccountInfo) => void;
