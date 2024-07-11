@@ -1,7 +1,8 @@
 import { getAccountInfo } from '@/api/gameApp';
+import { getInit } from '@/api/platformApp';
 import { SERVER } from '@/constants/app';
-import useAppName from '@/hooks/useAppName';
 import { useUserInfoStore } from '@/store/accountInfo';
+import { useInitStore } from '@/store/init';
 import { useThemeStore } from '@/store/theme';
 import { isLoggedIn } from '@/utils/app';
 import { useQuery } from '@tanstack/react-query';
@@ -13,6 +14,8 @@ import login_btn from '../../assets/blackGold/header/btn3_2.png';
 import button from '../../assets/blackGold/header/button2.png';
 import defaultIcon from '../../assets/blackGold/header/defaultIcon.png';
 import CoinPurse from '../CoinPurse';
+import HeaderButtons from './HeaderButtons';
+import HeaderTitle from './HeaderTitle';
 import styles from './index.module.scss';
 
 const Header = () => {
@@ -21,11 +24,16 @@ const Header = () => {
     queryFn: getAccountInfo,
   });
 
+  const { data: initData, isLoading: initIsLoading } = useQuery({
+    queryKey: ['init'],
+    queryFn: getInit,
+  });
+
   const navigate = useNavigate();
-  const [expBar, setExpBar] = useState(0);
-  const { appName } = useAppName();
-  const theme = useThemeStore((state) => state.theme);
   const userData = useUserInfoStore((state) => state.userInfo);
+  const theme = useThemeStore((state) => state.theme);
+  const setInit = useInitStore((state) => state.setInit);
+  const [expBar, setExpBar] = useState(0);
   const xpBar = (userData?.codeTotal / (userData?.codeTotal + (data?.nextLevelIntegral || 0))) * 100 || 0;
 
   useEffect(() => {
@@ -42,6 +50,10 @@ const Header = () => {
   const goToRecharge = () => {
     navigate({ to: '/recharge' });
   };
+
+  if (initData && !initIsLoading) {
+    setInit(initData);
+  }
 
   const onCopy = () => {
     navigator.clipboard.writeText(userData?.id || '未登录');
@@ -148,6 +160,9 @@ const Header = () => {
           </div>
         </div>
       </div>
+
+      <HeaderTitle />
+      <HeaderButtons />
     </div>
   );
 };
