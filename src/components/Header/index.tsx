@@ -1,4 +1,6 @@
 import { getAccountInfo } from '@/api/gameApp';
+import { SERVER } from '@/constants/app';
+import useAppName from '@/hooks/useAppName';
 import { useUserInfoStore } from '@/store/accountInfo';
 import { useThemeStore } from '@/store/theme';
 import { isLoggedIn } from '@/utils/app';
@@ -13,8 +15,6 @@ import defaultIcon from '../../assets/blackGold/header/defaultIcon.png';
 import CoinPurse from '../CoinPurse';
 import styles from './index.module.scss';
 
-const server = import.meta.env.VITE_APP_SERVER;
-
 const Header = () => {
   const { data } = useQuery({
     queryKey: ['accountInfo'],
@@ -23,18 +23,10 @@ const Header = () => {
 
   const navigate = useNavigate();
   const [expBar, setExpBar] = useState(0);
-  const [appName, setAppName] = useState('');
+  const { appName } = useAppName();
   const theme = useThemeStore((state) => state.theme);
   const userData = useUserInfoStore((state) => state.userInfo);
   const xpBar = (userData?.codeTotal / (userData?.codeTotal + (data?.nextLevelIntegral || 0))) * 100 || 0;
-
-  useEffect(() => {
-    const handleAsyncImport = async () => {
-      const { APP_NAME } = await import(`@/servers/${server}`);
-      setAppName(APP_NAME);
-    };
-    handleAsyncImport();
-  }, []);
 
   useEffect(() => {
     setExpBar(xpBar);
@@ -100,7 +92,7 @@ const Header = () => {
 
           {!isLoggedIn() && (
             <>
-              {server !== '8803' ? (
+              {SERVER !== '8803' ? (
                 <div className={styles.btnWrapper}>
                   <button className={styles.loginButton}>
                     <img
@@ -134,7 +126,7 @@ const Header = () => {
                         // dispatch(setSwitch(true));
                       }}
                       src={login_btn}
-                      alt="gold-button- login"
+                      alt="gold-button-login"
                     />
                   </button>
                 </div>

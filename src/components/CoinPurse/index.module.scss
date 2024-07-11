@@ -5,7 +5,15 @@
   height: 47%;
   width: 65%;
 
-  .coinInput2 {
+  .coin {
+    position: absolute;
+    left: -0.1rem;
+    top: -0.04rem;
+    z-index: 2;
+    width: 0.4rem;
+  }
+
+  .coinInput {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -15,7 +23,7 @@
     border-radius: 15rem;
     background: var(--balance-outline-header);
 
-    input {
+    .userBalanceInput {
       position: relative;
       line-height: 0.2rem;
       font-size: 0.15rem;
@@ -28,14 +36,8 @@
       border-radius: 15rem;
       right: 0.0092rem;
       text-align: center;
+      width: 90%;
     }
-  }
-  .img2 {
-    position: absolute;
-    left: -0.1rem;
-    top: -0.04rem;
-    z-index: 2;
-    width: 0.4rem;
   }
 }
 
