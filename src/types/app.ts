@@ -43,3 +43,44 @@ export interface HeCai6 {
   blue: string[];
   green: string[];
 }
+
+export interface ActiveSideBarItem {
+  id: number;
+  name: string;
+  icon: string;
+  type: number;
+}
+
+export interface Game {
+  activeSideBarItem: ActiveSideBarItem;
+}
+
+export interface GameState {
+  game: Game;
+  setActiveSideBarItem: (activeSideBarItem: ActiveSideBarItem) => void;
+}
+
+export interface InitState {
+  init: Init;
+  setInit: (init: Init) => void;
+}
+
+export interface AccountInfoState {
+  accountInfo: AccountInfo;
+  setAccountInfo: (accountInfo: AccountInfo) => void;
+}
+export interface AccountNowState {
+  accountNow: AccountNow;
+  setAccountNow: (accountNow: AccountNow) => void;
+}
+
+export type Music = {
+  music: boolean;
+  pop: boolean;
+};
+
+export interface MusicState {
+  playState: Music;
+  setMusic: (play: boolean) => void;
+  setPop: (play: boolean) => void;
+}
