@@ -18,11 +18,7 @@ const useAlertModalStore = create<AlertModalStore>((set) => ({
   isOpen: false,
   content: {},
   openAlert: (content) => {
-    set((state) => ({
-      ...state,
-      isOpen: true,
-      content: { ...content },
-    }));
+    set((state) => ({ ...state, isOpen: true, content: { ...content } }));
   },
   closeAlert: () => set((state) => ({ ...state, isOpen: false, content: {} })),
 }));

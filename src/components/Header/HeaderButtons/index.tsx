@@ -1,11 +1,11 @@
-import { useThemeStore } from '@/store/theme';
+import { useAppStore } from '@/store/useAppStore';
 import styles from './index.module.scss';
 import calendar from '/src/assets/blackGold/header/h5_icon.png';
 import promote from '/src/assets/blackGold/header/promote.png';
 import task from '/src/assets/blackGold/header/task.png';
 
 const HeaderButtons = () => {
-  const theme = useThemeStore((state) => state.theme);
+  const theme = useAppStore((state) => state.theme);
 
   return (
     <div className={styles.headerButtons}>

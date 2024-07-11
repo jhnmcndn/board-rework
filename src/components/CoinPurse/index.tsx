@@ -1,5 +1,5 @@
-import { useAccountNowStore } from '@/store/accountNow';
-import { useThemeStore } from '@/store/theme';
+import { useAccountStore } from '@/store/useAccountStore';
+import { useAppStore } from '@/store/useAppStore';
 import { isLoggedIn } from '@/utils/app';
 import classNames from 'classnames';
 import type { FC } from 'react';
@@ -20,8 +20,8 @@ type TProps = {
 
 const CoinPurse: FC<TProps> = (props) => {
   const { position, accountNow, top, left, iColor, betLog, inputBg, noShuffle } = props;
-  const { userBalance } = useAccountNowStore((state) => state.accountNow);
-  const theme = useThemeStore((state) => state.theme);
+  const { userBalance } = useAccountStore((state) => state.accountNow);
+  const theme = useAppStore((state) => state.theme);
   const [animateSpin, setAnimateSpin] = useState(false);
 
   useEffect(() => {

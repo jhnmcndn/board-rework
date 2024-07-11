@@ -1,4 +1,19 @@
-import type { THEME } from './enums';
+export interface Init {
+  latestVersion: string | null;
+  latestFore: string | null;
+  downUrl: string | null;
+  hasNew: boolean;
+  updateText: string | null;
+  customerUrl: string;
+  customerUrl2: string;
+  webUrl: string;
+  starPic: string;
+  heCai6: HeCai6;
+  captchaId: string;
+  actionSwitch: string;
+  productId: string;
+  firstRechargeUrl: string;
+}
 
 export type AccountInfo = {
   token: string;
@@ -27,51 +42,4 @@ export interface HeCai6 {
   reds: string[];
   blue: string[];
   green: string[];
-}
-
-export interface Init {
-  latestVersion: any;
-  latestFore: any;
-  downUrl: any;
-  hasNew: boolean;
-  updateText: any;
-  customerUrl: string;
-  customerUrl2: string;
-  webUrl: string;
-  starPic: string;
-  heCai6: HeCai6;
-  captchaId: string;
-  actionSwitch: string;
-  productId: string;
-  firstRechargeUrl: string;
-}
-
-export interface InitState {
-  init: Init;
-  setInit: (init: Init) => void;
-}
-
-export interface AccountInfoState {
-  accountInfo: AccountInfo;
-  setAccountInfo: (accountInfo: AccountInfo) => void;
-}
-export interface AccountNowState {
-  accountNow: AccountNow;
-  setAccountNow: (accountNow: AccountNow) => void;
-}
-
-export interface ThemeState {
-  theme: THEME;
-  setTheme: (theme: THEME) => void;
-}
-
-export type Music = {
-  music: boolean;
-  pop: boolean;
-};
-
-export interface MusicState {
-  playState: Music;
-  setMusic: (play: boolean) => void;
-  setPop: (play: boolean) => void;
 }

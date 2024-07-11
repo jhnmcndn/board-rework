@@ -1,4 +1,5 @@
-import type { Init, InitState } from '@/types/app';
+import type { Init } from '@/types/app';
+import { THEME } from '@/types/enums';
 import { create } from 'zustand';
 
 export const initialInitState = {
@@ -22,7 +23,20 @@ export const initialInitState = {
   firstRechargeUrl: '',
 } satisfies Init;
 
-export const useInitStore = create<InitState>()((set) => ({
+interface AppStore {
+  init: Init;
+  theme: THEME;
+  musicState: boolean;
+  setInit: (init: Init) => void;
+  setTheme: (theme: THEME) => void;
+  setMusic: (music: boolean) => void;
+}
+
+export const useAppStore = create<AppStore>()((set) => ({
   init: initialInitState,
+  theme: THEME.BLACK_GOLD,
+  musicState: true,
   setInit: (init) => set((state) => ({ init: { ...state.init, ...init } })),
+  setTheme: (theme) => set(() => ({ theme })),
+  setMusic: (music) => set(() => ({ musicState: music })),
 }));
