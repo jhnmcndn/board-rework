@@ -31,22 +31,3 @@ export type RspGameInfo = {
   kindId: string;
   platformId: number;
 };
-
-export interface GetAccountInfo {
-  accountCharge: number;
-  accountNow: number;
-  codeNow: number;
-  codeTotal: number;
-  codeWill: number;
-  headImg: string;
-  id: string;
-  inviterCode: string;
-  newAccount: boolean;
-  nextLevelIntegral: number;
-  nickName: string;
-  phone?: any;
-  registerType: number;
-  status: number;
-  token?: any;
-  vip: number;
-}

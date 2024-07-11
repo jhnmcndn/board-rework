@@ -20,7 +20,7 @@ const initialAccountInfoState = {
   newAccount: false,
 } satisfies AccountInfo;
 
-export const useUserInfoStore = create<AccountInfoState>()((set) => ({
-  userInfo: initialAccountInfoState,
-  setUserInfo: (userInfo) => set((state) => ({ userInfo: { ...state.userInfo, ...userInfo } })),
+export const useAccountInfoStore = create<AccountInfoState>()((set) => ({
+  accountInfo: initialAccountInfoState,
+  setAccountInfo: (accountInfo) => set(() => ({ accountInfo })),
 }));

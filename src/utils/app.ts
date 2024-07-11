@@ -1,3 +1,3 @@
 export const isLoggedIn = () => {
-  return !!localStorage.getItem('logged-in');
+  return !!localStorage.getItem('loggedIn');
 };
