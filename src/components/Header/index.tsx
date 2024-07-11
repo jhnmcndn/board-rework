@@ -22,10 +22,11 @@ const Header = () => {
   });
 
   const navigate = useNavigate();
-  const userData = useUserInfoStore((state) => state.userInfo);
-  const theme = useThemeStore((state) => state.theme);
   const [expBar, setExpBar] = useState(0);
-  const [, setAppName] = useState('');
+  const [appName, setAppName] = useState('');
+  const theme = useThemeStore((state) => state.theme);
+  const userData = useUserInfoStore((state) => state.userInfo);
+  const xpBar = (userData?.codeTotal / (userData?.codeTotal + (data?.nextLevelIntegral || 0))) * 100 || 0;
 
   useEffect(() => {
     const handleAsyncImport = async () => {
@@ -36,22 +37,22 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    setExpBar((userData?.codeTotal / (userData?.codeTotal + (data?.nextLevelIntegral || 0))) * 100 || 0);
+    setExpBar(xpBar);
   }, [expBar, userData, data]);
 
-  const gotoVip = () => {
+  const goToVip = () => {
     navigate({ to: '/personal-info' });
   };
 
-  const gotoPromotion = () => {
+  const goToPromotion = () => {
     navigate({ to: '/promotion-agent' });
   };
-  const gotoRecharge = () => {
+  const goToRecharge = () => {
     navigate({ to: '/recharge' });
   };
 
   const onCopy = () => {
-    navigator.clipboard.writeText(userData?.id ? userData?.id : '未登录');
+    navigator.clipboard.writeText(userData?.id || '未登录');
     // setCopyUserNick(true);
     // AlertDelay();
     // popSound();
@@ -59,7 +60,7 @@ const Header = () => {
 
   return (
     <div className={styles.header}>
-      <div className={styles.vippart}>
+      <div className={styles.vipPart}>
         <div className={styles.avatarContainer}>
           <img
             src={defaultIcon}
@@ -75,8 +76,8 @@ const Header = () => {
         <div className={styles.userDetailsContainer}>
           <div className={styles.userDetails}>
             <div className={styles.userInfo}>
-              <span>{userData?.id ? userData?.id : '未登录'}</span>
-              {isLoggedIn() && <span className={styles.vip}>VIP{userData?.vip ? userData?.vip : ''}</span>}
+              <span>{userData?.id || '未登录'}</span>
+              {isLoggedIn() && <span className={styles.vip}>VIP{userData?.vip || ''}</span>}
             </div>
             {isLoggedIn() && (
               <div className={styles.copyIcon} onClick={onCopy}>
@@ -100,7 +101,7 @@ const Header = () => {
           {!isLoggedIn() && (
             <>
               {server !== '8803' ? (
-                <div className={styles.btn_wrapper}>
+                <div className={styles.btnWrapper}>
                   <button className={styles.loginButton}>
                     <img
                       onClick={() => {
@@ -113,7 +114,7 @@ const Header = () => {
                   </button>
                 </div>
               ) : (
-                <div className={styles.btn_wrapper}>
+                <div className={styles.btnWrapper}>
                   <button className={styles.loginButton}>
                     <img
                       onClick={() => {
@@ -147,8 +148,8 @@ const Header = () => {
         <div className={styles.coinPurseWrapper}>
           <div className={styles.coinPurseContainer}>
             <CoinPurse
-              posi="relative"
-              accountNow={userData?.accountNow ? userData?.accountNow : '0.00'}
+              position="relative"
+              accountNow={userData?.accountNow || '0.00'}
               top={0}
               left={isMobile ? '0.15rem' : '0'}
             />
