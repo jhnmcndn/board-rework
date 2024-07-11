@@ -1,5 +1,6 @@
 import { useInit } from '@/actions/';
 import Header from '@/components/Header';
+import Main from '@/components/Main';
 import { useAppStore } from '@/store/useAppStore';
 import { useEffect } from 'react';
 
@@ -14,7 +15,7 @@ const Home = () => {
   return (
     <div className={'main-color'} data-theme={theme}>
       <Header />
-      {/* <Main /> */}
+      <Main />
       {/* <Footer /> */}
     </div>
   );

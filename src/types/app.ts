@@ -43,3 +43,19 @@ export interface HeCai6 {
   blue: string[];
   green: string[];
 }
+
+export interface ActiveSideBarItem {
+  id: number;
+  name: string;
+  icon: string;
+  type: number;
+}
+
+export interface Game {
+  activeSideBarItem: ActiveSideBarItem;
+}
+
+export interface GameState {
+  game: Game;
+  setActiveSideBarItem: (activeSideBarItem: ActiveSideBarItem) => void;
+}
