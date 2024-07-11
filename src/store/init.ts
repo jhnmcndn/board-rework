@@ -22,7 +22,7 @@ const initialInitState = {
   firstRechargeUrl: '',
 } satisfies Init;
 
-export const useUserInfoStore = create<InitState>()((set) => ({
+export const useInitStore = create<InitState>()((set) => ({
   init: initialInitState,
   setInit: (init) => set((state) => ({ init: { ...state.init, ...init } })),
 }));
