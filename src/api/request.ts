@@ -16,5 +16,6 @@ export const request = axios.create({
     agent,
     token,
     'Content-Type': 'application/json;charset=UTF-8',
+    version: import.meta.env.VITE_APP_VERSION,
   },
 });
