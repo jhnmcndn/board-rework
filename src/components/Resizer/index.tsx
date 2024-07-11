@@ -21,6 +21,8 @@ const Resizer = ({ children }) => {
 
 export default Resizer;
 
+//WILL DELETE THIS COMMENT JUST IN CASE
+
 // import { useLocation } from '@tanstack/react-router';
 // import { useEffect } from 'react';
 // import { isMobile } from 'react-device-detect';
