@@ -1,25 +1,14 @@
 import { useAccountStore } from '@/store/useAccountStore';
 import { useAppStore } from '@/store/useAppStore';
-import { isLoggedIn } from '@/utils/app';
+import type { CoinPurseComponent } from '@/types/component';
+import { isLoggedIn, onClickSound } from '@/utils/app';
 import classNames from 'classnames';
-import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import coinIcon from '/src/assets/blackGold/header/coin.png';
 
-type TProps = {
-  position: any;
-  accountNow: string | number;
-  top: number;
-  left: string;
-  iColor?: string;
-  betLog?: boolean;
-  inputBg?: string;
-  noShuffle?: boolean;
-};
-
-const CoinPurse: FC<TProps> = (props) => {
-  const { position, accountNow, top, left, iColor, betLog, inputBg, noShuffle } = props;
+const CoinPurse: CoinPurseComponent = (props) => {
+  const { position, top, left, iColor, betLog, inputBg, noShuffle } = props;
   const { userBalance } = useAccountStore((state) => state.accountNow);
   const theme = useAppStore((state) => state.theme);
   const [animateSpin, setAnimateSpin] = useState(false);
@@ -62,7 +51,7 @@ const CoinPurse: FC<TProps> = (props) => {
             alt=""
             style={{ left }}
             onClick={() => {
-              // popSound();
+              onClickSound('pop');
               if (!isLoggedIn()) {
                 // dispatch(setShowLoginModal(true));
               } else {
