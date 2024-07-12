@@ -1,13 +1,9 @@
-import type { ReactNode} from 'react';
+import type { ResizerComponent } from '@/types/component';
+import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
-import classNames from 'classnames';
 
-type Props = {
-  children: ReactNode;
-};
-
-const Resizer = ({ children }: Props) => {
+const Resizer: ResizerComponent = ({ children }) => {
   const [orientation, setOrientation] = useState(window.innerWidth > window.innerHeight ? '' : 'portrait');
 
   const handleOrientationChange = () => {

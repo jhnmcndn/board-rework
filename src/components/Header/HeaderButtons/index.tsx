@@ -1,8 +1,9 @@
+import calendar from '@/assets/blackGold/header/h5Icon.png';
+import promote from '@/assets/blackGold/header/promote.png';
+import task from '@/assets/blackGold/header/task.png';
 import { useAppStore } from '@/store/useAppStore';
+import { onClickSound } from '@/utils/app';
 import styles from './index.module.scss';
-import calendar from '/src/assets/blackGold/header/h5_icon.png';
-import promote from '/src/assets/blackGold/header/promote.png';
-import task from '/src/assets/blackGold/header/task.png';
 
 const HeaderButtons = () => {
   const theme = useAppStore((state) => state.theme);
@@ -12,10 +13,10 @@ const HeaderButtons = () => {
       <img
         src={calendar}
         alt="calendar"
-        // onClick={() => {
-        //   handleClick({ fn: setimgs, params: true });
-        //   popSound();
-        // }}
+        onClick={() => {
+          // handleClick({ fn: setimgs, params: true });
+          onClickSound('pop');
+        }}
       />
 
       <img
@@ -27,37 +28,37 @@ const HeaderButtons = () => {
         // }}
       />
       <img
-        // onClick={() => {
-        //   popSound();
-        //   dispatch(setShowOtherModalComp(true));
-        //   setIsSettings(false);
-        //   handleClick({ fn: setGTaskOpen, params: true });
-        // }}
+        onClick={() => {
+          onClickSound('pop');
+          // dispatch(setShowOtherModalComp(true));
+          // setIsSettings(false);
+          // handleClick({ fn: setGTaskOpen, params: true });
+        }}
         src={task}
         alt="task"
       />
       <div
         className={styles.settingContainer}
-        // onClick={() => {
-        //   popSound();
-        //   if (!isLoggedIn()) {
-        //     dispatch(setShowLoginModal(true));
-        //   } else {
-        //     setLoad(true);
-        //     getAccountInfo().then((res) => {
-        //       setLoad(false);
-        //       if (res.data.code === 401) {
-        //         auth?.logout();
-        //         logoutUser();
-        //         dispatch(resetUserInfoState());
-        //         dispatch(setShowLoginModal(true));
-        //       } else {
-        //         setIsSettings(true);
-        //         dispatch(setShowSettings(true));
-        //       }
-        //     });
-        //   }
-        // }}
+        onClick={() => {
+          onClickSound('pop');
+          // if (!isLoggedIn()) {
+          //   dispatch(setShowLoginModal(true));
+          // } else {
+          //   setLoad(true);
+          //   getAccountInfo().then((res) => {
+          //     setLoad(false);
+          //     if (res.data.code === 401) {
+          //       auth?.logout();
+          //       logoutUser();
+          //       dispatch(resetUserInfoState());
+          //       dispatch(setShowLoginModal(true));
+          //     } else {
+          //       setIsSettings(true);
+          //       dispatch(setShowSettings(true));
+          //     }
+          //   });
+          // }
+        }}
       >
         <img src={`/src/assets/${theme}/header/setting.png`} alt="setting" />
         <span className={styles.settingText}>设置</span>

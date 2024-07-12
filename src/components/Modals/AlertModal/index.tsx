@@ -1,4 +1,4 @@
-import ModalLayout from '@/components/ModalLayout';
+import ModalLayout from '@/components/Modals/ModalLayout';
 import { SERVER } from '@/constants/app';
 import useIsMounted from '@/hooks/useIsMounted';
 import useAlertModalStore from '@/store/useAlertModalStore';

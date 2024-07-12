@@ -1,14 +1,14 @@
 import { useGetGameTypes } from '@/actions';
-import styles from './index.module.scss';
-import blackGoldTitle from '/src/assets/blackGold/main/sidebarTitle.png';
-
 import { activeSideBarItem, useGameStore } from '@/store/gameTypes';
 import { useAppStore } from '@/store/useAppStore';
 import classNames from 'classnames';
 import { useEffect, useRef } from 'react';
 import PullToRefresh from 'react-simple-pull-to-refresh';
+import styles from './index.module.scss';
+import blackGoldTitle from '/src/assets/blackGold/main/sidebarTitle.png';
+
 const SideBar = () => {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const { data: sideBar, refetch } = useGetGameTypes();
   const theme = useAppStore((state) => state.theme);
   const { setActiveSideBarItem, game } = useGameStore((state) => state);
@@ -23,7 +23,7 @@ const SideBar = () => {
     try {
       await refetch();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
