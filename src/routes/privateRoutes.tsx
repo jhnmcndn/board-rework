@@ -1,3 +1,4 @@
+import Auth from '@/pages/__Root__/Auth';
 import CodeWashing from '@/pages/CodeWashing';
 import CustomerService from '@/pages/CustomerService';
 import FAQ from '@/pages/FAQ';
@@ -17,77 +18,77 @@ import { createRoute } from '@tanstack/react-router';
 export const codeWashRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/code-wash',
-  component: CodeWashing,
+  component: Auth.bind({ component: CodeWashing }),
 });
 
 export const customerServiceRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/customer-service',
-  component: CustomerService,
+  component: Auth.bind({ component: CustomerService }),
 });
 
 export const faqRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/faq',
-  component: FAQ,
+  component: Auth.bind({ component: FAQ }),
 });
 
 export const gamesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/games',
-  component: Games,
+  component: Auth.bind({ component: Games }),
 });
 
 export const mailBoxRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/mailbox',
-  component: Mailbox,
+  component: Auth.bind({ component: Mailbox }),
 });
 
 export const personalInfoRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/personal-info',
-  component: PersonalInfo,
+  component: Auth.bind({ component: PersonalInfo }),
 });
 
 export const promotionRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/promotion-agent',
-  component: PromotionAgent,
+  component: Auth.bind({ component: PromotionAgent }),
 });
 
 export const rechargeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/recharge',
-  component: Recharge,
+  component: Auth.bind({ component: Recharge }),
 });
 
 export const rechargeHistoryRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/recharge-history',
-  component: RechargeHistory,
+  component: Auth.bind({ component: RechargeHistory }),
 });
 
 export const safeBoxRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/safe-box',
-  component: SafeBox,
+  component: Auth.bind({ component: SafeBox }),
 });
 
 export const shareRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/share',
-  component: Share,
+  component: Auth.bind({ component: Share }),
 });
 
 export const webviewRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/webview',
-  component: WebView,
+  component: Auth.bind({ component: WebView }),
 });
 
 export const withdrawRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/withdraw',
-  component: Withdraw,
+  component: Auth.bind({ component: Withdraw }),
 });

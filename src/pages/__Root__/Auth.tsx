@@ -1,21 +1,10 @@
-import { useGetAccountInfo } from '@/actions/';
-import { useAccountStore } from '@/store/useAccountStore';
-import { Navigate, Outlet } from '@tanstack/react-router';
-import { useEffect } from 'react';
+import type { AuthComponent } from '@/types/component';
+import { isLoggedIn } from '@/utils/app';
+import { Navigate } from '@tanstack/react-router';
 
-const Auth = () => {
-  const { data: accountInfo } = useGetAccountInfo();
-  const setAccountInfo = useAccountStore((state) => state.setAccountInfo);
-
-  useEffect(() => {
-    if (accountInfo) {
-      setAccountInfo(accountInfo);
-    }
-  }, [accountInfo]);
-
-  if (!accountInfo) return <Navigate to="/" />;
-
-  return <Outlet />;
+const Auth: AuthComponent = ({ component }) => {
+  if (!isLoggedIn()) return <Navigate to="/" />;
+  return component();
 };
 
 export default Auth;
