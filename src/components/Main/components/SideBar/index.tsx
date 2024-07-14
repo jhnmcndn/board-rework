@@ -13,13 +13,11 @@ const SideBar = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { data: sideBar, refetch } = useGetGameTypes();
   const theme = useAppStore((state) => state.theme);
-  const { setActiveSideBarItem, game } = useGameStore((state) => state);
+  const { setActiveSideBarItem, activeSideBarItem } = useGameStore((state) => state);
 
   useEffect(() => {
     if (sideBar) {
-      setActiveSideBarItem(
-        sideBar.rspGameTypes.length > 0 ? sideBar?.rspGameTypes[0] : game.activeSideBarItem
-      );
+      setActiveSideBarItem(sideBar.rspGameTypes.length > 0 ? sideBar?.rspGameTypes[0] : activeSideBarItem);
     }
   }, [sideBar]);
 
@@ -33,7 +31,7 @@ const SideBar = () => {
 
   const handleOnClick = (item: RspGameType) => {
     if (item.type === 4) {
-      mutate(game.activeSideBarItem.id);
+      mutate(activeSideBarItem.id);
     }
 
     // popSound();
@@ -64,7 +62,7 @@ const SideBar = () => {
                   />
                   <div
                     className={classNames(styles.sideBarItem, {
-                      [styles.sidebarItemActive]: item.id === game.activeSideBarItem.id,
+                      [styles.sidebarItemActive]: item.id === activeSideBarItem.id,
                     })}
                   >
                     <img className={styles.icon} src={item.icon} alt="icon" />

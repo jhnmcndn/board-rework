@@ -61,11 +61,8 @@ export interface ActiveSideBarItem {
   type: number;
 }
 
-export interface Game {
-  activeSideBarItem: ActiveSideBarItem;
-}
-
 export interface GameState {
-  game: Game;
+  activeSideBarItem: ActiveSideBarItem;
+  gameInfoGroup: GameInfoGroup[];
   setActiveSideBarItem: (activeSideBarItem: ActiveSideBarItem) => void;
 }
