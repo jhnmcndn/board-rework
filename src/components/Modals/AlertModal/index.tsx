@@ -1,12 +1,12 @@
 import ModalLayout from '@/components/Modals/ModalLayout';
 import { SERVER } from '@/constants/app';
 import useIsMounted from '@/hooks/useIsMounted';
-import useAlertModalStore from '@/store/useAlertModalStore';
+import useModalStore from '@/store/useModalStore';
 import { createPortal } from 'react-dom';
 import styles from './index.module.scss';
 
 export default function AlertContainer() {
-  const { content, isOpen, closeAlert } = useAlertModalStore();
+  const { content, isOpen, closeAlert } = useModalStore();
   const alertIcon = `./assets/${SERVER}/favicon.ico`;
   const isMounted = useIsMounted();
 

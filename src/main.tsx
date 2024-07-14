@@ -21,6 +21,7 @@ import { createRouter, RouterProvider } from '@tanstack/react-router';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import AlertModal from './components/Modals/AlertModal';
+import Auth from './components/Modals/Auth';
 
 const routeTree = rootRoute.addChildren([
   homeRoute,
@@ -52,6 +53,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
       <AlertModal />
+      <Auth />
     </QueryClientProvider>
   </React.StrictMode>
 );

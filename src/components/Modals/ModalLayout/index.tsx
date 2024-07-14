@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import styles from './index.module.scss';
 
 interface ModalLayoutProps {
-  onClose: () => void;
+  onClose?: () => void;
   children: ReactNode;
   isAlert?: boolean;
   closeOnOutsideClick?: boolean;
@@ -18,13 +18,13 @@ function ModalLayout({ closeOnOutsideClick = false, isAlert = false, children, o
   useEffect(() => {
     if (isAlert) {
       setTimeout(() => {
-        onClose();
+        if (onClose) onClose();
       }, 1500);
     }
   }, []);
 
   const handleClose = () => {
-    if (closeOnOutsideClick && clickOutSide) onClose();
+    if (closeOnOutsideClick && clickOutSide && onClose) onClose();
     document.body.style.overflow = 'auto';
   };
 
