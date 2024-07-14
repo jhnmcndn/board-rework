@@ -44,7 +44,7 @@
       position: relative;
       height: 100%;
       width: 0.9rem;
-      background-image: url('../../../../../../assets/blackGold/main/gametopNorm.png');
+      background-image: url('/src/assets/blackGold/main/gametopNorm.png');
       background-position: center center;
       background-repeat: no-repeat;
       background-size: 100% 100%;
@@ -98,27 +98,27 @@
     }
 
     .iconHolderActive {
-      background-image: url('../../../../../../assets/blackGold/main/gametopAct.png');
+      background-image: url('/src/assets/blackGold/main/gametopAct.png');
       &[data-theme='yellowWhite'] {
-        background-image: url('../../../../../../assets/yellowWhite/main/gametopAct.png');
+        background-image: url('/src/assets/yellowWhite/main/gametopAct.png');
         background-size: 100%;
       }
       &[data-theme='greenYellow'] {
-        background-image: url('../../../../../../assets/greenYellow/main/gametopAct.png');
+        background-image: url('/src/assets/greenYellow/main/gametopAct.png');
         background-size: 100%;
       }
       &[data-theme='skyBlue'] {
-        background-image: url('../../../../../../assets/skyBlue/main/gametopAct.png');
+        background-image: url('/src/assets/skyBlue/main/gametopAct.png');
       }
       &[data-theme='darkBlue'] {
-        background-image: url('../../../../../../assets/darkBlue/main/gametopAct.png');
+        background-image: url('/src/assets/darkBlue/main/gametopAct.png');
         background-size: 100%;
         span {
           color: #ffffff;
         }
       }
       &[data-theme='whiteGold'] {
-        background-image: url('../../../../../../assets/whiteGold/main/gametopAct.png');
+        background-image: url('/src/assets/whiteGold/main/gametopAct.png');
         background-size: 100%;
         span {
           color: #461d09;
