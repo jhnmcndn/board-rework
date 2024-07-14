@@ -1,6 +1,6 @@
 import { ip } from '@/api/misc';
 import { request } from '@/api/request';
-import type { AccountInfo, Init } from '@/types/app';
+import type { AccountInfo, Init, Mail } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import type { LoginParams } from '@/types/params';
 import type { RootResponse } from '@/types/response';
@@ -55,7 +55,7 @@ export const login = async ({ username, password }: LoginParams) => {
 };
 
 export const getReceivedMessage = async () => {
-  const response: AxiosResponse<RootResponse<any>> = await request.post(
+  const response: AxiosResponse<RootResponse<Mail[]>> = await request.post(
     APP_ROUTE.PLATFORM + API_ENDPOINT.MESSAGE_ON_SITES
   );
   const { data } = response.data;

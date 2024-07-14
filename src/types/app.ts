@@ -68,6 +68,13 @@ export interface GameState {
   setGameInfoGroup: (gameInfoGroup: GameInfoGroup[]) => void;
 }
 
+export interface Mail {
+  id: number;
+  title: string;
+  content: string;
+  createTime: string;
+}
+
 export interface MailState {
-  mails: string[];
+  mails: Mail[];
 }
