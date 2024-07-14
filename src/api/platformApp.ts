@@ -53,3 +53,11 @@ export const login = async ({ username, password }: LoginParams) => {
   const { data } = response.data;
   return data;
 };
+
+export const getReceivedMessage = async () => {
+  const response: AxiosResponse<RootResponse<any>> = await request.post(
+    APP_ROUTE.PLATFORM + API_ENDPOINT.MESSAGE_ON_SITES
+  );
+  const { data } = response.data;
+  return data;
+};
