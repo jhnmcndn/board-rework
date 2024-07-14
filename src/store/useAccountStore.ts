@@ -1,4 +1,4 @@
-import type { AccountInfo, AccountNow } from '@/types/app';
+import type { AccountInfo, AccountNow, MailState } from '@/types/app';
 import { create } from 'zustand';
 
 export const initialAccountInfoState = {
@@ -20,6 +20,10 @@ export const initialAccountInfoState = {
   newAccount: false,
 } satisfies AccountInfo;
 
+export const initialMailState = {
+  mails: [],
+};
+
 const initialAccountNowState = {
   userBalance: 0,
 } satisfies AccountNow;
@@ -27,6 +31,7 @@ const initialAccountNowState = {
 interface AccountStore {
   accountInfo: AccountInfo;
   accountNow: AccountNow;
+  mails: MailState;
   setAccountInfo: (accountInfo: AccountInfo) => void;
   setAccountNow: (accountNow: AccountNow) => void;
 }
@@ -34,6 +39,7 @@ interface AccountStore {
 export const useAccountStore = create<AccountStore>()((set) => ({
   accountInfo: initialAccountInfoState,
   accountNow: initialAccountNowState,
+  mails: initialMailState,
   setAccountInfo: (accountInfo) => set(() => ({ accountInfo })),
   setAccountNow: (accountNow) => set(() => ({ accountNow })),
 }));

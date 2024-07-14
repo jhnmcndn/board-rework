@@ -1,4 +1,4 @@
-import { RspGameInfo } from './response';
+import type { RspGameInfo } from './response';
 
 export interface Init {
   latestVersion: string | null;
@@ -66,4 +66,15 @@ export interface GameState {
   gameInfoGroup: GameInfoGroup[];
   setActiveSideBarItem: (activeSideBarItem: ActiveSideBarItem) => void;
   setGameInfoGroup: (gameInfoGroup: GameInfoGroup[]) => void;
+}
+
+export interface Mail {
+  id: number;
+  title: string;
+  content: string;
+  createTime: string;
+}
+
+export interface MailState {
+  mails: Mail[];
 }

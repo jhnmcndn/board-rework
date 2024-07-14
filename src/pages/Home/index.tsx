@@ -1,4 +1,5 @@
 import { useInit } from '@/actions/';
+import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import Main from '@/components/Main';
 import { useAppStore } from '@/store/useAppStore';
@@ -16,7 +17,7 @@ const Home = () => {
     <div className={'main-color'} data-theme={theme}>
       <Header />
       <Main />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
