@@ -1,6 +1,7 @@
 import { SERVER } from '@/constants/app';
 import { useAccountStore } from '@/store/useAccountStore';
 import { useAppStore } from '@/store/useAppStore';
+import useModalStore from '@/store/useModalStore';
 import { isLoggedIn } from '@/utils/app';
 import { useNavigate } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
@@ -13,6 +14,7 @@ import defaultIcon from '/src/assets/blackGold/header/defaultIcon.png';
 const VipPart = () => {
   const navigate = useNavigate();
   const userInfo = useAccountStore((state) => state.accountInfo);
+  const openAuth = useModalStore((state) => state.openAuth);
   const theme = useAppStore((state) => state.theme);
   const [expBar, setExpBar] = useState(0);
   const xpBar = (userInfo?.codeTotal / (userInfo?.codeTotal + (userInfo?.nextLevelIntegral || 0))) * 100 || 0;
@@ -44,10 +46,14 @@ const VipPart = () => {
       <div className={styles.avatarContainer}>
         <img
           src={defaultIcon}
-          //   onClick={() => {
-          //     handleClick({ fn: gotoVip });
-          //     start();
-          //   }}
+          onClick={() => {
+            // handleClick({ fn: gotoVip });
+            // start();
+            if (!isLoggedIn()) {
+              openAuth();
+            }
+            // openAlert({ body: 'Hello world!' });
+          }}
           alt="defaultIcon"
           className={styles.avatarPhoto}
         />
