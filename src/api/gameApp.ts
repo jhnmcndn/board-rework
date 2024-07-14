@@ -19,3 +19,13 @@ export const getAccountInfo = async () => {
   const { data } = response.data;
   return data;
 };
+
+export const getGameInfoGroup = async (id: number) => {
+  const body = { id };
+  const response: AxiosResponse<RootResponse<AccountInfo>> = await request.post(
+    APP_ROUTE.GAME_APP + API_ENDPOINT.GAME_INFO_GROUP,
+    body
+  );
+  const { data } = response.data;
+  return data;
+};
