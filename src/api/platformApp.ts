@@ -18,33 +18,37 @@ export const getAccountNow = async () => {
 export const init = async () => {
   const loginNow: any = localStorage.getItem('loginNow');
 
-  const params = {
+  const body = {
     token: loginNow ? loginNow.token : 'randomString',
     id: loginNow ? loginNow.token : '23',
   };
 
   const response: AxiosResponse<RootResponse<Init>> = await request.post(
     APP_ROUTE.PLATFORM + API_ENDPOINT.INIT,
-    params
+    body
   );
   const { data } = response.data;
   return data;
 };
 
 export const login = async ({ username, password }: LoginParams) => {
+  const body = {
+    mobile: username,
+    passwd: password,
+    deviceId: generateDeviceId(),
+    ip: await ip(),
+  };
+
+  const headers = {
+    headers: {
+      version: import.meta.env.VITE_APP_VERSION,
+    },
+  };
+
   const response: AxiosResponse<RootResponse<AccountInfo>> = await request.post(
     APP_ROUTE.PLATFORM + API_ENDPOINT.LOGIN,
-    {
-      mobile: username,
-      passwd: password,
-      deviceId: generateDeviceId(),
-      ip: await ip(),
-    },
-    {
-      headers: {
-        version: import.meta.env.VITE_APP_VERSION,
-      },
-    }
+    body,
+    headers
   );
   const { data } = response.data;
   return data;

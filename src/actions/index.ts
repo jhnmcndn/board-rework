@@ -24,3 +24,9 @@ export const useInit = () =>
     queryFn: init,
     initialData: initialInitState,
   });
+
+export const useGetGameInfoGroup = () =>
+  useQuery({
+    queryKey: [API_ENDPOINT.GAME_INFO_GROUP],
+    queryFn: getGameTypes,
+  });
