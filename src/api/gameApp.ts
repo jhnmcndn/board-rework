@@ -1,4 +1,4 @@
-import type { AccountInfo, GameInfo } from '@/types/app';
+import type { AccountInfo, GameInfoGroup } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import type { GetGameTypes, RootResponse } from '@/types/response';
 import type { AxiosResponse } from 'axios';
@@ -22,7 +22,7 @@ export const getAccountInfo = async () => {
 
 export const getGameInfoGroup = async (id: number) => {
   const body = { id };
-  const response: AxiosResponse<RootResponse<GameInfo>> = await request.post(
+  const response: AxiosResponse<RootResponse<GameInfoGroup>> = await request.post(
     APP_ROUTE.GAME_APP + API_ENDPOINT.GAME_INFO_GROUP,
     body
   );

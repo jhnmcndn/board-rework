@@ -36,7 +36,7 @@ export type AccountInfo = {
   newAccount: boolean;
 };
 
-export type GameInfo = {
+export type GameInfoGroup = {
   id: number;
   name: string;
   icon: string;
