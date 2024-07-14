@@ -1,9 +1,9 @@
-import { getAccountInfo, getGameTypes } from '@/api/gameApp';
+import { getAccountInfo, getGameInfoGroup, getGameTypes } from '@/api/gameApp';
 import { init } from '@/api/platformApp';
 import { initialAccountInfoState } from '@/store/useAccountStore';
 import { initialInitState } from '@/store/useAppStore';
 import { API_ENDPOINT } from '@/types/enums';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 export const useGetAccountInfo = () =>
   useQuery({
@@ -26,7 +26,6 @@ export const useInit = () =>
   });
 
 export const useGetGameInfoGroup = () =>
-  useQuery({
-    queryKey: [API_ENDPOINT.GAME_INFO_GROUP],
-    queryFn: getGameTypes,
+  useMutation({
+    mutationFn: getGameInfoGroup,
   });

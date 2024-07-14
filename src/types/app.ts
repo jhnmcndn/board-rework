@@ -1,3 +1,5 @@
+import { RspGameInfo } from './response';
+
 export interface Init {
   latestVersion: string | null;
   latestFore: string | null;
@@ -32,6 +34,14 @@ export type AccountInfo = {
   registerType: number;
   phone: string;
   newAccount: boolean;
+};
+
+export type GameInfo = {
+  id: number;
+  name: string;
+  icon: string;
+  cardIcon: string;
+  rspGameInfos: RspGameInfo[];
 };
 
 export type AccountNow = {
