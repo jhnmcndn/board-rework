@@ -2,6 +2,7 @@ import { useGameStore } from '@/store/useGameStore';
 import { GameInfoGroup } from '@/types/app';
 import { useState } from 'react';
 import CategoryListBar from './components/CategoryListBar';
+import SearchField from './components/SearchField';
 import styles from './index.module.scss';
 
 const MainContentList = () => {
@@ -16,7 +17,7 @@ const MainContentList = () => {
         <div className={styles.categorySearchContainer}>
           <CategoryListBar setActivePlatformId={setActivePlatformId} />
           <div className={styles.searchWrapper}>
-            {/* <SearchField searchFieldData={searchFieldData} setSearchFieldData={setSearchFieldData} /> */}
+            <SearchField searchFieldData={searchFieldData} setSearchFieldData={setSearchFieldData} />
           </div>
         </div>
       ) : (
