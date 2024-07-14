@@ -65,4 +65,5 @@ export interface GameState {
   activeSideBarItem: ActiveSideBarItem;
   gameInfoGroup: GameInfoGroup[];
   setActiveSideBarItem: (activeSideBarItem: ActiveSideBarItem) => void;
+  setGameInfoGroup: (gameInfoGroup: GameInfoGroup[]) => void;
 }

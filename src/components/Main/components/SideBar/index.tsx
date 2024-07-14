@@ -9,17 +9,23 @@ import styles from './index.module.scss';
 import blackGoldTitle from '/src/assets/blackGold/main/sidebarTitle.png';
 
 const SideBar = () => {
-  const { mutate } = useGetGameInfoGroup();
-  const containerRef = useRef<HTMLDivElement>(null);
+  const { mutate, data: gameInfoGroupData } = useGetGameInfoGroup();
   const { data: sideBar, refetch } = useGetGameTypes();
+  const containerRef = useRef<HTMLDivElement>(null);
   const theme = useAppStore((state) => state.theme);
-  const { setActiveSideBarItem, activeSideBarItem } = useGameStore((state) => state);
+  const { setActiveSideBarItem, activeSideBarItem, setGameInfoGroup } = useGameStore((state) => state);
 
   useEffect(() => {
     if (sideBar) {
       setActiveSideBarItem(sideBar.rspGameTypes.length > 0 ? sideBar?.rspGameTypes[0] : activeSideBarItem);
     }
   }, [sideBar]);
+
+  useEffect(() => {
+    if (gameInfoGroupData) {
+      setGameInfoGroup(gameInfoGroupData);
+    }
+  }, [gameInfoGroupData]);
 
   const handleRefresh = async () => {
     try {
@@ -31,7 +37,7 @@ const SideBar = () => {
 
   const handleOnClick = (item: RspGameType) => {
     if (item.type === 4) {
-      mutate(activeSideBarItem.id);
+      mutate(item.id);
     }
 
     // popSound();

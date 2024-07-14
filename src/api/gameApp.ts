@@ -22,7 +22,7 @@ export const getAccountInfo = async () => {
 
 export const getGameInfoGroup = async (id: number) => {
   const body = { id };
-  const response: AxiosResponse<RootResponse<GameInfoGroup>> = await request.post(
+  const response: AxiosResponse<RootResponse<GameInfoGroup[]>> = await request.post(
     APP_ROUTE.GAME_APP + API_ENDPOINT.GAME_INFO_GROUP,
     body
   );

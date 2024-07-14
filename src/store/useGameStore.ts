@@ -12,4 +12,5 @@ export const useGameStore = create<GameState>()((set) => ({
   activeSideBarItem: initialActiveSideBarItem,
   gameInfoGroup: [],
   setActiveSideBarItem: (activeSideBarItem) => set(() => ({ activeSideBarItem })),
+  setGameInfoGroup: (gameInfoGroup) => set(() => ({ gameInfoGroup })),
 }));
