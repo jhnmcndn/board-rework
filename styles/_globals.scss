@@ -114,11 +114,12 @@ img {
   }
 }
 
-.main-color {
+.mainColor {
   background-repeat: no-repeat;
   background-position: left 1.62rem bottom 0;
   background-size: calc(100% - 1.62rem) 100%;
   position: relative;
+
   &[data-theme='blackGold'] {
     background-image: url('../assets/blackGold/main/main.webp');
   }
