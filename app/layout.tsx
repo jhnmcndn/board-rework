@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang='zh'>
       <link rel='manifest' href={`/assets/${serverConfig.server}/manifest.json`} />
-      <body className='anything'>
+      <body>
         <GlobalProvider>{children}</GlobalProvider>
       </body>
     </html>
