@@ -17,7 +17,7 @@ export const GameProvider = ({ children }: GameProviderProps) => {
   return <GameContext.Provider value={storeRef.current}>{children}</GameContext.Provider>;
 };
 
-export const useStore = <T,>(selector: (store: Store) => T): T => {
+export const useGameStore = <T,>(selector: (store: Store) => T): T => {
   const gameContext = useContext(GameContext);
   if (!gameContext) throw new Error('useInitStore must be used within InitStoreProvider');
   return useZustandStore(gameContext, selector);
