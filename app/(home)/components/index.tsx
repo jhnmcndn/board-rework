@@ -26,7 +26,7 @@ export const HomePage: HomePageComponent = ({ init }) => {
   return (
     <div className='mainColor' data-theme={theme}>
       <Header />
-      {/* <Main /> */}
+      <Main />
       {/* <Footer /> */}
     </div>
   );
