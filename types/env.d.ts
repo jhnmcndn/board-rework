@@ -3,3 +3,4 @@ declare namespace NodeJS {
     APP_VERSION: string;
   }
 }
+declare module '*.mp3';
