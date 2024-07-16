@@ -1,4 +1,4 @@
-import { init } from '@/api/init';
+import { init } from '@/api/platform';
 import { HomePage } from '@/app/(home)/components/';
 
 const Home = async () => {
