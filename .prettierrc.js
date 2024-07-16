@@ -1,9 +1,13 @@
+/**
+ * @type {import("prettier").Config}
+ */
 const config = {
-  trailingComma: 'es5',
-  tabWidth: 2,
-  semi: true,
-  singleQuote: true,
-  printWidth: 110,
-};
+    printWidth: 120,
+    tabWidth: 2,
+    trailingComma: 'all',
+    singleQuote: true,
+    jsxSingleQuote: true,
+    importOrderSortSpecifiers: true,
+}
 
-export default config;
+export default config
