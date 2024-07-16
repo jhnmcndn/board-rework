@@ -5,6 +5,10 @@ export type ServerConfig = {
   title: string;
 };
 
+export type ErrorData = {
+  message: string;
+};
+
 export type RootResponse<T = {}> = {
   code?: number;
   msg?: string;
