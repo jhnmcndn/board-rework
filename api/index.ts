@@ -13,6 +13,7 @@ export type RequestParams = {
   route: APP_ROUTE;
   endpoint: API_ENDPOINT;
   body?: unknown;
+  tags?: string;
 };
 
 export const errorRootResponse = {
@@ -28,6 +29,7 @@ export const request = async <T>({
   route,
   endpoint,
   body,
+  tags,
 }: RequestParams): Promise<T | Partial<RootResponse<ErrorData>>> => {
   const domain = serverConfig.domain;
   const method = 'POST';
@@ -35,6 +37,9 @@ export const request = async <T>({
     headers,
     method,
     body: JSON.stringify(body),
+    next: {
+      tags: [tags || ''],
+    },
   });
   if (!response.ok) return errorRootResponse;
   const data = await response.json();
