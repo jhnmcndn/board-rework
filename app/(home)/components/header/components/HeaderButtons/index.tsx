@@ -4,8 +4,10 @@ import taskImage from '@/assets/blackGold/header/task.png';
 import styles from './index.module.scss';
 import { useStore } from '@/components/providers/StoreProvider';
 import Image from 'next/image';
+import useModalStore from '@/store/modals';
 
 const HeaderButtons = () => {
+  const { openLoginTypes, openAlert } = useModalStore();
   const theme = useStore((state) => state.theme);
   const settingImage = require(`@/assets/${theme}/header/setting.png`);
 
@@ -18,6 +20,9 @@ const HeaderButtons = () => {
         height={87}
         onClick={() => {
           // onClickSound('pop')
+          console.log('CLICKED')
+          openLoginTypes();
+          // openAlert({body: 'test'})
         }}
       />
       <Image

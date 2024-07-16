@@ -1,14 +1,16 @@
+'use client';
+
 import { createPortal } from 'react-dom';
-import { serverConfig } from '@/server';
-import Image from 'next/image';
+// import { serverConfig } from '@/server';
+// import Image from 'next/image';
 import ModalLayout from '@/components/modals/ModalLayout';
 import useIsMounted from '@/hooks/useIsMounted';
-import useModalStore from '@/store/useModalStore';
+import useModalStore from '@/store/modals';
 import styles from './index.module.scss';
 
 export default function AlertContainer() {
   const { content, isAlertOpen, closeAlert } = useModalStore();
-  const alertIcon = require(`./assets/${serverConfig.server}/favicon.ico`);
+  // const alertIcon = require(`/assets/${serverConfig.server}/favicon.ico`);
   const isMounted = useIsMounted();
 
   const modalContent = (
@@ -16,7 +18,7 @@ export default function AlertContainer() {
       <div className={styles.alert__wrapper}>
         <div className={styles.alert__textContainer}>
           <div className={styles.alert__imageContainer}>
-            <Image src={alertIcon} alt="alert" className={styles.alert__icon} />
+            {/* <Image src={alertIcon} alt="alert" className={styles.alert__icon} /> */}
           </div>
           {content.body && (
             <span className={styles.alert__message}>
@@ -30,7 +32,7 @@ export default function AlertContainer() {
   );
 
   if (isMounted() && isAlertOpen) {
-    const element = document.getElementById('modalRoot') as HTMLDivElement;
+    const element = document.getElementById('modal-root') as HTMLDivElement;
     return createPortal(modalContent, element);
   }
 

@@ -4,7 +4,7 @@ import { useStore } from '@/components/providers/StoreProvider';
 import defaultIcon from '@/assets/blackGold/header/defaultIcon.png';
 import Image from 'next/image';
 import styles from './index.module.scss';
-import { copyToClipboard } from '@/utils/copyToClipboard';
+import { copyToClipboard } from '@/utils/helpers';
 import loginBtnImage from '@/assets/commons/loginBtn.png';
 
 const VipPart = () => {
