@@ -1,5 +1,5 @@
 import { request } from '@/api';
-import { AccountNow, Init, RootResponse } from '@/types/app';
+import { AccountNow, Init, MessageHomeNotice, RootResponse } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import { getToken } from '@/utils/getToken';
 
@@ -21,4 +21,13 @@ export const init = async () => {
     },
   });
   return data.data;
+};
+
+export const getMessageHomeNotices = async () => {
+  const response = await request<Pick<RootResponse<MessageHomeNotice[]>, 'data' | 'otherData'>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.MESSAGE_HOME_NOTICES,
+  });
+  const { data, otherData } = response;
+  return { data, otherData };
 };
