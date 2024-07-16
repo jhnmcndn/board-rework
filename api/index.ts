@@ -40,3 +40,10 @@ export const request = async <T>({
   const data = await response.json();
   return data;
 };
+
+export const getIp = async (): Promise<{ ip: string }> => {
+  const response = await fetch('https://api.ipify.org?format=json');
+  if (!response.ok) return { ip: '' };
+  const data = await response.json();
+  return data;
+};
