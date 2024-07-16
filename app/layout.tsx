@@ -3,8 +3,7 @@ import '@/styles/main.scss';
 
 import { serverConfig } from '@/server';
 import { GlobalProvider } from '@/components/providers';
-import LoginTypesModal from '@/components/modals/LoginTypesModal';
-import AlertModal from '@/components/modals/AlertModal';
+import ModalRoot from '@/components/modals';
 
 export const metadata: Metadata = {
   title: serverConfig.title,
@@ -33,9 +32,7 @@ export default function RootLayout({
       <body>
         <GlobalProvider>
           {children}
-          <LoginTypesModal />
-          <AlertModal />
-          <div id='modal-root' />
+          <ModalRoot />
         </GlobalProvider>
       </body>
     </html>

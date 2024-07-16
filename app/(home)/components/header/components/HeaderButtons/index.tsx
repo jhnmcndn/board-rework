@@ -7,7 +7,7 @@ import Image from 'next/image';
 import useModalStore from '@/store/modals';
 
 const HeaderButtons = () => {
-  const { openLoginTypes, openAlert } = useModalStore();
+  const { openLoginTypes } = useModalStore();
   const theme = useStore((state) => state.theme);
   const settingImage = require(`@/assets/${theme}/header/setting.png`);
 
@@ -20,9 +20,7 @@ const HeaderButtons = () => {
         height={87}
         onClick={() => {
           // onClickSound('pop')
-          console.log('CLICKED')
           openLoginTypes();
-          // openAlert({body: 'test'})
         }}
       />
       <Image

@@ -10,7 +10,7 @@ import styles from './index.module.scss';
 
 export default function AlertContainer() {
   const { content, isAlertOpen, closeAlert } = useModalStore();
-  // const alertIcon = require(`/assets/${serverConfig.server}/favicon.ico`);
+  // const alertIcon = require(`./assets/${serverConfig.server}/favicon.ico`);
   const isMounted = useIsMounted();
 
   const modalContent = (
