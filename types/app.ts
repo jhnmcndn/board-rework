@@ -1,3 +1,10 @@
+export type ServerConfig = {
+  agent: string;
+  domain: string;
+  server: '8801' | '8802' | '8803';
+  title: string;
+};
+
 export type RootResponse<T = {}> = {
   code?: number;
   msg?: string;

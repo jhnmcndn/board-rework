@@ -1,0 +1,41 @@
+.headerButtons {
+  height: 76%;
+  width: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.23rem;
+
+  img {
+    height: 0.4rem;
+    width: 0.4rem;
+
+    &:first-child {
+      height: 0.3rem;
+      width: 0.3rem;
+    }
+  }
+
+  .settingContainer {
+    @include flex-xy;
+    flex-direction: column;
+    margin-right: 0.05rem;
+    padding: 0.05rem 0;
+    position: relative;
+    width: 0.25rem;
+
+    img {
+      width: 80%;
+      height: auto;
+    }
+
+    .settingText {
+      font-size: 0.1rem;
+      background: var(--settings-header);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+}

@@ -5,7 +5,7 @@ import defaultIcon from '@/assets/blackGold/header/defaultIcon.png';
 import Image from 'next/image';
 import styles from './index.module.scss';
 
-export const VipPart = () => {
+const VipPart = () => {
   const accountInfo = useStore((state) => state.accountInfo);
   const theme = useStore((state) => state.theme);
   const codeTotal = accountInfo.codeTotal || 0;
@@ -29,3 +29,5 @@ export const VipPart = () => {
     </div>
   );
 };
+
+export default VipPart;

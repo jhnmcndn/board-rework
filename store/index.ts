@@ -2,7 +2,7 @@ import { AccountInfo, AccountNow, Init } from '@/types/app';
 import { THEME } from '@/types/enums';
 import { createStore as createZustandStore } from 'zustand';
 
-const initState = {
+export const initState = {
   actionSwitch: undefined,
   captchaId: undefined,
   customerUrl: undefined,
@@ -19,7 +19,7 @@ const initState = {
   webUrl: undefined,
 } satisfies Init;
 
-const accountInfoState = {
+export const accountInfoState = {
   accountCharge: undefined,
   accountNow: undefined,
   codeNow: undefined,
@@ -38,7 +38,7 @@ const accountInfoState = {
   vip: undefined,
 } satisfies AccountInfo;
 
-const accountNowState = {
+export const accountNowState = {
   balance: undefined,
 } satisfies AccountNow;
 
@@ -64,8 +64,8 @@ export const createStore = () =>
     accountInfo: accountInfoState,
     theme: THEME.BLACK_GOLD,
     accountNow: accountNowState,
-    setInit: (init) => set((state) => ({ init: { ...state.init, init } })),
-    setAccountInfo: (accountInfo) => set((state) => ({ accountInfo: { ...state.accountInfo, accountInfo } })),
+    setInit: (init) => set(() => ({ init: { ...init } })),
+    setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
     setTheme: (theme) => set(() => ({ theme })),
-    setAccountNow: (accountNow) => set((state) => ({ accountNow: { ...state.accountNow, accountNow } })),
+    setAccountNow: (accountNow) => set(() => ({ accountNow: { ...accountNow } })),
   }));
