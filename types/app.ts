@@ -65,47 +65,47 @@ export type AccountNow = {
 };
 
 export interface MessageHomeNotice {
-  id: number;
-  title: string;
-  content: string;
+  id?: number;
+  title?: string;
+  content?: string;
 }
 
 export type RspGameType = {
-  id: number;
-  name: string;
-  icon: string;
-  type: number;
+  id?: number;
+  name?: string;
+  icon?: string;
+  type?: number;
 };
 
 export type RspGameInfo = {
-  id: number;
-  name: string;
-  icon: string;
-  maintain: boolean;
-  recommend: boolean;
-  largeIcon: boolean;
-  gameCategory: string;
-  lotteryId: any;
-  kindId: string;
-  platformId: number;
+  id?: number;
+  name?: string;
+  icon?: string;
+  maintain?: boolean;
+  recommend?: boolean;
+  largeIcon?: boolean;
+  gameCategory?: string;
+  lotteryId?: any;
+  kindId?: string;
+  platformId?: number;
 };
 
 export type GetGameTypes = {
-  rspGameTypes: RspGameType[];
-  rspGameInfos: RspGameInfo[];
+  rspGameTypes?: RspGameType[];
+  rspGameInfos?: RspGameInfo[];
 };
 
 export type GameInfoGroup = {
-  id: number;
-  name: string;
-  icon: string;
-  cardIcon: string;
-  rspGameInfos: RspGameInfo[];
+  id?: number;
+  name?: string;
+  icon?: string;
+  cardIcon?: string;
+  rspGameInfos?: RspGameInfo[];
 };
 
 export interface ActiveSideBarItem {
-  id: number;
-  name: string;
-  icon: string;
-  type: number;
+  id?: number;
+  name?: string;
+  icon?: string;
+  type?: number;
 }

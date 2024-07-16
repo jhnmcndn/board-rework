@@ -5,6 +5,7 @@ import { Header } from '@/app/(home)/components/header';
 import { FC, useEffect } from 'react';
 import { ErrorData, Init, RootResponse } from '@/types/app';
 import { initState } from '@/store';
+import Main from './Main';
 
 export type HomePageComponent = FC<
   Readonly<{
