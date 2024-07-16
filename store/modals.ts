@@ -8,25 +8,31 @@ interface AlertContent {
 }
 
 interface ModalStore {
+  content: AlertContent;
   isAlertOpen: boolean;
   isAuthOpen: boolean;
-  content: AlertContent;
-  openAuth: () => void;
+  isLoginTypesOpen: boolean;
   openAlert: (newContent: AlertContent) => void;
-  closeAuth: () => void;
+  openLoginTypes: () =>  void;
+  openAuth: () => void;
   closeAlert: () => void;
+  closeLoginTypes: () =>  void;
+  closeAuth: () => void;
   isAnnouncementOpen: boolean;
 }
 
 const useModalStore = create<ModalStore>((set) => ({
   isAlertOpen: false,
   isAuthOpen: false,
+  isLoginTypesOpen: false,
   content: {},
   isAnnouncementOpen: false,
   openAlert: (content) => {
     set((state) => ({ ...state, isAlertOpen: true, content: { ...content } }));
   },
   closeAlert: () => set((state) => ({ ...state, isAlertOpen: false, content: {} })),
+  openLoginTypes: () => set((state) => ({ ...state, isLoginTypesOpen: true })),
+  closeLoginTypes: () => set((state) => ({ ...state, isLoginTypesOpen: false })),
   openAuth: () => set((state) => ({ ...state, isAuthOpen: true })),
   closeAuth: () => set((state) => ({ ...state, isAuthOpen: false })),
   openAnnouncement: () => set((state) => ({ ...state, isAnnouncementOpen: true })),

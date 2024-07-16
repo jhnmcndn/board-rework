@@ -1,0 +1,33 @@
+.loginTypes {
+    position: absolute;
+    inset: 0;
+    background: blue url('~/assets/blackGold/loginModal/loginTypesBg.png') center / contain no-repeat;
+    border-radius: 0.1rem;
+    height: 2.25rem;
+    width: 3.675rem;
+    margin: auto;
+
+    &__close {
+        position: absolute;
+        top: 0.1rem;
+        right: 0.1rem;
+        width: 0.15rem;
+        height: auto;
+    }
+
+    &__buttonsContainer {
+        display: flex;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin-inline: auto;
+        justify-content: space-between;
+        bottom: 0.05rem;
+        width: 70%;
+
+        > img {
+            width: 30%;
+            height: auto;
+        }
+    }
+}
