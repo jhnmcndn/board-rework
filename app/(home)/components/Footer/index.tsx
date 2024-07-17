@@ -1,26 +1,30 @@
 'use client';
-import { useStore } from '@/components/providers/StoreProvider';
-import { AudioType, onClickSound } from '@/utils/audioFile';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import { Svga } from 'react-svga';
-import styles from './index.module.scss';
+
 import { useMessageStore } from '@/components/providers/MessageProvider';
-import Image from 'next/image';
-import withdrawSvga from '@/public/assets/svgas/withdraw.svga';
+import { useStore } from '@/components/providers/StoreProvider';
 import rechargeSvga from '@/public/assets/svgas/recharge.svga';
-import { useRouter } from 'next/navigation';
-import { MessageOnSites } from '@/types/app';
-import useModalStore from '@/store/modals';
+import withdrawSvga from '@/public/assets/svgas/withdraw.svga';
 import { serverConfig } from '@/server';
+import useModalStore from '@/store/modals';
+import { MessageOnSites } from '@/types/app';
+import { AudioType, onClickSound } from '@/utils/audioFile';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { isIOS } from 'react-device-detect';
+import styles from './index.module.scss';
 
-type Fn = (params?: any) => void;
+const CSVGA = dynamic(() => import('@/app/(home)/components/Footer/components/CSVGA/'), { ssr: false });
 
-interface HandleClickParams {
+export type Fn = (params?: any) => void;
+
+export type HandleClickParams = {
   fn: Fn;
   params?: any;
   isActivity?: boolean;
-}
+};
 
 const Footer = () => {
   const router = useRouter();
@@ -29,12 +33,9 @@ const Footer = () => {
   const messageOnSites = useMessageStore((state) => state.messageOnSites);
   const [unreadMsgs, setUnreadMsgs] = useState<MessageOnSites[]>([]);
   const openAuth = useModalStore((state) => state.openAuth);
-
   const [activeSideLoggedIn, setActiveSideLoggedIn] = useState(3);
   const [omOpen, setOmOpen] = useState(false);
-
   const isLoggedIn = accountInfo.id !== undefined;
-  const isIOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
 
   const handleNavigation = (path: string, soundKey?: string) => {
     if (isIOS && soundKey) {
@@ -191,27 +192,11 @@ const Footer = () => {
         <div className={styles.rightNavigation}>
           <div className={styles.buttons}>
             <div className={styles.withdraw} onClick={() => handleClick({ fn: gotoWithdraw })}>
-              <Svga
-                src={withdrawSvga}
-                option={{
-                  loop: true,
-                  cacheFrames: true,
-                  intersectionObserverRender: true,
-                }}
-                className={styles.greenBtn}
-              />
+              <CSVGA src={withdrawSvga} className={styles.greenBtn} />
             </div>
 
             <div className={styles.other} onClick={() => handleNavigation('/recharge', 'recharge')}>
-              <Svga
-                src={rechargeSvga}
-                option={{
-                  loop: true,
-                  cacheFrames: true,
-                  intersectionObserverRender: true,
-                }}
-                className={styles.yellowBtn}
-              />
+              <CSVGA src={rechargeSvga} className={styles.yellowBtn} />
             </div>
           </div>
         </div>
