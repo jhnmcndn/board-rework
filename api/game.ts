@@ -1,6 +1,7 @@
 import { request } from '@/api';
 import { AccountInfo, ErrorData, GameInfoGroup, GetGameTypes, RootResponse, RspGameInfo } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
+import { GetGameInfoGroupFn, GetGameInfosFn } from '@/types/fns';
 
 export const getAccountInfo = async () => {
   const data = await request<RootResponse<AccountInfo>>({
@@ -19,8 +20,6 @@ export const getGameTypes = async () => {
   return data.data;
 };
 
-export type GetGameInfoGroupFn = (id: number) => Promise<ErrorData | GameInfoGroup[] | undefined>;
-
 export const getGameInfoGroup: GetGameInfoGroupFn = async (id) => {
   const body = { id };
   const response = await request<RootResponse<GameInfoGroup[]>>({
@@ -30,13 +29,6 @@ export const getGameInfoGroup: GetGameInfoGroupFn = async (id) => {
   });
   return response.data;
 };
-
-export type GetGameInfosParams = {
-  id: number;
-  pid: number;
-};
-
-export type GetGameInfosFn = (params?: GetGameInfosParams) => Promise<ErrorData | RspGameInfo[] | undefined>;
 
 export const getGameInfos: GetGameInfosFn = async (params) => {
   const body = { id: params?.id || 1, pid: params?.pid || -1 };
