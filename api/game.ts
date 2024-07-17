@@ -1,11 +1,20 @@
 import { request } from '@/api';
-import { AccountInfo, GameInfoGroup, RootResponse, RspGameInfo } from '@/types/app';
+import { AccountInfo, GameInfoGroup, GetGameTypes, RootResponse, RspGameInfo } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 
 export const getAccountInfo = async () => {
   const data = await request<RootResponse<AccountInfo>>({
     route: APP_ROUTE.GAME,
     endpoint: API_ENDPOINT.ACCOUNT_INFO,
+  });
+  return data.data;
+};
+
+export const getGameTypes = async () => {
+  const data = await request<RootResponse<GetGameTypes>>({
+    route: APP_ROUTE.GAME,
+    endpoint: API_ENDPOINT.GAME_TYPES,
+    tags: 'gameTypes',
   });
   return data.data;
 };
