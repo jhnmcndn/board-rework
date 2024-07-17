@@ -11,6 +11,7 @@ import { refetch } from '@/api/refetch';
 import { useGameStore } from '@/components/providers/GameProvider';
 import { useStore } from '@/components/providers/StoreProvider';
 import classNames from 'classnames';
+import { API_ENDPOINT } from '@/types/enums';
 
 const SideBar = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -28,7 +29,7 @@ const SideBar = () => {
     }
   };
 
-  const fetchGameInfo = async (params: { section: number; pid: number }) => {
+  const fetchGameInfo = async (params: { id: number; pid: number }) => {
     const response = await getGameInfos(params);
     if (response && !('message' in response)) {
       setGameInfos(response);
@@ -36,14 +37,14 @@ const SideBar = () => {
   };
 
   const handleRefresh = async () => {
-    await refetch('gameTypes');
+    await refetch(API_ENDPOINT.GAME_TYPES);
   };
 
   const handleOnClick = (item: RspGameType) => {
     if (item.type === 4) {
       fetchGameInfoGroup(item.id || 0);
     }
-    fetchGameInfo({ section: item.id || 0, pid: -1 });
+    fetchGameInfo({ id: item.id || 0, pid: -1 });
 
     // popSound();
     setActiveSideBarItem(item);

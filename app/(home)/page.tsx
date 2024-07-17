@@ -6,7 +6,7 @@ const Home = async () => {
   const initData = await init();
   const messageHomeNoticesData = await getMessageHomeNotices();
   const gameTypesData = await getGameTypes();
-  const gameInfosData = await getGameInfos({ section: 1, pid: -1 });
+  const gameInfosData = await getGameInfos();
 
   return (
     <HomePage
