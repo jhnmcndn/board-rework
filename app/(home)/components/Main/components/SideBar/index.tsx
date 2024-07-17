@@ -22,7 +22,6 @@ const SideBar = () => {
   const setGameInfoGroup = useGameStore((state) => state.setGameInfoGroup);
 
   const fetchGameInfoGroup = async (id: number) => {
-    console.log('qweqweqwe');
     const response = await getGameInfoGroup(id);
     if (response && !('message' in response)) {
       setGameInfoGroup(response);
@@ -41,8 +40,6 @@ const SideBar = () => {
   };
 
   const handleOnClick = (item: RspGameType) => {
-    // console.log(item.type, 'qweqweqwe');
-    console.log(item, 'qweqweqwe');
     if (item.type === 4) {
       fetchGameInfoGroup(item.id || 0);
     }
