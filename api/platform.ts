@@ -33,7 +33,7 @@ export const getMessageHomeNotices = async () => {
 };
 
 export const getMessageOnSites = async () => {
-  const data = await request<RootResponse<MessageOnSites>>({
+  const data = await request<RootResponse<MessageOnSites[]>>({
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.MESSAGE_ON_SITES,
   });

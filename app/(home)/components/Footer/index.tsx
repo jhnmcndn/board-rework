@@ -1,25 +1,88 @@
 'use client';
 import { useStore } from '@/components/providers/StoreProvider';
-import { onClickSound } from '@/utils/audioFile';
+import { AudioType, onClickSound } from '@/utils/audioFile';
 import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import { Svga } from 'react-svga';
 import styles from './index.module.scss';
 import { useMessageStore } from '@/components/providers/MessageProvider';
 import Image from 'next/image';
 import withdrawSvga from '@/public/assets/svgas/withdraw.svga';
 import rechargeSvga from '@/public/assets/svgas/recharge.svga';
+import { useRouter } from 'next/navigation';
+import { MessageOnSites } from '@/types/app';
+import useModalStore from '@/store/modals';
+import { serverConfig } from '@/server';
+
+type Fn = (params?: any) => void;
+
+interface HandleClickParams {
+  fn: Fn;
+  params?: any;
+  isActivity?: boolean;
+}
 
 const Footer = () => {
+  const router = useRouter();
   const theme = useStore((state) => state.theme);
   const accountInfo = useStore((state) => state.accountInfo);
   const messageOnSites = useMessageStore((state) => state.messageOnSites);
-  const getBoxPassIsOpen = useStore((state) => state.boxPassIsSet);
+  const [unreadMsgs, setUnreadMsgs] = useState<MessageOnSites[]>([]);
+  const openAuth = useModalStore((state) => state.openAuth);
 
-  // const withdrawSvga = require(`@/assets/${serverConfig.server}/withdraw.svga`);
-  // const rechargeSvga = require(`@/assets/${serverConfig.server}/recharge.svga`);
+  const [activeSideLoggedIn, setActiveSideLoggedIn] = useState(3);
+  const [omOpen, setOmOpen] = useState(false);
 
   const isLoggedIn = accountInfo.id !== undefined;
-  // const setMessageOnSites = useMessageStore((state) => state.setMessageOnSites);
+  const isIOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+
+  const handleNavigation = (path: string, soundKey?: string) => {
+    if (isIOS && soundKey) {
+      onClickSound(soundKey as AudioType);
+    }
+    if (isLoggedIn) {
+      router.push(path);
+    } else {
+      openAuth();
+    }
+  };
+
+  const gotoWithdraw = () => {
+    if (isIOS) {
+      onClickSound('withdraw');
+    }
+    // const loginNow = JSON.parse(localStorage.getItem('loginNow'));
+    // localStorage.setItem('withdrawModal', 'true');
+    if (!isLoggedIn || String(serverConfig.server) !== '8803') {
+      // dispatch(setShowBindWithdrawModal(true));
+    } else {
+      router.push('/withdraw');
+      // dispatch(setShowBindWithdrawModal(false));
+    }
+  };
+
+  const handleActivity = (fn: Fn, params?: any) => fn(params);
+
+  const handleClick = ({ fn, params, isActivity = false }: HandleClickParams) => {
+    if (isActivity || !isLoggedIn) {
+      handleActivity(fn, params);
+    } else {
+      openAuth();
+    }
+  };
+
+  useEffect(() => {
+    if (messageOnSites?.length > 0) {
+      setUnreadMsgs(messageOnSites?.filter((mail) => mail?.isRead === false));
+    }
+  }, [messageOnSites]);
+
+  // useEffect(() => {
+  //   if (showAnnouncementModal) {
+  //     setOmMegaphone(showAnnouncementModal);
+  //     dispatch(setShowAnnouncementModal(false));
+  //   }
+  // }, [showAnnouncementModal]);
 
   return (
     <>
@@ -64,11 +127,7 @@ const Footer = () => {
               <p className={styles.text}>客服</p>
             </div>
           </li>
-          <li
-            onClick={() => {
-              // handleClick({ fn: gotoWashCode });
-            }}
-          >
+          <li onClick={() => handleNavigation('/code-washing', 'cleanCode')}>
             <div>
               <div>
                 <Image alt='' src={require(`@/assets/${theme}/footer/iconChip.png`)} />
@@ -77,26 +136,22 @@ const Footer = () => {
             </div>
           </li>
           <li
-          // onClick={() => {
-          //   if (accountInfo?.id) setActiveSideLoggedIn(1);
-          //   if (!accountInfo?.id) setActiveSideLoggedIn(3);
-          //   // dispatch(setShowOtherModalComp(true));
-          //   // giftSound();
-          //   handleClick({ fn: setOmOpen, params: true, isActivity: true });
-          // }}
+            onClick={() => {
+              if (accountInfo?.id) setActiveSideLoggedIn(1);
+              if (!accountInfo?.id) setActiveSideLoggedIn(3);
+              // dispatch(setShowOtherModalComp(true));
+              onClickSound('gift');
+              handleClick({ fn: setOmOpen, params: true, isActivity: true });
+            }}
           >
             <div>
               <Image alt='' src={require(`@/assets/${theme}/footer/iconGift.png`)} />
               <p className={styles.text}>活动</p>
             </div>
           </li>
-          <li
-            onClick={() => {
-              // handleClick({ fn: gotoUserReceivedMail });
-            }}
-          >
+          <li onClick={() => handleNavigation('/mailbox', 'message')}>
             <div>
-              {/* {!isLoggedIn || (unreadMsgs?.length > 0 && <center className='alertIcon'></center>)} */}
+              {!isLoggedIn || (unreadMsgs?.length > 0 && <center className='alertIcon' />)}
               <Image alt='' src={require(`@/assets/${theme}/footer/iconMessage.png`)} />
               <p className={styles.text}>消息</p>
             </div>
@@ -135,12 +190,7 @@ const Footer = () => {
 
         <div className={styles.rightNavigation}>
           <div className={styles.buttons}>
-            <div
-              className={styles.withdraw}
-              onClick={() => {
-                // handleClick({ fn: gotoWithdraw });
-              }}
-            >
+            <div className={styles.withdraw} onClick={() => handleClick({ fn: gotoWithdraw })}>
               <Svga
                 src={withdrawSvga}
                 option={{
@@ -152,12 +202,7 @@ const Footer = () => {
               />
             </div>
 
-            <div
-              className={styles.other}
-              onClick={() => {
-                // handleClick({ fn: gotoRecharge });
-              }}
-            >
+            <div className={styles.other} onClick={() => handleNavigation('/recharge', 'recharge')}>
               <Svga
                 src={rechargeSvga}
                 option={{

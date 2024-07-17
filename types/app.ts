@@ -111,8 +111,9 @@ export interface ActiveSideBarItem {
 }
 
 export interface MessageOnSites {
-  id: number;
-  title: string;
-  content: string;
-  createTime: string;
+  id?: number;
+  title?: string;
+  content?: string;
+  createTime?: string;
+  isRead?: boolean;
 }
