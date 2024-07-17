@@ -1,5 +1,5 @@
 import { getGameInfos, getGameTypes } from '@/api/game';
-import { getMessageHomeNotices, init } from '@/api/platform';
+import { boxPassIsOpen, getMessageHomeNotices, getMessageOnSites, init } from '@/api/platform';
 import { HomePage } from '@/app/(home)/components/';
 
 const Home = async () => {
@@ -7,6 +7,8 @@ const Home = async () => {
   const messageHomeNoticesData = await getMessageHomeNotices();
   const gameTypesData = await getGameTypes();
   const gameInfosData = await getGameInfos();
+  const messageOnSites = await getMessageOnSites();
+  const getBoxPassIsOpen = await boxPassIsOpen();
 
   return (
     <HomePage
@@ -14,6 +16,8 @@ const Home = async () => {
       messageHomeNoticesData={messageHomeNoticesData}
       gameTypesData={gameTypesData}
       gameInfosData={gameInfosData}
+      messageOnSites={messageOnSites}
+      getBoxPassIsOpen={getBoxPassIsOpen}
     />
   );
 };

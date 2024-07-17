@@ -47,6 +47,7 @@ type State = {
   accountInfo: AccountInfo;
   theme: THEME;
   accountNow: AccountNow;
+  boxPassIsSet: boolean;
 };
 
 type Actions = {
@@ -54,6 +55,7 @@ type Actions = {
   setAccountInfo: (accountInfo: Partial<AccountInfo>) => void;
   setTheme: (theme: THEME) => void;
   setAccountNow: (accountNow: Partial<AccountNow>) => void;
+  setBoxPassIsSet: (boxPassIsSet: boolean) => void;
 };
 
 export type Store = State & Actions;
@@ -64,8 +66,10 @@ export const createStore = () =>
     accountInfo: accountInfoState,
     theme: THEME.BLACK_GOLD,
     accountNow: accountNowState,
+    boxPassIsSet: false,
     setInit: (init) => set(() => ({ init: { ...init } })),
     setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
     setTheme: (theme) => set(() => ({ theme })),
     setAccountNow: (accountNow) => set(() => ({ accountNow: { ...accountNow } })),
+    setBoxPassIsSet: (boxPassIsSet) => set(() => ({ boxPassIsSet })),
   }));
