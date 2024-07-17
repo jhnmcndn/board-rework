@@ -1,7 +1,7 @@
 'use client';
 
 import { useStore } from '@/components/providers/StoreProvider';
-import { Header } from '@/app/(home)/components/header';
+import { Header } from '@/app/(home)/components/Header';
 import { FC, useEffect } from 'react';
 import { ErrorData, GetGameTypes, Init, MessageHomeNotice, RootResponse, RspGameInfo } from '@/types/app';
 import { initState } from '@/store';
