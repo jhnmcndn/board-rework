@@ -37,8 +37,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'kyxfbky.yangzhi666.xyz',
-        pathname: '/88lm/**',
+        hostname: '**',
       },
     ],
   },
