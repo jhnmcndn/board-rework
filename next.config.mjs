@@ -19,8 +19,15 @@ const nextConfig = {
         ],
       },
       {
-        test: /\.svg$/,
-        use: ['url-loader'],
+        test: /\.svga$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              name: 'static/media/[name].[hash].[ext]',
+            },
+          },
+        ],
       },
     );
 
