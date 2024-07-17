@@ -10,3 +10,4 @@ export const serverConfig = {
 } satisfies ServerConfig;`;
 
 fs.writeFileSync('server.ts', content);
+fs.cpSync('./assets/8802', './public/assets/svgas', { recursive: true });

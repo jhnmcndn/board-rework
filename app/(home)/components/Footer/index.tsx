@@ -1,13 +1,13 @@
 'use client';
 import { useStore } from '@/components/providers/StoreProvider';
-import { serverConfig } from '@/server';
 import { onClickSound } from '@/utils/audioFile';
 import Link from 'next/link';
-import React from 'react';
 import { Svga } from 'react-svga';
 import styles from './index.module.scss';
 import { useMessageStore } from '@/components/providers/MessageProvider';
 import Image from 'next/image';
+import withdrawSvga from '@/public/assets/svgas/withdraw.svga';
+import rechargeSvga from '@/public/assets/svgas/recharge.svga';
 
 const Footer = () => {
   const theme = useStore((state) => state.theme);
@@ -96,7 +96,7 @@ const Footer = () => {
             }}
           >
             <div>
-              {!isLoggedIn || (unreadMsgs?.length > 0 && <center className='alertIcon'></center>)}
+              {/* {!isLoggedIn || (unreadMsgs?.length > 0 && <center className='alertIcon'></center>)} */}
               <Image alt='' src={require(`@/assets/${theme}/footer/iconMessage.png`)} />
               <p className={styles.text}>消息</p>
             </div>
@@ -141,7 +141,15 @@ const Footer = () => {
                 // handleClick({ fn: gotoWithdraw });
               }}
             >
-              {/* <Svga src={withdrawSvga} className={styles.greenBtn} /> */}
+              <Svga
+                src={withdrawSvga}
+                option={{
+                  loop: true,
+                  cacheFrames: true,
+                  intersectionObserverRender: true,
+                }}
+                className={styles.greenBtn}
+              />
             </div>
 
             <div
@@ -150,7 +158,15 @@ const Footer = () => {
                 // handleClick({ fn: gotoRecharge });
               }}
             >
-              {/* <Svga src={rechargeSvga} className={styles.yellowBtn} /> */}
+              <Svga
+                src={rechargeSvga}
+                option={{
+                  loop: true,
+                  cacheFrames: true,
+                  intersectionObserverRender: true,
+                }}
+                className={styles.yellowBtn}
+              />
             </div>
           </div>
         </div>
