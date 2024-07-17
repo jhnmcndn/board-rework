@@ -14,6 +14,7 @@ export type RequestParams = {
   endpoint: API_ENDPOINT;
   body?: unknown;
   tags?: string;
+  otherHeaders?: HeadersInit;
 };
 
 export const errorRootResponse = {
@@ -30,11 +31,15 @@ export const request = async <T>({
   endpoint,
   body,
   tags,
+  otherHeaders,
 }: RequestParams): Promise<T | Partial<RootResponse<ErrorData>>> => {
   const domain = serverConfig.domain;
   const method = 'POST';
   const response = await fetch(`${domain}${route}${endpoint}`, {
-    headers,
+    headers: {
+      ...headers,
+      ...otherHeaders,
+    },
     method,
     body: JSON.stringify(body),
     next: {
