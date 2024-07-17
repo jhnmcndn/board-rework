@@ -1,3 +1,5 @@
+'use client'
+
 import classnames from 'classnames';
 import { useStore } from "@/components/providers/StoreProvider";
 import Image from "next/image";
@@ -14,7 +16,7 @@ const NoData = ({ className }: Props) => {
       <div
         className={classnames(className, styles.noDataContainer)}>
         <Image
-          src={require(`/src/assets/${theme}/noData/noData.png`)}
+          src={require(`@/assets/${theme}/noData/noData.png`)}
           alt='No Data'
           width={916}
           height={400}
