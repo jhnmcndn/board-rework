@@ -6,20 +6,22 @@ export const initialMessageOnSites = {
   title: '',
   content: '',
   createTime: '',
+  isRead: false,
 } satisfies MessageOnSites;
 
 type State = {
-  messageOnSites: MessageOnSites;
+  messageOnSites: MessageOnSites[];
 };
 
 type Actions = {
-  setMessageOnSites: (messageOnSites: MessageOnSites) => void;
+  setMessageOnSites: (messageOnSites: MessageOnSites[]) => void;
 };
 
 export type Store = State & Actions;
 
 export const createStore = () =>
   createZustandStore<Store>()((set) => ({
-    messageOnSites: initialMessageOnSites,
-    setMessageOnSites: (messageOnSites) => set(() => ({ messageOnSites })),
+    messageOnSites: [initialMessageOnSites],
+    setMessageOnSites: (messageOnSites) =>
+      set((state) => ({ messageOnSites: [...state.messageOnSites, ...messageOnSites] })),
   }));

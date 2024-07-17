@@ -20,7 +20,7 @@ import vaultActAudio from '@/assets/music/vaultActAudio.mp3';
 import vipAudio from '@/assets/music/vipAudio.mp3';
 import withdrawAudio from '@/assets/music/withdrawAudio.mp3';
 
-type AudioType =
+export type AudioType =
   | 'pop'
   | 'gift'
   | 'activityPop'

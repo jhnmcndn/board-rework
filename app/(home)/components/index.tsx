@@ -24,7 +24,7 @@ export type HomePageComponent = FC<
     messageHomeNoticesData?: Pick<RootResponse<MessageHomeNotice[] | ErrorData>, 'data' | 'otherData'>;
     gameTypesData?: GetGameTypes | ErrorData;
     gameInfosData?: RspGameInfo[] | ErrorData;
-    messageOnSites?: MessageOnSites | ErrorData;
+    messageOnSites?: MessageOnSites[] | ErrorData;
     getBoxPassIsOpen?: boolean | ErrorData;
   }>
 >;
@@ -65,8 +65,20 @@ export const HomePage: HomePageComponent = ({
       setGameInfos(gameInfosData || []);
     }
 
-    if (messageOnSites && !('message' in messageOnSites)) {
-      setMessageOnSites(messageOnSites || []);
+    if (messageOnSites && !('message' in messageOnSites) && messageOnSites.length > 0) {
+      setMessageOnSites(
+        messageOnSites
+          .toSorted((a, b) => {
+            if (a.createTime && b.createTime) {
+              return a.createTime > b.createTime ? 1 : -1;
+            }
+            return -1;
+          })
+          .map((item) => ({
+            ...item,
+            isRead: false,
+          })),
+      );
     }
 
     if (getBoxPassIsOpen && typeof getBoxPassIsOpen === 'boolean') {
