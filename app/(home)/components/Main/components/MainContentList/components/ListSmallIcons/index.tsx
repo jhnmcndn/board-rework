@@ -1,10 +1,11 @@
-import React, { Dispatch, FC, SetStateAction, useEffect, useRef, useState } from 'react';
+import React, { Dispatch, FC, Fragment, SetStateAction, useEffect, useRef, useState } from 'react';
 import styles from './index.module.scss';
 import classNames from 'classnames';
 import { useGameStore } from '@/components/providers/GameProvider';
 import { RspGameInfo } from '@/types/app';
 import NoData from '@/components/NoData';
 import ImgWithFallback from '@/components/ImgWithFallback';
+import { motion } from 'framer-motion';
 import fallbackIcon from '@/assets/commons/fallBacks/onErrorImg.png';
 import loadingIcon from '@/assets/commons/fallBacks/squareLoad2.gif';
 
@@ -205,30 +206,35 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
             <div className={styles.firstRow}>
               {filteredDataEven?.map((item, idx) => {
                 return (
-                  <div
-                    id={item.id?.toString()}
-                    className={classNames(styles.iconHolder, {
-                      [styles.isMaintenance]: item.maintain,
-                    })}
-                    onClick={() => {
-                      // handleGameClick(item);
-                    }}
-                    style={{ width: iconWidth }}
-                  >
-                    {item.maintain && (
-                      <div className='isMaintain'>
-                        <div>正在维修</div>
-                      </div>
-                    )}
-                    <ImgWithFallback
-                      keyIcon={item.icon || ''}
-                      fallback={fallbackIcon}
-                      loadingIcon={loadingIcon}
-                      loading='lazy'
-                      src={item.icon || ''}
-                      handleIconWidthChange={handleIconWidthChange}
-                    />
-                  </div>
+                  <Fragment key={idx}>
+                    <motion.div
+                      animate={{ x: 0 }}
+                      initial={{ x: '100vw' }}
+                      transition={{ delay: 1 }}
+                      id={item.id?.toString()}
+                      className={classNames(styles.iconHolder, {
+                        [styles.isMaintenance]: item.maintain,
+                      })}
+                      onClick={() => {
+                        // handleGameClick(item);
+                      }}
+                      style={{ width: iconWidth }}
+                    >
+                      {item.maintain && (
+                        <div className='isMaintain'>
+                          <div>正在维修</div>
+                        </div>
+                      )}
+                      <ImgWithFallback
+                        keyIcon={item.icon || ''}
+                        fallback={fallbackIcon}
+                        loadingIcon={loadingIcon}
+                        loading='lazy'
+                        src={item.icon || ''}
+                        handleIconWidthChange={handleIconWidthChange}
+                      />
+                    </motion.div>
+                  </Fragment>
                 );
               })}
             </div>
@@ -236,30 +242,35 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
             <div className={styles.secondRow}>
               {filteredDataOdd?.map((item, idx) => {
                 return (
-                  <div
-                    id={item.id?.toString()}
-                    className={classNames(styles.iconHolder, {
-                      [styles.isMaintenance]: item.maintain,
-                    })}
-                    onClick={() => {
-                      // handleGameClick(item);
-                    }}
-                    style={{ width: iconWidth }}
-                  >
-                    {item.maintain && (
-                      <div className='isMaintain'>
-                        <div>正在维修</div>
-                      </div>
-                    )}
-                    <ImgWithFallback
-                      keyIcon={item.icon || ''}
-                      fallback={fallbackIcon}
-                      loadingIcon={loadingIcon}
-                      loading='lazy'
-                      src={item.icon || ''}
-                      handleIconWidthChange={handleIconWidthChange}
-                    />
-                  </div>
+                  <Fragment key={idx}>
+                    <motion.div
+                      animate={{ x: 0 }}
+                      initial={{ x: '100vw' }}
+                      transition={{ delay: 1 }}
+                      id={item.id?.toString()}
+                      className={classNames(styles.iconHolder, {
+                        [styles.isMaintenance]: item.maintain,
+                      })}
+                      onClick={() => {
+                        // handleGameClick(item);
+                      }}
+                      style={{ width: iconWidth }}
+                    >
+                      {item.maintain && (
+                        <div className='isMaintain'>
+                          <div>正在维修</div>
+                        </div>
+                      )}
+                      <ImgWithFallback
+                        keyIcon={item.icon || ''}
+                        fallback={fallbackIcon}
+                        loadingIcon={loadingIcon}
+                        loading='lazy'
+                        src={item.icon || ''}
+                        handleIconWidthChange={handleIconWidthChange}
+                      />
+                    </motion.div>
+                  </Fragment>
                 );
               })}
             </div>
