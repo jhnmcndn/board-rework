@@ -26,6 +26,15 @@ const nextConfig = {
 
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'kyxfbky.yangzhi666.xyz',
+        pathname: '/88lm/**',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

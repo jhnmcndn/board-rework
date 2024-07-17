@@ -29,7 +29,7 @@ const CategoryListBar: FC<IProps> = ({ setActivePlatformId }) => {
     };
   }, []);
 
-  const fetchGameInfo = async (params: { section: number; pid: number }) => {
+  const fetchGameInfo = async (params: { id: number; pid: number }) => {
     const response = await getGameInfos(params);
     if (response && !('message' in response)) {
       setGameInfos(response);
@@ -39,7 +39,7 @@ const CategoryListBar: FC<IProps> = ({ setActivePlatformId }) => {
   const handleOnClick = async (item: GameInfoGroup, index: number) => {
     setActiveTab(index);
     setActivePlatformId(item.id || -1);
-    fetchGameInfo({ section: activeSideBarItem.id || 1, pid: item.id || -1 });
+    fetchGameInfo({ id: activeSideBarItem.id || 1, pid: item.id || -1 });
   };
 
   return (
