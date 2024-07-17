@@ -4,6 +4,7 @@ import styles from './index.module.scss';
 import CategoryListBar from './components/CategoryListBar';
 import SearchField from '../SearchField';
 import Announce from '../Announce';
+import ListSmallIcons from './components/ListSmallIcons';
 
 const MainContentList = () => {
   const activeSideBarItem = useGameStore((state) => state.activeSideBarItem);
@@ -29,6 +30,35 @@ const MainContentList = () => {
           </div>
         </div>
       )}
+
+      <div className={styles.listContainer}>
+        {sideBar.map((item, idx) => {
+          if (item.type !== 2 && item.type !== 3) {
+            if (item.type === 4) {
+              return (
+                activeSideBarItem.id === item.id &&
+                gameInfoGroup?.map((platform, idx) => {
+                  return (
+                    activePlatformId === platform.id && (
+                      <ListSmallIcons
+                        key={idx}
+                        searchFieldData={searchFieldData}
+                        setSearchFieldData={setSearchFieldData}
+                      />
+                    )
+                  );
+                })
+              );
+            } else {
+              return (
+                activeSideBarItem.id === item.id && (
+                  <ListSmallIcons key={idx} searchFieldData={searchFieldData} setSearchFieldData={setSearchFieldData} />
+                )
+              );
+            }
+          }
+        })}
+      </div>
     </div>
   );
 };
