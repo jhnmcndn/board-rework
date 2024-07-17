@@ -13,7 +13,7 @@ export type RequestParams = {
   route: APP_ROUTE;
   endpoint: API_ENDPOINT;
   body?: unknown;
-  tags?: string;
+  tags?: API_ENDPOINT;
   otherHeaders?: HeadersInit;
 };
 
