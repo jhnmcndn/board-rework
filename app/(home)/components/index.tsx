@@ -39,7 +39,6 @@ export const HomePage: HomePageComponent = ({ init, messageHomeNoticesData, game
       if (!gameTypesData.rspGameTypes) {
         return;
       }
-      console.log(gameTypesData.rspGameTypes, 'qweqweqwe');
       setSideBar(gameTypesData.rspGameTypes.filter((item) => item.id !== 6));
       setActiveSideBarItem(gameTypesData.rspGameTypes.length > 0 ? gameTypesData?.rspGameTypes[0] : activeSideBarItem);
     }
