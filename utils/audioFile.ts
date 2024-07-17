@@ -4,7 +4,7 @@ import bjlEndBetAudio from '@/assets/music/bjlEndAudio.mp3';
 import bjlStartBetAudio from '@/assets/music/bjlStartAudio.mp3';
 import customerAudio from '@/assets/music/customerAudio.mp3';
 import giftAudio from '@/assets/music/gift.mp3';
-import popAudio from '@/assets/music/popAudio.mp3';
+import popAudio from '@/assets/music/pop.mp3';
 
 import cleanCodeAudio from '@/assets/music/cleanCodeAudio.mp3';
 import kaijiangAudio from '@/assets/music/kaijiangAudio.mp3';

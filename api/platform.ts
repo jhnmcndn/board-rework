@@ -1,5 +1,5 @@
 import { request } from '@/api';
-import { AccountNow, Init, MessageHomeNotice, RootResponse } from '@/types/app';
+import { AccountNow, Init, MessageHomeNotice, MessageOnSites, RootResponse } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import { getToken } from '@/utils/getToken';
 
@@ -30,4 +30,23 @@ export const getMessageHomeNotices = async () => {
   });
   const { data, otherData } = response;
   return { data, otherData };
+};
+
+export const getMessageOnSites = async () => {
+  const data = await request<RootResponse<MessageOnSites>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.MESSAGE_ON_SITES,
+  });
+  return data.data;
+};
+
+export const boxPassIsOpen = async () => {
+  const data = await request<RootResponse<boolean>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.BOX_PASS_IS_OPEN,
+    otherHeaders: {
+      token: getToken(),
+    },
+  });
+  return data.data;
 };

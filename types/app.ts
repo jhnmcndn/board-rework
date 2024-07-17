@@ -109,3 +109,10 @@ export interface ActiveSideBarItem {
   icon?: string;
   type?: number;
 }
+
+export interface MessageOnSites {
+  id: number;
+  title: string;
+  content: string;
+  createTime: string;
+}
