@@ -1,0 +1,42 @@
+.listBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+.listContainer {
+  height: 100%;
+  padding: 0.025rem 0.1rem 0.13rem 0.1rem;
+
+  ul {
+    @include flex-xy;
+    padding-inline-start: 0;
+    gap: 0.25rem;
+    width: 100%;
+    height: 100%;
+
+    li {
+      @include flex-xy;
+      flex-direction: column;
+      padding: 0;
+      .moreImg {
+        @include flex-xy;
+        flex-direction: column;
+        width: 0.25rem;
+        height: 0.25rem;
+
+        > span {
+          white-space: nowrap;
+          width: 100%;
+          font-size: 0.09rem;
+          font-weight: 600;
+          background: var(--footer-dialog-text);
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          -webkit-text-fill-color: transparent;
+        }
+      }
+    }
+  }
+}
