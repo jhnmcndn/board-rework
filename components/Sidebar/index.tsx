@@ -70,13 +70,13 @@ const Sidebar: SidebarComponent = ({ sidebarItems }) => {
         sidebarItems.map((item, index) => (
           <div
             key={index}
-            className={classNames(styles.sidebarItem, styles.noIconOverlay, {
+            className={classNames(styles.sidebarItem, {
               [styles.activeTab]: index === activeTab,
             })}
             bet-data={item === '' ? 'none' : undefined}
             onClick={() => handleTabClick(index)}
           >
-            <span>{item}</span>
+            <span className={styles.text}>{item}</span>
           </div>
         ))}
     </motion.div>
