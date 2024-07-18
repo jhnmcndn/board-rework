@@ -1,5 +1,3 @@
-@import '/styles/helpers';
-
 .footerContent {
   position: relative;
   @include flex-xy(space-between, center);
