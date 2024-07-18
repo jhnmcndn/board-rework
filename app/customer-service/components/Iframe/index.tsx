@@ -1,11 +1,11 @@
 'use client';
 
 import styles from '@/app/customer-service/components/Iframe/index.module.scss';
-import { useStore } from '@/components/providers/StoreProvider';
+import { useAccountStore } from '@/components/providers/AccountStoreProvider';
 import { useRef } from 'react';
 
 const Iframe = () => {
-  const init = useStore((state) => state.init);
+  const init = useAccountStore((state) => state.init);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const defaultCSUrl = 'https://yangxianli1.cn?groupid=bd901135e6b1fe631dd7e40e506b38d4';
 

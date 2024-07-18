@@ -3,8 +3,8 @@ import fallbackIcon from '@/assets/commons/fallBacks/onErrorImg.png';
 import loadingIcon from '@/assets/commons/fallBacks/squareLoad2.gif';
 import ImgWithFallback from '@/components/ImgWithFallback';
 import NoData from '@/components/NoData';
+import { useAccountStore } from '@/components/providers/AccountStoreProvider';
 import { useGameStore } from '@/components/providers/GameProvider';
-import { useStore } from '@/components/providers/StoreProvider';
 import { GameInfoGroup, RspGameInfo } from '@/types/app';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
@@ -25,7 +25,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
   const [filteredData, setFilteredData] = useState<CombinedGameInfo[]>([]);
   const [data, setData] = useState<CombinedGameInfo[]>([]);
   const [iconWidth, setIconWidth] = useState(0);
-  const theme = useStore((state) => state.theme);
+  const theme = useAccountStore((state) => state.theme);
   const activeSideBarItem = useGameStore((state) => state.activeSideBarItem);
   const gameInfos = useGameStore((state) => state.gameInfos);
   const setGameInfos = useGameStore((state) => state.setGameInfos);
@@ -50,7 +50,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
           if (item && item.name) {
             return item?.name.toLowerCase().includes(searchFieldData.toLowerCase());
           }
-        })
+        }),
       );
     }
   }, [searchFieldData, data]);
@@ -175,7 +175,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     return (
       <div className={styles.listHeader} data-theme={theme}>
         <div className={styles.leftContent}>
-          <Image src={activePlatform?.icon || ''} width={200} height={200} alt="Icon" />
+          <Image src={activePlatform?.icon || ''} width={200} height={200} alt='Icon' />
           <span>{activePlatform?.name}</span> <span>总共{gameInfos?.length}款小游戏</span>
         </div>
         <div className={styles.rightContent}>
@@ -186,7 +186,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
             onClick={() => {
               setShowPlatform(false);
             }}
-            alt="Card Game Back"
+            alt='Card Game Back'
           />
         </div>
       </div>
@@ -209,7 +209,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
 
       {!showPlatform && filteredData?.length !== 0 && (
         <div
-          id="listLargeWrapper"
+          id='listLargeWrapper'
           ref={containerRef}
           className={classNames(styles.listLargeWrapper, {
             [styles.listLargeType2Overlay]: activeSideBarItem.type === 2,
@@ -248,7 +248,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
                     }}
                   >
                     {item.maintain && (
-                      <div className="isMaintainLargeIcon">
+                      <div className='isMaintainLargeIcon'>
                         <div>正在维修</div>
                       </div>
                     )}
@@ -258,7 +258,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
                       keyIcon={(activeSideBarItem.type === 3 ? item.cardIcon : item.icon) || ''}
                       fallback={fallbackIcon}
                       loadingIcon={loadingIcon}
-                      loading="lazy"
+                      loading='lazy'
                       src={(activeSideBarItem.type === 3 ? item.cardIcon : item.icon) || ''}
                       handleIconWidthChange={handleIconWidthChange}
                     />

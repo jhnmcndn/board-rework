@@ -42,7 +42,7 @@ export const accountNowState = {
   balance: undefined,
 } satisfies AccountNow;
 
-type State = {
+type AccountState = {
   init: Init;
   accountInfo: AccountInfo;
   theme: THEME;
@@ -50,7 +50,7 @@ type State = {
   boxPassIsSet: boolean;
 };
 
-type Actions = {
+type AccountActions = {
   setInit: (init: Partial<Init>) => void;
   setAccountInfo: (accountInfo: Partial<AccountInfo>) => void;
   setTheme: (theme: THEME) => void;
@@ -58,10 +58,10 @@ type Actions = {
   setBoxPassIsSet: (boxPassIsSet: boolean) => void;
 };
 
-export type Store = State & Actions;
+export type AccountStore = AccountState & AccountActions;
 
-export const createStore = () =>
-  createZustandStore<Store>()((set) => ({
+export const createAccountStore = () =>
+  createZustandStore<AccountStore>()((set) => ({
     init: initState,
     accountInfo: accountInfoState,
     theme: THEME.BLACK_GOLD,

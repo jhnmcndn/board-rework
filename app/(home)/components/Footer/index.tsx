@@ -1,6 +1,6 @@
 'use client';
 
-import { useStore } from '@/components/providers/StoreProvider';
+import { useAccountStore } from '@/components/providers/AccountStoreProvider';
 import { serverConfig } from '@/server';
 import useModalStore from '@/store/modals';
 import { AudioType, onClickSound } from '@/utils/audioFile';
@@ -18,7 +18,7 @@ export type HandleClickParams = {
 
 const Footer = () => {
   const router = useRouter();
-  const accountInfo = useStore((state) => state.accountInfo);
+  const accountInfo = useAccountStore((state) => state.accountInfo);
   const openAuth = useModalStore((state) => state.openAuth);
   const isLoggedIn = Boolean(accountInfo.id);
 

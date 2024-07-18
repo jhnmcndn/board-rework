@@ -1,10 +1,10 @@
 'use client';
 
 import coinIcon from '@/assets/blackGold/header/coin.png';
-import { useStore } from '@/components/providers/StoreProvider';
 import classNames from 'classnames';
 import Image from 'next/image';
 import { CSSProperties, FC, useEffect, useState } from 'react';
+import { useAccountStore } from '../providers/AccountStoreProvider';
 import styles from './index.module.scss';
 
 export type CoinPurseProps = {
@@ -20,9 +20,9 @@ export type CoinPurseComponent = FC<Readonly<CoinPurseProps>>;
 
 const CoinPurse: CoinPurseComponent = (props) => {
   const { position, top, left, iColor, betLog, inputBg, noShuffle } = props;
-  const userBalance = useStore((state) => state.accountNow.balance);
-  const userToken = useStore((state) => state.accountInfo.token);
-  const theme = useStore((state) => state.theme);
+  const userBalance = useAccountStore((state) => state.accountNow.balance);
+  const userToken = useAccountStore((state) => state.accountInfo.token);
+  const theme = useAccountStore((state) => state.theme);
   const [animateSpin, setAnimateSpin] = useState(false);
   const reloadImage = require(`@/assets/${theme}/header/reload.png`);
   const isLoggedIn = userToken !== undefined;

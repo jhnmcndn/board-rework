@@ -3,8 +3,8 @@
 import { getGameInfoGroup, getGameInfos } from '@/api/game';
 import { refetch } from '@/api/refetch';
 import blackGoldTitle from '@/assets/blackGold/sidebar/sidebarTitle.png';
+import { useAccountStore } from '@/components/providers/AccountStoreProvider';
 import { useGameStore } from '@/components/providers/GameProvider';
-import { useStore } from '@/components/providers/StoreProvider';
 import { RspGameType } from '@/types/app';
 import { API_ENDPOINT } from '@/types/enums';
 import classNames from 'classnames';
@@ -16,7 +16,7 @@ import styles from './index.module.scss';
 const SideBar = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const sideBar = useGameStore((state) => state.sideBar);
-  const theme = useStore((state) => state.theme);
+  const theme = useAccountStore((state) => state.theme);
   const activeSideBarItem = useGameStore((state) => state.activeSideBarItem);
   const setActiveSideBarItem = useGameStore((state) => state.setActiveSideBarItem);
   const setGameInfos = useGameStore((state) => state.setGameInfos);
@@ -59,7 +59,7 @@ const SideBar = () => {
   return (
     <div className={styles.sidebarWrapper}>
       <div className={styles.title}>
-        <Image src={blackGoldTitle} alt="" />
+        <Image src={blackGoldTitle} alt='' />
       </div>
 
       <div className={styles.list}>
@@ -77,14 +77,14 @@ const SideBar = () => {
                     width={434}
                     className={styles.divider}
                     src={require(`@/assets/${theme}/sidebar/divider.png`)}
-                    alt="divider"
+                    alt='divider'
                   />
                   <div
                     className={classNames(styles.sideBarItem, {
                       [styles.sidebarItemActive]: item.id === activeSideBarItem.id,
                     })}
                   >
-                    <img className={styles.icon} src={item.icon} alt="icon" />
+                    <img className={styles.icon} src={item.icon} alt='icon' />
                     <span>{item.name}</span>
                   </div>
 
@@ -94,7 +94,7 @@ const SideBar = () => {
                       width={434}
                       className={styles.divider}
                       src={require(`@/assets/${theme}/sidebar/divider.png`)}
-                      alt="divider"
+                      alt='divider'
                     />
                   )}
                 </div>

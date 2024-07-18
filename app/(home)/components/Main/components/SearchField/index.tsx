@@ -1,8 +1,9 @@
 'use client';
-import { useStore } from '@/components/providers/StoreProvider';
-import React, { ChangeEvent, Dispatch, FC, SetStateAction } from 'react';
-import styles from './index.module.scss';
+
+import { useAccountStore } from '@/components/providers/AccountStoreProvider';
 import Image from 'next/image';
+import { ChangeEvent, Dispatch, FC, SetStateAction } from 'react';
+import styles from './index.module.scss';
 
 interface IProps {
   setSearchFieldData: Dispatch<SetStateAction<string>>;
@@ -10,7 +11,7 @@ interface IProps {
 }
 
 const SearchField: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => {
-  const theme = useStore((state) => state.theme);
+  const theme = useAccountStore((state) => state.theme);
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchFieldData(e.target.value);
   };

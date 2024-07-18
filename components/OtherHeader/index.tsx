@@ -2,7 +2,6 @@
 
 import CoinPurse from '@/components/CoinPurse';
 import styles from '@/components/OtherHeader/index.module.scss';
-import { useStore } from '@/components/providers/StoreProvider';
 import { THEME } from '@/types/enums';
 import { onClickSound } from '@/utils/audioFile';
 import classNames from 'classnames';
@@ -11,6 +10,7 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 import Draggable from 'react-draggable';
+import { useAccountStore } from '../providers/AccountStoreProvider';
 
 export type OtherHeaderProps = {
   headerTitle: string;
@@ -20,8 +20,8 @@ export type OtherHeaderProps = {
 export type OtherHeaderComponent = FC<Readonly<OtherHeaderProps>>;
 
 const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, hasPurse }) => {
-  const theme = useStore((state) => state.theme);
-  const accountBalance = useStore((state) => state.accountNow.balance);
+  const theme = useAccountStore((state) => state.theme);
+  const accountBalance = useAccountStore((state) => state.accountNow.balance);
   const pathname = usePathname();
   const router = useRouter();
   const [isDraggable, setIsDraggable] = useState(false);

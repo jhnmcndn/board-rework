@@ -1,21 +1,21 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import Image from 'next/image';
 // import { loginDevice } from '@/api/game/gamelist';
 // import NECaptchaComponent from 'src/commons/Captcha/NECaptchaComponent';
-import { getDeviceInfo } from '@/utils/helpers';
-import { useStore } from '@/components/providers/StoreProvider';
+import { useAccountStore } from '@/components/providers/AccountStoreProvider';
 import useModalStore from '@/store/modals';
+import { getDeviceInfo } from '@/utils/helpers';
 import { images } from '@/utils/resources';
 import ModalLayout from '../ModalLayout';
 import styles from './index.module.scss';
 
 // const LoginTypesModal = ({ setIsShowUserAuth }) => {
 const LoginTypesModal = () => {
-  const { openAlert, isLoginTypesOpen, closeLoginTypes } =  useModalStore();
-  const { captchaId, actionSwitch } =  useStore(state => state.init);
+  const { openAlert, isLoginTypesOpen, closeLoginTypes } = useModalStore();
+  const { captchaId, actionSwitch } = useAccountStore((state) => state.init);
   const isCaptchaEnabled = actionSwitch === '1' ? true : false;
   const [isCaptchaOpen, setIsCaptchaOpen] = useState(false);
 
@@ -99,7 +99,7 @@ const LoginTypesModal = () => {
             height={79}
             width={228}
             quality={100}
-            onClick={() => openAlert({body: '没有发现其他域名' })}
+            onClick={() => openAlert({ body: '没有发现其他域名' })}
           />
         </div>
       </div>

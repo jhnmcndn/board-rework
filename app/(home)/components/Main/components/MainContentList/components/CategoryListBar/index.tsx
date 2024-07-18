@@ -1,17 +1,17 @@
 import { getGameInfos } from '@/api/game';
+import { useAccountStore } from '@/components/providers/AccountStoreProvider';
 import { useGameStore } from '@/components/providers/GameProvider';
-import { useStore } from '@/components/providers/StoreProvider';
-import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
-import styles from './index.module.scss';
-import classNames from 'classnames';
 import { GameInfoGroup } from '@/types/app';
+import classNames from 'classnames';
+import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import styles from './index.module.scss';
 
 interface IProps {
   setActivePlatformId: Dispatch<SetStateAction<number>>;
 }
 
 const CategoryListBar: FC<IProps> = ({ setActivePlatformId }) => {
-  const theme = useStore((state) => state.theme);
+  const theme = useAccountStore((state) => state.theme);
   const gameInfoGroup = useGameStore((state) => state.gameInfoGroup);
   const setGameInfos = useGameStore((state) => state.setGameInfos);
   const activeSideBarItem = useGameStore((state) => state.activeSideBarItem);

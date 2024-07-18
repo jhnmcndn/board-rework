@@ -1,14 +1,14 @@
 import calendarImage from '@/assets/blackGold/header/calendar.png';
 import promoteImage from '@/assets/blackGold/header/promote.png';
 import taskImage from '@/assets/blackGold/header/task.png';
-import styles from './index.module.scss';
-import { useStore } from '@/components/providers/StoreProvider';
-import Image from 'next/image';
+import { useAccountStore } from '@/components/providers/AccountStoreProvider';
 import useModalStore from '@/store/modals';
+import Image from 'next/image';
+import styles from './index.module.scss';
 
 const HeaderButtons = () => {
   const { openLoginTypes } = useModalStore();
-  const theme = useStore((state) => state.theme);
+  const theme = useAccountStore((state) => state.theme);
   const settingImage = require(`@/assets/${theme}/header/setting.png`);
 
   return (

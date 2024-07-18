@@ -1,12 +1,11 @@
 import headerLogo from '@/assets/blackGold/header/headerLogo.png';
+import { useAccountStore } from '@/components/providers/AccountStoreProvider';
 import { serverConfig } from '@/server';
-import styles from './index.module.scss';
-import { useStore } from '@/components/providers/StoreProvider';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import styles from './index.module.scss';
 
 const HeaderTitle = () => {
-  const init = useStore((state) => state.init);
+  const init = useAccountStore((state) => state.init);
 
   return (
     <div className={styles.headerTitle}>

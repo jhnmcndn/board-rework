@@ -1,15 +1,15 @@
 'use client';
 
-import { useStore } from '@/components/providers/StoreProvider';
 import defaultIcon from '@/assets/blackGold/header/defaultIcon.png';
+import loginBtnImage from '@/assets/commons/loginBtn.png';
+import { useAccountStore } from '@/components/providers/AccountStoreProvider';
+import { copyToClipboard } from '@/utils/helpers';
 import Image from 'next/image';
 import styles from './index.module.scss';
-import { copyToClipboard } from '@/utils/helpers';
-import loginBtnImage from '@/assets/commons/loginBtn.png';
 
 const VipPart = () => {
-  const accountInfo = useStore((state) => state.accountInfo);
-  const theme = useStore((state) => state.theme);
+  const accountInfo = useAccountStore((state) => state.accountInfo);
+  const theme = useAccountStore((state) => state.theme);
   const codeTotal = accountInfo.codeTotal || 0;
   const nextLevelIntegral = accountInfo.nextLevelIntegral || 0;
   const expBar = (codeTotal / (codeTotal + nextLevelIntegral)) * 100;

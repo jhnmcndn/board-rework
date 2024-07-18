@@ -1,8 +1,11 @@
 'use client';
 
-import { useStore } from '@/components/providers/StoreProvider';
+import Footer from '@/app/(home)/components/Footer';
 import { Header } from '@/app/(home)/components/Header';
-import { FC, useEffect } from 'react';
+import { useAccountStore } from '@/components/providers/AccountStoreProvider';
+import { useGameStore } from '@/components/providers/GameProvider';
+import { useMessageStore } from '@/components/providers/MessageProvider';
+import { initState } from '@/store/account';
 import {
   ErrorData,
   GetGameTypes,
@@ -12,11 +15,8 @@ import {
   RootResponse,
   RspGameInfo,
 } from '@/types/app';
-import { initState } from '@/store';
+import { FC, useEffect } from 'react';
 import Main from './Main';
-import { useGameStore } from '@/components/providers/GameProvider';
-import Footer from '@/app/(home)/components/Footer';
-import { useMessageStore } from '@/components/providers/MessageProvider';
 
 export type HomePageComponent = FC<
   Readonly<{
@@ -37,15 +37,15 @@ export const HomePage: HomePageComponent = ({
   messageOnSites,
   getBoxPassIsOpen,
 }) => {
-  const theme = useStore((state) => state.theme);
-  const setInit = useStore((state) => state.setInit);
+  const theme = useAccountStore((state) => state.theme);
+  const setInit = useAccountStore((state) => state.setInit);
   const setAnnounceText = useGameStore((state) => state.setAnnounceText);
   const setSideBar = useGameStore((state) => state.setSideBar);
   const setActiveSideBarItem = useGameStore((state) => state.setActiveSideBarItem);
   const activeSideBarItem = useGameStore((state) => state.activeSideBarItem);
   const setGameInfos = useGameStore((state) => state.setGameInfos);
   const setMessageOnSites = useMessageStore((state) => state.setMessageOnSites);
-  const setBoxPassIsSet = useStore((state) => state.setBoxPassIsSet);
+  const setBoxPassIsSet = useAccountStore((state) => state.setBoxPassIsSet);
 
   useEffect(() => {
     if (init && !('message' in init)) {
