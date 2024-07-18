@@ -117,3 +117,16 @@ export interface MessageOnSites {
   createTime?: string;
   isRead?: boolean;
 }
+
+export type CustomerService = {
+  id?: number;
+  title?: string;
+  icon?: string;
+  details?: string;
+  url?: string;
+  status?: boolean;
+  createBy?: string;
+  createTime?: string;
+  updateBy?: string;
+  updateTime?: string;
+};

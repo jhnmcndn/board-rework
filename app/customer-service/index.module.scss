@@ -1,0 +1,13 @@
+.cs {
+  font-size: 0.15rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .wrapper {
+    display: flex;
+    width: 100%;
+    height: calc(100% - 0.4rem);
+  }
+}

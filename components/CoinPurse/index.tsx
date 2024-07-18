@@ -1,16 +1,16 @@
 'use client';
 
-import classNames from 'classnames';
-import { CSSProperties, FC, useEffect, useState } from 'react';
-import styles from './index.module.scss';
 import coinIcon from '@/assets/blackGold/header/coin.png';
 import { useStore } from '@/components/providers/StoreProvider';
+import classNames from 'classnames';
 import Image from 'next/image';
+import { CSSProperties, FC, useEffect, useState } from 'react';
+import styles from './index.module.scss';
 
 export type CoinPurseProps = {
-  position: CSSProperties['position'];
-  top: CSSProperties['top'];
-  left: CSSProperties['left'];
+  position?: CSSProperties['position'];
+  top?: CSSProperties['top'];
+  left?: CSSProperties['left'];
   iColor?: string;
   betLog?: boolean;
   inputBg?: string;
