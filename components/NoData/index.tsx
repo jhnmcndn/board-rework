@@ -1,20 +1,19 @@
-'use client'
+'use client';
 
 import classnames from 'classnames';
-import { useStore } from "@/components/providers/StoreProvider";
-import Image from "next/image";
+import Image from 'next/image';
+import { useAccountStore } from '../providers/AccountStoreProvider';
 import styles from './index.module.scss';
 
 type Props = {
   className?: string;
-}
+};
 
 const NoData = ({ className }: Props) => {
-  const theme = useStore((state) => state.theme);
+  const theme = useAccountStore((state) => state.theme);
   return (
     <>
-      <div
-        className={classnames(className, styles.noDataContainer)}>
+      <div className={classnames(className, styles.noDataContainer)}>
         <Image
           src={require(`@/assets/${theme}/noData/noData.png`)}
           alt='No Data'
@@ -26,6 +25,6 @@ const NoData = ({ className }: Props) => {
       </div>
     </>
   );
-}
+};
 
 export default NoData;

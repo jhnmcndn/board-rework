@@ -1,18 +1,20 @@
-import { useStore } from '@/components/providers/StoreProvider';
+'use client';
+
+import { useAccountStore } from '@/components/providers/AccountStoreProvider';
 import { FC } from 'react';
 import Morelist from './component/index';
 import styles from './index.module.scss';
 
-type MoreModalProps = {
+type MoreModalComponentProps = {
   showMore: boolean;
   setOpenAnnounceModal: () => void;
   setSafeBoxModal: () => void;
   setShowMore: (value: boolean) => void;
 };
+export type MoreModalComponent = FC<Readonly<MoreModalComponentProps>>;
 
-export type MoreModal = FC<Readonly<MoreModalProps>>;
-const MoreModal: MoreModal = ({ showMore, setOpenAnnounceModal, setSafeBoxModal, setShowMore }) => {
-  const theme = useStore((state) => state.theme);
+const MoreModal: MoreModalComponent = ({ showMore, setOpenAnnounceModal, setSafeBoxModal, setShowMore }) => {
+  const theme = useAccountStore((state) => state.theme);
 
   return (
     <>

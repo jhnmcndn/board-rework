@@ -2,8 +2,8 @@
 
 import Iframe from '@/app/customer-service/components/Iframe';
 import styles from '@/app/customer-service/components/MainContent/index.module.scss';
+import { useAccountStore } from '@/components/providers/AccountStoreProvider';
 import { useCSStore } from '@/components/providers/CustomerServiceProvider';
-import { useStore } from '@/components/providers/StoreProvider';
 import { CustomerServiceData } from '@/types/fns';
 import { FC } from 'react';
 
@@ -11,7 +11,7 @@ export type MainContentProps = { customerServiceData: CustomerServiceData };
 export type MainContentComponent = FC<Readonly<MainContentProps>>;
 
 const MainContent: MainContentComponent = ({ customerServiceData }) => {
-  const theme = useStore((state) => state.theme);
+  const theme = useAccountStore((state) => state.theme);
   const activeTab = useCSStore((state) => state.activeTab);
 
   return (

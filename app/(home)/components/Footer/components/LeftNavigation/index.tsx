@@ -1,9 +1,9 @@
-import { useStore } from '@/components/providers/StoreProvider';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './index.module.scss';
 
 import MoreModal from '@/components/modals/MoreModal';
+import { useAccountStore } from '@/components/providers/AccountStoreProvider';
 import { useMessageStore } from '@/components/providers/MessageProvider';
 import useModal from '@/hooks/useModal';
 import { MessageOnSites } from '@/types/app';
@@ -18,8 +18,8 @@ type LeftNavigationProps = {
 
 const LeftNavigation: React.FC<LeftNavigationProps> = ({ handleNavigation, handleClick }) => {
   const [isShowing, toggle] = useModal();
-  const theme = useStore((state) => state.theme);
-  const accountInfo = useStore((state) => state.accountInfo);
+  const theme = useAccountStore((state) => state.theme);
+  const accountInfo = useAccountStore((state) => state.accountInfo);
   const messageOnSites = useMessageStore((state) => state.messageOnSites);
   const isLoggedIn = Boolean(accountInfo.id);
 

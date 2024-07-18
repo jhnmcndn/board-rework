@@ -2,7 +2,7 @@
 
 import { createStore, Store } from '@/store/message';
 import { createContext, ReactNode, useContext, useRef } from 'react';
-import { useStore as useZustandStore } from 'zustand';
+import { useStore } from 'zustand';
 
 export type MessageApi = ReturnType<typeof createStore>;
 export type MessageProviderProps = Readonly<{ children: ReactNode }>;
@@ -20,5 +20,5 @@ export const MessageProvider = ({ children }: MessageProviderProps) => {
 export const useMessageStore = <T,>(selector: (store: Store) => T): T => {
   const messageContext = useContext(MessageContext);
   if (!messageContext) throw new Error('useInitStore must be used within InitStoreProvider');
-  return useZustandStore(messageContext, selector);
+  return useStore(messageContext, selector);
 };

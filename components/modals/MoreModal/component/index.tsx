@@ -1,4 +1,4 @@
-import { useStore } from '@/components/providers/StoreProvider';
+import { useAccountStore } from '@/components/providers/AccountStoreProvider';
 import { onClickSound } from '@/utils/audioFile';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -12,8 +12,8 @@ type MorelistProps = {
 };
 
 const Morelist: React.FC<MorelistProps> = ({ setOpenAnnounceModal, setShowMore, setSafeBoxModal }) => {
-  const theme = useStore((state) => state.theme);
-  const accountInfo = useStore((state) => state.accountInfo);
+  const theme = useAccountStore((state) => state.theme);
+  const accountInfo = useAccountStore((state) => state.accountInfo);
   const isLoggedIn = Boolean(accountInfo.id);
   const router = useRouter();
 

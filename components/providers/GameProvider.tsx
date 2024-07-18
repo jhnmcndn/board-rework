@@ -2,7 +2,7 @@
 
 import { createStore, Store } from '@/store/game';
 import { createContext, ReactNode, useContext, useRef } from 'react';
-import { useStore as useZustandStore } from 'zustand';
+import { useStore } from 'zustand';
 
 export type GameApi = ReturnType<typeof createStore>;
 export type GameProviderProps = Readonly<{ children: ReactNode }>;
@@ -20,5 +20,5 @@ export const GameProvider = ({ children }: GameProviderProps) => {
 export const useGameStore = <T,>(selector: (store: Store) => T): T => {
   const gameContext = useContext(GameContext);
   if (!gameContext) throw new Error('useInitStore must be used within InitStoreProvider');
-  return useZustandStore(gameContext, selector);
+  return useStore(gameContext, selector);
 };
