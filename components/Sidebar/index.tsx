@@ -73,7 +73,7 @@ const Sidebar: SidebarComponent = ({ sidebarItems }) => {
             className={classNames(styles.sidebarItem, styles.noIconOverlay, {
               [styles.activeTab]: index === activeTab,
             })}
-            bet-data={item === '' && 'none'}
+            bet-data={item === '' ? 'none' : undefined}
             onClick={() => handleTabClick(index)}
           >
             <span>{item}</span>

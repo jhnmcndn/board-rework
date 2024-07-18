@@ -128,7 +128,7 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, hasPurse })
         )}
       </div>
 
-      <div className={styles.coinPurseContainer}>{!hasPurse && <CoinPurse left='78%' />}</div>
+      <div className={styles.coinPurseContainer}>{!hasPurse && <CoinPurse />}</div>
     </motion.div>
   );
 };

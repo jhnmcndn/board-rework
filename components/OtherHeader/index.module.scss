@@ -20,12 +20,15 @@
         @include flex-xy;
         position: relative;
         height: 100%;
+        cursor: pointer;
       }
 
       img {
         position: relative;
         top: -0.03rem;
         left: -0.1rem;
+        width: 0.3rem;
+        height: auto;
       }
     }
   }
@@ -36,7 +39,7 @@
     margin-left: 0.1rem;
 
     &.isWebview {
-      width: 0;
+      width: max-content;
     }
 
     .headerTitle {
