@@ -8,6 +8,14 @@ export const initialActiveSideBarItem = {
   type: 0,
 };
 
+export const initialActivePlatform = {
+  cardIcon: '',
+  icon: '',
+  id: -1,
+  name: '',
+  rspGameInfos: [],
+};
+
 type State = {
   sideBar: RspGameType[];
   activeSideBarItem: ActiveSideBarItem;
@@ -15,6 +23,8 @@ type State = {
   messageHomeNotices: MessageHomeNotice[];
   announceText: string;
   gameInfos: RspGameInfo[];
+  showPlatform: boolean;
+  activePlatform: GameInfoGroup;
 };
 
 type Actions = {
@@ -24,6 +34,8 @@ type Actions = {
   setMessageHomeNotices: (messageHomeNotices: MessageHomeNotice[]) => void;
   setAnnounceText: (announceText: string) => void;
   setGameInfos: (gameInfos: RspGameInfo[]) => void;
+  setShowPlatform: (showPlatform: boolean) => void;
+  setActivePlatform: (activePlatform: GameInfoGroup) => void;
 };
 
 export type Store = State & Actions;
@@ -36,10 +48,14 @@ export const createStore = () =>
     messageHomeNotices: [],
     announceText: '',
     gameInfos: [],
+    showPlatform: false,
+    activePlatform: initialActivePlatform,
     setSideBar: (sideBar) => set(() => ({ sideBar })),
     setActiveSideBarItem: (activeSideBarItem) => set(() => ({ activeSideBarItem })),
     setGameInfoGroup: (gameInfoGroup) => set(() => ({ gameInfoGroup })),
     setMessageHomeNotices: (messageHomeNotices) => set(() => ({ messageHomeNotices })),
     setAnnounceText: (announceText) => set(() => ({ announceText })),
     setGameInfos: (gameInfos) => set(() => ({ gameInfos })),
+    setShowPlatform: (showPlatform) => set(() => ({ showPlatform })),
+    setActivePlatform: (activePlatform) => set(() => ({ activePlatform })),
   }));
