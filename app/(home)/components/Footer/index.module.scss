@@ -21,7 +21,7 @@
       @include flex-xy;
       width: 0.3rem;
       cursor: pointer;
-      > div {
+      > .listContainer {
         position: relative;
         @include flex-xy;
         flex-direction: column;
