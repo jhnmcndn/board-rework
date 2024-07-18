@@ -66,27 +66,22 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
   }, [activeSideBarItem, gameInfoGroup, gameInfos]);
 
   useEffect(() => {
-    var item: HTMLElement | null = document.getElementById('listSmallWrapper');
+    const item = containerRef.current;
 
-    if (!item) {
-      return;
-    }
-
-    const handleMouseWheel = (e: WheelEvent) => {
-      if (!item) {
-        return;
-      }
-
+    const scrollFn = (e: WheelEvent) => {
+      if (!item) return;
       if (e.deltaY > 0) item.scrollLeft += 100;
       else item.scrollLeft -= 100;
     };
-    item.addEventListener('wheel', handleMouseWheel, { passive: true });
 
+    if (!showPlatform && item) {
+      item.addEventListener('wheel', scrollFn, { passive: true });
+    }
     return () => {
-      setSearchFieldData && setSearchFieldData('');
-      item?.removeEventListener('wheel', handleMouseWheel);
+      setSearchFieldData('');
+      item && item.removeEventListener('wheel', scrollFn);
     };
-  }, []);
+  }, [showPlatform]);
 
   useEffect(() => {
     const container = containerRef.current;
