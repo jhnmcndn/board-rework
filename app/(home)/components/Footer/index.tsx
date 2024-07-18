@@ -6,8 +6,8 @@ import useModalStore from '@/store/modals';
 import { AudioType, onClickSound } from '@/utils/audioFile';
 import { useRouter } from 'next/navigation';
 import { isIOS } from 'react-device-detect';
-import LeftNavigation from './components/leftNavigation';
-import RightNavigation from './components/rightNavigation';
+import LeftNavigation from './components/LeftNavigation';
+import RightNavigation from './components/RightNavigation';
 import styles from './index.module.scss';
 
 export type HandleClickParams = {
