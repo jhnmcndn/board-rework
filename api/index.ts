@@ -13,7 +13,7 @@ export type RequestParams = {
   route: APP_ROUTE;
   endpoint: API_ENDPOINT;
   body?: unknown;
-  tags?: API_ENDPOINT;
+  tags: API_ENDPOINT;
   otherHeaders?: HeadersInit;
 };
 
@@ -43,7 +43,7 @@ export const request = async <T>({
     method,
     body: JSON.stringify(body),
     next: {
-      tags: [tags || ''],
+      tags: [tags],
     },
   });
   if (!response.ok) return errorRootResponse;
