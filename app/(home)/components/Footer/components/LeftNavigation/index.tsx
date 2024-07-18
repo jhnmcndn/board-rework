@@ -3,7 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './index.module.scss';
 
+import MoreModal from '@/components/modals/MoreModal';
 import { useMessageStore } from '@/components/providers/MessageProvider';
+import useModal from '@/hooks/useModal';
 import { MessageOnSites } from '@/types/app';
 import { onClickSound } from '@/utils/audioFile';
 import { useEffect, useState } from 'react';
@@ -15,14 +17,17 @@ type LeftNavigationProps = {
 };
 
 const LeftNavigation: React.FC<LeftNavigationProps> = ({ handleNavigation, handleClick }) => {
+  const [isShowing, toggle] = useModal();
   const theme = useStore((state) => state.theme);
   const accountInfo = useStore((state) => state.accountInfo);
   const messageOnSites = useMessageStore((state) => state.messageOnSites);
-  const [unreadMsgs, setUnreadMsgs] = useState<MessageOnSites[]>([]);
   const isLoggedIn = Boolean(accountInfo.id);
 
+  const [unreadMsgs, setUnreadMsgs] = useState<MessageOnSites[]>([]);
   const [omOpen, setOmOpen] = useState(false);
   const [activeSideLoggedIn, setActiveSideLoggedIn] = useState(3);
+  const [isMegaphone, setMegaphone] = useState(false);
+  const [safeBoxModalOpen, setSafeBoxModal] = useState(false);
 
   const iconSupport = require(`@/assets/${theme}/footer/iconSupport.png`);
   const iconChip = require(`@/assets/${theme}/footer/iconChip.png`);
@@ -54,12 +59,14 @@ const LeftNavigation: React.FC<LeftNavigationProps> = ({ handleNavigation, handl
             <span className={styles.text}>客服</span>
           </Link>
         </li>
+
         <li onClick={() => handleNavigation('/code-washing', 'cleanCode')}>
           <div className={styles.listContainer}>
             <Image src={iconChip} alt='Chip Icon' />
             <span className={styles.text}>洗码</span>
           </div>
         </li>
+
         <li
           onClick={() => {
             accountInfo?.id ? setActiveSideLoggedIn(1) : setActiveSideLoggedIn(3);
@@ -73,6 +80,7 @@ const LeftNavigation: React.FC<LeftNavigationProps> = ({ handleNavigation, handl
             <span className={styles.text}>活动</span>
           </div>
         </li>
+
         <li onClick={() => handleNavigation('/mailbox', 'message')}>
           <div className={styles.listContainer}>
             {(!isLoggedIn || unreadMsgs.length > 0) && <center className='alertIcon' />}
@@ -80,8 +88,26 @@ const LeftNavigation: React.FC<LeftNavigationProps> = ({ handleNavigation, handl
             <span className={styles.text}>消息</span>
           </div>
         </li>
-        <li onClick={() => onClickSound('pop')}>
+
+        <li
+          onClick={() => {
+            onClickSound('pop');
+            toggle();
+          }}
+        >
           <div className={styles.listContainer}>
+            <MoreModal
+              showMore={isShowing}
+              setShowMore={toggle}
+              setOpenAnnounceModal={() => {
+                setMegaphone(true);
+                toggle();
+              }}
+              setSafeBoxModal={() => {
+                toggle();
+                setSafeBoxModal(true);
+              }}
+            />
             <Image src={iconMore} alt='More Icon' />
             <span className={styles.text}>更多</span>
           </div>
