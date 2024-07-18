@@ -1,6 +1,7 @@
 import { request } from '@/api';
-import { AccountNow, Init, MessageHomeNotice, MessageOnSites, RootResponse } from '@/types/app';
+import { AccountNow, CustomerService, Init, MessageHomeNotice, MessageOnSites, RootResponse } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
+import { CustomerServiceFn } from '@/types/fns';
 import { getToken } from '@/utils/getToken';
 
 export const getAccountNow = async () => {
@@ -51,6 +52,20 @@ export const boxPassIsOpen = async () => {
     tags: API_ENDPOINT.BOX_PASS_IS_OPEN,
     otherHeaders: {
       token: getToken(),
+    },
+  });
+  return data.data;
+};
+
+export const customerService: CustomerServiceFn = async () => {
+  const data = await request<RootResponse<CustomerService[]>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.CUSTOMER_SERVICE,
+    tags: API_ENDPOINT.CUSTOMER_SERVICE,
+    otherHeaders: {
+      // This token should be from the initial request headers.
+      // Remove after creating the auth logic!
+      token: 'uEd2844af8c6220e11faa797b8bab0cc70',
     },
   });
   return data.data;
