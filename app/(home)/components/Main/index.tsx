@@ -1,9 +1,6 @@
-'use client';
-
-import React from 'react';
-import styles from './index.module.scss';
-import SideBar from './components/SideBar';
 import MainContentList from './components/MainContentList';
+import SideBar from './components/SideBar';
+import styles from './index.module.scss';
 
 const Main = () => {
   return (
