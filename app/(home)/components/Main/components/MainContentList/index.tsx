@@ -1,10 +1,11 @@
 import { useGameStore } from '@/components/providers/GameProvider';
-import React, { useState } from 'react';
-import styles from './index.module.scss';
-import CategoryListBar from './components/CategoryListBar';
-import SearchField from '../SearchField';
+import { useState } from 'react';
 import Announce from '../Announce';
+import SearchField from '../SearchField';
+import CategoryListBar from './components/CategoryListBar';
+import ListLargeIcons from './components/ListLargeIcons';
 import ListSmallIcons from './components/ListSmallIcons';
+import styles from './index.module.scss';
 
 const MainContentList = () => {
   const activeSideBarItem = useGameStore((state) => state.activeSideBarItem);
@@ -52,10 +53,24 @@ const MainContentList = () => {
             } else {
               return (
                 activeSideBarItem.id === item.id && (
-                  <ListSmallIcons key={idx} searchFieldData={searchFieldData} setSearchFieldData={setSearchFieldData} />
+                  <ListSmallIcons
+                    key={idx}
+                    searchFieldData={searchFieldData}
+                    setSearchFieldData={setSearchFieldData}
+                  />
                 )
               );
             }
+          } else {
+            return (
+              activeSideBarItem.id === item.id && (
+                <ListLargeIcons
+                  key={idx}
+                  searchFieldData={searchFieldData}
+                  setSearchFieldData={setSearchFieldData}
+                />
+              )
+            );
           }
         })}
       </div>

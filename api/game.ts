@@ -33,7 +33,10 @@ export const getGameInfoGroup: GetGameInfoGroupFn = async (id) => {
 };
 
 export const getGameInfos: GetGameInfosFn = async (params) => {
-  const body = { id: params?.id || 1, pid: params?.pid || -1 };
+  let body = {
+    id: params?.id || 1,
+    ...(params && params.id !== 7 ? { pid: params.pid || -1 } : {}),
+  };
   const response = await request<RootResponse<RspGameInfo[]>>({
     route: APP_ROUTE.GAME,
     endpoint: API_ENDPOINT.GAME_INFOS,

@@ -1,17 +1,17 @@
 'use client';
 
-import { getGameInfoGroup, getGameInfos, getGameTypes } from '@/api/game';
-import { ErrorData, GetGameTypes, RspGameType } from '@/types/app';
-import React, { useEffect, useRef, useState } from 'react';
-import styles from './index.module.scss';
-import blackGoldTitle from '@/assets/blackGold/sidebar/sidebarTitle.png';
-import Image from 'next/image';
-import PullToRefresh from 'react-simple-pull-to-refresh';
+import { getGameInfoGroup, getGameInfos } from '@/api/game';
 import { refetch } from '@/api/refetch';
+import blackGoldTitle from '@/assets/blackGold/sidebar/sidebarTitle.png';
 import { useGameStore } from '@/components/providers/GameProvider';
 import { useStore } from '@/components/providers/StoreProvider';
-import classNames from 'classnames';
+import { RspGameType } from '@/types/app';
 import { API_ENDPOINT } from '@/types/enums';
+import classNames from 'classnames';
+import Image from 'next/image';
+import { useRef } from 'react';
+import PullToRefresh from 'react-simple-pull-to-refresh';
+import styles from './index.module.scss';
 
 const SideBar = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -21,6 +21,8 @@ const SideBar = () => {
   const setActiveSideBarItem = useGameStore((state) => state.setActiveSideBarItem);
   const setGameInfos = useGameStore((state) => state.setGameInfos);
   const setGameInfoGroup = useGameStore((state) => state.setGameInfoGroup);
+  const showPlatform = useGameStore((state) => state.showPlatform);
+  const activePlatform = useGameStore((state) => state.activePlatform);
 
   const fetchGameInfoGroup = async (id: number) => {
     const response = await getGameInfoGroup(id);
@@ -29,8 +31,13 @@ const SideBar = () => {
     }
   };
 
-  const fetchGameInfo = async (params: { id: number; pid: number }) => {
-    const response = await getGameInfos(params);
+  const fetchGameInfo = async (params: { id: number; pid: number }, item?: RspGameType) => {
+    let newParams = params;
+    if (item && item.type === 3 && showPlatform) {
+      newParams = { id: params.id, pid: activePlatform.id || -1 };
+    }
+
+    const response = await getGameInfos(newParams);
     if (response && !('message' in response)) {
       setGameInfos(response);
     }
@@ -41,19 +48,18 @@ const SideBar = () => {
   };
 
   const handleOnClick = (item: RspGameType) => {
-    if (item.type === 4) {
+    if (item.type === 4 || item.type === 3) {
       fetchGameInfoGroup(item.id || 0);
     }
-    fetchGameInfo({ id: item.id || 0, pid: -1 });
-
-    // popSound();
+    fetchGameInfo({ id: item.id || 0, pid: -1 }, item);
     setActiveSideBarItem(item);
+    // popSound();
   };
 
   return (
     <div className={styles.sidebarWrapper}>
       <div className={styles.title}>
-        <Image src={blackGoldTitle} alt='' />
+        <Image src={blackGoldTitle} alt="" />
       </div>
 
       <div className={styles.list}>
@@ -71,14 +77,14 @@ const SideBar = () => {
                     width={434}
                     className={styles.divider}
                     src={require(`@/assets/${theme}/sidebar/divider.png`)}
-                    alt='divider'
+                    alt="divider"
                   />
                   <div
                     className={classNames(styles.sideBarItem, {
                       [styles.sidebarItemActive]: item.id === activeSideBarItem.id,
                     })}
                   >
-                    <img className={styles.icon} src={item.icon} alt='icon' />
+                    <img className={styles.icon} src={item.icon} alt="icon" />
                     <span>{item.name}</span>
                   </div>
 
@@ -88,7 +94,7 @@ const SideBar = () => {
                       width={434}
                       className={styles.divider}
                       src={require(`@/assets/${theme}/sidebar/divider.png`)}
-                      alt='divider'
+                      alt="divider"
                     />
                   )}
                 </div>
