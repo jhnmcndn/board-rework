@@ -18,9 +18,9 @@ import styles from './index.module.scss';
 
 const CSVGA = dynamic(() => import('@/app/(home)/components/Footer/components/CSVGA/'), { ssr: false });
 
-export type Fn = (params?: any) => void;
+type Fn = (params?: any) => void;
 
-export type HandleClickParams = {
+type HandleClickParams = {
   fn: Fn;
   params?: any;
   isActivity?: boolean;
@@ -121,19 +121,15 @@ const Footer = () => {
       <div className={styles.footerContent}>
         <ul className={styles.leftNavigation}>
           <li>
-            <div>
-              <Link href='/customer-service'>
-                <Image alt='' src={require(`@/assets/${theme}/footer/iconSupport.png`)} />
-              </Link>
-              <p className={styles.text}>客服</p>
-            </div>
+            <Link href='/customer-service' className={styles.listContainer}>
+              <Image alt='' src={require(`@/assets/${theme}/footer/iconSupport.png`)} />
+              <span className={styles.text}>客服</span>
+            </Link>
           </li>
           <li onClick={() => handleNavigation('/code-washing', 'cleanCode')}>
-            <div>
-              <div>
-                <Image alt='' src={require(`@/assets/${theme}/footer/iconChip.png`)} />
-              </div>
-              <p className={styles.text}>洗码</p>
+            <div className={styles.listContainer}>
+              <Image alt='' src={require(`@/assets/${theme}/footer/iconChip.png`)} />
+              <span className={styles.text}>洗码</span>
             </div>
           </li>
           <li
@@ -145,16 +141,16 @@ const Footer = () => {
               handleClick({ fn: setOmOpen, params: true, isActivity: true });
             }}
           >
-            <div>
+            <div className={styles.listContainer}>
               <Image alt='' src={require(`@/assets/${theme}/footer/iconGift.png`)} />
-              <p className={styles.text}>活动</p>
+              <span className={styles.text}>活动</span>
             </div>
           </li>
           <li onClick={() => handleNavigation('/mailbox', 'message')}>
-            <div>
+            <div className={styles.listContainer}>
               {!isLoggedIn || (unreadMsgs?.length > 0 && <center className='alertIcon' />)}
               <Image alt='' src={require(`@/assets/${theme}/footer/iconMessage.png`)} />
-              <p className={styles.text}>消息</p>
+              <span className={styles.text}>消息</span>
             </div>
           </li>
 
@@ -163,7 +159,7 @@ const Footer = () => {
               // setShowMore(!setShowMore);
             }}
           >
-            <div>
+            <div className={styles.listContainer}>
               {/* <MoreModal
                 showMore={showMore}
                 setShowMore={setShowMore}
@@ -184,7 +180,7 @@ const Footer = () => {
                   // setShowMore(!setShowMore);
                 }}
               />
-              <p className={styles.text}>更多</p>
+              <span className={styles.text}>更多</span>
             </div>
           </li>
         </ul>
