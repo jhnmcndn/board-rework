@@ -81,7 +81,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
       setSearchFieldData('');
       item && item.removeEventListener('wheel', scrollFn);
     };
-  }, [showPlatform]);
+  }, [containerRef.current, showPlatform]);
 
   useEffect(() => {
     const container = containerRef.current;
