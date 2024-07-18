@@ -42,7 +42,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
 
   useEffect(() => {
     if (!searchFieldData) {
-      setFilteredData(gameInfoGroup || []);
+      setFilteredData(data || []);
     }
     if (searchFieldData && data.length > 0) {
       setFilteredData(
