@@ -1,0 +1,123 @@
+.container {
+  font-size: 0.15rem;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 0rem 0.08rem;
+
+  .headerTextWrapper {
+    width: 3.35rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span:first-child {
+      font-family: 'Inter';
+      font-size: 0.2rem;
+      font-weight: 400;
+      text-align: left;
+      background: linear-gradient(180deg, #ffffff 0%, #ffffdc 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    span:nth-child(2) {
+      font-family: Microsoft YaHei UI;
+      font-size: 0.15rem;
+      font-weight: 400;
+      text-align: left;
+      color: #ffffff;
+    }
+  }
+
+  .linksWrapper {
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+
+    .pullToRefresh {
+      :global {
+        .ptr__pull-down > div {
+          p {
+            font-size: 0.15rem;
+            color: #f6da85;
+            text-align: center !important;
+          }
+        }
+      }
+
+      ul {
+        .leftContent {
+          height: 100%;
+          max-width: 4.5rem;
+          display: flex;
+
+          img {
+            height: 100%;
+            width: auto;
+            margin-right: 0.1rem;
+          }
+
+          div {
+            padding: 0.05rem 0;
+            display: flex;
+            flex-direction: column;
+
+            span:first-child {
+              color: #ffffff;
+              font-family: Inter;
+              font-size: 0.18rem;
+              font-weight: 400;
+              text-align: left;
+            }
+
+            span:last-child {
+              color: #f0cb5a;
+              font-family: Inter;
+              font-size: 0.18rem;
+              font-weight: 400;
+              text-align: left;
+            }
+          }
+        }
+
+        .rightContent {
+          width: 1.7rem;
+          margin-right: 0.03rem;
+          display: flex;
+          justify-content: space-between;
+
+          div {
+            width: 0.57rem;
+            height: 0.28rem;
+            border-radius: 0.23rem;
+            border: 0.01rem solid #72728f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            span {
+              color: #757575;
+            }
+          }
+
+          a {
+            width: 1.06rem;
+            height: 0.28rem;
+            border-radius: 0.23rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(180deg, #ffe800 0%, #e38c00 100%);
+            box-shadow: 0 0.005rem 0.005rem 0 #ffffff;
+            color: #651d00;
+          }
+        }
+      }
+    }
+  }
+}
