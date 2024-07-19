@@ -1,7 +1,7 @@
 'use client';
 
 import styles from '@/app/customer-service/components/Iframe/index.module.scss';
-import { useAccountStore } from '@/components/providers/AccountStoreProvider';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useRef } from 'react';
 
 const Iframe = () => {

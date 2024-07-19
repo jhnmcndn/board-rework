@@ -1,6 +1,6 @@
 'use client';
 
-import { useAccountStore } from '@/components/providers/AccountStoreProvider';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import Image from 'next/image';
 import { ChangeEvent, Dispatch, FC, SetStateAction } from 'react';
 import styles from './index.module.scss';

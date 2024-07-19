@@ -2,7 +2,7 @@
 
 import defaultIcon from '@/assets/blackGold/header/defaultIcon.png';
 import loginBtnImage from '@/assets/commons/loginBtn.png';
-import { useAccountStore } from '@/components/providers/AccountStoreProvider';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { copyToClipboard } from '@/utils/helpers';
 import Image from 'next/image';
 import styles from './index.module.scss';

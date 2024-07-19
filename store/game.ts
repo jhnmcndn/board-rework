@@ -1,5 +1,6 @@
 import { ActiveSideBarItem, GameInfoGroup, MessageHomeNotice, RspGameInfo, RspGameType } from '@/types/app';
-import { createStore as createZustandStore } from 'zustand';
+import { createStore } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 export const initialActiveSideBarItem = {
   id: 0,
@@ -16,7 +17,7 @@ export const initialActivePlatform = {
   rspGameInfos: [],
 };
 
-type State = {
+type GameState = {
   sideBar: RspGameType[];
   activeSideBarItem: ActiveSideBarItem;
   gameInfoGroup: GameInfoGroup[];
@@ -27,7 +28,7 @@ type State = {
   activePlatform: GameInfoGroup;
 };
 
-type Actions = {
+type GameActions = {
   setSideBar: (sideBar: RspGameType[]) => void;
   setActiveSideBarItem: (activeSideBarItem: ActiveSideBarItem) => void;
   setGameInfoGroup: (gameInfoGroup: GameInfoGroup[]) => void;
@@ -38,24 +39,31 @@ type Actions = {
   setActivePlatform: (activePlatform: GameInfoGroup) => void;
 };
 
-export type Store = State & Actions;
+export type GameStore = GameState & GameActions;
 
-export const createStore = () =>
-  createZustandStore<Store>()((set) => ({
-    sideBar: [],
-    activeSideBarItem: initialActiveSideBarItem,
-    gameInfoGroup: [],
-    messageHomeNotices: [],
-    announceText: '',
-    gameInfos: [],
-    showPlatform: false,
-    activePlatform: initialActivePlatform,
-    setSideBar: (sideBar) => set(() => ({ sideBar })),
-    setActiveSideBarItem: (activeSideBarItem) => set(() => ({ activeSideBarItem })),
-    setGameInfoGroup: (gameInfoGroup) => set(() => ({ gameInfoGroup })),
-    setMessageHomeNotices: (messageHomeNotices) => set(() => ({ messageHomeNotices })),
-    setAnnounceText: (announceText) => set(() => ({ announceText })),
-    setGameInfos: (gameInfos) => set(() => ({ gameInfos })),
-    setShowPlatform: (showPlatform) => set(() => ({ showPlatform })),
-    setActivePlatform: (activePlatform) => set(() => ({ activePlatform })),
-  }));
+export const createGameStore = () =>
+  createStore<GameStore>()(
+    persist(
+      (set) => ({
+        sideBar: [],
+        activeSideBarItem: initialActiveSideBarItem,
+        gameInfoGroup: [],
+        messageHomeNotices: [],
+        announceText: '',
+        gameInfos: [],
+        showPlatform: false,
+        activePlatform: initialActivePlatform,
+        setSideBar: (sideBar) => set(() => ({ sideBar })),
+        setActiveSideBarItem: (activeSideBarItem) => set(() => ({ activeSideBarItem })),
+        setGameInfoGroup: (gameInfoGroup) => set(() => ({ gameInfoGroup })),
+        setMessageHomeNotices: (messageHomeNotices) => set(() => ({ messageHomeNotices })),
+        setAnnounceText: (announceText) => set(() => ({ announceText })),
+        setGameInfos: (gameInfos) => set(() => ({ gameInfos })),
+        setShowPlatform: (showPlatform) => set(() => ({ showPlatform })),
+        setActivePlatform: (activePlatform) => set(() => ({ activePlatform })),
+      }),
+      {
+        name: 'game-store',
+      },
+    ),
+  );

@@ -3,8 +3,8 @@
 import { getGameInfoGroup, getGameInfos } from '@/api/game';
 import { refetch } from '@/api/refetch';
 import blackGoldTitle from '@/assets/blackGold/sidebar/sidebarTitle.png';
-import { useAccountStore } from '@/components/providers/AccountStoreProvider';
-import { useGameStore } from '@/components/providers/GameProvider';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import { RspGameType } from '@/types/app';
 import { API_ENDPOINT } from '@/types/enums';
 import classNames from 'classnames';

@@ -2,8 +2,8 @@
 
 import Iframe from '@/app/customer-service/components/Iframe';
 import styles from '@/app/customer-service/components/MainContent/index.module.scss';
-import { useAccountStore } from '@/components/providers/AccountStoreProvider';
-import { useCSStore } from '@/components/providers/CustomerServiceProvider';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import { useCSStore } from '@/components/Providers/CSStoreProvider';
 import { CustomerServiceData } from '@/types/fns';
 import { FC } from 'react';
 

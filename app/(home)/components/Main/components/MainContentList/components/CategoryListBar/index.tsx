@@ -1,6 +1,6 @@
 import { getGameInfos } from '@/api/game';
-import { useAccountStore } from '@/components/providers/AccountStoreProvider';
-import { useGameStore } from '@/components/providers/GameProvider';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import { GameInfoGroup } from '@/types/app';
 import classNames from 'classnames';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';

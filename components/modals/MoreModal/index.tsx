@@ -1,6 +1,6 @@
 'use client';
 
-import { useAccountStore } from '@/components/providers/AccountStoreProvider';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { FC } from 'react';
 import Morelist from './component/index';
 import styles from './index.module.scss';

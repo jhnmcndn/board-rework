@@ -3,8 +3,8 @@ import Link from 'next/link';
 import styles from './index.module.scss';
 
 import MoreModal from '@/components/modals/MoreModal';
-import { useAccountStore } from '@/components/providers/AccountStoreProvider';
-import { useMessageStore } from '@/components/providers/MessageProvider';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import { useMessageStore } from '@/components/Providers/MessageStoreProvider';
 import useModal from '@/hooks/useModal';
 import { MessageOnSites } from '@/types/app';
 import { onClickSound } from '@/utils/audioFile';

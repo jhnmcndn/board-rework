@@ -1,10 +1,10 @@
 'use client';
 
 import coinIcon from '@/assets/blackGold/header/coin.png';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import classNames from 'classnames';
 import Image from 'next/image';
 import { CSSProperties, FC, useEffect, useState } from 'react';
-import { useAccountStore } from '../providers/AccountStoreProvider';
 import styles from './index.module.scss';
 
 export type CoinPurseProps = {

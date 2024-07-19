@@ -1,5 +1,5 @@
-import { useAccountStore } from '@/components/providers/AccountStoreProvider';
-import { useGameStore } from '@/components/providers/GameProvider';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import classNames from 'classnames';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';

@@ -1,5 +1,6 @@
 import { CustomerService } from '@/types/app';
 import { createStore } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 export const csState = {
   createBy: undefined,
@@ -27,9 +28,16 @@ export type CSActions = {
 export type CSStore = CSState & CSActions;
 
 export const createCSStore = () =>
-  createStore<CSStore>()((set) => ({
-    cs: [csState],
-    activeTab: 0,
-    setCS: (cs) => set((state) => ({ cs: [...state.cs, ...cs] })),
-    setActiveTab: (index) => set(() => ({ activeTab: index })),
-  }));
+  createStore<CSStore>()(
+    persist(
+      (set) => ({
+        cs: [csState],
+        activeTab: 0,
+        setCS: (cs) => set((state) => ({ cs: [...state.cs, ...cs] })),
+        setActiveTab: (index) => set(() => ({ activeTab: index })),
+      }),
+      {
+        name: 'customer-service-store',
+      },
+    ),
+  );

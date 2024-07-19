@@ -1,6 +1,7 @@
 import { AccountInfo, AccountNow, Init } from '@/types/app';
 import { THEME } from '@/types/enums';
-import { createStore as createZustandStore } from 'zustand';
+import { createStore } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 export const initState = {
   actionSwitch: undefined,
@@ -61,15 +62,22 @@ type AccountActions = {
 export type AccountStore = AccountState & AccountActions;
 
 export const createAccountStore = () =>
-  createZustandStore<AccountStore>()((set) => ({
-    init: initState,
-    accountInfo: accountInfoState,
-    theme: THEME.BLACK_GOLD,
-    accountNow: accountNowState,
-    boxPassIsSet: false,
-    setInit: (init) => set(() => ({ init: { ...init } })),
-    setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
-    setTheme: (theme) => set(() => ({ theme })),
-    setAccountNow: (accountNow) => set(() => ({ accountNow: { ...accountNow } })),
-    setBoxPassIsSet: (boxPassIsSet) => set(() => ({ boxPassIsSet })),
-  }));
+  createStore<AccountStore>()(
+    persist(
+      (set) => ({
+        init: initState,
+        accountInfo: accountInfoState,
+        theme: THEME.BLACK_GOLD,
+        accountNow: accountNowState,
+        boxPassIsSet: false,
+        setInit: (init) => set(() => ({ init: { ...init } })),
+        setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
+        setTheme: (theme) => set(() => ({ theme })),
+        setAccountNow: (accountNow) => set(() => ({ accountNow: { ...accountNow } })),
+        setBoxPassIsSet: (boxPassIsSet) => set(() => ({ boxPassIsSet })),
+      }),
+      {
+        name: 'account-store',
+      },
+    ),
+  );
