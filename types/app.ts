@@ -130,3 +130,32 @@ export type CustomerService = {
   updateBy?: string;
   updateTime?: string;
 };
+
+
+export type BindCardList = {
+  memberCardList?: MemberCardList[];
+  rspWithdrawInfo?: RspWithdrawInfo;
+  specialBankInfoMap?: SpecialBankInfoMap;
+}
+
+export type MemberCardList = {
+  id?: number;
+  bankAccount?: string;
+  realName?: string;
+  bankAddress?: string;
+  dv?: boolean;
+  bankIcon?: string;
+  bankName?: string;
+  bankCode?: string;
+}
+
+export type RspWithdrawInfo = {
+  canWithdrawMoney?: number;
+  accountNow?: number;
+  needBeat?: number;
+  usdtWithdrawExchangeRate?: number;
+}
+
+export type SpecialBankInfoMap = {
+  USDT?: number;
+}
