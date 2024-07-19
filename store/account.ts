@@ -1,4 +1,4 @@
-import { AccountInfo, AccountNow, Init } from '@/types/app';
+import { AccountInfo, AccountNow, Init, BindCardList } from '@/types/app';
 import { THEME } from '@/types/enums';
 import { createStore } from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -43,12 +43,19 @@ export const accountNowState = {
   balance: undefined,
 } satisfies AccountNow;
 
+export const bindCardListState = {
+  memberCardList: undefined,
+  rspWithdrawInfo: undefined,
+  specialBankInfoMap: undefined,
+} satisfies BindCardList;
+
 type AccountState = {
   init: Init;
   accountInfo: AccountInfo;
   theme: THEME;
   accountNow: AccountNow;
   boxPassIsSet: boolean;
+  bindCardList: BindCardList;
 };
 
 type AccountActions = {
@@ -57,6 +64,7 @@ type AccountActions = {
   setTheme: (theme: THEME) => void;
   setAccountNow: (accountNow: Partial<AccountNow>) => void;
   setBoxPassIsSet: (boxPassIsSet: boolean) => void;
+  setBindCardList: (bindCardList: BindCardList) => void;
 };
 
 export type AccountStore = AccountState & AccountActions;
@@ -70,11 +78,13 @@ export const createAccountStore = () =>
         theme: THEME.BLACK_GOLD,
         accountNow: accountNowState,
         boxPassIsSet: false,
+        bindCardList: bindCardListState,
         setInit: (init) => set(() => ({ init: { ...init } })),
         setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
         setTheme: (theme) => set(() => ({ theme })),
         setAccountNow: (accountNow) => set(() => ({ accountNow: { ...accountNow } })),
         setBoxPassIsSet: (boxPassIsSet) => set(() => ({ boxPassIsSet })),
+        setBindCardList: (bindCardList) => set(() => ({ bindCardList })),
       }),
       {
         name: 'account-store',

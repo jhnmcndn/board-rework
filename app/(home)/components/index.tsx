@@ -7,6 +7,7 @@ import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import { useMessageStore } from '@/components/Providers/MessageStoreProvider';
 import { initState } from '@/store/account';
 import {
+  BindCardList,
   ErrorData,
   GetGameTypes,
   Init,
@@ -26,6 +27,7 @@ export type HomePageComponent = FC<
     gameInfosData?: RspGameInfo[] | ErrorData;
     messageOnSites?: MessageOnSites[] | ErrorData;
     getBoxPassIsOpen?: boolean | ErrorData;
+    bindCardList?: BindCardList | ErrorData;
   }>
 >;
 
@@ -36,6 +38,7 @@ export const HomePage: HomePageComponent = ({
   gameInfosData,
   messageOnSites,
   getBoxPassIsOpen,
+  bindCardList
 }) => {
   const theme = useAccountStore((state) => state.theme);
   const setInit = useAccountStore((state) => state.setInit);
@@ -46,6 +49,7 @@ export const HomePage: HomePageComponent = ({
   const setGameInfos = useGameStore((state) => state.setGameInfos);
   const setMessageOnSites = useMessageStore((state) => state.setMessageOnSites);
   const setBoxPassIsSet = useAccountStore((state) => state.setBoxPassIsSet);
+  const setBindCardList = useAccountStore((state) => state.setBindCardList);
 
   useEffect(() => {
     if (init && !('message' in init)) {
@@ -84,7 +88,12 @@ export const HomePage: HomePageComponent = ({
     if (getBoxPassIsOpen && typeof getBoxPassIsOpen === 'boolean') {
       setBoxPassIsSet(getBoxPassIsOpen);
     }
-  }, [init, messageHomeNoticesData, gameTypesData, gameInfosData, messageOnSites, getBoxPassIsOpen]);
+
+    if (bindCardList && !('message' in bindCardList)) {
+      setBindCardList(bindCardList)
+    }
+
+  }, [init, messageHomeNoticesData, gameTypesData, gameInfosData, messageOnSites, getBoxPassIsOpen, bindCardList]);
 
   return (
     <div className='mainColor' data-theme={theme}>
