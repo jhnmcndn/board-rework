@@ -19,6 +19,6 @@ export const CSStoreProvider = ({ children }: CSStoreProviderProps) => {
 
 export const useCSStore = <T,>(selector: (store: CSStore) => T): T => {
   const storeContext = useContext(CSStoreContext);
-  if (!storeContext) throw new Error('useInitStore must be used within InitStoreProvider');
+  if (!storeContext) throw new Error('useCSStore must be used within CSStoreProvider');
   return useStore(storeContext, selector);
 };

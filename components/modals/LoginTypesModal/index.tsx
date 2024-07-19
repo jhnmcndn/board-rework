@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { createPortal } from 'react-dom';
 // import { loginDevice } from '@/api/game/gamelist';
 // import NECaptchaComponent from 'src/commons/Captcha/NECaptchaComponent';
-import { useAccountStore } from '@/components/providers/AccountStoreProvider';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useModalStore from '@/store/modals';
 import { getDeviceInfo } from '@/utils/helpers';
 import { images } from '@/utils/resources';

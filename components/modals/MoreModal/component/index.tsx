@@ -1,4 +1,4 @@
-import { useAccountStore } from '@/components/providers/AccountStoreProvider';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { onClickSound } from '@/utils/audioFile';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';

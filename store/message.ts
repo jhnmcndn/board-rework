@@ -1,5 +1,6 @@
 import { MessageOnSites } from '@/types/app';
-import { createStore as createZustandStore } from 'zustand';
+import { createStore } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 export const initialMessageOnSites = {
   id: 0,
@@ -9,19 +10,26 @@ export const initialMessageOnSites = {
   isRead: false,
 } satisfies MessageOnSites;
 
-type State = {
+type MessageState = {
   messageOnSites: MessageOnSites[];
 };
 
-type Actions = {
+type MessageActions = {
   setMessageOnSites: (messageOnSites: MessageOnSites[]) => void;
 };
 
-export type Store = State & Actions;
+export type MessageStore = MessageState & MessageActions;
 
-export const createStore = () =>
-  createZustandStore<Store>()((set) => ({
-    messageOnSites: [initialMessageOnSites],
-    setMessageOnSites: (messageOnSites) =>
-      set((state) => ({ messageOnSites: [...state.messageOnSites, ...messageOnSites] })),
-  }));
+export const createMessageStore = () =>
+  createStore<MessageStore>()(
+    persist(
+      (set) => ({
+        messageOnSites: [initialMessageOnSites],
+        setMessageOnSites: (messageOnSites) =>
+          set((state) => ({ messageOnSites: [...state.messageOnSites, ...messageOnSites] })),
+      }),
+      {
+        name: 'message-store',
+      },
+    ),
+  );

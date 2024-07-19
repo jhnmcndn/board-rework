@@ -1,13 +1,13 @@
-import React, { Dispatch, FC, Fragment, SetStateAction, useEffect, useRef, useState } from 'react';
-import styles from './index.module.scss';
-import classNames from 'classnames';
-import { useGameStore } from '@/components/providers/GameProvider';
-import { RspGameInfo } from '@/types/app';
-import NoData from '@/components/NoData';
-import ImgWithFallback from '@/components/ImgWithFallback';
-import { motion } from 'framer-motion';
 import fallbackIcon from '@/assets/commons/fallBacks/onErrorImg.png';
 import loadingIcon from '@/assets/commons/fallBacks/squareLoad2.gif';
+import ImgWithFallback from '@/components/ImgWithFallback';
+import NoData from '@/components/NoData';
+import { useGameStore } from '@/components/Providers/GameStoreProvider';
+import { RspGameInfo } from '@/types/app';
+import classNames from 'classnames';
+import { motion } from 'framer-motion';
+import { Dispatch, FC, Fragment, SetStateAction, useEffect, useRef, useState } from 'react';
+import styles from './index.module.scss';
 
 interface IProps {
   searchFieldData: string;

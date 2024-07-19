@@ -1,7 +1,7 @@
 import calendarImage from '@/assets/blackGold/header/calendar.png';
 import promoteImage from '@/assets/blackGold/header/promote.png';
 import taskImage from '@/assets/blackGold/header/task.png';
-import { useAccountStore } from '@/components/providers/AccountStoreProvider';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useModalStore from '@/store/modals';
 import Image from 'next/image';
 import styles from './index.module.scss';

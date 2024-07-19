@@ -2,9 +2,9 @@
 
 import Footer from '@/app/(home)/components/Footer';
 import { Header } from '@/app/(home)/components/Header';
-import { useAccountStore } from '@/components/providers/AccountStoreProvider';
-import { useGameStore } from '@/components/providers/GameProvider';
-import { useMessageStore } from '@/components/providers/MessageProvider';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import { useGameStore } from '@/components/Providers/GameStoreProvider';
+import { useMessageStore } from '@/components/Providers/MessageStoreProvider';
 import { initState } from '@/store/account';
 import {
   ErrorData,

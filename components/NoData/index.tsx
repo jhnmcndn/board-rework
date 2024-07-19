@@ -1,8 +1,8 @@
 'use client';
 
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import classnames from 'classnames';
 import Image from 'next/image';
-import { useAccountStore } from '../providers/AccountStoreProvider';
 import styles from './index.module.scss';
 
 type Props = {

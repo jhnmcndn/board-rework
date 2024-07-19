@@ -1,5 +1,5 @@
 import headerLogo from '@/assets/blackGold/header/headerLogo.png';
-import { useAccountStore } from '@/components/providers/AccountStoreProvider';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { serverConfig } from '@/server';
 import Image from 'next/image';
 import styles from './index.module.scss';

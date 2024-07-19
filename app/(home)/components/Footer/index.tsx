@@ -1,6 +1,6 @@
 'use client';
 
-import { useAccountStore } from '@/components/providers/AccountStoreProvider';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { serverConfig } from '@/server';
 import useModalStore from '@/store/modals';
 import { AudioType, onClickSound } from '@/utils/audioFile';
