@@ -1,6 +1,6 @@
 'use client';
 
-import { useCSStore } from '@/components/providers/CustomerServiceProvider';
+import { useCSStore } from '@/components/Providers/CSStoreProvider';
 import styles from '@/components/Sidebar/index.module.scss';
 import { onClickSound } from '@/utils/audioFile';
 import classNames from 'classnames';

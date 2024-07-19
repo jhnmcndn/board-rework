@@ -2,6 +2,7 @@
 
 import CoinPurse from '@/components/CoinPurse';
 import styles from '@/components/OtherHeader/index.module.scss';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { THEME } from '@/types/enums';
 import { onClickSound } from '@/utils/audioFile';
 import classNames from 'classnames';
@@ -10,7 +11,6 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 import Draggable from 'react-draggable';
-import { useAccountStore } from '../providers/AccountStoreProvider';
 
 export type OtherHeaderProps = {
   headerTitle: string;
