@@ -56,6 +56,7 @@ type AccountState = {
   accountNow: AccountNow;
   boxPassIsSet: boolean;
   bindCardList: BindCardList;
+  withdrawActiveTab: number;
 };
 
 type AccountActions = {
@@ -65,6 +66,7 @@ type AccountActions = {
   setAccountNow: (accountNow: Partial<AccountNow>) => void;
   setBoxPassIsSet: (boxPassIsSet: boolean) => void;
   setBindCardList: (bindCardList: BindCardList) => void;
+  setWithdrawActiveTab: (index: number) => void;
 };
 
 export type AccountStore = AccountState & AccountActions;
@@ -85,6 +87,7 @@ export const createAccountStore = () =>
         setAccountNow: (accountNow) => set(() => ({ accountNow: { ...accountNow } })),
         setBoxPassIsSet: (boxPassIsSet) => set(() => ({ boxPassIsSet })),
         setBindCardList: (bindCardList) => set(() => ({ bindCardList })),
+        setWithdrawActiveTab: (index) => set(() => ({ withdrawActiveTab: index })),
       }),
       {
         name: 'account-store',
