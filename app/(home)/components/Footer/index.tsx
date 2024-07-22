@@ -37,7 +37,9 @@ const Footer = () => {
     if (isIOS) {
       onClickSound('withdraw');
     }
-    if (!isLoggedIn || String(serverConfig.server) !== '8803') {
+    if (!isLoggedIn) {
+      //THIS ROUTER.PUSH TO WITHDRAW PAGE IS TEMPORARY. WILL DELETE AFTER WITHDRAWAL PAGE DEVELOPMENT
+      router.push('/withdraw');
       // dispatch(setShowBindWithdrawModal(true));
     } else {
       router.push('/withdraw');
