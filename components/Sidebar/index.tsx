@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { FC } from 'react';
+import { useAccountStore } from "@/components/Providers/AccountStoreProvider";
 
 export type SidebarComponentProps = {
   sidebarItems: string[];
@@ -19,9 +20,12 @@ const Sidebar: SidebarComponent = ({ sidebarItems }) => {
   const isRechargePage = pathname.toLowerCase().includes('recharge');
   const activeTab = useCSStore((state) => state.activeTab);
   const setActiveTab = useCSStore((state) => state.setActiveTab);
+  const withdrawActiveTab = useAccountStore((state) => state.withdrawActiveTab);
+  const setWithdrawActiveTab = useAccountStore((state) => state.setWithdrawActiveTab);
 
   const handleTabClick = (index: number) => {
     onClickSound('pop');
+    setWithdrawActiveTab(index);
     setActiveTab(index);
   };
 
@@ -71,7 +75,7 @@ const Sidebar: SidebarComponent = ({ sidebarItems }) => {
           <div
             key={index}
             className={classNames(styles.sidebarItem, {
-              [styles.activeTab]: index === activeTab,
+              [styles.activeTab]: index === activeTab || index === withdrawActiveTab,
             })}
             bet-data={item === '' ? 'none' : undefined}
             onClick={() => handleTabClick(index)}

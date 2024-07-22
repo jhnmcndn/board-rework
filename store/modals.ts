@@ -19,16 +19,20 @@ interface ModalStore {
   closeLoginTypes: () =>  void;
   closeAuth: () => void;
   isAnnouncementOpen: boolean;
-  showWithdrawSuccessModal: boolean;
+  isWithdrawSuccessModalOpen: boolean;
 }
 
-const useModalStore = create<ModalStore>((set) => ({
+export type ModalStoreActions = {
+  closeWithdrawSuccessModal: () => void;
+}
+
+const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   isAlertOpen: false,
   isAuthOpen: false,
   isLoginTypesOpen: false,
   content: {},
   isAnnouncementOpen: false,
-  showWithdrawSuccessModal: false,
+  isWithdrawSuccessModalOpen: false,
   openAlert: (content) => {
     set((state) => ({ ...state, isAlertOpen: true, content: { ...content } }));
   },
@@ -39,8 +43,8 @@ const useModalStore = create<ModalStore>((set) => ({
   closeAuth: () => set((state) => ({ ...state, isAuthOpen: false })),
   openAnnouncement: () => set((state) => ({ ...state, isAnnouncementOpen: true })),
   closeAnnouncement: () => set((state) => ({ ...state, isAnnouncementOpen: false })),
-  openWithdrawSuccessModal: () => set((state) => ({ ...state, showWithdrawSuccessModal: true })),
-  closeWithdrawSuccessModal: () => set((state) => ({ ...state, showWithdrawSuccessModal: false })),
+  openWithdrawSuccessModal: () => set((state) => ({ ...state, isWithdrawSuccessModalOpen: true })),
+  closeWithdrawSuccessModal: () => set((state) => ({ ...state, isWithdrawSuccessModalOpen: false })),
 }));
 
 export default useModalStore;
