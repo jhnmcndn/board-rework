@@ -23,6 +23,7 @@ const SideBar = () => {
   const setGameInfoGroup = useGameStore((state) => state.setGameInfoGroup);
   const showPlatform = useGameStore((state) => state.showPlatform);
   const activePlatform = useGameStore((state) => state.activePlatform);
+  const setShowPlatform = useGameStore((state) => state.setShowPlatform);
 
   const fetchGameInfoGroup = async (id: number) => {
     const response = await getGameInfoGroup(id);
@@ -50,6 +51,9 @@ const SideBar = () => {
   const handleOnClick = (item: RspGameType) => {
     if (item.type === 4 || item.type === 3) {
       fetchGameInfoGroup(item.id || 0);
+    }
+    if (item.type === 2) {
+      setShowPlatform(false);
     }
     fetchGameInfo({ id: item.id || 0, pid: -1 }, item);
     setActiveSideBarItem(item);
