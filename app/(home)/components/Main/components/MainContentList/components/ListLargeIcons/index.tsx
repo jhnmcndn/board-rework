@@ -231,14 +231,16 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
           }}
         >
           <div className={styles.listLargeContainer}>
-            <div className={styles.firstRow}>
+            <motion.div
+              animate={{ x: 0 }}
+              initial={{ x: '100vw' }}
+              transition={{ delay: 1 }}
+              className={styles.firstRow}
+            >
               {filteredData?.map((item, idx) => {
                 return (
                   <motion.div
-                    key={idx}
-                    animate={{ x: 0 }}
-                    initial={{ x: '100vw' }}
-                    transition={{ delay: 1 }}
+                    key={item.id}
                     className={classNames(styles.iconHolder, {
                       [styles.isMaintenance]: item.maintain,
                     })}
@@ -262,7 +264,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
                   </motion.div>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
         </div>
       )}
