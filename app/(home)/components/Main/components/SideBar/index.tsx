@@ -8,6 +8,7 @@ import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import { RspGameType } from '@/types/app';
 import { API_ENDPOINT } from '@/types/enums';
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useRef } from 'react';
 import PullToRefresh from 'react-simple-pull-to-refresh';
@@ -61,7 +62,12 @@ const SideBar = () => {
   };
 
   return (
-    <div className={styles.sidebarWrapper}>
+    <motion.div
+      initial={{ x: -100 }}
+      animate={{ x: 0 }}
+      transition={{ duration: 0.2 }}
+      className={styles.sidebarWrapper}
+    >
       <div className={styles.title}>
         <Image src={blackGoldTitle} alt='' />
       </div>
@@ -107,7 +113,7 @@ const SideBar = () => {
           </div>
         </PullToRefresh>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
