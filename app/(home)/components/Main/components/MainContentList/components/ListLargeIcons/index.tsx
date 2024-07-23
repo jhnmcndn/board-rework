@@ -2,6 +2,7 @@ import { getGameInfos } from '@/api/game';
 import fallbackIcon from '@/assets/commons/fallBacks/onErrorImg.png';
 import loadingIcon from '@/assets/commons/fallBacks/squareLoad2.gif';
 import ImgWithFallback from '@/components/ImgWithFallback';
+import Loader from '@/components/Loader';
 import NoData from '@/components/NoData';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
@@ -22,7 +23,7 @@ type CombinedGameInfo = RspGameInfo & GameInfoGroup;
 
 const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [filteredData, setFilteredData] = useState<CombinedGameInfo[]>([]);
+  const [filteredData, setFilteredData] = useState<CombinedGameInfo[] | undefined>();
   const [data, setData] = useState<CombinedGameInfo[]>([]);
   const [iconWidth, setIconWidth] = useState(0);
   const theme = useAccountStore((state) => state.theme);
@@ -197,15 +198,22 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     setIconWidth(value);
   };
 
+  const handleOnClick = (item: CombinedGameInfo) => {
+    if (activeSideBarItem.type === 2) {
+      // to follow
+    } else {
+      setActivePlatform(item);
+      fetchGameInfo({ id: activeSideBarItem.id || 1, pid: item.id || 1 });
+      setShowPlatform(true);
+    }
+  };
+
   const load = filteredData === undefined;
 
   return (
     <>
-      {!showPlatform && filteredData?.length === 0 && (
-        <div className={styles.noGamesContainer}>
-          <NoData />
-        </div>
-      )}
+      {!showPlatform && filteredData?.length === 0 && !load && <NoData />}
+      {load && <Loader load={load} />}
 
       {!showPlatform && filteredData?.length !== 0 && (
         <div
@@ -222,15 +230,8 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
             zIndex: 0,
           }}
         >
-          <div
-            style={{
-              width: '100%',
-              margin: '0 0.15rem',
-            }}
-          >
+          <div className={styles.listLargeContainer}>
             <div className={styles.firstRow}>
-              {load && '<Loading load={load} />'}
-
               {filteredData?.map((item, idx) => {
                 return (
                   <motion.div
@@ -241,11 +242,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
                     className={classNames(styles.iconHolder, {
                       [styles.isMaintenance]: item.maintain,
                     })}
-                    onClick={() => {
-                      setActivePlatform(item);
-                      fetchGameInfo({ id: activeSideBarItem.id || 1, pid: item.id || 1 });
-                      setShowPlatform(true);
-                    }}
+                    onClick={() => handleOnClick(item)}
                   >
                     {item.maintain && (
                       <div className='isMaintainLargeIcon'>
@@ -269,6 +266,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
           </div>
         </div>
       )}
+
       {showPlatform && (
         <>
           {PlatFormListHeader()}
