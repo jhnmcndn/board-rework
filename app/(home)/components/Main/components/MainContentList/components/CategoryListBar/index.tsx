@@ -3,6 +3,7 @@ import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import { GameInfoGroup } from '@/types/app';
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import styles from './index.module.scss';
 
@@ -47,8 +48,11 @@ const CategoryListBar: FC<IProps> = ({ setActivePlatformId }) => {
       <div className={styles.lists}>
         {gameInfoGroup?.map((item, index: number) => {
           return (
-            <div
-              key={item.id}
+            <motion.div
+              key={index}
+              initial={{ y: '120%' }}
+              animate={{ y: 0 }}
+              transition={{ delay: 0.4 }}
               className={classNames(styles.iconHolder, {
                 [styles.iconHolderActive]: activeTab === index,
               })}
@@ -57,7 +61,7 @@ const CategoryListBar: FC<IProps> = ({ setActivePlatformId }) => {
             >
               <img loading='lazy' src={item.icon} alt='Icon' />
               <span>{item.name} </span>
-            </div>
+            </motion.div>
           );
         })}
       </div>
