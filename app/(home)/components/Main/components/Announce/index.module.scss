@@ -1,7 +1,10 @@
 .announceContainer {
-  height: 0.15rem;
+  height: 0.35rem;
   margin-left: 0.45rem;
   width: 71%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 
   .announceBar {
     position: relative;
@@ -38,20 +41,7 @@
         width: fit-content;
         box-sizing: border-box;
         text-align: center;
-        animation: tickermt linear infinite;
-        &.pausedAnnounce {
-          animation-play-state: paused;
-        }
       }
     }
-  }
-}
-
-@keyframes tickermt {
-  0% {
-    transform: translateX(40%);
-  }
-  100% {
-    transform: translateX(-100%);
   }
 }
