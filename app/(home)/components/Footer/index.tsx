@@ -1,9 +1,9 @@
 'use client';
 
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
-import { serverConfig } from '@/server';
 import useModalStore from '@/store/modals';
 import { AudioType, onClickSound } from '@/utils/audioFile';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { isIOS } from 'react-device-detect';
 import LeftNavigation from './components/LeftNavigation';
@@ -81,10 +81,15 @@ const Footer = () => {
         }}
       /> */}
 
-      <div className={styles.footerContent}>
+      <motion.div
+        initial={{ y: 100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.15 }}
+        className={styles.footerContent}
+      >
         <LeftNavigation handleNavigation={handleNavigation} handleClick={handleClick} />
         <RightNavigation handleNavigation={handleNavigation} handleClick={handleClick} gotoWithdraw={gotoWithdraw} />
-      </div>
+      </motion.div>
     </>
   );
 };

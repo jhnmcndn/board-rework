@@ -1,16 +1,17 @@
-import styles from './index.module.scss';
-import VipPart from './components/VipPart';
+import { motion } from 'framer-motion';
+import HeaderButtons from './components/HeaderButtons';
 import HeaderDetails from './components/HeaderDetails';
 import HeaderTitle from './components/HeaderTitle';
-import HeaderButtons from './components/HeaderButtons';
+import VipPart from './components/VipPart';
+import styles from './index.module.scss';
 
 export const Header = () => {
   return (
-    <div className={styles.header}>
+    <motion.div initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.15 }} className={styles.header}>
       <VipPart />
       <HeaderDetails />
       <HeaderTitle />
       <HeaderButtons />
-    </div>
+    </motion.div>
   );
 };
