@@ -29,7 +29,8 @@
     ".next/types/**/*.ts",
     "scripts/8801/index.js",
     "scripts/8802/index.js",
-    "scripts/8803/index.js"
+    "scripts/8803/index.js",
+    "custom.d.ts"
   ],
   "exclude": ["node_modules"]
 }
