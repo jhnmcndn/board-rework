@@ -4,35 +4,40 @@
   overflow: scroll;
   overflow-y: hidden;
 
-  .firstRow {
-    display: flex;
-    gap: 0.15rem;
-    width: auto;
-    height: 100%;
-    position: relative;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+  .listLargeContainer {
+    width: 100%;
+    margin: 0 0.15rem;
 
-    .iconHolder {
+    .firstRow {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      height: 95%;
+      gap: 0.15rem;
       width: auto;
+      height: 100%;
+      position: relative;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
 
-      img {
-        cursor: pointer;
-        height: 100%;
-        width: auto !important;
-        border-radius: 0.1rem;
-        object-fit: cover;
+      .iconHolder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        height: 95%;
+        width: auto;
+
+        img {
+          cursor: pointer;
+          height: 100%;
+          width: auto !important;
+          border-radius: 0.1rem;
+          object-fit: cover;
+        }
       }
-    }
 
-    .isMaintenance {
-      pointer-events: none;
+      .isMaintenance {
+        pointer-events: none;
+      }
     }
   }
 }
@@ -43,14 +48,6 @@
       grid-gap: 0.15rem;
     }
   }
-}
-
-.noGamesContainer {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .listHeader {
