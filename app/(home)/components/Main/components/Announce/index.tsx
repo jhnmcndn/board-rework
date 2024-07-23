@@ -17,7 +17,7 @@ const Announce = () => {
         <Image src={audioIcon} alt='AudioIcon' />
         <div className={styles.announceTextWrapper} onClick={() => setOmOpen(true)}>
           <marquee behavior='scroll' direction='left' className={styles.moveTextItem}>
-            {announceText ? announceText : '充值，成功率 100%，到账速度快，还享有额外的入款优惠！祝您旗开得胜！'}
+            {announceText || '充值，成功率 100%，到账速度快，还享有额外的入款优惠！祝您旗开得胜！'}
           </marquee>
         </div>
       </motion.div>
