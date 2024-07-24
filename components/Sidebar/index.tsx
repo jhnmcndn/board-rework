@@ -1,21 +1,23 @@
 'use client';
 
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useCSStore } from '@/components/Providers/CSStoreProvider';
 import styles from '@/components/Sidebar/index.module.scss';
 import { onClickSound } from '@/utils/audioFile';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import { FC } from 'react';
-import { useAccountStore } from "@/components/Providers/AccountStoreProvider";
+import { Dispatch, FC, SetStateAction } from 'react';
 
 export type SidebarComponentProps = {
   sidebarItems: string[];
+  activeSidebar?: number;
+  setActiveSidebar?: Dispatch<SetStateAction<number>>;
 };
 
 export type SidebarComponent = FC<Readonly<SidebarComponentProps>>;
 
-const Sidebar: SidebarComponent = ({ sidebarItems }) => {
+const Sidebar: SidebarComponent = ({ sidebarItems, activeSidebar, setActiveSidebar }) => {
   const pathname = usePathname();
   const isRechargePage = pathname.toLowerCase().includes('recharge');
   const activeTab = useCSStore((state) => state.activeTab);
@@ -27,6 +29,7 @@ const Sidebar: SidebarComponent = ({ sidebarItems }) => {
     onClickSound('pop');
     setWithdrawActiveTab(index);
     setActiveTab(index);
+    setActiveSidebar && setActiveSidebar(index || 0);
   };
 
   return (
@@ -75,7 +78,8 @@ const Sidebar: SidebarComponent = ({ sidebarItems }) => {
           <div
             key={index}
             className={classNames(styles.sidebarItem, {
-              [styles.activeTab]: index === activeTab || index === withdrawActiveTab,
+              [styles.activeTab]:
+                index === activeTab || index === withdrawActiveTab || (activeSidebar && activeSidebar === index),
             })}
             bet-data={item === '' ? 'none' : undefined}
             onClick={() => handleTabClick(index)}
