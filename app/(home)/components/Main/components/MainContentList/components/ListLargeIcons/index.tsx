@@ -175,11 +175,19 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
   const PlatFormListHeader = () => {
     return (
       <div className={styles.listHeader} data-theme={theme}>
-        <div className={styles.leftContent}>
+        <motion.div
+          initial={{ y: '-100%' }}
+          animate={{ y: 0, transition: { delay: 0.2 } }}
+          className={styles.leftContent}
+        >
           <Image src={activePlatform?.icon || ''} width={200} height={200} alt='Icon' />
           <span>{activePlatform?.name}</span> <span>总共{gameInfos?.length}款小游戏</span>
-        </div>
-        <div className={styles.rightContent}>
+        </motion.div>
+        <motion.div
+          initial={{ y: '-150%' }}
+          animate={{ y: 0, transition: { delay: 0.2 } }}
+          className={styles.rightContent}
+        >
           <Image
             src={require(`@/assets/${theme}/main/cardGameBack.png`)}
             width={200}
@@ -189,7 +197,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
             }}
             alt='Card Game Back'
           />
-        </div>
+        </motion.div>
       </div>
     );
   };
@@ -234,7 +242,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
             <motion.div
               animate={{ x: 0 }}
               initial={{ x: '100vw' }}
-              transition={{ delay: 1 }}
+              transition={{ delay: 0.4 }}
               className={styles.firstRow}
             >
               {filteredData?.map((item, idx) => {
