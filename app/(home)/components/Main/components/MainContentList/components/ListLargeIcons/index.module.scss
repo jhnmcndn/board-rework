@@ -54,6 +54,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  overflow: hidden;
 
   .leftContent {
     display: flex;
@@ -86,6 +87,7 @@
     justify-content: center;
     align-items: center;
     margin-right: 0.1rem;
+
     img {
       z-index: 2;
       cursor: pointer;
