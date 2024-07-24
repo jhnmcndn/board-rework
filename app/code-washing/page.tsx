@@ -1,6 +1,7 @@
-const CodeWashing = () => {
+import MainContent from './components/MainContent';
 
-  return <div>Code Washing</div>;
+const CodeWashing = () => {
+  return <MainContent />;
 };
 
 export default CodeWashing;
