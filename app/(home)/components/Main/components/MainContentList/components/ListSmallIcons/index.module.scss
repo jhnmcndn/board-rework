@@ -37,8 +37,8 @@
         img {
           position: inherit;
           cursor: pointer;
-          width: auto;
-          height: 100%;
+          width: auto !important;
+          height: 100% !important;
           object-fit: contain;
           border-radius: 0.11rem;
         }

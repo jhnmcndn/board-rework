@@ -1,5 +1,5 @@
 import Image, { StaticImageData } from 'next/image';
-import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
 
 interface IProps {
   onLoadCall?: () => void;
@@ -8,7 +8,7 @@ interface IProps {
   loadingIcon: StaticImageData;
   keyIcon: string;
   src: string;
-  loading: 'lazy';
+  loading?: 'lazy';
   handleIconWidthChange: (value: number) => void;
 }
 
@@ -77,8 +77,11 @@ const ImgWithFallback: FC<IProps> = ({
     <Image
       ref={iconRef}
       key={keyIcon && keyIcon}
-      height={200}
-      width={200}
+      height={1}
+      width={1}
+      sizes='(max-width: 600px) 100vw, 50vw'
+      layout='responsive'
+      quality={100}
       src={imgSrc || fallback}
       onLoad={onLoad}
       onError={onError}
