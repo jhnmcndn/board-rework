@@ -1,7 +1,7 @@
 import { getGameInfos, getGameTypes } from '@/api/game';
+import { getBindCardList } from '@/api/pay';
 import { boxPassIsOpen, getMessageHomeNotices, getMessageOnSites, init } from '@/api/platform';
 import { HomePage } from '@/app/(home)/components/';
-import { getBindCardList } from "@/api/pay";
 
 const Home = async () => {
   const initData = await init();

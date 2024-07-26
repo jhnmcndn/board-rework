@@ -2,13 +2,7 @@ import { MessageOnSites } from '@/types/app';
 import { createStore } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-export const initialMessageOnSites = {
-  id: 0,
-  title: '',
-  content: '',
-  createTime: '',
-  isRead: false,
-} satisfies MessageOnSites;
+export const initialMessageOnSites = [];
 
 type MessageState = {
   messageOnSites: MessageOnSites[];
@@ -24,7 +18,7 @@ export const createMessageStore = () =>
   createStore<MessageStore>()(
     persist(
       (set) => ({
-        messageOnSites: [initialMessageOnSites],
+        messageOnSites: initialMessageOnSites,
         setMessageOnSites: (messageOnSites) =>
           set((state) => ({ messageOnSites: [...state.messageOnSites, ...messageOnSites] })),
       }),
