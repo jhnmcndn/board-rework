@@ -202,16 +202,11 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
 
       {filteredData?.length !== 0 && (
         <div className={styles.rowsContainer}>
-          <motion.div
-            key={'even'}
-            animate={{ x: 0 }}
-            initial={{ x: '100vw' }}
-            transition={{ delay: 1 }}
-            className={styles.firstRow}
-          >
+          <motion.div animate={{ x: 0 }} initial={{ x: '100vw' }} transition={{ delay: 1 }} className={styles.firstRow}>
             {filteredDataEven?.map((item, idx) => {
               return (
                 <div
+                  key={item.id}
                   id={item.id?.toString()}
                   className={classNames(styles.iconHolder, {
                     [styles.isMaintenance]: item.maintain,
@@ -240,7 +235,6 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
           </motion.div>
 
           <motion.div
-            key={'odd'}
             animate={{ x: 0 }}
             initial={{ x: '100vw' }}
             transition={{ delay: 1 }}
@@ -249,6 +243,7 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
             {filteredDataOdd?.map((item, idx) => {
               return (
                 <div
+                  key={item.id}
                   id={item.id?.toString()}
                   className={classNames(styles.iconHolder, {
                     [styles.isMaintenance]: item.maintain,

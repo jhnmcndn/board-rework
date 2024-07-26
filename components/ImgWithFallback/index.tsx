@@ -80,7 +80,6 @@ const ImgWithFallback: FC<IProps> = ({
       height={1}
       width={1}
       sizes='(max-width: 600px) 100vw, 50vw'
-      layout='responsive'
       quality={100}
       src={imgSrc || fallback}
       onLoad={onLoad}
