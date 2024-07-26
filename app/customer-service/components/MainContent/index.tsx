@@ -7,7 +7,7 @@ import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useCSStore } from '@/components/Providers/CSStoreProvider';
 import { CustomerService } from '@/types/app';
 import { CustomerServiceData } from '@/types/fns';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 
 export type MainContentComponentProps = { hasCSData: boolean; csData: CustomerServiceData };
 export type MainContentComponent = FC<Readonly<MainContentComponentProps>>;
@@ -17,14 +17,14 @@ const MainContent: MainContentComponent = ({ hasCSData, csData }) => {
   const activeTab = useCSStore((state) => state.activeTab);
   const setCS = useCSStore((state) => state.setCS);
 
-  useEffect(() => {
+  const setStoreData = () => {
     if (hasCSData) {
       setCS(csData as CustomerService[]);
     }
-  }, []);
+  };
 
   return (
-    <section className={styles.mainContent} data-theme={theme}>
+    <section className={styles.mainContent} data-theme={theme} onLoad={setStoreData}>
       {activeTab === 0 && <Iframe />}
       {hasCSData && activeTab === 1 && <CSPop />}
       {/* {csActiveTab === 0 && <CsIframe />}
