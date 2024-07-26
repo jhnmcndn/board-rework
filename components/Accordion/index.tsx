@@ -9,7 +9,7 @@ import { useMessageStore } from '../Providers/MessageStoreProvider';
 
 export type AccordionComponentProps = {
   title: string;
-  content: ReactElement[];
+  content: ReactElement[] | string;
   createdAt?: string;
   delay: number;
   background?: string;
@@ -29,7 +29,7 @@ const Accordion: AccordionComponent = ({ title, content, createdAt, delay, backg
 
   const handleExpand = () => {
     setExpand((prev) => !prev);
-    if (id) {
+    if (id && messageOnSites.length > 0) {
       setMessageOnSites(
         messageOnSites.map((mail) =>
           mail.id === id

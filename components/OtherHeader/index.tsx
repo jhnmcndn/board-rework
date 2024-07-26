@@ -15,11 +15,11 @@ import Draggable from 'react-draggable';
 export type OtherHeaderProps = {
   headerTitle: string;
   isWebview?: boolean;
-  hasPurse?: boolean;
+  showPurse?: boolean;
 };
 export type OtherHeaderComponent = FC<Readonly<OtherHeaderProps>>;
 
-const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, hasPurse }) => {
+const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }) => {
   const theme = useAccountStore((state) => state.theme);
   const accountBalance = useAccountStore((state) => state.accountNow.balance);
   const pathname = usePathname();
@@ -128,7 +128,11 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, hasPurse })
         )}
       </div>
 
-      <div className={styles.coinPurseContainer}>{!hasPurse && <CoinPurse />}</div>
+      {showPurse && (
+        <div className={styles.coinPurseContainer}>
+          <CoinPurse />
+        </div>
+      )}
     </motion.div>
   );
 };

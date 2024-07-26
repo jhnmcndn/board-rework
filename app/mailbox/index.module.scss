@@ -1,0 +1,32 @@
+.container {
+  color: white;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  display: flex;
+
+  .contentWrapper {
+    width: 100%;
+    height: calc(100vh - 0.4rem);
+    overflow: auto;
+
+    .mailList {
+      @include flex-xy(flex-start, center);
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      padding: 0.12rem;
+      gap: 0.05rem;
+      overflow: scroll;
+
+      > div {
+        width: 100%;
+        margin-bottom: 5px;
+      }
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+}
