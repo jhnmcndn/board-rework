@@ -1,18 +1,23 @@
 'use client';
 
 import CSPop from '@/app/customer-service/components/CSPop';
+import FAQ from '@/app/customer-service/components/FAQ';
 import Iframe from '@/app/customer-service/components/Iframe';
 import styles from '@/app/customer-service/components/MainContent/index.module.scss';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useCSStore } from '@/components/Providers/CSStoreProvider';
-import { CustomerService } from '@/types/app';
+import { CustomerService, ErrorData, MessageCommonProblems } from '@/types/app';
 import { CustomerServiceData } from '@/types/fns';
 import { FC, useEffect } from 'react';
 
-export type MainContentComponentProps = { hasCSData: boolean; csData: CustomerServiceData };
+export type MainContentComponentProps = {
+  hasCSData: boolean;
+  csData: CustomerServiceData;
+  faq: ErrorData | MessageCommonProblems[] | undefined;
+};
 export type MainContentComponent = FC<Readonly<MainContentComponentProps>>;
 
-const MainContent: MainContentComponent = ({ hasCSData, csData }) => {
+const MainContent: MainContentComponent = ({ hasCSData, csData, faq }) => {
   const theme = useAccountStore((state) => state.theme);
   const activeTab = useCSStore((state) => state.activeTab);
   const setCS = useCSStore((state) => state.setCS);
@@ -27,9 +32,7 @@ const MainContent: MainContentComponent = ({ hasCSData, csData }) => {
     <section className={styles.mainContent} data-theme={theme}>
       {activeTab === 0 && <Iframe />}
       {hasCSData && activeTab === 1 && <CSPop />}
-      {/* {csActiveTab === 0 && <CsIframe />}
-      {!!csPopData?.length && csActiveTab === 1 && <CsPop csPopData={csPopData} />}
-      {!csPopData?.length ? csActiveTab === 1 && <FAQComponent /> : csActiveTab === 2 && <FAQComponent />} */}
+      {!hasCSData ? activeTab === 1 && <FAQ faq={faq} /> : activeTab === 2 && <FAQ faq={faq} />}
     </section>
   );
 };
