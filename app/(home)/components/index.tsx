@@ -38,7 +38,7 @@ export const HomePage: HomePageComponent = ({
   gameInfosData,
   messageOnSites,
   getBoxPassIsOpen,
-  bindCardList
+  bindCardList,
 }) => {
   const theme = useAccountStore((state) => state.theme);
   const setInit = useAccountStore((state) => state.setInit);
@@ -90,9 +90,8 @@ export const HomePage: HomePageComponent = ({
     }
 
     if (bindCardList && !('message' in bindCardList)) {
-      setBindCardList(bindCardList)
+      setBindCardList(bindCardList);
     }
-
   }, [init, messageHomeNoticesData, gameTypesData, gameInfosData, messageOnSites, getBoxPassIsOpen, bindCardList]);
 
   return (

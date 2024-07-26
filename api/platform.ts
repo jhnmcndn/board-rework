@@ -1,5 +1,13 @@
 import { request } from '@/api';
-import { AccountNow, CustomerService, Init, MessageHomeNotice, MessageOnSites, RootResponse } from '@/types/app';
+import {
+  AccountNow,
+  CustomerService,
+  Init,
+  MessageCommonProblems,
+  MessageHomeNotice,
+  MessageOnSites,
+  RootResponse,
+} from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import { CustomerServiceFn } from '@/types/fns';
 import { getToken } from '@/utils/getToken';
@@ -67,6 +75,15 @@ export const customerService: CustomerServiceFn = async () => {
       // Remove after creating the auth logic!
       token: 'uEd2844af8c6220e11faa797b8bab0cc70',
     },
+  });
+  return data.data;
+};
+
+export const getMessageCommonProblems = async () => {
+  const data = await request<RootResponse<MessageCommonProblems[]>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.MESSAGE_COMMON_PROBLEMS,
+    tags: API_ENDPOINT.MESSAGE_COMMON_PROBLEMS,
   });
   return data.data;
 };
