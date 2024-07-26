@@ -131,12 +131,11 @@ export type CustomerService = {
   updateTime?: string;
 };
 
-
 export type BindCardList = {
   memberCardList?: MemberCardList[];
   rspWithdrawInfo?: RspWithdrawInfo;
   specialBankInfoMap?: SpecialBankInfoMap;
-}
+};
 
 export type MemberCardList = {
   id?: number;
@@ -147,15 +146,21 @@ export type MemberCardList = {
   bankIcon?: string;
   bankName?: string;
   bankCode?: string;
-}
+};
 
 export type RspWithdrawInfo = {
   canWithdrawMoney?: number;
   accountNow?: number;
   needBeat?: number;
   usdtWithdrawExchangeRate?: number;
-}
+};
 
 export type SpecialBankInfoMap = {
   USDT?: number;
-}
+};
+
+export type MessageCommonProblems = {
+  id: number;
+  title: string;
+  content: string;
+};

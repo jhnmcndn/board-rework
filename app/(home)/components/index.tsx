@@ -16,7 +16,7 @@ import {
   RootResponse,
   RspGameInfo,
 } from '@/types/app';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import Main from './Main';
 
 export type HomePageComponent = FC<
@@ -51,7 +51,7 @@ export const HomePage: HomePageComponent = ({
   const setBoxPassIsSet = useAccountStore((state) => state.setBoxPassIsSet);
   const setBindCardList = useAccountStore((state) => state.setBindCardList);
 
-  const setStoreData = () => {
+  useEffect(() => {
     if (init && !('message' in init)) {
       setInit(init || initState);
     }
@@ -92,10 +92,10 @@ export const HomePage: HomePageComponent = ({
     if (bindCardList && !('message' in bindCardList)) {
       setBindCardList(bindCardList);
     }
-  };
+  }, [init, messageHomeNoticesData, gameTypesData, gameInfosData, messageOnSites, getBoxPassIsOpen, bindCardList]);
 
   return (
-    <div className='mainColor' data-theme={theme} onLoad={setStoreData}>
+    <div className='mainColor' data-theme={theme}>
       <Header />
       <Main />
       <Footer />
