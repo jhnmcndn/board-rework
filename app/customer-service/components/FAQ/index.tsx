@@ -1,25 +1,21 @@
-import { getMessageCommonProblems } from '@/api/platform';
-import Accordion from '@/app/customer-service/components/FAQ/Accordion';
 import HelpSection from '@/app/customer-service/components/FAQ/HelpSection';
 import styles from '@/app/customer-service/components/FAQ/index.module.scss';
+import { ErrorData, MessageCommonProblems } from '@/types/app';
+import { FC } from 'react';
+import AccordionList from './AccordionList';
 
-const FAQ = async () => {
-  const faq = await getMessageCommonProblems();
+export type FAQComponentProps = {
+  faq: ErrorData | MessageCommonProblems[] | undefined;
+};
 
+export type FAQComponent = FC<Readonly<FAQComponentProps>>;
+
+const FAQ: FAQComponent = ({ faq }) => {
   return (
     <section className={styles.container}>
       <div className={styles.wrapper}>
         <HelpSection>
-          <ul>
-            {faq &&
-              !('message' in faq) &&
-              faq.length > 0 &&
-              faq.map((question, index) => (
-                <li key={index}>
-                  <Accordion />
-                </li>
-              ))}
-          </ul>
+          <AccordionList faq={faq} />
         </HelpSection>
       </div>
     </section>
