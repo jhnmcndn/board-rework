@@ -9,9 +9,11 @@ export const Header = () => {
   return (
     <motion.div initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.15 }} className={styles.header}>
       <VipPart />
-      <HeaderDetails />
-      <HeaderTitle />
-      <HeaderButtons />
+      <div className={styles.rightHeadContainer}>
+        <HeaderDetails />
+        <HeaderTitle />
+        <HeaderButtons />
+      </div>
     </motion.div>
   );
 };
