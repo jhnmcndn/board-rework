@@ -81,12 +81,22 @@ const LeftNavigation: React.FC<LeftNavigationProps> = ({ handleNavigation, handl
           </div>
         </li>
 
-        <li onClick={() => handleNavigation('/mailbox', 'message')}>
+        {/* <li onClick={() => handleNavigation('/mailbox', 'message')}>
           <div className={styles.listContainer}>
             {(!isLoggedIn || unreadMsgs.length > 0) && <center className='alertIcon' />}
             <Image src={iconMessage} alt='Message Icon' />
             <span className={styles.text}>消息</span>
           </div>
+        </li> */}
+
+        {/* Replace the code above with the code below with auth added through handleNavigation */}
+
+        <li>
+          <Link href='/mailbox' className={styles.listContainer}>
+            {(!isLoggedIn || unreadMsgs.length > 0) && <center className='alertIcon' />}
+            <Image src={iconMessage} alt='Message Icon' />
+            <span className={styles.text}>消息</span>
+          </Link>
         </li>
 
         <li
