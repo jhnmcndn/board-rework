@@ -1,4 +1,4 @@
-import { AccountInfo, AccountNow, Init, BindCardList } from '@/types/app';
+import { AccountInfo, AccountNow, BindCardList, Init } from '@/types/app';
 import { THEME } from '@/types/enums';
 import { createStore } from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -81,6 +81,7 @@ export const createAccountStore = () =>
         accountNow: accountNowState,
         boxPassIsSet: false,
         bindCardList: bindCardListState,
+        withdrawActiveTab: 0,
         setInit: (init) => set(() => ({ init: { ...init } })),
         setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
         setTheme: (theme) => set(() => ({ theme })),
