@@ -25,6 +25,7 @@ const SideBar = () => {
   const showPlatform = useGameStore((state) => state.showPlatform);
   const activePlatform = useGameStore((state) => state.activePlatform);
   const setShowPlatform = useGameStore((state) => state.setShowPlatform);
+  const isGamesLoading = useGameStore((state) => state.isGamesLoading);
   const setIsGamesLoading = useGameStore((state) => state.setIsGamesLoading);
 
   const fetchGameInfoGroup = async (id: number) => {
@@ -88,7 +89,7 @@ const SideBar = () => {
                 <div
                   key={index}
                   className={classNames(styles.sideBarItemContainer, {
-                    [styles.activeSideBarItemContainer]: item.id === activeSideBarItem.id,
+                    [styles.disabled]: item.id === activeSideBarItem.id || isGamesLoading,
                   })}
                   onClick={() => handleOnClick(item)}
                 >
