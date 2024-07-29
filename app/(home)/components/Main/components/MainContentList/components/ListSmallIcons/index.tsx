@@ -217,7 +217,12 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
                       <div>正在维修</div>
                     </div>
                   )}
-                  <ImgWithFallback src={item.icon || ''} fallback={fallbackIcon} loadingIcon={loadingIcon} />
+                  <ImgWithFallback
+                    src={item.icon || ''}
+                    fallback={fallbackIcon}
+                    loadingIcon={loadingIcon}
+                    alt={item.icon || ''}
+                  />
                 </div>
               );
             })}
@@ -246,7 +251,12 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
                       <div>正在维修</div>
                     </div>
                   )}
-                  <ImgWithFallback src={item.icon || ''} fallback={fallbackIcon} loadingIcon={loadingIcon} />
+                  <ImgWithFallback
+                    src={item.icon || ''}
+                    fallback={fallbackIcon}
+                    loadingIcon={loadingIcon}
+                    alt={item.icon || ''}
+                  />
                 </div>
               );
             })}

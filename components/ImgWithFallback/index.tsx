@@ -1,41 +1,50 @@
-import Image, { StaticImageData } from 'next/image';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import Image, { ImageProps, StaticImageData } from 'next/image';
 import { FC, useState } from 'react';
 
-interface IProps {
+interface IProps extends ImageProps {
   onLoadCall?: () => void;
   onErrorCall?: () => void;
   fallback: StaticImageData;
   loadingIcon: StaticImageData;
-  src: string;
-  loading?: 'lazy' | 'eager';
 }
 
-const ImgWithFallback: FC<IProps> = ({ onLoadCall, onErrorCall, fallback, loadingIcon, src, loading = 'lazy' }) => {
-  const [imgSrc, setImgSrc] = useState<StaticImageData | string>(loadingIcon);
+const ImgWithFallback: FC<IProps> = ({
+  onLoadCall,
+  onErrorCall,
+  fallback,
+  loadingIcon,
+  src,
+  sizes,
+  objectFit,
+  objectPosition,
+  quality,
+  ...rest
+}) => {
+  const [imgSrc, setImgSrc] = useState<StaticImport | string>(loadingIcon);
 
   const onError = () => {
-    onErrorCall && onErrorCall();
+    onErrorCall?.();
     setImgSrc(fallback);
   };
 
   const onLoad = () => {
-    onLoadCall && onLoadCall();
+    onLoadCall?.();
     setImgSrc(src);
   };
 
   return (
     <Image
-      sizes='(max-width: 600px) 100vw, 50vw'
+      sizes={sizes || '(max-width: 600px) 100vw, 50vw'}
       fill
-      quality={100}
+      quality={quality || 100}
       src={imgSrc || fallback}
       onLoad={onLoad}
       onError={onError}
-      loading={loading}
       draggable='false'
-      objectFit='cover'
-      objectPosition='center'
-      alt='Key Icon'
+      objectFit={objectFit || 'cover'}
+      objectPosition={objectPosition || 'center'}
+      {...rest}
     />
   );
 };

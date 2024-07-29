@@ -262,6 +262,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
                       src={(activeSideBarItem.type === 3 ? item.cardIcon : item.icon) || ''}
                       fallback={fallbackIcon}
                       loadingIcon={loadingIcon}
+                      alt={item.icon || item.cardIcon || ''}
                     />
                   </motion.div>
                 );
