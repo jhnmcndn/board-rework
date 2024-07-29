@@ -219,7 +219,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
   return (
     <>
       {!showPlatform && filteredData?.length === 0 && !isGamesLoading && <NoData />}
-      {isGamesLoading && <Loader load={isGamesLoading} />}
+      {!showPlatform && isGamesLoading && <Loader load={isGamesLoading} />}
 
       {!showPlatform && filteredData?.length !== 0 && (
         <div
