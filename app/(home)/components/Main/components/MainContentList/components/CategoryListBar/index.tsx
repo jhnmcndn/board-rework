@@ -16,6 +16,7 @@ const CategoryListBar: FC<IProps> = ({ setActivePlatformId }) => {
   const gameInfoGroup = useGameStore((state) => state.gameInfoGroup);
   const setGameInfos = useGameStore((state) => state.setGameInfos);
   const activeSideBarItem = useGameStore((state) => state.activeSideBarItem);
+  const setIsGamesLoading = useGameStore((state) => state.setIsGamesLoading);
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
@@ -31,10 +32,12 @@ const CategoryListBar: FC<IProps> = ({ setActivePlatformId }) => {
   }, []);
 
   const fetchGameInfo = async (params: { id: number; pid: number }) => {
+    setIsGamesLoading(true);
     const response = await getGameInfos(params);
     if (response && !('message' in response)) {
       setGameInfos(response);
     }
+    setIsGamesLoading(false);
   };
 
   const handleOnClick = async (item: GameInfoGroup, index: number) => {

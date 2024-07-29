@@ -23,9 +23,7 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
   const [iconWidth, setIconWidth] = useState(0);
   const activeSideBarItem = useGameStore((state) => state.activeSideBarItem);
   const gameInfos = useGameStore((state) => state.gameInfos);
-
-  //   const fallbackIcon = require('@/assets/commons/fallBacks/onErrorImg.png');
-  //   const loadingIcon = require('@/assets/commons/fallBacks/squareLoad2.gif');
+  const isGamesLoading = useGameStore((state) => state.isGamesLoading);
 
   const isVivoBrowser = /VivoBrowser/i.test(navigator.userAgent);
   let initialTouchX: number | null = null;
@@ -180,8 +178,6 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     setIconWidth(value);
   };
 
-  const load = filteredData === undefined;
-
   return (
     <div
       id='listSmallWrapper'
@@ -197,10 +193,10 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
         zIndex: 0,
       }}
     >
-      {load && <Loader load={load} />}
-      {filteredData?.length === 0 && load && <NoData />}
+      {isGamesLoading && <Loader load={isGamesLoading} />}
+      {filteredData?.length === 0 && !isGamesLoading && <NoData />}
 
-      {filteredData?.length !== 0 && (
+      {!isGamesLoading && filteredData?.length !== 0 && (
         <div className={styles.rowsContainer}>
           <motion.div animate={{ x: 0 }} initial={{ x: '100vw' }} transition={{ delay: 1 }} className={styles.firstRow}>
             {filteredDataEven?.map((item, idx) => {

@@ -26,7 +26,7 @@ const Footer = () => {
     if (isIOS && soundKey) {
       onClickSound(soundKey as AudioType);
     }
-    if (isLoggedIn) {
+    if (!isLoggedIn) {
       router.push(path);
     } else {
       openAuth();
