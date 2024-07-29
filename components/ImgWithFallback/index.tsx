@@ -1,30 +1,17 @@
 import Image, { StaticImageData } from 'next/image';
-import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, useState } from 'react';
 
 interface IProps {
   onLoadCall?: () => void;
   onErrorCall?: () => void;
   fallback: StaticImageData;
   loadingIcon: StaticImageData;
-  keyIcon: string;
   src: string;
-  loading?: 'lazy';
-  handleIconWidthChange: (value: number) => void;
+  loading?: 'lazy' | 'eager';
 }
 
-const ImgWithFallback: FC<IProps> = ({
-  onLoadCall,
-  onErrorCall,
-  fallback,
-  loadingIcon,
-  keyIcon,
-  src,
-  loading,
-  handleIconWidthChange,
-}) => {
-  const iconRef = useRef<HTMLImageElement | null>(null);
+const ImgWithFallback: FC<IProps> = ({ onLoadCall, onErrorCall, fallback, loadingIcon, src, loading = 'lazy' }) => {
   const [imgSrc, setImgSrc] = useState<StaticImageData | string>(loadingIcon);
-  const [iconWidth, setIconWidth] = useState(0);
 
   const onError = () => {
     onErrorCall && onErrorCall();
@@ -36,57 +23,18 @@ const ImgWithFallback: FC<IProps> = ({
     setImgSrc(src);
   };
 
-  useEffect(() => {
-    handleResize();
-  }, [iconRef?.current?.offsetWidth, window.orientation]);
-
-  const handleResize = useCallback(() => {
-    setIconContainerSize();
-  }, []);
-
-  const setIconContainerSize = () => {
-    if (!iconRef) return;
-    handleIconWidthChange && handleIconWidthChange(Number(iconRef?.current?.offsetWidth));
-    setIconWidth(Number(iconRef?.current?.offsetWidth));
-  };
-
-  useEffect(() => {
-    let debounceId: any;
-
-    function handleDebouncedResize() {
-      if (debounceId) {
-        clearTimeout(debounceId);
-      }
-      debounceId = setTimeout(() => {
-        handleResize();
-      }, 1000);
-    }
-
-    window.addEventListener('resize', handleDebouncedResize);
-    window.addEventListener('pageshow', handleDebouncedResize);
-    window.addEventListener('orientationchange', handleDebouncedResize);
-
-    return () => {
-      window.removeEventListener('resize', handleDebouncedResize);
-      window.removeEventListener('pageshow', handleDebouncedResize);
-      window.removeEventListener('orientationchange', handleDebouncedResize);
-    };
-  }, [handleResize]);
-
   return (
     <Image
-      ref={iconRef}
-      key={keyIcon && keyIcon}
-      height={1}
-      width={1}
       sizes='(max-width: 600px) 100vw, 50vw'
+      fill
       quality={100}
       src={imgSrc || fallback}
       onLoad={onLoad}
       onError={onError}
       loading={loading}
       draggable='false'
-      style={iconWidth ? { width: iconWidth } : {}}
+      objectFit='cover'
+      objectPosition='center'
       alt='Key Icon'
     />
   );

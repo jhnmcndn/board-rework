@@ -33,13 +33,10 @@
         align-items: center;
         height: 98%;
         position: relative;
+        aspect-ratio: 1/1;
 
         img {
-          position: inherit;
           cursor: pointer;
-          width: auto !important;
-          height: 100% !important;
-          object-fit: contain;
           border-radius: 0.11rem;
         }
       }
