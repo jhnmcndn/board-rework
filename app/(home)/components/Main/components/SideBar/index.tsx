@@ -25,12 +25,15 @@ const SideBar = () => {
   const showPlatform = useGameStore((state) => state.showPlatform);
   const activePlatform = useGameStore((state) => state.activePlatform);
   const setShowPlatform = useGameStore((state) => state.setShowPlatform);
+  const setIsGamesLoading = useGameStore((state) => state.setIsGamesLoading);
 
   const fetchGameInfoGroup = async (id: number) => {
+    setIsGamesLoading(true);
     const response = await getGameInfoGroup(id);
     if (response && !('message' in response)) {
       setGameInfoGroup(response);
     }
+    setIsGamesLoading(false);
   };
 
   const fetchGameInfo = async (params: { id: number; pid: number }, item?: RspGameType) => {
@@ -38,11 +41,12 @@ const SideBar = () => {
     if (item && item.type === 3 && showPlatform) {
       newParams = { id: params.id, pid: activePlatform.id || -1 };
     }
-
+    setIsGamesLoading(true);
     const response = await getGameInfos(newParams);
     if (response && !('message' in response)) {
       setGameInfos(response);
     }
+    setIsGamesLoading(false);
   };
 
   const handleRefresh = async () => {

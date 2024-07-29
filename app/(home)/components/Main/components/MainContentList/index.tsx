@@ -39,6 +39,7 @@ const MainContentList = () => {
               return (
                 activeSideBarItem.id === item.id &&
                 gameInfoGroup?.map((platform, idx) => {
+                  console.log('qweqweqweqw 111111');
                   return (
                     activePlatformId === platform.id && (
                       <ListSmallIcons
@@ -51,6 +52,8 @@ const MainContentList = () => {
                 })
               );
             } else {
+              console.log('qweqweqweqw 22222222');
+
               return (
                 activeSideBarItem.id === item.id && (
                   <ListSmallIcons key={idx} searchFieldData={searchFieldData} setSearchFieldData={setSearchFieldData} />
@@ -58,6 +61,8 @@ const MainContentList = () => {
               );
             }
           } else {
+            console.log('qweqweqweqw 333333333');
+
             return (
               activeSideBarItem.id === item.id && (
                 <ListLargeIcons key={idx} searchFieldData={searchFieldData} setSearchFieldData={setSearchFieldData} />

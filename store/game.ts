@@ -26,6 +26,7 @@ type GameState = {
   gameInfos: RspGameInfo[];
   showPlatform: boolean;
   activePlatform: GameInfoGroup;
+  isGamesLoading: boolean;
 };
 
 type GameActions = {
@@ -37,6 +38,7 @@ type GameActions = {
   setGameInfos: (gameInfos: RspGameInfo[]) => void;
   setShowPlatform: (showPlatform: boolean) => void;
   setActivePlatform: (activePlatform: GameInfoGroup) => void;
+  setIsGamesLoading: (isGamesLoading: boolean) => void;
 };
 
 export type GameStore = GameState & GameActions;
@@ -53,6 +55,7 @@ export const createGameStore = () =>
         gameInfos: [],
         showPlatform: false,
         activePlatform: initialActivePlatform,
+        isGamesLoading: false,
         setSideBar: (sideBar) => set(() => ({ sideBar })),
         setActiveSideBarItem: (activeSideBarItem) => set(() => ({ activeSideBarItem })),
         setGameInfoGroup: (gameInfoGroup) => set(() => ({ gameInfoGroup })),
@@ -61,6 +64,7 @@ export const createGameStore = () =>
         setGameInfos: (gameInfos) => set(() => ({ gameInfos })),
         setShowPlatform: (showPlatform) => set(() => ({ showPlatform })),
         setActivePlatform: (activePlatform) => set(() => ({ activePlatform })),
+        setIsGamesLoading: (isGamesLoading) => set(() => ({ isGamesLoading })),
       }),
       {
         name: 'game-store',

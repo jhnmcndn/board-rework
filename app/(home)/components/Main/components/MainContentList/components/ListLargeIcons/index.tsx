@@ -35,6 +35,8 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
   const setShowPlatform = useGameStore((state) => state.setShowPlatform);
   const activePlatform = useGameStore((state) => state.activePlatform);
   const setActivePlatform = useGameStore((state) => state.setActivePlatform);
+  const isGamesLoading = useGameStore((state) => state.isGamesLoading);
+  const setIsGamesLoading = useGameStore((state) => state.setIsGamesLoading);
 
   const isVivoBrowser = /VivoBrowser/i.test(navigator.userAgent);
   let initialTouchX: number | null = null;
@@ -166,10 +168,12 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
   }, []);
 
   const fetchGameInfo = async (params: { id: number; pid: number }) => {
+    setIsGamesLoading(true);
     const response = await getGameInfos(params);
     if (response && !('message' in response)) {
       setGameInfos(response);
     }
+    setIsGamesLoading(false);
   };
 
   const PlatFormListHeader = () => {
@@ -216,12 +220,10 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     }
   };
 
-  const load = filteredData === undefined;
-
   return (
     <>
-      {!showPlatform && filteredData?.length === 0 && !load && <NoData />}
-      {load && <Loader load={load} />}
+      {!showPlatform && filteredData?.length === 0 && !isGamesLoading && <NoData />}
+      {isGamesLoading && <Loader load={isGamesLoading} />}
 
       {!showPlatform && filteredData?.length !== 0 && (
         <div
