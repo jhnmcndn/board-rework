@@ -65,6 +65,10 @@
         width: 100%;
         cursor: pointer;
 
+        &.activeSideBarItemContainer {
+          pointer-events: none;
+        }
+
         .sideBarItem {
           height: 100%;
           width: 100%;
