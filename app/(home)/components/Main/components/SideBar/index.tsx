@@ -85,7 +85,13 @@ const SideBar = () => {
               }
 
               return (
-                <div key={index} className={styles.sideBarItemContainer} onClick={() => handleOnClick(item)}>
+                <div
+                  key={index}
+                  className={classNames(styles.sideBarItemContainer, {
+                    [styles.activeSideBarItemContainer]: item.id === activeSideBarItem.id,
+                  })}
+                  onClick={() => handleOnClick(item)}
+                >
                   <Image
                     height={1}
                     width={434}
