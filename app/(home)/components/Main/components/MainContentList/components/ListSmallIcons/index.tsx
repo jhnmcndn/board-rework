@@ -174,10 +174,6 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     }
   }, []);
 
-  const handleIconWidthChange = (value: number) => {
-    setIconWidth(value);
-  };
-
   return (
     <div
       id='listSmallWrapper'
@@ -198,7 +194,12 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
 
       {!isGamesLoading && filteredData?.length !== 0 && (
         <div className={styles.rowsContainer}>
-          <motion.div animate={{ x: 0 }} initial={{ x: '100vw' }} transition={{ delay: 1 }} className={styles.firstRow}>
+          <motion.div
+            animate={{ x: 0 }}
+            initial={{ x: '100vw' }}
+            transition={{ delay: 0.4 }}
+            className={styles.firstRow}
+          >
             {filteredDataEven?.map((item, idx) => {
               return (
                 <div
@@ -210,7 +211,6 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
                   onClick={() => {
                     // handleGameClick(item);
                   }}
-                  style={{ width: iconWidth }}
                 >
                   {item.maintain && (
                     <div className='isMaintain'>
@@ -218,12 +218,10 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
                     </div>
                   )}
                   <ImgWithFallback
-                    keyIcon={item.icon || ''}
+                    src={item.icon || ''}
                     fallback={fallbackIcon}
                     loadingIcon={loadingIcon}
-                    loading='lazy'
-                    src={item.icon || ''}
-                    handleIconWidthChange={handleIconWidthChange}
+                    alt={item.icon || ''}
                   />
                 </div>
               );
@@ -233,7 +231,7 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
           <motion.div
             animate={{ x: 0 }}
             initial={{ x: '100vw' }}
-            transition={{ delay: 1 }}
+            transition={{ delay: 0.4 }}
             className={styles.secondRow}
           >
             {filteredDataOdd?.map((item, idx) => {
@@ -247,7 +245,6 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
                   onClick={() => {
                     // handleGameClick(item);
                   }}
-                  style={{ width: iconWidth }}
                 >
                   {item.maintain && (
                     <div className='isMaintain'>
@@ -255,12 +252,10 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
                     </div>
                   )}
                   <ImgWithFallback
-                    keyIcon={item.icon || ''}
+                    src={item.icon || ''}
                     fallback={fallbackIcon}
                     loadingIcon={loadingIcon}
-                    loading='lazy'
-                    src={item.icon || ''}
-                    handleIconWidthChange={handleIconWidthChange}
+                    alt={item.icon || ''}
                   />
                 </div>
               );

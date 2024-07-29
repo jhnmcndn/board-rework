@@ -25,13 +25,11 @@
         position: relative;
         height: 95%;
         width: auto;
+        aspect-ratio: 15/23;
 
         img {
           cursor: pointer;
-          height: 100% !important;
-          width: auto !important;
           border-radius: 0.1rem;
-          object-fit: cover;
         }
       }
 

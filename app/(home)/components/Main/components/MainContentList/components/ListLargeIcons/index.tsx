@@ -206,10 +206,6 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     );
   };
 
-  const handleIconWidthChange = (value: number) => {
-    setIconWidth(value);
-  };
-
   const handleOnClick = (item: CombinedGameInfo) => {
     if (activeSideBarItem.type === 2) {
       // to follow
@@ -263,13 +259,10 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
                     )}
 
                     <ImgWithFallback
-                      // largeWidth={detectMobile.isMobile() ? ".89rem" : ""}
-                      keyIcon={(activeSideBarItem.type === 3 ? item.cardIcon : item.icon) || ''}
+                      src={(activeSideBarItem.type === 3 ? item.cardIcon : item.icon) || ''}
                       fallback={fallbackIcon}
                       loadingIcon={loadingIcon}
-                      loading='lazy'
-                      src={(activeSideBarItem.type === 3 ? item.cardIcon : item.icon) || ''}
-                      handleIconWidthChange={handleIconWidthChange}
+                      alt={item.icon || item.cardIcon || ''}
                     />
                   </motion.div>
                 );
