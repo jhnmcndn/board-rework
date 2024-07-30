@@ -2,6 +2,7 @@ import { AccountStoreProvider } from '@/components/Providers/AccountStoreProvide
 import { CSStoreProvider } from '@/components/Providers/CSStoreProvider';
 import { GameStoreProvider } from '@/components/Providers/GameStoreProvider';
 import { MessageProvider } from '@/components/Providers/MessageStoreProvider';
+import { PersonalInfoStoreProvider } from '@/components/Providers/PersonalInfoStoreProvider';
 import { ReactNode } from 'react';
 
 export type GlobalProviderProps = Readonly<{ children: ReactNode }>;
@@ -11,7 +12,9 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
     <AccountStoreProvider>
       <GameStoreProvider>
         <MessageProvider>
-          <CSStoreProvider>{children}</CSStoreProvider>
+          <CSStoreProvider>
+            <PersonalInfoStoreProvider>{children}</PersonalInfoStoreProvider>
+          </CSStoreProvider>
         </MessageProvider>
       </GameStoreProvider>
     </AccountStoreProvider>
