@@ -73,8 +73,12 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
 
     const scrollFn = (e: WheelEvent) => {
       if (!item) return;
-      if (e.deltaY > 0) item.scrollLeft += 100;
-      else item.scrollLeft -= 100;
+
+      const scrollAmount = e.deltaY > 0 ? 200 : -200;
+      item.scrollTo({
+        left: item.scrollLeft + scrollAmount,
+        behavior: 'smooth',
+      });
     };
 
     if (!showPlatform && item) {

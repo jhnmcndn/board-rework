@@ -52,13 +52,15 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
       return;
     }
 
+    item.style.scrollBehavior = 'smooth';
+
     const handleMouseWheel = (e: WheelEvent) => {
       if (!item) {
         return;
       }
 
-      if (e.deltaY > 0) item.scrollLeft += 100;
-      else item.scrollLeft -= 100;
+      if (e.deltaY > 0) item.scrollLeft += 200;
+      else item.scrollLeft -= 200;
     };
     item.addEventListener('wheel', handleMouseWheel, { passive: true });
 
