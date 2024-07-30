@@ -68,7 +68,7 @@ const SideBar = () => {
 
   return (
     <motion.div
-      initial={{ x: -100 }}
+      initial={{ x: '-100%' }}
       animate={{ x: 0 }}
       transition={{ duration: 0.2 }}
       className={styles.sidebarWrapper}
