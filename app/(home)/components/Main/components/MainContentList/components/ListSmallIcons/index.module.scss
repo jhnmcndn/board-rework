@@ -11,9 +11,6 @@
   -webkit-overflow-scrolling: touch;
 
   .rowsContainer {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
     height: 100%;
     position: relative;
 
@@ -24,14 +21,15 @@
       align-items: center;
       gap: 0.15rem;
       width: auto;
-      height: 50%;
+      height: 100%;
       position: relative;
 
       .iconHolder {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 98%;
+        height: 100%;
+        width: auto;
         position: relative;
         aspect-ratio: 1/1;
 
