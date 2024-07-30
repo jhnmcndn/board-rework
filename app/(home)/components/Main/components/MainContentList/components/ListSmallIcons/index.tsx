@@ -1,7 +1,6 @@
 import fallbackIcon from '@/assets/commons/fallBacks/onErrorImg.png';
 import loadingIcon from '@/assets/commons/fallBacks/squareLoad2.gif';
 import ImgWithFallback from '@/components/ImgWithFallback';
-import Loader from '@/components/Loader';
 import NoData from '@/components/NoData';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import { RspGameInfo } from '@/types/app';
@@ -191,7 +190,6 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
         zIndex: 0,
       }}
     >
-      {isGamesLoading && <Loader load={isGamesLoading} />}
       {filteredData?.length === 0 && !isGamesLoading && <NoData />}
 
       {!isGamesLoading && filteredData?.length !== 0 && (

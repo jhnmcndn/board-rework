@@ -2,7 +2,6 @@ import { getGameInfos } from '@/api/game';
 import fallbackIcon from '@/assets/commons/fallBacks/onErrorImg.png';
 import loadingIcon from '@/assets/commons/fallBacks/squareLoad2.gif';
 import ImgWithFallback from '@/components/ImgWithFallback';
-import Loader from '@/components/Loader';
 import NoData from '@/components/NoData';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
@@ -223,8 +222,6 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
   return (
     <>
       {!showPlatform && filteredData?.length === 0 && !isGamesLoading && <NoData />}
-      {!showPlatform && isGamesLoading && <Loader load={isGamesLoading} />}
-
       {!showPlatform && filteredData?.length !== 0 && (
         <div
           id='listLargeWrapper'
