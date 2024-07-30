@@ -1,9 +1,8 @@
-import type { Metadata } from 'next';
-import '@/styles/main.scss';
-
-import { serverConfig } from '@/server';
-import { GlobalProvider } from '@/components/providers';
+import { GlobalProvider } from '@/components/Providers';
 import ModalRoot from '@/components/modals';
+import { serverConfig } from '@/server';
+import '@/styles/main.scss';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: serverConfig.title,

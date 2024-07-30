@@ -5,7 +5,6 @@ import styles from './index.module.scss';
 import MoreModal from '@/components/modals/MoreModal';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useMessageStore } from '@/components/Providers/MessageStoreProvider';
-import useModal from '@/hooks/useModal';
 import { MessageOnSites } from '@/types/app';
 import { onClickSound } from '@/utils/audioFile';
 import { useEffect, useState } from 'react';
@@ -17,8 +16,8 @@ type LeftNavigationProps = {
 };
 
 const LeftNavigation: React.FC<LeftNavigationProps> = ({ handleNavigation, handleClick }) => {
-  const [isShowing, toggle] = useModal();
   const theme = useAccountStore((state) => state.theme);
+  const [showMoreModal, setShowMoreModal] = useState(false);
   const accountInfo = useAccountStore((state) => state.accountInfo);
   const messageOnSites = useMessageStore((state) => state.messageOnSites);
   const isLoggedIn = Boolean(accountInfo.id);
@@ -102,27 +101,28 @@ const LeftNavigation: React.FC<LeftNavigationProps> = ({ handleNavigation, handl
         <li
           onClick={() => {
             onClickSound('pop');
-            toggle();
+            setShowMoreModal(!showMoreModal);
           }}
         >
           <div className={styles.listContainer}>
-            <MoreModal
-              showMore={isShowing}
-              setShowMore={toggle}
-              setOpenAnnounceModal={() => {
-                setMegaphone(true);
-                toggle();
-              }}
-              setSafeBoxModal={() => {
-                toggle();
-                setSafeBoxModal(true);
-              }}
-            />
             <Image src={iconMore} alt='More Icon' />
             <span className={styles.text}>更多</span>
           </div>
         </li>
       </ul>
+      {showMoreModal && (
+        <MoreModal
+          setShowMore={setShowMoreModal}
+          setOpenAnnounceModal={() => {
+            setMegaphone(true);
+            setShowMoreModal(false);
+          }}
+          setSafeBoxModal={() => {
+            setShowMoreModal(false);
+            setSafeBoxModal(true);
+          }}
+        />
+      )}
     </>
   );
 };
