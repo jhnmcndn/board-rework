@@ -1,5 +1,5 @@
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Announce from '../Announce';
 import SearchField from '../SearchField';
 import CategoryListBar from './components/CategoryListBar';
@@ -13,6 +13,17 @@ const MainContentList = () => {
   const sideBar = useGameStore((state) => state.sideBar);
   const [activePlatformId, setActivePlatformId] = useState(-1);
   const [searchFieldData, setSearchFieldData] = useState('');
+  const [delayRender, setDelayRender] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setDelayRender(false); // This is code to prevent laggy first render animation of home page
+    }, 500);
+  }, []);
+
+  if (delayRender) {
+    return;
+  }
 
   return (
     <div className={styles.mainListWrapper}>
