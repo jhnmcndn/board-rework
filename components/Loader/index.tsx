@@ -10,7 +10,7 @@ type TProps = {
 const Loader: FC<TProps> = ({ load }) => {
   return (
     <div className={styles.loader} style={{ display: load ? 'flex' : 'none' }}>
-      <Image src={loading} alt='' />
+      <Image src={loading} alt='' quality={100} height={80} width={80} />
     </div>
   );
 };

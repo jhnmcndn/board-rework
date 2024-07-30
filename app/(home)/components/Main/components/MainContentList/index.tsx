@@ -1,3 +1,4 @@
+import Loader from '@/components/Loader';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import { useEffect, useState } from 'react';
 import Announce from '../Announce';
@@ -11,6 +12,7 @@ const MainContentList = () => {
   const activeSideBarItem = useGameStore((state) => state.activeSideBarItem);
   const gameInfoGroup = useGameStore((state) => state.gameInfoGroup);
   const sideBar = useGameStore((state) => state.sideBar);
+  const isGamesLoading = useGameStore((state) => state.isGamesLoading);
   const [activePlatformId, setActivePlatformId] = useState(-1);
   const [searchFieldData, setSearchFieldData] = useState('');
   const [delayRender, setDelayRender] = useState(true);
@@ -42,6 +44,8 @@ const MainContentList = () => {
           </div>
         </div>
       )}
+
+      {isGamesLoading && <Loader load={isGamesLoading} />}
 
       <div className={styles.listContainer}>
         {sideBar.map((item, idx) => {
