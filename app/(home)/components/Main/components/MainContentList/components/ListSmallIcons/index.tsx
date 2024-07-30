@@ -85,7 +85,7 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
               grabCursor
               grid={{
                 rows: 2,
-                fill: 'row',
+                fill: 'column',
               }}
               modules={[Grid]}
             >
@@ -111,46 +111,13 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
                       fallback={fallbackIcon}
                       loadingIcon={loadingIcon}
                       alt={item.icon || ''}
+                      className='swiper-lazy'
                     />
                   </SwiperSlide>
                 );
               })}
             </Swiper>
           </motion.div>
-
-          {/* <motion.div
-            animate={{ x: 0 }}
-            initial={{ x: '100vw' }}
-            transition={{ delay: 0.4 }}
-            className={styles.secondRow}
-          >
-            {filteredDataOdd?.map((item, idx) => {
-              return (
-                <div
-                  key={item.id}
-                  id={item.id?.toString()}
-                  className={classNames(styles.iconHolder, {
-                    [styles.isMaintenance]: item.maintain,
-                  })}
-                  onClick={() => {
-                    // handleGameClick(item);
-                  }}
-                >
-                  {item.maintain && (
-                    <div className='isMaintain'>
-                      <div>正在维修</div>
-                    </div>
-                  )}
-                  <ImgWithFallback
-                    src={item.icon || ''}
-                    fallback={fallbackIcon}
-                    loadingIcon={loadingIcon}
-                    alt={item.icon || ''}
-                  />
-                </div>
-              );
-            })}
-          </motion.div> */}
         </div>
       )}
     </div>
