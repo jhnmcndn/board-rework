@@ -14,7 +14,7 @@ import styles from './index.module.scss';
 
 // const LoginTypesModal = ({ setIsShowUserAuth }) => {
 const LoginTypesModal = () => {
-  const { openAlert, isLoginTypesOpen, closeLoginTypes } = useModalStore();
+  const { openAlert, isLoginOptionsOpen, closeLoginTypes } = useModalStore();
   const { captchaId, actionSwitch } = useAccountStore((state) => state.init);
   const isCaptchaEnabled = actionSwitch === '1' ? true : false;
   const [isCaptchaOpen, setIsCaptchaOpen] = useState(false);
@@ -106,7 +106,7 @@ const LoginTypesModal = () => {
     </ModalLayout>
   );
 
-  if (isLoginTypesOpen) {
+  if (isLoginOptionsOpen) {
     const element = document.getElementById('modal-root') as HTMLDivElement;
     return createPortal(modalContent, element);
   }

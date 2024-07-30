@@ -7,7 +7,7 @@ import Image from 'next/image';
 import styles from './index.module.scss';
 
 const HeaderButtons = () => {
-  const { openLoginTypes } = useModalStore();
+  const { openLoginOptions } = useModalStore();
   const theme = useAccountStore((state) => state.theme);
   const settingImage = require(`@/assets/${theme}/header/setting.png`);
 
@@ -20,7 +20,7 @@ const HeaderButtons = () => {
         height={87}
         onClick={() => {
           // onClickSound('pop')
-          openLoginTypes();
+          openLoginOptions();
         }}
       />
       <Image
