@@ -13,11 +13,12 @@ export type SidebarComponentProps = {
   sidebarItems: string[];
   activeSidebar?: number;
   setActiveSidebar?: Dispatch<SetStateAction<number>>;
+  dispatch?: Function;
 };
 
 export type SidebarComponent = FC<Readonly<SidebarComponentProps>>;
 
-const Sidebar: SidebarComponent = ({ sidebarItems, activeSidebar, setActiveSidebar }) => {
+const Sidebar: SidebarComponent = ({ sidebarItems, activeSidebar, setActiveSidebar, dispatch }) => {
   const pathname = usePathname();
   const isRechargePage = pathname.toLowerCase().includes('recharge');
   const activeTab = useCSStore((state) => state.activeTab);
@@ -30,6 +31,7 @@ const Sidebar: SidebarComponent = ({ sidebarItems, activeSidebar, setActiveSideb
     setWithdrawActiveTab(index);
     setActiveTab(index);
     setActiveSidebar && setActiveSidebar(index || 0);
+    dispatch && dispatch(index);
   };
 
   return (
