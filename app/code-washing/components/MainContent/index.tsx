@@ -16,7 +16,7 @@ const MainContent = () => {
 
   return (
     <div className={styles.washCodePage}>
-      <OtherHeader headerTitle={'洗码'} />
+      <OtherHeader headerTitle={'洗码'} showPurse />
       <div className={styles.wrapper}>
         <Sidebar sidebarItems={list} activeSidebar={activeSidebar} setActiveSidebar={setActiveSidebar} />
         <div className={styles.mainContent} data-theme={theme}>
