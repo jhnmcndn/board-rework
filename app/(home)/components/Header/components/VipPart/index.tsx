@@ -18,7 +18,7 @@ const VipPart = () => {
   return (
     <div className={styles.vipPart}>
       <Link href='/personal-info' className={styles.avatarContainer}>
-        <Image src={images.avatar_placeholder} alt='Default icon' className={styles.avatarPhoto} />
+        <Image src={images.avatarPlaceholder} alt='Default icon' className={styles.avatarPhoto} />
       </Link>
       <div className={styles.userDetailsContainer}>
         <div className={styles.userDetails}>
@@ -28,7 +28,7 @@ const VipPart = () => {
           </div>
           {isLoggedIn && (
             <div className={styles.copyIcon} onClick={() => copyToClipboard(accountInfo.id || '未登录')}>
-              <Image src={images.copy_icon} alt='Copy' width={60} height={60} />
+              <Image src={images.copy} alt='Copy' width={60} height={60} />
             </div>
           )}
         </div>
@@ -48,7 +48,7 @@ const VipPart = () => {
           <div className={styles.btnWrapper}>
             <button className={styles.loginButton}>
               <Image
-                src={images.login_btn}
+                src={images.loginBtn}
                 alt='Login'
                 width={310}
                 height={80}

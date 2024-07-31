@@ -44,7 +44,7 @@ const CoinPurse: CoinPurseComponent = (props) => {
           left,
         }}
       >
-        <Image src={images.coin_icon} alt='Coin' width={96} height={70} className={styles.coin} />
+        <Image src={images.coin} alt='Coin' width={96} height={70} className={styles.coin} />
         {!betLog && (
           <div className={styles.coinInput}>
             <input
@@ -58,7 +58,7 @@ const CoinPurse: CoinPurseComponent = (props) => {
       </div>
       {!noShuffle && (
         <div className={classNames(styles.shuffles, { shuffleSpin: animateSpin })}>
-          <Image src={images.reload_image} alt='Reload' width={70} height={70} />
+          <Image src={images.reload} alt='Reload' width={70} height={70} />
         </div>
       )}
     </>

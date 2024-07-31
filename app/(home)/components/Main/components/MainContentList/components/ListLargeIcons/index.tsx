@@ -87,7 +87,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
           className={styles.rightContent}
         >
           <Image
-            src={images.card_game_back}
+            src={images.cardGameBack}
             width={200}
             height={200}
             onClick={() => {
@@ -152,8 +152,8 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
 
                       <ImgWithFallback
                         src={(activeSideBarItem.type === 3 ? item.cardIcon : item.icon) || ''}
-                        fallback={images.fallback_icon}
-                        loadingIcon={images.loading_icon}
+                        fallback={images.fallback}
+                        loadingIcon={images.loading}
                         alt={item.icon || item.cardIcon || ''}
                       />
                     </SwiperSlide>

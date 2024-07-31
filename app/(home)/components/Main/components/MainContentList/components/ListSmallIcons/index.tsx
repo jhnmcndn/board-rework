@@ -108,8 +108,8 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
                     )}
                     <ImgWithFallback
                       src={item.icon || ''}
-                      fallback={images.fallback_icon}
-                      loadingIcon={images.loading_icon}
+                      fallback={images.fallback}
+                      loadingIcon={images.loading}
                       alt={item.icon || ''}
                       className='swiper-lazy'
                     />

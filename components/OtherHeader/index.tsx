@@ -106,7 +106,7 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
       <div className={styles.otherHeaderContainer}>
         <div className={styles.backBtnContainer}>
           <div onClick={handleBack}>
-            <Image src={images.back_btn} alt='Back' width={72} height={69} className={styles.backBtn} />
+            <Image src={images.backBtn} alt='Back' width={72} height={69} className={styles.backBtn} />
           </div>
         </div>
       </div>
@@ -121,7 +121,7 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
         </div>
         {headerTitle === '充值' && (
           <div className={styles.historyRecordBtn} onClick={handleHistoryRecordBtnClick}>
-            <Image src={images.history_record} alt='History Record' width={38} height={54} className={styles.hrImage} />
+            <Image src={images.historyRecord} alt='History Record' width={38} height={54} className={styles.hrImage} />
             {/* styles.prioRed does not exist in the scss module. Remove if necessary! */}
             <span className={classNames({ [styles.prioRed]: theme === THEME.YELLOW_WHITE })}>充值记录 &gt;</span>
           </div>

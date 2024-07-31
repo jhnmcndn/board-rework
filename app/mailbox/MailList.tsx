@@ -17,7 +17,7 @@ const MailList = () => {
       })
       .map((mail, index) => (
         <div key={index}>
-          <Accordion title={mail.title || ''} content={mail.content || ''} delay={index} img={images.envelope_icon} />
+          <Accordion title={mail.title || ''} content={mail.content || ''} delay={index} img={images.envelope} />
         </div>
       ))
   ) : (

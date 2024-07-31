@@ -12,7 +12,7 @@ const HeaderTitle = () => {
     <div className={styles.headerTitle}>
       {/* @ts-ignore */}
       {serverConfig.server === '8803' ? (
-        <Image src={images.header_logo} alt='Header logo' />
+        <Image src={images.headerLogo} alt='Header logo' />
       ) : (
         <span className={styles.name}>
           {serverConfig.title}

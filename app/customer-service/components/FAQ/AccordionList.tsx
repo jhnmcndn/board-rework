@@ -25,7 +25,7 @@ const AccordionList: AccordionListComponent = ({ faq }) => {
             <Accordion
               title={question.title}
               content={ReactHtmlParser(question.content)}
-              dropdownImg={images.arrow_down}
+              dropdownImg={images.arrowDown}
               delay={index}
             />
           </li>

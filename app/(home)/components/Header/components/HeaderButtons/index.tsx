@@ -10,7 +10,7 @@ const HeaderButtons = () => {
   return (
     <div className={styles.headerButtons}>
       <Image
-        src={images.calendar_image}
+        src={images.calendar}
         alt='Calendar'
         width={99}
         height={87}
@@ -20,7 +20,7 @@ const HeaderButtons = () => {
         }}
       />
       <Image
-        src={images.promote_image}
+        src={images.promote}
         alt='Promote'
         width={110}
         height={110}
@@ -29,7 +29,7 @@ const HeaderButtons = () => {
         // }}
       />
       <Image
-        src={images.task_image}
+        src={images.task}
         alt='Task'
         width={110}
         height={110}
@@ -61,7 +61,7 @@ const HeaderButtons = () => {
         }}
       >
         {/* <img src={`/src/assets/${theme}/header/setting.png`} alt='setting' /> */}
-        <Image src={images.settings_icon} alt='Settings' width={55} height={55} />
+        <Image src={images.settings} alt='Settings' width={55} height={55} />
         <span className={styles.settingText}>设置</span>
       </div>
     </div>

@@ -44,12 +44,12 @@ const MoreModal: MoreModalComponent = ({ setOpenAnnounceModal, setSafeBoxModal, 
             onClickSound('pop');
           }}
         >
-          <Image src={images.megaphone_icon} alt='Megaphone Icon' />
+          <Image src={images.megaphone} alt='Megaphone Icon' />
           <span>公告</span>
         </li>
 
         <li className={styles.more__listItem} onClick={() => (isLoggedIn ? setSafeBoxModal() : openLoginOptions())}>
-          <Image src={images.vault_icon} alt='Vault Icon' />
+          <Image src={images.vault} alt='Vault Icon' />
           <span>保险箱</span>
         </li>
 
@@ -57,7 +57,7 @@ const MoreModal: MoreModalComponent = ({ setOpenAnnounceModal, setSafeBoxModal, 
           className={styles.more__listItem}
           onClick={() => (isLoggedIn ? push('/personal-info') : openLoginOptions())}
         >
-          <Image src={images.user_icon} alt='User Icon' />
+          <Image src={images.user} alt='User Icon' />
           <span>个人信息</span>
         </li>
       </ul>

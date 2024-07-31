@@ -54,14 +54,14 @@ const BottomContent: BottomContentComponent = ({ vipLevel }) => {
           <div className={styles.giftboxWrapper}>
             <Giftbox
               giftboxColor='pink'
-              img={images.vip_adv_jackpot}
+              img={images.vipAdvJackpot}
               info={levelBonusStatus === 1 ? '未领取' : '暂不可领取'}
               title='晋级彩金'
               yenCount={`¥${levelBonus}`}
             />
             <Giftbox
               giftboxColor='blue'
-              img={images.vip_gift}
+              img={images.vipGift}
               info={weekBonusStatus === 1 ? '未领取' : '已领取'}
               title='周礼金'
               yenCount={`¥${weekBonus}`}
