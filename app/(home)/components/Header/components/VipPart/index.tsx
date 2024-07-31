@@ -5,6 +5,7 @@ import loginBtnImage from '@/assets/commons/loginBtn.png';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { copyToClipboard } from '@/utils/helpers';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './index.module.scss';
 
 const VipPart = () => {
@@ -18,9 +19,9 @@ const VipPart = () => {
 
   return (
     <div className={styles.vipPart}>
-      <div className={styles.avatarContainer}>
+      <Link href='/personal-info' className={styles.avatarContainer}>
         <Image src={defaultIcon} alt='Default icon' className={styles.avatarPhoto} />
-      </div>
+      </Link>
       <div className={styles.userDetailsContainer}>
         <div className={styles.userDetails}>
           <div className={styles.userInfo}>
