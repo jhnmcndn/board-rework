@@ -22,19 +22,21 @@ type CombinedGameInfo = RspGameInfo & GameInfoGroup;
 
 const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => {
   const { images } = useImages();
-  const [filteredData, setFilteredData] = useState<CombinedGameInfo[] | undefined>();
   const [data, setData] = useState<CombinedGameInfo[]>([]);
+  const [filteredData, setFilteredData] = useState<CombinedGameInfo[] | undefined>();
   const theme = useAccountStore((state) => state.theme);
-  const activeSideBarItem = useGameStore((state) => state.activeSideBarItem);
-  const gameInfos = useGameStore((state) => state.gameInfos);
-  const setGameInfos = useGameStore((state) => state.setGameInfos);
-  const gameInfoGroup = useGameStore((state) => state.gameInfoGroup);
-  const showPlatform = useGameStore((state) => state.showPlatform);
-  const setShowPlatform = useGameStore((state) => state.setShowPlatform);
-  const activePlatform = useGameStore((state) => state.activePlatform);
-  const setActivePlatform = useGameStore((state) => state.setActivePlatform);
-  const isGamesLoading = useGameStore((state) => state.isGamesLoading);
-  const setIsGamesLoading = useGameStore((state) => state.setIsGamesLoading);
+  const {
+    activeSideBarItem,
+    gameInfos,
+    gameInfoGroup,
+    showPlatform,
+    activePlatform,
+    isGamesLoading,
+    setGameInfos,
+    setShowPlatform,
+    setActivePlatform,
+    setIsGamesLoading,
+  } = useGameStore((state) => state);
 
   useEffect(() => {
     if (!searchFieldData) {

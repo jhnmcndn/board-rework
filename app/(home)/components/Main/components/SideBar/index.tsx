@@ -16,16 +16,18 @@ import styles from './index.module.scss';
 const SideBar = () => {
   const { images } = useImages();
   const containerRef = useRef<HTMLDivElement>(null);
-  const sideBar = useGameStore((state) => state.sideBar);
-  const activeSideBarItem = useGameStore((state) => state.activeSideBarItem);
-  const setActiveSideBarItem = useGameStore((state) => state.setActiveSideBarItem);
-  const setGameInfos = useGameStore((state) => state.setGameInfos);
-  const setGameInfoGroup = useGameStore((state) => state.setGameInfoGroup);
-  const showPlatform = useGameStore((state) => state.showPlatform);
-  const activePlatform = useGameStore((state) => state.activePlatform);
-  const setShowPlatform = useGameStore((state) => state.setShowPlatform);
-  const isGamesLoading = useGameStore((state) => state.isGamesLoading);
-  const setIsGamesLoading = useGameStore((state) => state.setIsGamesLoading);
+  const {
+    sideBar,
+    activeSideBarItem,
+    setActiveSideBarItem,
+    showPlatform,
+    activePlatform,
+    setShowPlatform,
+    isGamesLoading,
+    setIsGamesLoading,
+    setGameInfos,
+    setGameInfoGroup,
+  } = useGameStore((state) => state);
 
   const fetchGameInfoGroup = async (id: number) => {
     setIsGamesLoading(true);

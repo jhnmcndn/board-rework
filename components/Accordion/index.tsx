@@ -23,8 +23,7 @@ export type AccordionComponent = FC<Readonly<AccordionComponentProps>>;
 const Accordion: AccordionComponent = ({ title, content, createdAt, delay, background, id, img, dropdownImg }) => {
   const [expand, setExpand] = useState(false);
   const theme = useAccountStore((state) => state.theme);
-  const messageOnSites = useMessageStore((state) => state.messageOnSites);
-  const setMessageOnSites = useMessageStore((state) => state.setMessageOnSites);
+  const { messageOnSites, setMessageOnSites } = useMessageStore((state) => state);
   const currentMessage = useMemo(() => messageOnSites.find((message) => message.id === id), [id]);
 
   const handleExpand = () => {

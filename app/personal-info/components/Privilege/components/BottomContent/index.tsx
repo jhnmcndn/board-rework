@@ -7,17 +7,12 @@ import useImages from '@/hooks/useImages';
 import { FC, useEffect, useMemo } from 'react';
 import Giftbox from '../Giftbox';
 
-export type BottomContentComponent = FC<
-  Readonly<{
-    vipLevel: number;
-  }>
->;
+export type BottomContentComponent = FC<Readonly<{ vipLevel: number }>>;
 
 const BottomContent: BottomContentComponent = ({ vipLevel }) => {
   const { images } = useImages();
-  const fetchVipGiftInfo = useVipGiftInfoStore((state) => state.fetchVipGiftInfo);
-  const vipGiftInfo = useVipGiftInfoStore((state) => state.vipGiftInfo);
   const accountInfo = useAccountStore((state) => state.accountInfo);
+  const { vipGiftInfo, fetchVipGiftInfo } = useVipGiftInfoStore((state) => state);
 
   useEffect(() => {
     fetchVipGiftInfo();

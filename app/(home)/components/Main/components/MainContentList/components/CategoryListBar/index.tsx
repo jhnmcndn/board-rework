@@ -12,12 +12,9 @@ interface IProps {
 }
 
 const CategoryListBar: FC<IProps> = ({ setActivePlatformId }) => {
-  const theme = useAccountStore((state) => state.theme);
-  const gameInfoGroup = useGameStore((state) => state.gameInfoGroup);
-  const setGameInfos = useGameStore((state) => state.setGameInfos);
-  const activeSideBarItem = useGameStore((state) => state.activeSideBarItem);
-  const setIsGamesLoading = useGameStore((state) => state.setIsGamesLoading);
   const [activeTab, setActiveTab] = useState(0);
+  const theme = useAccountStore((state) => state.theme);
+  const { gameInfoGroup, activeSideBarItem, setGameInfos, setIsGamesLoading } = useGameStore((state) => state);
 
   useEffect(() => {
     var item = document.getElementById('cateListWrapper') as HTMLDivElement;

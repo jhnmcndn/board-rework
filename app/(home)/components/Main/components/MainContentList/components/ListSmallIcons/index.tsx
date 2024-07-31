@@ -20,9 +20,7 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
   const rowsContainerRef = useRef<HTMLDivElement | null>(null);
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
   const [filteredData, setFilteredData] = useState<RspGameInfo[] | undefined>();
-  const activeSideBarItem = useGameStore((state) => state.activeSideBarItem);
-  const gameInfos = useGameStore((state) => state.gameInfos);
-  const isGamesLoading = useGameStore((state) => state.isGamesLoading);
+  const { gameInfos, activeSideBarItem, isGamesLoading } = useGameStore((state) => state);
 
   useEffect(() => {
     const timeout = setTimeout(() => {

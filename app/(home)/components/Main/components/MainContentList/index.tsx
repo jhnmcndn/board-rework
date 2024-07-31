@@ -9,17 +9,15 @@ import ListSmallIcons from './components/ListSmallIcons';
 import styles from './index.module.scss';
 
 const MainContentList = () => {
-  const activeSideBarItem = useGameStore((state) => state.activeSideBarItem);
-  const gameInfoGroup = useGameStore((state) => state.gameInfoGroup);
-  const sideBar = useGameStore((state) => state.sideBar);
-  const isGamesLoading = useGameStore((state) => state.isGamesLoading);
+  const { sideBar, activeSideBarItem, gameInfoGroup, isGamesLoading } = useGameStore((state) => state);
   const [activePlatformId, setActivePlatformId] = useState(-1);
   const [searchFieldData, setSearchFieldData] = useState('');
   const [delayRender, setDelayRender] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
-      setDelayRender(false); // This is code to prevent laggy first render animation of home page
+      // This is code to prevent laggy first render animation of home page
+      setDelayRender(false);
     }, 500);
   }, []);
 
