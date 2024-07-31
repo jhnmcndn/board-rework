@@ -18,7 +18,10 @@ export default function WithdrawLayout({
     <div className={styles.withdrawPageContainer}>
       {isWithdrawSuccessModalOpen && <SuccessWithdrawModal />}
       <OtherHeader headerTitle='提现'/>
-      <Sidebar sidebarItems={list}/>
+      <div className={styles.withdrawPageBody}>
+        <Sidebar sidebarItems={list}/>
+        {children}
+      </div>
     </div>
   );
 }

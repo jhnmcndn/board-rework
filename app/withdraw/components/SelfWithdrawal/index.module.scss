@@ -1,0 +1,156 @@
+.selfWithdrawalWrapper {
+  @include flex-xy(flex-start, center);
+  flex-direction: column;
+  gap: 0.1rem;
+  overflow-y: auto;
+  padding: 0.1rem;
+  width: 100%;
+  height: 100%;
+  .panel {
+    @include flex-xy(flex-start, center);
+    flex-direction: column;
+    border-radius: 0.08rem;
+    width: 100%;
+    overflow: hidden;
+    background: var(--withdrawal-panel-bg);
+    &:last-child {
+      border-radius: 0.03rem;
+    }
+    .headerWrapper {
+      width: 100%;
+      height: 0.3rem;
+      background: var(--withdrawal-header-panel-bg);
+      border-bottom: 0.0001rem solid var(--withdrawal-head-panel-borderBot);
+      span {
+        @include flex-xy;
+        background: var(--withdrawal-head-title-bg);
+        color: var(--withdrawal-head-title);
+        font-size: 0.13rem;
+        width: 0.9rem;
+        height: 100%;
+      }
+    }
+    .inputField {
+      @include flex-xy;
+      flex-direction: column;
+      width: 100%;
+      padding: 0.1rem;
+      gap: 0.1rem;
+      input {
+        caret-color: var(--withdrawSelf-text-input);
+        height: 0.3rem;
+        padding: 0.1rem;
+        font-size: 0.1rem;
+        width: 100%;
+        color: var(--withdrawSelf-text-input);
+        background: var(--withdrawSelf-bg-input);
+        border: none;
+        border-radius: 0.04rem;
+      }
+      .userBalWrapper {
+        width: 100%;
+        span {
+          display: flex;
+          color: var(--withdrawSelf-user-balance);
+          font-size: 0.1rem;
+        }
+      }
+    }
+    &.secondPanel {
+      gap: 0.1rem;
+      .selectBindCardList {
+        width: 100%;
+        .bankCard {
+          @include flex-xy(space-between, center);
+          font-size: 0.15rem;
+          width: 100%;
+          padding: 0.1rem;
+          &.selectedCard {
+            background: rgb(44, 44, 44);
+          }
+          .bankDetails {
+            @include flex-xy;
+            gap: 0.1rem;
+            font-size: 0.15rem;
+            img {
+              width: 0.2rem;
+              height: 0.2rem;
+            }
+            .toggle {
+              width: 0.2rem;
+              height: 0.2rem;
+              border-radius: 100%;
+              background: #1f1e1b;
+              border: #dec18c 0.004rem solid;
+              &.toggleSelected {
+                background: linear-gradient(to top, #ff9900, #fee78a);
+              }
+            }
+          }
+        }
+      }
+      .addCardsCont {
+        margin: 0.2rem 0;
+        display: flex;
+        gap: 0.3rem;
+        .addCard {
+          @include flex-xy;
+          gap: 0.1rem;
+          margin-bottom: 0.1rem;
+          img {
+            width: 0.2rem;
+            height: 0.2rem;
+          }
+          span {
+            font-size: 0.15rem;
+            color: var(--withdrawSelf-text-add);
+          }
+        }
+      }
+    }
+    &.thirdPanel {
+      .withdrawButtonWrapper {
+        @include flex-xy(space-between, center);
+        width: 100%;
+        padding: 0.1rem;
+        .left {
+          display: flex;
+          gap: 0.2rem;
+          .details {
+            display: flex;
+            border-radius: 0.04rem;
+            overflow: hidden;
+            > span {
+              @include flex-xy;
+              width: 0.8rem;
+              height: 0.26rem;
+              font-size: 0.1rem;
+            }
+            .title {
+              background: var(--withdrawal-head-title-bg);
+              color: var(--withdrawal-head-title);
+            }
+            .hardCodeNaDigit {
+              background: var(--withdrawSelf-bg-input);
+              color: var(--withdrawSelf-text-input);
+            }
+          }
+        }
+        .withdrawButton {
+          @include flex-xy;
+          background: url(~/assets/commons/button.png) center / contain no-repeat;
+          background-size: contain;
+          height: 0.4rem;
+          width: 1.2rem;
+          span {
+            position: relative;
+            top: -0.01rem;
+            font-size: 0.12rem;
+            font-weight: 700;
+            color: #511a00;
+          }
+        }
+      }
+    }
+  }
+}
