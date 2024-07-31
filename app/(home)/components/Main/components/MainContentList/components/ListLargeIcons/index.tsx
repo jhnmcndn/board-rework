@@ -1,10 +1,9 @@
 import { getGameInfos } from '@/api/game';
-import fallbackIcon from '@/assets/commons/fallBacks/onErrorImg.png';
-import loadingIcon from '@/assets/commons/fallBacks/squareLoad2.gif';
 import ImgWithFallback from '@/components/ImgWithFallback';
 import NoData from '@/components/NoData';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
+import useImages from '@/hooks/useImages';
 import { GameInfoGroup, RspGameInfo } from '@/types/app';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
@@ -22,6 +21,7 @@ interface IProps {
 type CombinedGameInfo = RspGameInfo & GameInfoGroup;
 
 const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => {
+  const { images } = useImages();
   const [filteredData, setFilteredData] = useState<CombinedGameInfo[] | undefined>();
   const [data, setData] = useState<CombinedGameInfo[]>([]);
   const theme = useAccountStore((state) => state.theme);
@@ -87,7 +87,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
           className={styles.rightContent}
         >
           <Image
-            src={require(`@/assets/${theme}/main/cardGameBack.png`)}
+            src={images.card_game_back}
             width={200}
             height={200}
             onClick={() => {
@@ -152,8 +152,8 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
 
                       <ImgWithFallback
                         src={(activeSideBarItem.type === 3 ? item.cardIcon : item.icon) || ''}
-                        fallback={fallbackIcon}
-                        loadingIcon={loadingIcon}
+                        fallback={images.fallback_icon}
+                        loadingIcon={images.loading_icon}
                         alt={item.icon || item.cardIcon || ''}
                       />
                     </SwiperSlide>

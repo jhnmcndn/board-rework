@@ -6,14 +6,15 @@ import { createPortal } from 'react-dom';
 // import { loginDevice } from '@/api/game/gamelist';
 // import NECaptchaComponent from 'src/commons/Captcha/NECaptchaComponent';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
 import { getDeviceInfo } from '@/utils/helpers';
-import { images } from '@/utils/resources';
 import ModalLayout from '../ModalLayout';
 import styles from './index.module.scss';
 
 // const LoginTypesModal = ({ setIsShowUserAuth }) => {
 const LoginTypesModal = () => {
+  const { images } = useImages();
   const { openAlert, isLoginOptionsOpen, closeLoginTypes } = useModalStore();
   const { captchaId, actionSwitch } = useAccountStore((state) => state.init);
   const isCaptchaEnabled = actionSwitch === '1' ? true : false;

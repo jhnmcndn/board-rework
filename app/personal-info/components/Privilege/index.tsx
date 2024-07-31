@@ -1,9 +1,9 @@
 'use client';
 
-import BottomContent from '@/app/personal-info/components/Privilege/components/BottomContent';
-import TopContent from '@/app/personal-info/components/Privilege/components/TopContent';
 import styles from '@/app/personal-info/components/Privilege/index.module.scss';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import BottomContent from './components/BottomContent';
+import TopContent from './components/TopContent';
 
 const Privilege = () => {
   const theme = useAccountStore((state) => state.theme);
