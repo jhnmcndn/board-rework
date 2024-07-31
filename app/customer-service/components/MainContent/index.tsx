@@ -19,8 +19,7 @@ export type MainContentComponent = FC<Readonly<MainContentComponentProps>>;
 
 const MainContent: MainContentComponent = ({ hasCSData, csData, faq }) => {
   const theme = useAccountStore((state) => state.theme);
-  const activeTab = useCSStore((state) => state.activeTab);
-  const setCS = useCSStore((state) => state.setCS);
+  const { activeTab, setCS } = useCSStore((state) => state);
 
   useEffect(() => {
     if (hasCSData) {

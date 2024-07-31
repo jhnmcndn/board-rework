@@ -22,8 +22,7 @@ const MoreModal: MoreModalComponent = ({ setOpenAnnounceModal, setSafeBoxModal, 
   const { push } = useRouter();
   const { images } = useImages();
   const { openLoginOptions } = useModalStore();
-  const theme = useAccountStore((state) => state.theme);
-  const accountInfo = useAccountStore((state) => state.accountInfo);
+  const { theme, accountInfo } = useAccountStore((state) => state);
   const isLoggedIn = !!accountInfo.id;
   const moreOptionsRef = useRef<HTMLDivElement>(null);
   const clickOutSide = useClickOutSide(moreOptionsRef);

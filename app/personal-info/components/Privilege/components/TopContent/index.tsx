@@ -18,8 +18,8 @@ export type TopContentComponent = FC<
 
 const TopContent: TopContentComponent = ({ vipLevel, nextVipLevel, progressBar, nextLevelIntegralToFixed }) => {
   const { images } = useImages();
-  const theme = useAccountStore((state) => state.theme);
   const crownImg = getCrownImageByTheme(theme);
+  const theme = useAccountStore((state) => state.theme);
 
   return (
     <div className={styles.topContent}>

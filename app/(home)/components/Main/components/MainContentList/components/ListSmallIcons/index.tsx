@@ -23,9 +23,7 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
   const [filteredData, setFilteredData] = useState<RspGameInfo[] | undefined>();
   const [filteredDataEven, setFilteredDataEven] = useState<RspGameInfo[]>([]);
   const [filteredDataOdd, setFilteredDataOdd] = useState<RspGameInfo[]>([]);
-  const activeSideBarItem = useGameStore((state) => state.activeSideBarItem);
-  const gameInfos = useGameStore((state) => state.gameInfos);
-  const isGamesLoading = useGameStore((state) => state.isGamesLoading);
+  const { gameInfos, activeSideBarItem, isGamesLoading } = useGameStore((state) => state);
 
   useEffect(() => {
     if (!searchFieldData) {

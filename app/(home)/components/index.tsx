@@ -40,16 +40,11 @@ export const HomePage: HomePageComponent = ({
   getBoxPassIsOpen,
   bindCardList,
 }) => {
-  const theme = useAccountStore((state) => state.theme);
-  const setInit = useAccountStore((state) => state.setInit);
-  const setAnnounceText = useGameStore((state) => state.setAnnounceText);
-  const setSideBar = useGameStore((state) => state.setSideBar);
-  const setActiveSideBarItem = useGameStore((state) => state.setActiveSideBarItem);
-  const activeSideBarItem = useGameStore((state) => state.activeSideBarItem);
-  const setGameInfos = useGameStore((state) => state.setGameInfos);
   const setMessageOnSites = useMessageStore((state) => state.setMessageOnSites);
-  const setBoxPassIsSet = useAccountStore((state) => state.setBoxPassIsSet);
-  const setBindCardList = useAccountStore((state) => state.setBindCardList);
+  const { theme, setInit, setBoxPassIsSet, setBindCardList } = useAccountStore((state) => state);
+  const { activeSideBarItem, setGameInfos, setAnnounceText, setSideBar, setActiveSideBarItem } = useGameStore(
+    (state) => state,
+  );
 
   useEffect(() => {
     if (init && !('message' in init)) {
