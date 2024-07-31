@@ -5,6 +5,8 @@
   border-radius: 0.1rem;
   height: 3.48rem;
   width: 5.71rem;
+  max-height: 75vh;
+  max-width: calc(75vh * 1.64);
   margin: auto;
 
   &__close {
