@@ -1,0 +1,49 @@
+.alertContainer_wrapper {
+  @include flex-xy;
+  position: fixed;
+  bottom: 0.5rem;
+  left: 60.5%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  width: auto;
+  height: auto;
+  .alertTextContainer {
+    display: flex;
+    max-width: 2.8rem;
+    min-height: 0.33rem;
+    max-height: 0.45rem;
+    z-index: 20 !important;
+    text-align: center;
+    padding: 0.05rem 0.1rem;
+    border-radius: 0.1rem;
+    font-size: 0.1rem;
+    background: #fff;
+    color: rgba(0, 0, 0, 0.5647058824);
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .alertIconImageCont {
+      @include flex-xy;
+      width: 0.22rem;
+      padding: 0.01rem;
+      height: 0.22rem;
+      background: white;
+      .alertIcon {
+        height: 0.15rem;
+        width: 0.15rem;
+        background: red;
+        border-radius: 0.2rem;
+      }
+    }
+    .alertMess {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: -webkit-linear-gradient(#7a7a7a, rgb(0, 0, 0));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+}

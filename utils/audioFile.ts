@@ -12,7 +12,6 @@ import lotteryAudio from '@/assets/music/lotteryAudio.mp3';
 import messageAudio from '@/assets/music/messageAudio.mp3';
 import musicAudio from '@/assets/music/music.mp3';
 import webviewAudio from '@/assets/music/webviewAudio.mp3';
-import onClickPopAudio from '@/assets/music/onClickPopAudio.mp3';
 
 import promotionAudio from '@/assets/music/promotionAudio.mp3';
 import rechargeAudio from '@/assets/music/rechargeAudio.mp3';
@@ -83,9 +82,6 @@ export const onClickSound = (type: AudioType) => {
       break;
     case 'music':
       audioFile = musicAudio;
-      break;
-    case 'onClickPop':
-      audioFile = onClickPopAudio;
       break;
     case 'promotion':
       audioFile = promotionAudio;
