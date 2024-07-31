@@ -164,3 +164,16 @@ export type MessageCommonProblems = {
   title: string;
   content: string;
 };
+
+export type VIPGiftInfo = {
+  vipSetList?: VIPSetList[];
+  levelBonusStatus?: number;
+  weekBonusStatus?: number;
+};
+
+export type VIPSetList = {
+  level?: number;
+  levelBonus?: number;
+  weekBonus?: number;
+  bcode?: number;
+};

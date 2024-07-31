@@ -7,10 +7,10 @@ import {
   MessageHomeNotice,
   MessageOnSites,
   RootResponse,
+  VIPGiftInfo,
 } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import { CustomerServiceFn } from '@/types/fns';
-import { getToken } from '@/utils/getToken';
 
 export const getAccountNow = async () => {
   const data = await request<RootResponse<AccountNow>>({
@@ -27,8 +27,8 @@ export const init = async () => {
     endpoint: API_ENDPOINT.INIT,
     tags: API_ENDPOINT.INIT,
     body: {
-      token: getToken(),
-      id: getToken(),
+      token: 'uEd2844af8c6220e11faa797b8bab0cc70',
+      id: 'uEd2844af8c6220e11faa797b8bab0cc70',
     },
   });
   return data.data;
@@ -59,7 +59,7 @@ export const boxPassIsOpen = async () => {
     endpoint: API_ENDPOINT.BOX_PASS_IS_OPEN,
     tags: API_ENDPOINT.BOX_PASS_IS_OPEN,
     otherHeaders: {
-      token: getToken(),
+      token: 'uEd2844af8c6220e11faa797b8bab0cc70',
     },
   });
   return data.data;
@@ -84,6 +84,20 @@ export const getMessageCommonProblems = async () => {
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.MESSAGE_COMMON_PROBLEMS,
     tags: API_ENDPOINT.MESSAGE_COMMON_PROBLEMS,
+  });
+  return data.data;
+};
+
+export const getVipGiftInfo = async () => {
+  const data = await request<RootResponse<VIPGiftInfo>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.VIP_GIFT_INFO,
+    tags: API_ENDPOINT.VIP_GIFT_INFO,
+    otherHeaders: {
+      // This token should be from the initial request headers.
+      // Remove after creating the auth logic!
+      token: 'Zrf5e58ed5129cd8fc547db6c3097483e3',
+    },
   });
   return data.data;
 };
