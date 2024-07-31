@@ -29,6 +29,8 @@
         img {
           cursor: pointer;
           border-radius: 0.1rem;
+          object-fit: cover;
+          object-position: center;
         }
       }
 
