@@ -7,7 +7,7 @@ import { Fragment } from 'react';
 const PersonalInfo = () => {
   return (
     <Fragment>
-      <OtherHeader headerTitle='个人中心' />
+      <OtherHeader headerTitle='个人中心' showPurse />
       <main className={styles.container}>
         <PersonalInfoSidebar />
         <section className={styles.wrapper}>
