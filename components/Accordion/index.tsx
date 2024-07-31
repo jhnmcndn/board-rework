@@ -1,11 +1,11 @@
 'use client';
 
-import styles from '@/components/Accordion/index.module.scss';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { FC, ReactElement, useMemo, useState } from 'react';
 import { useMessageStore } from '../Providers/MessageStoreProvider';
+import styles from './index.module.scss';
 
 export type AccordionComponentProps = {
   title: string;
@@ -21,25 +21,16 @@ export type AccordionComponentProps = {
 export type AccordionComponent = FC<Readonly<AccordionComponentProps>>;
 
 const Accordion: AccordionComponent = ({ title, content, createdAt, delay, background, id, img, dropdownImg }) => {
+  const [expand, setExpand] = useState(false);
   const theme = useAccountStore((state) => state.theme);
   const messageOnSites = useMessageStore((state) => state.messageOnSites);
   const setMessageOnSites = useMessageStore((state) => state.setMessageOnSites);
-  const [expand, setExpand] = useState(false);
   const currentMessage = useMemo(() => messageOnSites.find((message) => message.id === id), [id]);
 
   const handleExpand = () => {
     setExpand((prev) => !prev);
     if (id && messageOnSites.length > 0) {
-      setMessageOnSites(
-        messageOnSites.map((mail) =>
-          mail.id === id
-            ? {
-                ...mail,
-                isRead: true,
-              }
-            : mail,
-        ),
-      );
+      setMessageOnSites(messageOnSites.map((mail) => (mail.id === id ? { ...mail, isRead: true } : mail)));
     }
   };
 

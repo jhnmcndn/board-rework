@@ -2,6 +2,7 @@
 
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useClickOutSide from '@/hooks/useClickOutside';
+import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
 import { onClickSound } from '@/utils/audioFile';
 import Image from 'next/image';
@@ -19,16 +20,13 @@ type MoreModalComponent = FC<Readonly<MoreModalComponentProps>>;
 
 const MoreModal: MoreModalComponent = ({ setOpenAnnounceModal, setSafeBoxModal, setShowMore }) => {
   const { push } = useRouter();
+  const { images } = useImages();
   const { openLoginOptions } = useModalStore();
   const theme = useAccountStore((state) => state.theme);
   const accountInfo = useAccountStore((state) => state.accountInfo);
   const isLoggedIn = !!accountInfo.id;
   const moreOptionsRef = useRef<HTMLDivElement>(null);
   const clickOutSide = useClickOutSide(moreOptionsRef);
-
-  const megaphoneIcon = require(`@/assets/${theme}/footer/megaphone.png`);
-  const vaultIcon = require(`@/assets/${theme}/footer/vault.png`);
-  const userIcon = require(`@/assets/${theme}/footer/user.png`);
 
   useEffect(() => {
     if (clickOutSide) {
@@ -46,12 +44,12 @@ const MoreModal: MoreModalComponent = ({ setOpenAnnounceModal, setSafeBoxModal, 
             onClickSound('pop');
           }}
         >
-          <Image src={megaphoneIcon} alt='Megaphone Icon' />
+          <Image src={images.megaphone_icon} alt='Megaphone Icon' />
           <span>公告</span>
         </li>
 
         <li className={styles.more__listItem} onClick={() => (isLoggedIn ? setSafeBoxModal() : openLoginOptions())}>
-          <Image src={vaultIcon} alt='Vault Icon' />
+          <Image src={images.vault_icon} alt='Vault Icon' />
           <span>保险箱</span>
         </li>
 
@@ -59,7 +57,7 @@ const MoreModal: MoreModalComponent = ({ setOpenAnnounceModal, setSafeBoxModal, 
           className={styles.more__listItem}
           onClick={() => (isLoggedIn ? push('/personal-info') : openLoginOptions())}
         >
-          <Image src={userIcon} alt='User Icon' />
+          <Image src={images.user_icon} alt='User Icon' />
           <span>个人信息</span>
         </li>
       </ul>

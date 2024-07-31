@@ -1,20 +1,16 @@
-import calendarImage from '@/assets/blackGold/header/calendar.png';
-import promoteImage from '@/assets/blackGold/header/promote.png';
-import taskImage from '@/assets/blackGold/header/task.png';
-import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
 import Image from 'next/image';
 import styles from './index.module.scss';
 
 const HeaderButtons = () => {
+  const { images } = useImages();
   const { openLoginOptions } = useModalStore();
-  const theme = useAccountStore((state) => state.theme);
-  const settingImage = require(`@/assets/${theme}/header/setting.png`);
 
   return (
     <div className={styles.headerButtons}>
       <Image
-        src={calendarImage}
+        src={images.calendar_image}
         alt='Calendar'
         width={99}
         height={87}
@@ -24,7 +20,7 @@ const HeaderButtons = () => {
         }}
       />
       <Image
-        src={promoteImage}
+        src={images.promote_image}
         alt='Promote'
         width={110}
         height={110}
@@ -33,7 +29,7 @@ const HeaderButtons = () => {
         // }}
       />
       <Image
-        src={taskImage}
+        src={images.task_image}
         alt='Task'
         width={110}
         height={110}
@@ -65,7 +61,7 @@ const HeaderButtons = () => {
         }}
       >
         {/* <img src={`/src/assets/${theme}/header/setting.png`} alt='setting' /> */}
-        <Image src={settingImage} alt='Settings' width={55} height={55} />
+        <Image src={images.settings_icon} alt='Settings' width={55} height={55} />
         <span className={styles.settingText}>设置</span>
       </div>
     </div>

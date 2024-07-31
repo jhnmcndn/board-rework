@@ -3,6 +3,7 @@
 import CoinPurse from '@/components/CoinPurse';
 import styles from '@/components/OtherHeader/index.module.scss';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import useImages from '@/hooks/useImages';
 import { THEME } from '@/types/enums';
 import { onClickSound } from '@/utils/audioFile';
 import classNames from 'classnames';
@@ -20,20 +21,19 @@ export type OtherHeaderProps = {
 export type OtherHeaderComponent = FC<Readonly<OtherHeaderProps>>;
 
 const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }) => {
-  const theme = useAccountStore((state) => state.theme);
-  const accountBalance = useAccountStore((state) => state.accountNow.balance);
-  const pathname = usePathname();
   const router = useRouter();
-  const [isDraggable, setIsDraggable] = useState(false);
+  const pathname = usePathname();
+  const { images } = useImages();
   const [started, setStarted] = useState(false);
   const [hasData, setHasData] = useState(false);
+  const [isDraggable, setIsDraggable] = useState(false);
+  const theme = useAccountStore((state) => state.theme);
+  const accountBalance = useAccountStore((state) => state.accountNow.balance);
   const isRechargeHistoryPage = pathname.toLowerCase().includes('recharge-history');
   const isRechargePage = pathname.toLowerCase().includes('recharge');
   const isWebviewPage = pathname.toLowerCase().includes('webview');
   const isSharePage = pathname.toLowerCase().includes('share');
   const isGamePage = pathname.toLowerCase().includes('games');
-  const backBtnImg = require(`@/assets/${theme}/header/backBtn.png`);
-  const historyRecordImg = require(`@/assets/${theme}/header/historyRecord.png`);
 
   // NOTE: Modify this line after creating the music store
   // const turnBgMusicOn = useMusicStore((state) => state.turnBgMusicOn)
@@ -106,7 +106,7 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
       <div className={styles.otherHeaderContainer}>
         <div className={styles.backBtnContainer}>
           <div onClick={handleBack}>
-            <Image src={backBtnImg} alt='Back' width={72} height={69} className={styles.backBtn} />
+            <Image src={images.back_btn} alt='Back' width={72} height={69} className={styles.backBtn} />
           </div>
         </div>
       </div>
@@ -121,7 +121,7 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
         </div>
         {headerTitle === '充值' && (
           <div className={styles.historyRecordBtn} onClick={handleHistoryRecordBtnClick}>
-            <Image src={historyRecordImg} alt='History Record' width={38} height={54} className={styles.hrImage} />
+            <Image src={images.history_record} alt='History Record' width={38} height={54} className={styles.hrImage} />
             {/* styles.prioRed does not exist in the scss module. Remove if necessary! */}
             <span className={classNames({ [styles.prioRed]: theme === THEME.YELLOW_WHITE })}>充值记录 &gt;</span>
           </div>

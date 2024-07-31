@@ -2,9 +2,8 @@
 
 import { getGameInfoGroup, getGameInfos } from '@/api/game';
 import { refetch } from '@/api/refetch';
-import blackGoldTitle from '@/assets/blackGold/sidebar/sidebarTitle.png';
-import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
+import useImages from '@/hooks/useImages';
 import { RspGameType } from '@/types/app';
 import { API_ENDPOINT } from '@/types/enums';
 import classNames from 'classnames';
@@ -15,9 +14,9 @@ import PullToRefresh from 'react-simple-pull-to-refresh';
 import styles from './index.module.scss';
 
 const SideBar = () => {
+  const { images } = useImages();
   const containerRef = useRef<HTMLDivElement>(null);
   const sideBar = useGameStore((state) => state.sideBar);
-  const theme = useAccountStore((state) => state.theme);
   const activeSideBarItem = useGameStore((state) => state.activeSideBarItem);
   const setActiveSideBarItem = useGameStore((state) => state.setActiveSideBarItem);
   const setGameInfos = useGameStore((state) => state.setGameInfos);
@@ -74,16 +73,14 @@ const SideBar = () => {
       className={styles.sidebarWrapper}
     >
       <div className={styles.title}>
-        <Image src={blackGoldTitle} alt='' />
+        <Image src={images.black_gold_title} alt='' />
       </div>
 
       <div className={styles.list}>
         <PullToRefresh onRefresh={handleRefresh}>
           <div ref={containerRef} className={styles.sidebarSwiper}>
             {sideBar.map((item, index) => {
-              if (item.id === 6) {
-                return null;
-              }
+              if (item.id === 6) return null;
 
               return (
                 <div
@@ -93,13 +90,7 @@ const SideBar = () => {
                   })}
                   onClick={() => handleOnClick(item)}
                 >
-                  <Image
-                    height={1}
-                    width={434}
-                    className={styles.divider}
-                    src={require(`@/assets/${theme}/sidebar/divider.png`)}
-                    alt='divider'
-                  />
+                  <Image height={1} width={434} className={styles.divider} src={images.divider} alt='divider' />
                   <div
                     className={classNames(styles.sideBarItem, {
                       [styles.sidebarItemActive]: item.id === activeSideBarItem.id,
@@ -110,13 +101,7 @@ const SideBar = () => {
                   </div>
 
                   {index === sideBar.length - 1 && (
-                    <Image
-                      height={1}
-                      width={434}
-                      className={styles.divider}
-                      src={require(`@/assets/${theme}/sidebar/divider.png`)}
-                      alt='divider'
-                    />
+                    <Image height={1} width={434} className={styles.divider} src={images.divider} alt='divider' />
                   )}
                 </div>
               );

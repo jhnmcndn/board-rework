@@ -1,7 +1,7 @@
 'use client';
 
-import coinIcon from '@/assets/blackGold/header/coin.png';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import useImages from '@/hooks/useImages';
 import classNames from 'classnames';
 import Image from 'next/image';
 import { CSSProperties, FC, useEffect, useState } from 'react';
@@ -20,11 +20,10 @@ export type CoinPurseComponent = FC<Readonly<CoinPurseProps>>;
 
 const CoinPurse: CoinPurseComponent = (props) => {
   const { position, top, left, iColor, betLog, inputBg, noShuffle } = props;
+  const { images } = useImages();
   const userBalance = useAccountStore((state) => state.accountNow.balance);
   const userToken = useAccountStore((state) => state.accountInfo.token);
-  const theme = useAccountStore((state) => state.theme);
   const [animateSpin, setAnimateSpin] = useState(false);
-  const reloadImage = require(`@/assets/${theme}/header/reload.png`);
   const isLoggedIn = userToken !== undefined;
 
   useEffect(() => {
@@ -45,7 +44,7 @@ const CoinPurse: CoinPurseComponent = (props) => {
           left,
         }}
       >
-        <Image src={coinIcon} alt='Coin icon' width={96} height={70} className={styles.coin} />
+        <Image src={images.coin_icon} alt='Coin' width={96} height={70} className={styles.coin} />
         {!betLog && (
           <div className={styles.coinInput}>
             <input
@@ -59,7 +58,7 @@ const CoinPurse: CoinPurseComponent = (props) => {
       </div>
       {!noShuffle && (
         <div className={classNames(styles.shuffles, { shuffleSpin: animateSpin })}>
-          <Image src={reloadImage} alt='Reload' width={70} height={70} />
+          <Image src={images.reload_image} alt='Reload' width={70} height={70} />
         </div>
       )}
     </>

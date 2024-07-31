@@ -2,13 +2,12 @@
 
 import Accordion from '@/components/Accordion';
 import NoData from '@/components/NoData';
-import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useMessageStore } from '@/components/Providers/MessageStoreProvider';
+import useImages from '@/hooks/useImages';
 
 const MailList = () => {
+  const { images } = useImages();
   const messageOnSites = useMessageStore((state) => state.messageOnSites);
-  const theme = useAccountStore((state) => state.theme);
-  const envelopeIcon = require(`@/assets/${theme}/fragments/envelope.png`);
 
   return messageOnSites.length > 0 ? (
     messageOnSites
@@ -18,7 +17,7 @@ const MailList = () => {
       })
       .map((mail, index) => (
         <div key={index}>
-          <Accordion title={mail.title || ''} content={mail.content || ''} delay={index} img={envelopeIcon} />
+          <Accordion title={mail.title || ''} content={mail.content || ''} delay={index} img={images.envelope_icon} />
         </div>
       ))
   ) : (

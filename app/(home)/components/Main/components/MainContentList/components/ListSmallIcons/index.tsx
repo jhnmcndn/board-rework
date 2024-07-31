@@ -1,8 +1,7 @@
-import fallbackIcon from '@/assets/commons/fallBacks/onErrorImg.png';
-import loadingIcon from '@/assets/commons/fallBacks/squareLoad2.gif';
 import ImgWithFallback from '@/components/ImgWithFallback';
 import NoData from '@/components/NoData';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
+import useImages from '@/hooks/useImages';
 import { RspGameInfo } from '@/types/app';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
@@ -19,6 +18,7 @@ interface IProps {
 }
 
 const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => {
+  const { images } = useImages();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [filteredData, setFilteredData] = useState<RspGameInfo[] | undefined>();
   const [filteredDataEven, setFilteredDataEven] = useState<RspGameInfo[]>([]);
@@ -108,8 +108,8 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
                     )}
                     <ImgWithFallback
                       src={item.icon || ''}
-                      fallback={fallbackIcon}
-                      loadingIcon={loadingIcon}
+                      fallback={images.fallback_icon}
+                      loadingIcon={images.loading_icon}
                       alt={item.icon || ''}
                       className='swiper-lazy'
                     />

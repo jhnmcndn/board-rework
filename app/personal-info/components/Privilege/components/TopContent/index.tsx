@@ -3,6 +3,7 @@
 import styles from '@/app/personal-info/components/Privilege/index.module.scss';
 import { getCrownImageByTheme } from '@/app/personal-info/utils/getCrownImageByTheme';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import useImages from '@/hooks/useImages';
 import Image from 'next/image';
 import { FC } from 'react';
 
@@ -16,13 +17,9 @@ export type TopContentComponent = FC<
 >;
 
 const TopContent: TopContentComponent = ({ vipLevel, nextVipLevel, progressBar, nextLevelIntegralToFixed }) => {
+  const { images } = useImages();
   const theme = useAccountStore((state) => state.theme);
-
-  // Assets
   const crownImg = getCrownImageByTheme(theme);
-  const vipBadgeImg = require('@/assets/commons/vipBadge.png');
-  const currentVipLevelImg = require(`@/assets/commons/vipLevels/vip${vipLevel}.png`);
-  const nextVipLevelImg = require(`@/assets/commons/vipLevels/vip${nextVipLevel}.png`);
 
   return (
     <div className={styles.topContent}>
@@ -33,19 +30,19 @@ const TopContent: TopContentComponent = ({ vipLevel, nextVipLevel, progressBar, 
         </div>
         <div className={styles.vip}>
           <div className={styles.badge}>
-            <Image src={vipBadgeImg} alt='VIP Badge' />
+            <Image src={images.vip_badge} alt='VIP Badge' />
           </div>
           <div className={styles.progressDetails}>
             <span className={styles.level}>当前会员等级: VIP {vipLevel}</span>
             <div className={styles.progress}>
               <div className={styles.currentVipLevel}>
-                <Image src={currentVipLevelImg} alt='Current VIP Level' />
+                <Image src={images.vip_level} alt='Current VIP Level' />
               </div>
               <div className={styles.progressBarWrapper}>
                 <div className={styles.progressBar} style={{ width: `${progressBar}%` }} />
               </div>
               <div className={styles.nextVipLevel}>
-                <Image src={nextVipLevelImg} alt='Next VIP Level' />
+                <Image src={images.vip_next_level} alt='Next VIP Level' />
               </div>
             </div>
             <span className={styles.tooltip}>

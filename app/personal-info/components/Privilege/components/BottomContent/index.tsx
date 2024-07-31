@@ -3,6 +3,7 @@
 import styles from '@/app/personal-info/components/Privilege/index.module.scss';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useVipGiftInfoStore } from '@/components/Providers/VipGiftInfoStoreProvider';
+import useImages from '@/hooks/useImages';
 import { FC, useEffect, useMemo } from 'react';
 import Giftbox from '../Giftbox';
 
@@ -13,6 +14,7 @@ export type BottomContentComponent = FC<
 >;
 
 const BottomContent: BottomContentComponent = ({ vipLevel }) => {
+  const { images } = useImages();
   const fetchVipGiftInfo = useVipGiftInfoStore((state) => state.fetchVipGiftInfo);
   const vipGiftInfo = useVipGiftInfoStore((state) => state.vipGiftInfo);
   const accountInfo = useAccountStore((state) => state.accountInfo);
@@ -52,14 +54,14 @@ const BottomContent: BottomContentComponent = ({ vipLevel }) => {
           <div className={styles.giftboxWrapper}>
             <Giftbox
               giftboxColor='pink'
-              img={require(`@/assets/commons/vipImages/advancementJackpot.png`)}
+              img={images.vip_adv_jackpot}
               info={levelBonusStatus === 1 ? '未领取' : '暂不可领取'}
               title='晋级彩金'
               yenCount={`¥${levelBonus}`}
             />
             <Giftbox
               giftboxColor='blue'
-              img={require(`@/assets/commons/vipImages/gift.png`)}
+              img={images.vip_gift}
               info={weekBonusStatus === 1 ? '未领取' : '已领取'}
               title='周礼金'
               yenCount={`¥${weekBonus}`}

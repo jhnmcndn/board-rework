@@ -1,26 +1,24 @@
 'use client';
 
-import defaultIcon from '@/assets/blackGold/header/defaultIcon.png';
-import loginBtnImage from '@/assets/commons/loginBtn.png';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import useImages from '@/hooks/useImages';
 import { copyToClipboard } from '@/utils/helpers';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './index.module.scss';
 
 const VipPart = () => {
+  const { images } = useImages();
   const accountInfo = useAccountStore((state) => state.accountInfo);
-  const theme = useAccountStore((state) => state.theme);
   const codeTotal = accountInfo.codeTotal || 0;
   const nextLevelIntegral = accountInfo.nextLevelIntegral || 0;
   const expBar = (codeTotal / (codeTotal + nextLevelIntegral)) * 100;
   const isLoggedIn = accountInfo.id !== undefined;
-  const copyImage = require(`@/assets/${theme}/header/copy.png`);
 
   return (
     <div className={styles.vipPart}>
       <Link href='/personal-info' className={styles.avatarContainer}>
-        <Image src={defaultIcon} alt='Default icon' className={styles.avatarPhoto} />
+        <Image src={images.avatar_placeholder} alt='Default icon' className={styles.avatarPhoto} />
       </Link>
       <div className={styles.userDetailsContainer}>
         <div className={styles.userDetails}>
@@ -30,7 +28,7 @@ const VipPart = () => {
           </div>
           {isLoggedIn && (
             <div className={styles.copyIcon} onClick={() => copyToClipboard(accountInfo.id || '未登录')}>
-              <Image src={copyImage} alt='Copy' width={60} height={60} />
+              <Image src={images.copy_icon} alt='Copy' width={60} height={60} />
             </div>
           )}
         </div>
@@ -50,7 +48,7 @@ const VipPart = () => {
           <div className={styles.btnWrapper}>
             <button className={styles.loginButton}>
               <Image
-                src={loginBtnImage}
+                src={images.login_btn}
                 alt='Login'
                 width={310}
                 height={80}

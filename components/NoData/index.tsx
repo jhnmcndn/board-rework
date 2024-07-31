@@ -1,6 +1,6 @@
 'use client';
 
-import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import useImages from '@/hooks/useImages';
 import classnames from 'classnames';
 import Image from 'next/image';
 import styles from './index.module.scss';
@@ -10,20 +10,13 @@ type Props = {
 };
 
 const NoData = ({ className }: Props) => {
-  const theme = useAccountStore((state) => state.theme);
+  const { images } = useImages();
+
   return (
-    <>
-      <div className={classnames(className, styles.noDataContainer)}>
-        <Image
-          src={require(`@/assets/${theme}/noData/noData.png`)}
-          alt='No Data'
-          width={916}
-          height={400}
-          className={styles.noDataImage}
-        />
-        <div className={styles.noDataLabel}>暂无数据...</div>
-      </div>
-    </>
+    <div className={classnames(className, styles.noDataContainer)}>
+      <Image src={images.no_data} alt='No Data' width={916} height={400} className={styles.noDataImage} />
+      <div className={styles.noDataLabel}>暂无数据...</div>
+    </div>
   );
 };
 
