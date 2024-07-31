@@ -36,6 +36,8 @@
         img {
           cursor: pointer;
           border-radius: 0.11rem;
+          object-fit: cover;
+          object-position: center;
         }
       }
 

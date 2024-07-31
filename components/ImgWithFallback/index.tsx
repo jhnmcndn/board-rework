@@ -16,8 +16,6 @@ const ImgWithFallback: FC<IProps> = ({
   loadingIcon,
   src,
   sizes,
-  objectFit,
-  objectPosition,
   quality,
   ...rest
 }) => {
@@ -42,8 +40,6 @@ const ImgWithFallback: FC<IProps> = ({
       onLoad={onLoad}
       onError={onError}
       draggable='false'
-      objectFit={objectFit || 'cover'}
-      objectPosition={objectPosition || 'center'}
       {...rest}
     />
   );
