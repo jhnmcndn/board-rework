@@ -73,7 +73,7 @@ const SideBar = () => {
       className={styles.sidebarWrapper}
     >
       <div className={styles.title}>
-        <Image src={images.black_gold_title} alt='' />
+        <Image src={images.sidebarTitle} alt='Sidebar title' />
       </div>
 
       <div className={styles.list}>

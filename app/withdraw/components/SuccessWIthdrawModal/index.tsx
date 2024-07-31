@@ -14,18 +14,12 @@ const SuccessWithdrawModal = () => {
       <div className={styles.modalWrapper}>
         <div className={styles.header}>
           <span>意见反馈箱</span>
-          <Image
-            src={images.close_btn}
-            alt='Close'
-            width={54}
-            height={54}
-            onClick={() => closeWithdrawSuccessModal()}
-          />
+          <Image src={images.closeBtn} alt='Close' width={54} height={54} onClick={() => closeWithdrawSuccessModal()} />
         </div>
         <div className={styles.body}>
           <Image
             className={styles.withdrawSuccessImg}
-            src={images.withdraw_success}
+            src={images.withdrawSuccess}
             alt='Success'
             width={180}
             height={180}

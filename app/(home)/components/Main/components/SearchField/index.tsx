@@ -19,9 +19,9 @@ const SearchField: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => {
     <div className={styles.searchBg}>
       <input value={searchFieldData} type='text' placeholder='搜索游戏' onChange={handleSearchChange} />
       {searchFieldData.length === 0 ? (
-        <Image src={images.search_icon} alt='Search' />
+        <Image src={images.search} alt='Search' />
       ) : (
-        <Image src={images.search_clear} onClick={() => setSearchFieldData('')} alt='Clear' />
+        <Image src={images.searchClear} onClick={() => setSearchFieldData('')} alt='Clear' />
       )}
     </div>
   );

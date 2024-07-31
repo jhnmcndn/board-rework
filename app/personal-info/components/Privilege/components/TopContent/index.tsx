@@ -30,19 +30,19 @@ const TopContent: TopContentComponent = ({ vipLevel, nextVipLevel, progressBar, 
         </div>
         <div className={styles.vip}>
           <div className={styles.badge}>
-            <Image src={images.vip_badge} alt='VIP Badge' />
+            <Image src={images.vipBadge} alt='VIP Badge' />
           </div>
           <div className={styles.progressDetails}>
             <span className={styles.level}>当前会员等级: VIP {vipLevel}</span>
             <div className={styles.progress}>
               <div className={styles.currentVipLevel}>
-                <Image src={images.vip_level} alt='Current VIP Level' />
+                <Image src={images.vipLevel} alt='Current VIP Level' />
               </div>
               <div className={styles.progressBarWrapper}>
                 <div className={styles.progressBar} style={{ width: `${progressBar}%` }} />
               </div>
               <div className={styles.nextVipLevel}>
-                <Image src={images.vip_next_level} alt='Next VIP Level' />
+                <Image src={images.vipNextLevel} alt='Next VIP Level' />
               </div>
             </div>
             <span className={styles.tooltip}>

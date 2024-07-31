@@ -55,7 +55,7 @@ const LoginTypesModal = () => {
     <ModalLayout>
       <div className={styles.loginTypes}>
         <Image
-          src={images.login_close}
+          src={images.loginClose}
           alt='close'
           height={44}
           width={44}
@@ -76,7 +76,7 @@ const LoginTypesModal = () => {
 
         <div className={styles.loginTypes__buttonsContainer}>
           <Image
-            src={images.login_register_btn}
+            src={images.loginRegisterBtn}
             alt='password-login-register'
             height={79}
             width={228}
@@ -84,7 +84,7 @@ const LoginTypesModal = () => {
             // onClick={() => setIsShowUserAuth(true)}
           />
           <Image
-            src={images.guest_login_btn}
+            src={images.guestLoginBtn}
             alt='guest-login'
             height={79}
             width={228}
@@ -95,7 +95,7 @@ const LoginTypesModal = () => {
             }}
           />
           <Image
-            src={images.guest_notice_btn}
+            src={images.guestNoticeBtn}
             alt='guest-login-notice'
             height={79}
             width={228}

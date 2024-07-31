@@ -49,14 +49,14 @@ const LeftNavigation: React.FC<LeftNavigationProps> = ({ handleNavigation, handl
       <ul className={styles.leftNavigation}>
         <li>
           <Link href='/customer-service' className={styles.listContainer}>
-            <Image src={images.support_icon} alt='Support Icon' />
+            <Image src={images.support} alt='Support Icon' />
             <span className={styles.text}>客服</span>
           </Link>
         </li>
 
         <li onClick={() => handleNavigation('/code-washing', 'cleanCode')}>
           <div className={styles.listContainer}>
-            <Image src={images.chip_icon} alt='Chip Icon' />
+            <Image src={images.chip} alt='Chip Icon' />
             <span className={styles.text}>洗码</span>
           </div>
         </li>
@@ -70,7 +70,7 @@ const LeftNavigation: React.FC<LeftNavigationProps> = ({ handleNavigation, handl
           }}
         >
           <div className={styles.listContainer}>
-            <Image src={images.gift_icon} alt='Gift Icon' />
+            <Image src={images.gift} alt='Gift Icon' />
             <span className={styles.text}>活动</span>
           </div>
         </li>
@@ -88,7 +88,7 @@ const LeftNavigation: React.FC<LeftNavigationProps> = ({ handleNavigation, handl
         <li>
           <Link href='/mailbox' className={styles.listContainer}>
             {(!isLoggedIn || unreadMsgs.length > 0) && <center className='alertIcon' />}
-            <Image src={images.message_icon} alt='Message Icon' />
+            <Image src={images.message} alt='Message Icon' />
             <span className={styles.text}>消息</span>
           </Link>
         </li>
@@ -100,7 +100,7 @@ const LeftNavigation: React.FC<LeftNavigationProps> = ({ handleNavigation, handl
           }}
         >
           <div className={styles.listContainer}>
-            <Image src={images.more_icon} alt='More Icon' />
+            <Image src={images.more} alt='More Icon' />
             <span className={styles.text}>更多</span>
           </div>
         </li>

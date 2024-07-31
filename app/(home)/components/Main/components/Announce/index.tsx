@@ -13,7 +13,7 @@ const Announce = () => {
   return (
     <div className={styles.announceContainer}>
       <motion.div initial={{ y: '200%' }} animate={{ y: 0 }} transition={{ delay: 0.4 }} className={styles.announceBar}>
-        <Image src={images.audio_icon} alt='AudioIcon' />
+        <Image src={images.audio} alt='AudioIcon' />
         <div className={styles.announceTextWrapper} onClick={() => setOmOpen(true)}>
           <marquee behavior='scroll' direction='left' className={styles.moveTextItem}>
             {announceText || '充值，成功率 100%，到账速度快，还享有额外的入款优惠！祝您旗开得胜！'}

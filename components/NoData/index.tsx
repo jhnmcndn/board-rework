@@ -14,7 +14,7 @@ const NoData = ({ className }: Props) => {
 
   return (
     <div className={classnames(className, styles.noDataContainer)}>
-      <Image src={images.no_data} alt='No Data' width={916} height={400} className={styles.noDataImage} />
+      <Image src={images.noData} alt='No Data' width={916} height={400} className={styles.noDataImage} />
       <div className={styles.noDataLabel}>暂无数据...</div>
     </div>
   );
