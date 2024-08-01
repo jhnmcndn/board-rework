@@ -19,6 +19,7 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
   const { images } = useImages();
   const rowsContainerRef = useRef<HTMLDivElement | null>(null);
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
+  const [isDragging, setIsDragging] = useState(false);
   const [filteredData, setFilteredData] = useState<RspGameInfo[] | undefined>();
   const { gameInfos, activeSideBarItem, isGamesLoading } = useGameStore((state) => state);
 
@@ -72,6 +73,8 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
           dragConstraints={dragConstraints}
           dragElastic={0.1}
           ref={rowsContainerRef}
+          onDragStart={() => setIsDragging(true)}
+          onDragEnd={() => setIsDragging(false)}
         >
           <motion.div
             animate={{ x: 0 }}

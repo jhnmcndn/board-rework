@@ -23,6 +23,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
   const { images } = useImages();
   const rowsContainerRef = useRef<HTMLDivElement | null>(null);
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
+  const [isDragging, setIsDragging] = useState(false);
   const [data, setData] = useState<CombinedGameInfo[]>([]);
   const [filteredData, setFilteredData] = useState<CombinedGameInfo[] | undefined>();
   const theme = useAccountStore((state) => state.theme);
@@ -116,6 +117,8 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
   };
 
   const handleOnClick = (item: CombinedGameInfo) => {
+    if (isDragging) return;
+
     if (activeSideBarItem.type === 2) {
       // to follow
     } else {
@@ -148,6 +151,8 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
             dragConstraints={dragConstraints}
             dragElastic={0.1}
             ref={rowsContainerRef}
+            onDragStart={() => setIsDragging(true)}
+            onDragEnd={() => setIsDragging(false)}
           >
             <motion.div
               animate={{ x: 0 }}
