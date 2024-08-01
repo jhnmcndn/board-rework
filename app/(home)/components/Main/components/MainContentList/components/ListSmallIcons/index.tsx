@@ -26,7 +26,7 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     const timeout = setTimeout(() => {
       if (rowsContainerRef.current) {
         const containerWidth = rowsContainerRef.current.scrollWidth;
-        const viewportWidth = rowsContainerRef.current.clientWidth * 2;
+        const viewportWidth = rowsContainerRef.current.clientWidth * 2.1;
         setDragConstraints({ left: -(containerWidth - viewportWidth), right: 0 });
       }
     }, 100);
