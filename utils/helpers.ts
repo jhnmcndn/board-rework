@@ -31,7 +31,7 @@ export const setToLocalStorage = (key: string, value: string) => {
 };
 
 export const generateMachineCode = () => {
-  let machineId = getFromLocalStorage('MachineId');
+  let machineId = getFromLocalStorage('machineId');
   if (!machineId) {
     var d = new Date().getTime();
     machineId = 'xxxxxxyxxyxxxyy'.replace(/[xy]/g, function (c) {
@@ -39,7 +39,7 @@ export const generateMachineCode = () => {
       d = Math.floor(d / 15);
       return (c === 'x' ? r : (r & 0x3) | 0x8).toString(15);
     });
-    setToLocalStorage('MachineId', machineId);
+    setToLocalStorage('machineId', machineId);
   }
   return machineId;
 };
