@@ -43,14 +43,3 @@ export const generateMachineCode = () => {
   }
   return machineId;
 };
-
-export const getExternalIp = async () => {
-  const ip: string = await fetch('https://api.ipify.org?format=json')
-    .then((response) => response.json())
-    .then((data) => {
-      setToLocalStorage('externalIP', data.ip);
-      return data.ip;
-    });
-
-  return ip;
-};

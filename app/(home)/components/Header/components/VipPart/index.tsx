@@ -18,7 +18,13 @@ const VipPart = () => {
   return (
     <div className={styles.vipPart}>
       <Link href='/personal-info' className={styles.avatarContainer}>
-        <Image src={images.avatarPlaceholder} alt='Default icon' className={styles.avatarPhoto} />
+        <Image
+          src={accountInfo.headImg || images.avatarPlaceholder}
+          alt='Default icon'
+          fill
+          sizes='20vw'
+          className={styles.avatarPhoto}
+        />
       </Link>
       <div className={styles.userDetailsContainer}>
         <div className={styles.userDetails}>
