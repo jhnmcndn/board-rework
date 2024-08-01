@@ -50,7 +50,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     }, 100);
 
     return () => clearTimeout(timeout);
-  }, [filteredData]);
+  }, [filteredData, showPlatform]);
 
   useEffect(() => {
     if (!searchFieldData) {
