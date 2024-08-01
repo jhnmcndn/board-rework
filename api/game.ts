@@ -1,7 +1,7 @@
 import { request } from '@/api';
 import { AccountInfo, GameInfoGroup, GetGameTypes, RootResponse, RspGameInfo } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
-import { GetGameInfoGroupFn, GetGameInfosFn } from '@/types/fns';
+import { GetGameInfoGroupFn, GetGameInfosFn, JoinGameParams } from '@/types/fns';
 
 export const getAccountInfo = async () => {
   const token = localStorage?.getItem('token');
@@ -46,6 +46,22 @@ export const getGameInfos: GetGameInfosFn = async (params) => {
     endpoint: API_ENDPOINT.GAME_INFOS,
     body,
     tags: API_ENDPOINT.GAME_INFOS,
+  });
+  return response.data;
+};
+
+export const joinGame: JoinGameParams = async (id) => {
+  let body = {
+    id,
+  };
+  const response = await request<RootResponse<string>>({
+    route: APP_ROUTE.GAME,
+    endpoint: API_ENDPOINT.JOIN_GAME,
+    body,
+    tags: API_ENDPOINT.JOIN_GAME,
+    otherHeaders: {
+      token: localStorage?.getItem('token') || '',
+    },
   });
   return response.data;
 };
