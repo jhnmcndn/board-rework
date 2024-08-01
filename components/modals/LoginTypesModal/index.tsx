@@ -7,41 +7,19 @@ import { createPortal } from 'react-dom';
 // import NECaptchaComponent from 'src/commons/Captcha/NECaptchaComponent';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useImages from '@/hooks/useImages';
+import useLogin from '@/hooks/useLogin';
 import useModalStore from '@/store/modals';
-import { getDeviceInfo } from '@/utils/helpers';
 import ModalLayout from '../ModalLayout';
 import styles from './index.module.scss';
 
 // const LoginTypesModal = ({ setIsShowUserAuth }) => {
 const LoginTypesModal = () => {
+  const { login } = useLogin();
   const { images } = useImages();
-  const { openAlert, isLoginOptionsOpen, closeLoginTypes } = useModalStore();
+  const { openAlert, isLoginOptionsOpen, closeLoginOptions } = useModalStore();
   const { captchaId, actionSwitch } = useAccountStore((state) => state.init);
   const isCaptchaEnabled = actionSwitch === '1' ? true : false;
   const [isCaptchaOpen, setIsCaptchaOpen] = useState(false);
-
-  function getGuestLoginInfo() {
-    const inviterCode = localStorage.getItem('channelCode');
-    const machineId = localStorage.getItem('MachineId');
-    const ip = localStorage.getItem('externalIP');
-    const deviceModel = getDeviceInfo();
-    const validate = isCaptchaEnabled ? captchaId : null;
-
-    // loginDevice({ inviterCode, machineId, ip, deviceModel, validate }).then((res) => {
-    //   setIsCaptchaOpen(false);
-    //   if (res.data.code === 200) {
-    //     dispatch(setShowOtherModalComp(true));
-    //     dispatch(setShowAnnouncementModal(true));
-    //     dispatch(setShowBindWithdrawModal(true));
-    //     dispatch(setUserData(res.data.data));
-    //     dispatch(setShowLoginModal(false));
-    //     localStorage.setItem('loginNow', JSON.stringify(res.data.data));
-    //     dispatch(setUserBalance(res.data.data?.accountNow));
-    //   } else {
-    //     alert(res.data.msg);
-    //   }
-    // });
-  }
 
   // const handleCaptchaSuccess = (data) => {
   //   getGuestLoginInfo(data);
@@ -61,7 +39,7 @@ const LoginTypesModal = () => {
           width={44}
           quality={100}
           className={styles.loginTypes__close}
-          onClick={() => closeLoginTypes()}
+          onClick={() => closeLoginOptions()}
         />
 
         {/* {isCaptchaOpen && isCaptchaEnabled && (
@@ -91,7 +69,7 @@ const LoginTypesModal = () => {
             quality={100}
             onClick={() => {
               if (isCaptchaEnabled) setIsCaptchaOpen(true);
-              else getGuestLoginInfo();
+              else login();
             }}
           />
           <Image

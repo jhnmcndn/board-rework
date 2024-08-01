@@ -14,7 +14,7 @@ interface ModalStore {
   openAlert: (newContent: AlertContent) => void;
   openLoginOptions: () => void;
   closeAlert: () => void;
-  closeLoginTypes: () => void;
+  closeLoginOptions: () => void;
   isAnnouncementOpen: boolean;
   isWithdrawSuccessModalOpen: boolean;
 }
@@ -34,7 +34,7 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   },
   closeAlert: () => set((state) => ({ ...state, isAlertOpen: false, content: {} })),
   openLoginOptions: () => set((state) => ({ ...state, isLoginOptionsOpen: true })),
-  closeLoginTypes: () => set((state) => ({ ...state, isLoginOptionsOpen: false })),
+  closeLoginOptions: () => set((state) => ({ ...state, isLoginOptionsOpen: false })),
   openAnnouncement: () => set((state) => ({ ...state, isAnnouncementOpen: true })),
   closeAnnouncement: () => set((state) => ({ ...state, isAnnouncementOpen: false })),
   openWithdrawSuccessModal: () => set((state) => ({ ...state, isWithdrawSuccessModalOpen: true })),

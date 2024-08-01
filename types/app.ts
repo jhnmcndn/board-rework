@@ -41,6 +41,14 @@ export type HeCai6 = {
   green?: string[];
 };
 
+export type LoginDevicePayload = {
+  inviterCode: string | null;
+  deviceId: string;
+  ip: string;
+  phoneModel: string | null;
+  validate: string | null;
+};
+
 export type AccountInfo = {
   token?: string;
   id?: string;
