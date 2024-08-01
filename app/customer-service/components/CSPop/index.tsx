@@ -16,8 +16,6 @@ const CSPop = () => {
   const csData = useCSStore((state) => state.csData);
   const theme = useAccountStore((state) => state.theme);
 
-  console.log(csData);
-
   return (
     <Fragment>
       {/* <Alert /> */}
