@@ -8,8 +8,7 @@ import { GameInfoGroup, RspGameInfo } from '@/types/app';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Dispatch, FC, SetStateAction, useEffect, useRef, useState } from 'react';
 import ListSmallIcons from '../ListSmallIcons';
 import styles from './index.module.scss';
 
@@ -22,6 +21,8 @@ type CombinedGameInfo = RspGameInfo & GameInfoGroup;
 
 const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => {
   const { images } = useImages();
+  const rowsContainerRef = useRef<HTMLDivElement | null>(null);
+  const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
   const [data, setData] = useState<CombinedGameInfo[]>([]);
   const [filteredData, setFilteredData] = useState<CombinedGameInfo[] | undefined>();
   const theme = useAccountStore((state) => state.theme);
@@ -37,6 +38,18 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     setActivePlatform,
     setIsGamesLoading,
   } = useGameStore((state) => state);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (rowsContainerRef.current) {
+        const containerWidth = rowsContainerRef.current.scrollWidth;
+        const viewportWidth = rowsContainerRef.current.clientWidth * 2.1;
+        setDragConstraints({ left: -(containerWidth - viewportWidth), right: 0 });
+      }
+    }, 100);
+
+    return () => clearTimeout(timeout);
+  }, [filteredData]);
 
   useEffect(() => {
     if (!searchFieldData) {
@@ -61,7 +74,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     if (activeSideBarItem.type === 3) {
       setData(gameInfoGroup || []);
     }
-  }, [activeSideBarItem, gameInfoGroup, gameInfos]);
+  }, [gameInfoGroup, gameInfos]);
 
   const fetchGameInfo = async (params: { id: number; pid: number }) => {
     setIsGamesLoading(true);
@@ -129,43 +142,45 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
             zIndex: 0,
           }}
         >
-          <div className={styles.listLargeContainer}>
+          <motion.div
+            className={styles.listLargeContainer}
+            drag='x'
+            dragConstraints={dragConstraints}
+            dragElastic={0.1}
+            ref={rowsContainerRef}
+          >
             <motion.div
               animate={{ x: 0 }}
               initial={{ x: '100vw' }}
               transition={{ delay: 0.4 }}
               className={styles.firstRow}
             >
-              <Swiper slidesPerView={'auto'} spaceBetween={15} grabCursor>
-                {filteredData?.map((item) => {
-                  return (
-                    <SwiperSlide
-                      key={item.id}
-                      className={classNames(styles.iconHolder, {
-                        [styles.isMaintenance]: item.maintain,
-                      })}
-                      onClick={() => handleOnClick(item)}
-                    >
-                      {item.maintain && (
-                        <div className='isMaintainLargeIcon'>
-                          <div>正在维修</div>
-                        </div>
-                      )}
+              {filteredData?.map((item) => {
+                return (
+                  <div
+                    key={item.id}
+                    className={classNames(styles.iconHolder, {
+                      [styles.isMaintenance]: item.maintain,
+                    })}
+                    onClick={() => handleOnClick(item)}
+                  >
+                    {item.maintain && (
+                      <div className='isMaintainLargeIcon'>
+                        <div>正在维修</div>
+                      </div>
+                    )}
 
-                      <ImgWithFallback
-                        src={(activeSideBarItem.type === 3 ? item.cardIcon : item.icon) || ''}
-                        fallback={images.fallback}
-                        loadingIcon={images.loading}
-                        alt={item.icon || item.cardIcon || ''}
-                      />
-                    </SwiperSlide>
-                  );
-                })}
-
-                <SwiperSlide className={styles.iconHolder}></SwiperSlide>
-              </Swiper>
+                    <ImgWithFallback
+                      src={(activeSideBarItem.type === 3 ? item.cardIcon : item.icon) || ''}
+                      fallback={images.fallback}
+                      loadingIcon={images.loading}
+                      alt={item.icon || item.cardIcon || ''}
+                    />
+                  </div>
+                );
+              })}
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       )}
 
