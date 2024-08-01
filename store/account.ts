@@ -1,4 +1,5 @@
 import { getAccountInfo } from '@/api/game';
+import { getAccountNow } from '@/api/platform';
 import { AccountInfo, AccountNow, BindCardList, Init } from '@/types/app';
 import { THEME } from '@/types/enums';
 import { createStore } from 'zustand';
@@ -72,6 +73,7 @@ type AccountActions = {
 
 export type AccountApiCalls = {
   fetchAccountInfo: () => void;
+  fetchAccountNow: () => void;
 };
 
 export type AccountStore = AccountState & AccountActions & AccountApiCalls;
@@ -99,6 +101,11 @@ export const createAccountStore = () =>
           const accountInfo = await getAccountInfo();
           if (!accountInfo || 'message' in accountInfo) return set(() => ({ accountInfo: accountInfoState }));
           return set(() => ({ accountInfo }));
+        },
+        fetchAccountNow: async () => {
+          const accountNow = await getAccountNow();
+          if (!accountNow || 'message' in accountNow) return set(() => ({ accountNow: accountNowState }));
+          return set(() => ({ accountNow }));
         },
       }),
       {
