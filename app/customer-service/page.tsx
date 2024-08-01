@@ -1,25 +1,15 @@
-import { customerService, getMessageCommonProblems } from '@/api/platform';
 import styles from '@/app/customer-service/index.module.scss';
 import OtherHeader from '@/components/OtherHeader';
-import Sidebar from '@/components/Sidebar';
 import MainContent from './components/MainContent';
+import CSSidebar from './components/Sidebar';
 
-const CustomerService = async () => {
-  const csData = await customerService();
-  const faq = await getMessageCommonProblems();
-  const isCSDataEmpty = !csData || 'message' in csData || csData.length < 1;
-
-  const setSidebarItems = () => {
-    if (isCSDataEmpty) return ['在线客服', '常见问题'];
-    return ['在线客服', 'POP客服', '常见问题'];
-  };
-
+const CustomerService = () => {
   return (
     <main className={styles.cs}>
       <OtherHeader headerTitle='客户服务' />
       <div className={styles.wrapper}>
-        <Sidebar sidebarItems={setSidebarItems()} />
-        <MainContent hasCSData={!isCSDataEmpty} csData={csData} faq={faq} />
+        <CSSidebar />
+        <MainContent />
       </div>
     </main>
   );

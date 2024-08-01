@@ -5,7 +5,7 @@ import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 const headers = {
   dev: '2',
   agent: serverConfig.agent,
-  version: process.env.APP_VERSION,
+  version: process.env.NEXT_PUBLIC_APP_VERSION,
   'Content-Type': 'application/json;charset=UTF-8',
 } satisfies HeadersInit;
 

@@ -1,4 +1,5 @@
-import { CustomerService } from '@/types/app';
+import { customerService, getMessageCommonProblems } from '@/api/platform';
+import { CustomerService, MessageCommonProblems } from '@/types/app';
 import { createStore } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -15,26 +16,52 @@ export const csState = {
   url: undefined,
 } satisfies CustomerService;
 
+export const msgCommonProblemsState = {
+  content: undefined,
+  id: undefined,
+  title: undefined,
+} satisfies MessageCommonProblems;
+
 export type CSState = {
-  cs: CustomerService[];
+  csData: CustomerService[];
   activeTab: number;
+  msgCommonProblems: MessageCommonProblems[];
 };
 
 export type CSActions = {
-  setCS: (cs: CustomerService[]) => void;
+  setCSData: (csData: CustomerService[]) => void;
   setActiveTab: (index: number) => void;
 };
 
-export type CSStore = CSState & CSActions;
+export type CSApiCalls = {
+  fetchCSData: () => void;
+  fetchMsgCommonProblems: () => void;
+};
+
+export type CSStore = CSState & CSActions & CSApiCalls;
 
 export const createCSStore = () =>
   createStore<CSStore>()(
     persist(
       (set) => ({
-        cs: [csState],
+        csData: [csState],
         activeTab: 0,
-        setCS: (cs) => set((state) => ({ cs: [...state.cs, ...cs] })),
+        msgCommonProblems: [],
+        setCSData: (csData) => set(() => ({ csData })),
         setActiveTab: (index) => set(() => ({ activeTab: index })),
+
+        fetchCSData: async () => {
+          const csData = await customerService();
+          if (!csData || 'message' in csData) return set(() => ({ csData: [csState] }));
+          return set(() => ({ csData }));
+        },
+        fetchMsgCommonProblems: async () => {
+          const msgCommonProblems = await getMessageCommonProblems();
+          if (!msgCommonProblems || 'message' in msgCommonProblems) return set(() => ({ msgCommonProblems: [] }));
+          console.log(msgCommonProblems);
+
+          return set(() => ({ msgCommonProblems }));
+        },
       }),
       {
         name: 'customer-service-store',
