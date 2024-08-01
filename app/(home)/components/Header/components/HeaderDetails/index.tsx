@@ -1,8 +1,10 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { isMobile } from 'react-device-detect';
 import styles from './index.module.scss';
-import CoinPurse from '@/components/CoinPurse';
+
+const CoinPurse = dynamic(() => import('@/components/CoinPurse'), { ssr: false });
 
 const HeaderDetails = () => {
   return (
