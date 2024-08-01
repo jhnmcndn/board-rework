@@ -1,3 +1,4 @@
+import { getAccountInfo } from '@/api/game';
 import { AccountInfo, AccountNow, BindCardList, Init } from '@/types/app';
 import { THEME } from '@/types/enums';
 import { createStore } from 'zustand';
@@ -69,7 +70,11 @@ type AccountActions = {
   setWithdrawActiveTab: (index: number) => void;
 };
 
-export type AccountStore = AccountState & AccountActions;
+export type AccountApiCalls = {
+  fetchAccountInfo: () => void;
+};
+
+export type AccountStore = AccountState & AccountActions & AccountApiCalls;
 
 export const createAccountStore = () =>
   createStore<AccountStore>()(
@@ -89,6 +94,12 @@ export const createAccountStore = () =>
         setBoxPassIsSet: (boxPassIsSet) => set(() => ({ boxPassIsSet })),
         setBindCardList: (bindCardList) => set(() => ({ bindCardList })),
         setWithdrawActiveTab: (index) => set(() => ({ withdrawActiveTab: index })),
+
+        fetchAccountInfo: async () => {
+          const accountInfo = await getAccountInfo();
+          if (!accountInfo || 'message' in accountInfo) return set(() => ({ accountInfo: accountInfoState }));
+          return set(() => ({ accountInfo }));
+        },
       }),
       {
         name: 'account-store',
