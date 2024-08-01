@@ -51,9 +51,12 @@ export const request = async <T>({
   return data;
 };
 
-export const getIp = async (): Promise<{ ip: string }> => {
+export const getIp = async (): Promise<string> => {
   const response = await fetch('https://api.ipify.org?format=json');
-  if (!response.ok) return { ip: '' };
-  const data = await response.json();
-  return data;
+  if (!response.ok) return '';
+  const data = (await response.json()) as { ip: string };
+  if (window !== undefined) {
+    localStorage.setItem('externalIp', data.ip);
+  }
+  return data.ip;
 };

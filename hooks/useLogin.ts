@@ -1,9 +1,10 @@
 'use client';
 
+import { getIp } from '@/api';
 import { loginDevice } from '@/api/platform';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useModalStore from '@/store/modals';
-import { generateMachineCode, getDeviceInfo, getExternalIp, getFromLocalStorage } from '@/utils/helpers';
+import { generateMachineCode, getDeviceInfo, getFromLocalStorage } from '@/utils/helpers';
 
 type LoginMethod = 'device' | 'user-pass' | 'captcha';
 
@@ -16,7 +17,7 @@ const useLogin = () => {
   const validate = null;
 
   const login = async (loginMethod: LoginMethod = 'device') => {
-    const ip = await getExternalIp();
+    const ip = await getIp();
     loginDevice({ inviterCode, deviceId, ip, phoneModel, validate }).then((res) => {
       if (res && !('message' in res)) {
         // setShowAnnouncementModal(true);

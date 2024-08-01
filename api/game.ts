@@ -4,10 +4,14 @@ import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import { GetGameInfoGroupFn, GetGameInfosFn } from '@/types/fns';
 
 export const getAccountInfo = async () => {
+  const token = localStorage?.getItem('token');
   const data = await request<RootResponse<AccountInfo>>({
     route: APP_ROUTE.GAME,
     endpoint: API_ENDPOINT.ACCOUNT_INFO,
     tags: API_ENDPOINT.ACCOUNT_INFO,
+    otherHeaders: {
+      token: token || '',
+    },
   });
   return data.data;
 };

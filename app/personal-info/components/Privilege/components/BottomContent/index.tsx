@@ -22,7 +22,7 @@ const BottomContent: BottomContentComponent = ({ vipLevel }) => {
     const defaultVipSet = {
       level: 1,
       levelBonus: 0.0,
-      weekBonus: 0.18,
+      weekBonus: 0.0,
       bcode: 0.0,
     };
     if (!vipGiftInfo.vipSetList) return defaultVipSet;

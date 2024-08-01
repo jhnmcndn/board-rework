@@ -1,6 +1,5 @@
 'use client';
 
-import AlertContainer from '@/components/modals/Vault';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { MemberCardList, SpecialBankInfoMap } from '@/types/app';
 import { onClickSound } from '@/utils/audioFile';
@@ -63,7 +62,8 @@ const SelfWithdrawal = () => {
 
   return (
     <>
-      <AlertContainer alertMe={alertNotif} notify={alertMessage} />
+      {/* Should be replaced by openAlert() from useModalStore */}
+      {/* <AlertContainer alertMe={alertNotif} notify={alertMessage} /> */}
       <div className={styles.selfWithdrawalWrapper}>
         <section className={styles.panel}>
           <div className={styles.headerWrapper}>

@@ -71,21 +71,20 @@ export const boxPassIsOpen = async () => {
     endpoint: API_ENDPOINT.BOX_PASS_IS_OPEN,
     tags: API_ENDPOINT.BOX_PASS_IS_OPEN,
     otherHeaders: {
-      token: 'uEd2844af8c6220e11faa797b8bab0cc70',
+      token: '',
     },
   });
   return data.data;
 };
 
 export const customerService: CustomerServiceFn = async () => {
+  const token = localStorage?.getItem('token');
   const data = await request<RootResponse<CustomerService[]>>({
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.CUSTOMER_SERVICE,
     tags: API_ENDPOINT.CUSTOMER_SERVICE,
     otherHeaders: {
-      // This token should be from the initial request headers.
-      // Remove after creating the auth logic!
-      token: 'uEd2844af8c6220e11faa797b8bab0cc70',
+      token: token || '',
     },
   });
   return data.data;
@@ -101,14 +100,13 @@ export const getMessageCommonProblems = async () => {
 };
 
 export const getVipGiftInfo = async () => {
+  const token = localStorage?.getItem('token');
   const data = await request<RootResponse<VIPGiftInfo>>({
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.VIP_GIFT_INFO,
     tags: API_ENDPOINT.VIP_GIFT_INFO,
     otherHeaders: {
-      // This token should be from the initial request headers.
-      // Remove after creating the auth logic!
-      token: 'Zrf5e58ed5129cd8fc547db6c3097483e3',
+      token: token || '',
     },
   });
   return data.data;
