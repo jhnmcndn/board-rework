@@ -29,6 +29,9 @@ export const getAccountNow = async () => {
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.ACCOUNT_NOW,
     tags: API_ENDPOINT.ACCOUNT_NOW,
+    otherHeaders: {
+      token: localStorage.getItem('token') || '',
+    },
   });
   return data.data;
 };
