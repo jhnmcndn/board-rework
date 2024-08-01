@@ -1,10 +1,13 @@
 import ImgWithFallback from '@/components/ImgWithFallback';
 import NoData from '@/components/NoData';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import useImages from '@/hooks/useImages';
 import { RspGameInfo } from '@/types/app';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import { Dispatch, FC, SetStateAction, useEffect, useRef, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/grid';
@@ -16,12 +19,15 @@ interface IProps {
 }
 
 const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => {
+  const router = useRouter();
   const { images } = useImages();
   const rowsContainerRef = useRef<HTMLDivElement | null>(null);
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [filteredData, setFilteredData] = useState<RspGameInfo[] | undefined>();
   const { gameInfos, activeSideBarItem, isGamesLoading } = useGameStore((state) => state);
+  const { fetchAccountInfo, accountInfo } = useAccountStore((state) => state);
+  const { authCheck } = useAuthCheck();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -49,6 +55,25 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
       );
     }
   }, [searchFieldData, gameInfos]);
+
+  const handleGameClick = (item: RspGameInfo) => {
+    if (isDragging) return;
+
+    sessionStorage.setItem('id', String(item.id));
+    sessionStorage.setItem('id_2', String(item.id));
+    var data_Category = item.gameCategory === 'HG' ? true : false;
+
+    authCheck(() => {
+      if (activeSideBarItem.id === 6) {
+        router.push(`/game/${item.lotteryId}`);
+      } else {
+        if (data_Category) {
+        } else {
+          router.push('/games');
+        }
+      }
+    });
+  };
 
   return (
     <div
@@ -92,7 +117,7 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
                     [styles.isMaintenance]: item.maintain,
                   })}
                   onClick={() => {
-                    // handleGameClick(item);
+                    handleGameClick(item);
                   }}
                 >
                   {item.maintain && (
@@ -127,7 +152,7 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
                     [styles.isMaintenance]: item.maintain,
                   })}
                   onClick={() => {
-                    // handleGameClick(item);
+                    handleGameClick(item);
                   }}
                 >
                   {item.maintain && (

@@ -79,7 +79,7 @@ const SideBar = () => {
       </div>
 
       <div className={styles.list}>
-        <PullToRefresh onRefresh={handleRefresh}>
+        <PullToRefresh onRefresh={handleRefresh} pullingContent={''}>
           <div ref={containerRef} className={styles.sidebarSwiper}>
             {sideBar.map((item, index) => {
               if (item.id === 6) return null;
