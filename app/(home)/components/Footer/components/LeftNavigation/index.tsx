@@ -5,19 +5,18 @@ import { useEffect, useState } from 'react';
 import MoreModal from '@/components/modals/MoreModal';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useMessageStore } from '@/components/Providers/MessageStoreProvider';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import useImages from '@/hooks/useImages';
 import { MessageOnSites } from '@/types/app';
-import { onClickSound } from '@/utils/audioFile';
-import { HandleClickParams } from '../..';
+import { AudioType, onClickSound } from '@/utils/audioFile';
+import { useRouter } from 'next/navigation';
+import { isIOS } from 'react-device-detect';
 import styles from './index.module.scss';
 
-type LeftNavigationProps = {
-  handleNavigation: (path: string, soundKey?: string) => void;
-  handleClick: ({ fn, params, isActivity }: HandleClickParams) => void;
-};
-
-const LeftNavigation: React.FC<LeftNavigationProps> = ({ handleNavigation, handleClick }) => {
+const LeftNavigation: React.FC = () => {
+  const { push } = useRouter();
   const { images } = useImages();
+  const { authCheck } = useAuthCheck();
   const [showMoreModal, setShowMoreModal] = useState(false);
   const accountInfo = useAccountStore((state) => state.accountInfo);
   const messageOnSites = useMessageStore((state) => state.messageOnSites);
@@ -34,6 +33,11 @@ const LeftNavigation: React.FC<LeftNavigationProps> = ({ handleNavigation, handl
       setUnreadMsgs(messageOnSites.filter((mail) => !mail.isRead));
     }
   }, [messageOnSites]);
+
+  const handleNavigation = (route: string, soundKey?: string) => {
+    if (isIOS && soundKey) onClickSound(soundKey as AudioType);
+    authCheck(() => push(route));
+  };
 
   return (
     <>
@@ -66,7 +70,7 @@ const LeftNavigation: React.FC<LeftNavigationProps> = ({ handleNavigation, handl
             accountInfo?.id ? setActiveSideLoggedIn(1) : setActiveSideLoggedIn(3);
 
             onClickSound('gift');
-            handleClick({ fn: setOmOpen, params: true, isActivity: true });
+            // handleClick({ fn: setOmOpen, params: true, isActivity: true });
           }}
         >
           <div className={styles.listContainer}>
@@ -75,22 +79,12 @@ const LeftNavigation: React.FC<LeftNavigationProps> = ({ handleNavigation, handl
           </div>
         </li>
 
-        {/* <li onClick={() => handleNavigation('/mailbox', 'message')}>
+        <li onClick={() => handleNavigation('/mailbox', 'message')}>
           <div className={styles.listContainer}>
-            {(!isLoggedIn || unreadMsgs.length > 0) && <center className='alertIcon' />}
-            <Image src={iconMessage} alt='Message Icon' />
-            <span className={styles.text}>消息</span>
-          </div>
-        </li> */}
-
-        {/* Replace the code above with the code below with auth added through handleNavigation */}
-
-        <li>
-          <Link href='/mailbox' className={styles.listContainer}>
             {(!isLoggedIn || unreadMsgs.length > 0) && <center className='alertIcon' />}
             <Image src={images.message} alt='Message Icon' />
             <span className={styles.text}>消息</span>
-          </Link>
+          </div>
         </li>
 
         <li
