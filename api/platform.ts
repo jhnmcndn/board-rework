@@ -1,8 +1,10 @@
 import { request } from '@/api';
 import {
+  AccountInfo,
   AccountNow,
   CustomerService,
   Init,
+  LoginDevicePayload,
   MessageCommonProblems,
   MessageHomeNotice,
   MessageOnSites,
@@ -11,6 +13,16 @@ import {
 } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import { CustomerServiceFn } from '@/types/fns';
+
+export const loginDevice = async (payload: LoginDevicePayload) => {
+  const data = await request<RootResponse<AccountInfo>>({
+    body: payload,
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.LOGIN_DEVICE,
+    tags: API_ENDPOINT.LOGIN_DEVICE,
+  });
+  return data.data;
+};
 
 export const getAccountNow = async () => {
   const data = await request<RootResponse<AccountNow>>({

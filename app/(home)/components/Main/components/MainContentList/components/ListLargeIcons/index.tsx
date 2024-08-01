@@ -86,7 +86,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     setIsGamesLoading(false);
   };
 
-  const PlatFormListHeader = () => {
+  const renderPlatFormListHeader = () => {
     return (
       <div className={styles.listHeader} data-theme={theme}>
         <motion.div
@@ -120,7 +120,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     if (isDragging) return;
 
     if (activeSideBarItem.type === 2) {
-      // to follow
+      // TO DO
     } else {
       setActivePlatform(item);
       fetchGameInfo({ id: activeSideBarItem.id || 1, pid: item.id || 1 });
@@ -191,24 +191,20 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
 
       {showPlatform && (
         <>
-          {PlatFormListHeader()}
-          {data ? (
-            <>
-              {data.map((item, idx) => {
-                return (
+          {renderPlatFormListHeader()}
+          <>
+            {data &&
+              data.map(
+                (item, idx) =>
                   item.id === activePlatform?.id && (
                     <ListSmallIcons
                       key={item.id || '' + idx}
                       searchFieldData={searchFieldData}
                       setSearchFieldData={setSearchFieldData}
                     />
-                  )
-                );
-              })}
-            </>
-          ) : (
-            ''
-          )}
+                  ),
+              )}
+          </>
         </>
       )}
     </>
