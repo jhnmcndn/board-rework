@@ -1,9 +1,9 @@
 'use client';
 
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import useClickOutSide from '@/hooks/useClickOutside';
 import useImages from '@/hooks/useImages';
-import useModalStore from '@/store/modals';
 import { onClickSound } from '@/utils/audioFile';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -21,9 +21,8 @@ type MoreModalComponent = FC<Readonly<MoreModalComponentProps>>;
 const MoreModal: MoreModalComponent = ({ setOpenAnnounceModal, setSafeBoxModal, setShowMore }) => {
   const { push } = useRouter();
   const { images } = useImages();
-  const { openLoginOptions } = useModalStore();
-  const { theme, accountInfo } = useAccountStore((state) => state);
-  const isLoggedIn = !!accountInfo.id;
+  const { authCheck } = useAuthCheck();
+  const { theme } = useAccountStore((state) => state);
   const moreOptionsRef = useRef<HTMLDivElement>(null);
   const clickOutSide = useClickOutSide(moreOptionsRef);
 
@@ -47,15 +46,12 @@ const MoreModal: MoreModalComponent = ({ setOpenAnnounceModal, setSafeBoxModal, 
           <span>公告</span>
         </li>
 
-        <li className={styles.more__listItem} onClick={() => (isLoggedIn ? setSafeBoxModal() : openLoginOptions())}>
+        <li className={styles.more__listItem} onClick={() => authCheck(() => setSafeBoxModal())}>
           <Image src={images.vault} alt='Vault Icon' />
           <span>保险箱</span>
         </li>
 
-        <li
-          className={styles.more__listItem}
-          onClick={() => (isLoggedIn ? push('/personal-info') : openLoginOptions())}
-        >
+        <li className={styles.more__listItem} onClick={() => authCheck(() => push('/personal-info'))}>
           <Image src={images.user} alt='User Icon' />
           <span>个人信息</span>
         </li>
