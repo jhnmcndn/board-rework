@@ -1,6 +1,7 @@
 'use client';
 
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import useImages from '@/hooks/useImages';
 import classNames from 'classnames';
 import Image from 'next/image';
@@ -21,6 +22,7 @@ export type CoinPurseComponent = FC<Readonly<CoinPurseProps>>;
 const CoinPurse: CoinPurseComponent = (props) => {
   const { position, top, left, iColor, betLog, inputBg, noShuffle } = props;
   const { images } = useImages();
+  const { authCheck } = useAuthCheck();
   const userBalance = useAccountStore((state) => state.accountNow.balance);
   const userToken = useAccountStore((state) => state.accountInfo.token);
   const [animateSpin, setAnimateSpin] = useState(false);
@@ -58,7 +60,13 @@ const CoinPurse: CoinPurseComponent = (props) => {
       </div>
       {!noShuffle && (
         <div className={classNames(styles.shuffles, { shuffleSpin: animateSpin })}>
-          <Image src={images.reload} alt='Reload' width={70} height={70} />
+          <Image
+            src={images.reload}
+            alt='Reload'
+            width={70}
+            height={70}
+            onClick={() => authCheck(() => console.log('// TODO Refetch balance'))}
+          />
         </div>
       )}
     </>

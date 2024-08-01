@@ -1,14 +1,20 @@
 'use client';
 
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import useImages from '@/hooks/useImages';
+import useModalStore from '@/store/modals';
+import { onClickSound } from '@/utils/audioFile';
 import { copyToClipboard } from '@/utils/helpers';
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import styles from './index.module.scss';
 
 const VipPart = () => {
+  const { push } = useRouter();
   const { images } = useImages();
+  const { authCheck } = useAuthCheck();
+  const { openLoginOptions } = useModalStore();
   const accountInfo = useAccountStore((state) => state.accountInfo);
   const codeTotal = accountInfo.codeTotal || 0;
   const nextLevelIntegral = accountInfo.nextLevelIntegral || 0;
@@ -17,7 +23,7 @@ const VipPart = () => {
 
   return (
     <div className={styles.vipPart}>
-      <Link href='/personal-info' className={styles.avatarContainer}>
+      <div onClick={() => authCheck(() => push('/personal-info'))} className={styles.avatarContainer}>
         <Image
           src={accountInfo.headImg || images.avatarPlaceholder}
           alt='Default icon'
@@ -25,7 +31,7 @@ const VipPart = () => {
           sizes='20vw'
           className={styles.avatarPhoto}
         />
-      </Link>
+      </div>
       <div className={styles.userDetailsContainer}>
         <div className={styles.userDetails}>
           <div className={styles.userInfo}>
@@ -59,7 +65,8 @@ const VipPart = () => {
                 width={310}
                 height={80}
                 onClick={() => {
-                  // onClickSound('pop')
+                  onClickSound('pop');
+                  openLoginOptions();
                 }}
               />
             </button>
