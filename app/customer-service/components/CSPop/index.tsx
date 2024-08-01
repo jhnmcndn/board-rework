@@ -13,7 +13,7 @@ import { Fragment } from 'react';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 
 const CSPop = () => {
-  const cs = useCSStore((state) => state.cs);
+  const csData = useCSStore((state) => state.csData);
   const theme = useAccountStore((state) => state.theme);
 
   return (
@@ -28,8 +28,8 @@ const CSPop = () => {
         <div className={styles.linksWrapper}>
           <PullToRefresh onRefresh={() => refetch(API_ENDPOINT.CUSTOMER_SERVICE)} className={styles.pullToRefresh}>
             <ul>
-              {cs.length > 0 &&
-                cs.map((data, index) => (
+              {csData.length > 0 &&
+                csData.map((data, index) => (
                   <li key={index}>
                     <div className={styles.leftContent} data-theme={theme}>
                       <Image src={data.icon as string} alt='Icon' />

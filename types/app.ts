@@ -168,9 +168,9 @@ export type SpecialBankInfoMap = {
 };
 
 export type MessageCommonProblems = {
-  id: number;
-  title: string;
-  content: string;
+  id?: number;
+  title?: string;
+  content?: string;
 };
 
 export type VIPGiftInfo = {

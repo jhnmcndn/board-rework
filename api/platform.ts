@@ -98,6 +98,7 @@ export const getMessageCommonProblems = async () => {
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.MESSAGE_COMMON_PROBLEMS,
     tags: API_ENDPOINT.MESSAGE_COMMON_PROBLEMS,
+    otherHeaders: {},
   });
   return data.data;
 };

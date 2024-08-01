@@ -1,30 +1,29 @@
 'use client';
 
 import Accordion from '@/components/Accordion';
+import { useCSStore } from '@/components/Providers/CSStoreProvider';
 import useImages from '@/hooks/useImages';
-import { ErrorData, MessageCommonProblems } from '@/types/app';
-import { FC } from 'react';
+import { useEffect } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 
-export type AccordionListComponentProps = {
-  faq: ErrorData | MessageCommonProblems[] | undefined;
-};
-
-export type AccordionListComponent = FC<Readonly<AccordionListComponentProps>>;
-
-const AccordionList: AccordionListComponent = ({ faq }) => {
+const AccordionList = () => {
   const { images } = useImages();
+  const { msgCommonProblems, fetchMsgCommonProblems } = useCSStore((state) => state);
+
+  useEffect(() => {
+    fetchMsgCommonProblems();
+  }, []);
 
   return (
     <ul>
-      {faq &&
-        !('message' in faq) &&
-        faq.length > 0 &&
-        faq.map((question, index) => (
+      {msgCommonProblems.length > 0 &&
+        !('message' in msgCommonProblems) &&
+        msgCommonProblems.length > 0 &&
+        msgCommonProblems.map((question, index) => (
           <li key={index}>
             <Accordion
-              title={question.title}
-              content={ReactHtmlParser(question.content)}
+              title={question.title || ''}
+              content={ReactHtmlParser(question.content || '')}
               dropdownImg={images.arrowDown}
               delay={index}
             />
