@@ -1,3 +1,5 @@
+'use server';
+
 import { request } from '@/api';
 import {
   AccountInfo,
@@ -13,6 +15,7 @@ import {
 } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import { CustomerServiceFn } from '@/types/fns';
+import { cookies } from 'next/headers';
 
 export const loginDevice = async (payload: LoginDevicePayload) => {
   const data = await request<RootResponse<AccountInfo>>({
@@ -21,6 +24,7 @@ export const loginDevice = async (payload: LoginDevicePayload) => {
     endpoint: API_ENDPOINT.LOGIN_DEVICE,
     tags: API_ENDPOINT.LOGIN_DEVICE,
   });
+  if (data.data && 'token' in data.data) cookies().set('token', `${data.data.token}`);
   return data.data;
 };
 
