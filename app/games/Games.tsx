@@ -5,12 +5,11 @@ import { FC, useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 type Props = {
-  gameId: string;
+  gameUrl: string;
 };
 
-const Games: FC<Props> = ({ gameId }) => {
+const Games: FC<Props> = ({ gameUrl }) => {
   const pathname = usePathname();
-  const [data, setData] = useState<string | undefined>();
   const [isDraggableTouched, setIsDraggableTouched] = useState(false);
   const inThirdPartyGamePage = pathname.includes('Games');
 
@@ -45,12 +44,6 @@ const Games: FC<Props> = ({ gameId }) => {
     };
   }, []);
 
-  useEffect(() => {
-    if (gameId && typeof gameId === 'string') {
-      setData(gameId);
-    }
-  }, []);
-
   const thirdGameAppSize = () => {
     const rootElement = document.getElementById('root');
 
@@ -83,7 +76,7 @@ const Games: FC<Props> = ({ gameId }) => {
       <iframe
         className='thirdPartGameIframe'
         title='Game'
-        src={data}
+        src={gameUrl}
         style={{
           position: 'absolute',
           zIndex: '1',

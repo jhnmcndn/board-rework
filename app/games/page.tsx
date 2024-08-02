@@ -27,9 +27,9 @@ const GamesPage: FC<Props> = async ({ searchParams }) => {
     return response.data;
   };
 
-  const id = await joinGame(searchParams.id);
+  const gameUrl = await joinGame(searchParams.id);
 
-  if (typeof id === 'string') return <Games gameId={id} />;
+  if (typeof gameUrl === 'string') return <Games gameUrl={gameUrl} />;
 
   redirect('/');
 };

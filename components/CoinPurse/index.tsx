@@ -22,11 +22,9 @@ export type CoinPurseComponent = FC<Readonly<CoinPurseProps>>;
 const CoinPurse: CoinPurseComponent = (props) => {
   const { position, top, left, iColor, betLog, inputBg, noShuffle } = props;
   const { images } = useImages();
-  const { authCheck } = useAuthCheck();
-  const userBalance = useAccountStore((state) => state.accountNow.balance);
-  const userToken = useAccountStore((state) => state.accountInfo.token);
+  const { authCheck, isLoggedIn } = useAuthCheck();
   const [animateSpin, setAnimateSpin] = useState(false);
-  const isLoggedIn = userToken !== undefined;
+  const { fetchAccountNow, accountNow } = useAccountStore((state) => state);
 
   useEffect(() => {
     const spinTimer = setTimeout(() => setAnimateSpin(false), 500);
@@ -51,7 +49,7 @@ const CoinPurse: CoinPurseComponent = (props) => {
           <div className={styles.coinInput}>
             <input
               className={styles.userBalanceInput}
-              value={isLoggedIn ? userBalance : 0}
+              value={isLoggedIn ? accountNow.balance : 0}
               disabled={true}
               style={{ background: inputBg, color: iColor }}
             />
@@ -65,7 +63,7 @@ const CoinPurse: CoinPurseComponent = (props) => {
             alt='Reload'
             width={70}
             height={70}
-            onClick={() => authCheck(() => console.log('// TODO Refetch balance'))}
+            onClick={() => authCheck(() => fetchAccountNow())}
           />
         </div>
       )}

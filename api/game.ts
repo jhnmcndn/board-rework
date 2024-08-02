@@ -2,9 +2,10 @@ import { request } from '@/api';
 import { AccountInfo, GameInfoGroup, GetGameTypes, RootResponse, RspGameInfo } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import { GetGameInfoGroupFn, GetGameInfosFn } from '@/types/fns';
+import { getFromLocalStorage } from '@/utils/helpers';
 
 export const getAccountInfo = async () => {
-  const token = localStorage?.getItem('token');
+  const token = getFromLocalStorage('token');
   const data = await request<RootResponse<AccountInfo>>({
     route: APP_ROUTE.GAME,
     endpoint: API_ENDPOINT.ACCOUNT_INFO,
