@@ -52,6 +52,10 @@ const BackButton = () => {
         className={styles.exit}
         drag
         dragConstraints={constraints}
+        initial={{
+          y: 20,
+          x: 20,
+        }}
         onClick={() => {
           if (isDragging) return;
 
