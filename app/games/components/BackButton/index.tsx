@@ -12,6 +12,7 @@ const BackButton = () => {
     right: window.innerWidth,
     bottom: window.innerHeight,
   });
+  const [confirmation, setConfirmation] = useState(false);
 
   useEffect(() => {
     const updateConstraints = () => {
@@ -27,22 +28,44 @@ const BackButton = () => {
     return () => window.removeEventListener('resize', updateConstraints);
   }, []);
 
-  return (
-    <motion.div
-      className={styles.exit}
-      drag
-      dragConstraints={constraints}
-      onClick={() => {
-        if (isDragging) return;
+  const onCancel = () => {
+    setConfirmation(false);
+  };
 
-        router.push('/');
-        // popSound();
-      }}
-      onDragStart={() => setIsDragging(true)}
-      onDragEnd={() => setIsDragging(false)}
-    >
-      返回
-    </motion.div>
+  const onConfirm = () => {
+    router.push('/');
+  };
+
+  return (
+    <>
+      <motion.div
+        className={styles.exit}
+        drag
+        dragConstraints={constraints}
+        onClick={() => {
+          if (isDragging) return;
+
+          setConfirmation(true);
+          // popSound();
+        }}
+        onDragStart={() => setIsDragging(true)}
+        onDragEnd={() => setIsDragging(false)}
+      >
+        返回
+      </motion.div>
+
+      {confirmation && (
+        <div className={styles.confirmation}>
+          <div className={styles.container}>
+            <h1>确定是否退出</h1>
+            <div className={styles.buttons}>
+              <button onClick={onCancel}>取消</button>
+              <button onClick={onConfirm}>确定</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
