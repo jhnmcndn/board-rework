@@ -10,8 +10,8 @@ const BackButton = () => {
   const [constraints, setConstraints] = useState({
     top: 0,
     left: 0,
-    right: window.innerWidth,
-    bottom: window.innerHeight,
+    right: window.innerWidth / 1.043,
+    bottom: window.innerHeight / 1.125,
   });
   const [confirmation, setConfirmation] = useState(false);
   const fetchAccountNow = useAccountStore((state) => state.fetchAccountNow);
@@ -21,8 +21,8 @@ const BackButton = () => {
       setConstraints({
         top: 0,
         left: 0,
-        right: window.innerWidth,
-        bottom: window.innerHeight,
+        right: window.innerWidth / 1.043,
+        bottom: window.innerHeight / 1.125,
       });
     };
 
