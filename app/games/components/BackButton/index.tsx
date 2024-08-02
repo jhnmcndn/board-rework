@@ -17,13 +17,20 @@ const BackButton = () => {
   const fetchAccountNow = useAccountStore((state) => state.fetchAccountNow);
 
   useEffect(() => {
+    let deboundId: NodeJS.Timeout;
+
     const updateConstraints = () => {
-      setConstraints({
-        top: 0,
-        left: 0,
-        right: window.innerWidth / 1.043,
-        bottom: window.innerHeight / 1.125,
-      });
+      if (deboundId) {
+        clearTimeout(deboundId);
+      }
+      deboundId = setTimeout(() => {
+        setConstraints({
+          top: 0,
+          left: 0,
+          right: window.innerWidth / 1.043,
+          bottom: window.innerHeight / 1.125,
+        });
+      }, 100);
     };
 
     window.addEventListener('resize', updateConstraints);
