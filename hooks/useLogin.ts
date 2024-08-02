@@ -1,5 +1,3 @@
-'use client';
-
 import { getIp } from '@/api';
 import { loginDevice } from '@/api/platform';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
