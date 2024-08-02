@@ -1,0 +1,13 @@
+.exit {
+  position: absolute;
+  z-index: 100;
+  width: 0.4rem;
+  height: 0.4rem;
+  background-color: rgba(23, 23, 23, 0.5);
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px white;
+  font-size: 0.1rem;
+}
