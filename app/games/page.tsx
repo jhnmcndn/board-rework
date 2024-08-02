@@ -3,6 +3,7 @@ import { RootResponse } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import { JoinGameParams } from '@/types/fns';
 import { getToken } from '@/utils/getToken';
+import { redirect } from 'next/navigation';
 import { FC } from 'react';
 import Games from './Games';
 
@@ -12,15 +13,12 @@ type Props = {
   };
 };
 
-const page: FC<Props> = async ({ searchParams }) => {
+const GamesPage: FC<Props> = async ({ searchParams }) => {
   const joinGame: JoinGameParams = async (id) => {
-    let body = {
-      id,
-    };
     const response = await request<RootResponse<string>>({
       route: APP_ROUTE.GAME,
       endpoint: API_ENDPOINT.JOIN_GAME,
-      body,
+      body: { id },
       tags: API_ENDPOINT.JOIN_GAME,
       otherHeaders: {
         token: getToken() || '',
@@ -31,7 +29,9 @@ const page: FC<Props> = async ({ searchParams }) => {
 
   const id = await joinGame(searchParams.id);
 
-  return <Games gameId={id} />;
+  if (typeof id === 'string') return <Games gameId={id} />;
+
+  redirect('/');
 };
 
-export default page;
+export default GamesPage;
