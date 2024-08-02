@@ -10,8 +10,8 @@ const BackButton = () => {
   const [constraints, setConstraints] = useState({
     top: 0,
     left: 0,
-    right: window.innerWidth / 1.043,
-    bottom: window.innerHeight / 1.125,
+    right: window.innerWidth - 44,
+    bottom: window.innerHeight - 40,
   });
   const [confirmation, setConfirmation] = useState(false);
   const fetchAccountNow = useAccountStore((state) => state.fetchAccountNow);
@@ -27,8 +27,8 @@ const BackButton = () => {
         setConstraints({
           top: 0,
           left: 0,
-          right: window.innerWidth / 1.043,
-          bottom: window.innerHeight / 1.125,
+          right: window.innerWidth - 44,
+          bottom: window.innerHeight - 40,
         });
       }, 100);
     };
@@ -52,6 +52,10 @@ const BackButton = () => {
         className={styles.exit}
         drag
         dragConstraints={constraints}
+        initial={{
+          y: 20,
+          x: 20,
+        }}
         onClick={() => {
           if (isDragging) return;
 
