@@ -1,30 +1,15 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
+import BackButton from './components/BackButton';
 
 type Props = {
   gameUrl: string;
 };
 
 const Games: FC<Props> = ({ gameUrl }) => {
-  const pathname = usePathname();
-  const [isDraggableTouched, setIsDraggableTouched] = useState(false);
-  const inThirdPartyGamePage = pathname.includes('Games');
-
   let lowZIndexTimer: NodeJS.Timeout;
-
-  const draggableTouched = () => {
-    setIsDraggableTouched(true);
-  };
-
-  const draggableUntouched = () => {
-    lowZIndexTimer = setTimeout(() => {
-      setIsDraggableTouched(false);
-      clearTimeout(lowZIndexTimer);
-    }, 2000);
-  };
 
   useEffect(() => {
     thirdGameAppSize();
@@ -73,6 +58,7 @@ const Games: FC<Props> = ({ gameUrl }) => {
         position: 'relative',
       }}
     >
+      <BackButton />
       <iframe
         className='thirdPartGameIframe'
         title='Game'
