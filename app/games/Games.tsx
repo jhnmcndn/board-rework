@@ -1,26 +1,18 @@
 'use client';
 
-import useAuthCheck from '@/hooks/useAuthCheck';
-import { ErrorData } from '@/types/app';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 type Props = {
-  gameId: ErrorData | string | undefined;
+  gameId: string;
 };
 
 const Games: FC<Props> = ({ gameId }) => {
-  const router = useRouter();
+  const pathname = usePathname();
   const [data, setData] = useState<string | undefined>();
   const [isDraggableTouched, setIsDraggableTouched] = useState(false);
-  const pathname = usePathname();
   const inThirdPartyGamePage = pathname.includes('Games');
-  const { isLoggedIn } = useAuthCheck();
-
-  if (!isLoggedIn) {
-    router.push('/');
-  }
 
   let lowZIndexTimer: NodeJS.Timeout;
 
