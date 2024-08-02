@@ -1,3 +1,4 @@
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -13,6 +14,7 @@ const BackButton = () => {
     bottom: window.innerHeight,
   });
   const [confirmation, setConfirmation] = useState(false);
+  const fetchAccountNow = useAccountStore((state) => state.fetchAccountNow);
 
   useEffect(() => {
     const updateConstraints = () => {
@@ -33,6 +35,7 @@ const BackButton = () => {
   };
 
   const onConfirm = () => {
+    fetchAccountNow();
     router.push('/');
   };
 
