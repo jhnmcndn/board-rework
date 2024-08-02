@@ -34,7 +34,7 @@ export const getAccountNow = async () => {
     endpoint: API_ENDPOINT.ACCOUNT_NOW,
     tags: API_ENDPOINT.ACCOUNT_NOW,
     otherHeaders: {
-      token: localStorage.getItem('token') || '',
+      token: cookies().get('token')?.value || '',
     },
   });
   return data.data;
@@ -85,7 +85,7 @@ export const boxPassIsOpen = async () => {
 };
 
 export const customerService: CustomerServiceFn = async () => {
-  const token = localStorage?.getItem('token');
+  const token = cookies().get('token')?.value || '';
   const data = await request<RootResponse<CustomerService[]>>({
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.CUSTOMER_SERVICE,
@@ -108,7 +108,7 @@ export const getMessageCommonProblems = async () => {
 };
 
 export const getVipGiftInfo = async () => {
-  const token = localStorage?.getItem('token');
+  const token = cookies().get('token')?.value || '';
   const data = await request<RootResponse<VIPGiftInfo>>({
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.VIP_GIFT_INFO,
