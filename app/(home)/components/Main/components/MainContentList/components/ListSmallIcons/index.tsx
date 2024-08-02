@@ -58,7 +58,6 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
 
   const handleGameClick = (item: RspGameInfo) => {
     if (isDragging) return;
-
     sessionStorage.setItem('id', String(item.id));
     sessionStorage.setItem('id_2', String(item.id));
     var data_Category = item.gameCategory === 'HG' ? true : false;
@@ -69,7 +68,7 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
       } else {
         if (data_Category) {
         } else {
-          router.push('/games');
+          router.push(`/games?id=${item.id}`);
         }
       }
     });
