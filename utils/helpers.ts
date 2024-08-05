@@ -20,6 +20,43 @@ export const getDeviceInfo = () => {
 
 export const copyToClipboard = (text: string) => window.navigator.clipboard.writeText(text);
 
+export const MODAL_BG_ANIMATION = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      delay: 0.3,
+    },
+  },
+};
+
+export const MODAL_CONTENT_ANIMATION = {
+  hidden: {
+    scale: 0.9,
+  },
+  visible: {
+    scale: 1,
+    transition: {
+      duration: 0.3,
+      type: 'spring',
+      damping: 25,
+      stiffness: 500,
+    },
+  },
+  exit: {
+    scale: 0,
+    opacity: 0,
+    transition: {
+      duration: 0.2,
+    },
+  },
+};
+
 export const getFromLocalStorage = (key: string, defaultValue: string = '') => {
   if (typeof localStorage === 'undefined') return defaultValue;
   else return localStorage.getItem(key) || defaultValue;

@@ -1,9 +1,10 @@
 import { getAccountInfo } from '@/api/game';
 import { getAccountNow } from '@/api/platform';
-import { AccountInfo, AccountNow, BindCardList, Init } from '@/types/app';
+import { AccountInfo, AccountNow, BankList, BindCardList, Init } from '@/types/app';
 import { THEME } from '@/types/enums';
 import { createStore } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { getBankList, getBindCardList } from "@/api/pay";
 
 export const initState = {
   actionSwitch: undefined,
@@ -51,6 +52,13 @@ export const bindCardListState = {
   specialBankInfoMap: undefined,
 } satisfies BindCardList;
 
+export const bankListState = {
+  id: undefined,
+  bankName: undefined,
+  bankIcon: undefined,
+  sort: undefined
+} satisfies BankList;
+
 type AccountState = {
   init: Init;
   accountInfo: AccountInfo;
@@ -59,6 +67,7 @@ type AccountState = {
   boxPassIsSet: boolean;
   bindCardList: BindCardList;
   withdrawActiveTab: number;
+  bankList: BankList[];
 };
 
 type AccountActions = {
@@ -69,6 +78,9 @@ type AccountActions = {
   setBoxPassIsSet: (boxPassIsSet: boolean) => void;
   setBindCardList: (bindCardList: BindCardList) => void;
   setWithdrawActiveTab: (index: number) => void;
+  setBankList: (bankList: BankList) => void;
+  fetchBankList: () => void;
+  fetchBindCardList: () => void;
 };
 
 export type AccountApiCalls = {
@@ -89,6 +101,7 @@ export const createAccountStore = () =>
         boxPassIsSet: false,
         bindCardList: bindCardListState,
         withdrawActiveTab: 0,
+        bankList: [bankListState],
         setInit: (init) => set(() => ({ init: { ...init } })),
         setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
         setTheme: (theme) => set(() => ({ theme })),
@@ -96,7 +109,7 @@ export const createAccountStore = () =>
         setBoxPassIsSet: (boxPassIsSet) => set(() => ({ boxPassIsSet })),
         setBindCardList: (bindCardList) => set(() => ({ bindCardList })),
         setWithdrawActiveTab: (index) => set(() => ({ withdrawActiveTab: index })),
-
+        setBankList: (bankList) => set(() => ({ bankList: bankList })),
         fetchAccountInfo: async () => {
           const accountInfo = await getAccountInfo();
           if (!accountInfo || 'message' in accountInfo) return set(() => ({ accountInfo: accountInfoState }));
@@ -106,6 +119,16 @@ export const createAccountStore = () =>
           const accountNow = await getAccountNow();
           if (!accountNow || 'message' in accountNow) return set(() => ({ accountNow: accountNowState }));
           return set(() => ({ accountNow }));
+        },
+        fetchBankList: async () => {
+          const bankList = await getBankList();
+          if (!bankList || 'message' in bankList) return set(() => ({ bankList: [bankListState] }));
+          return set(() => ({ bankList }));
+        },
+        fetchBindCardList: async () => {
+          const bindCardList = await getBindCardList();
+          if (!bindCardList || 'message' in bindCardList) return set(() => ({ bindCardList: bindCardListState }));
+          return set(() => ({ bindCardList }));
         },
       }),
       {

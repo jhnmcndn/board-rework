@@ -1,0 +1,18 @@
+.buttonDesignTwo {
+  @include flex-xy;
+  background: var(--vip-btn-bg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  font-size: 0.12rem;
+  border-radius: 0.2rem;
+  width: 0.8rem;
+  margin-top: 0.15rem;
+  color: var(--vip-btn-text);
+  text-align: center;
+  padding: 0.1rem;
+  height: 0.2rem;
+  span {
+    position: relative;
+    top: -0.02rem;
+  }
+}

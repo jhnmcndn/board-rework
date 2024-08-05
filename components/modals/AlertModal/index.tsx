@@ -22,7 +22,7 @@ export default function AlertContainer() {
           </div>
           {content.body && (
             <span className={styles.alert__message}>
-              {content.link ? '复制链接:' : '复制:'} {content.body}
+              {content.body}
             </span>
           )}
           {content.notify && <span className={styles.alert__message}>{content.notify}</span>}

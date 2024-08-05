@@ -20,7 +20,7 @@ function ModalLayout({ closeOnOutsideClick = false, isAlert = false, children, o
     if (isAlert) {
       setTimeout(() => {
         onClose?.();
-      }, 1500);
+      }, 4000);
     }
   }, []);
 

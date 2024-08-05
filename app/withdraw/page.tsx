@@ -1,20 +1,17 @@
-'use client'
+'use server'
 
-import { useAccountStore } from "@/components/Providers/AccountStoreProvider";
-import SelfWithdrawal from '@/app/withdraw/components/SelfWithdrawal';
-import styles from './index.module.scss';
+import { WithdrawPage } from "@/app/withdraw/components/WithdrawPage";
+import { getBindCardList, getBankList } from '@/api/pay';
 
-const Withdraw = () => {
-  const bindCardList = useAccountStore((state) => state.bindCardList);
-  const withdrawActiveTab = useAccountStore((state) => state.withdrawActiveTab);
+const Withdraw = async () => {
+  const bindCardList = await getBindCardList();
+  const bankList = await getBankList();
 
   return (
-    <div className={styles.withdrawContents}>
-      {withdrawActiveTab === 0 && <SelfWithdrawal />}
-      {/*{withdrawActiveTab === 1 && <CodingDetails />}*/}
-      {/*{withdrawActiveTab === 2 && <BindCards />}*/}
-      {/*{withdrawActiveTab === 3 && <CashWithdrawalRecord />}*/}
-    </div>
+    <WithdrawPage
+      bindCardList={bindCardList}
+      bankList={bankList}
+    />
   )
 };
 
