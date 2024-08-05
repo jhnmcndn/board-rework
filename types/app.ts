@@ -185,3 +185,10 @@ export type VIPSetList = {
   weekBonus?: number;
   bcode?: number;
 };
+
+export type BankList = {
+  id?: number;
+  bankName?: string;
+  bankIcon?: string;
+  sort?: number;
+};
