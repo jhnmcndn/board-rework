@@ -1,12 +1,13 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { MemberCardList, SpecialBankInfoMap } from '@/types/app';
 import { onClickSound } from '@/utils/audioFile';
+import AddCardModal from "@/app/withdraw/components/AddCardModal";
 import classnames from 'classnames';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import styles from './index.module.scss';
+import styles from './index.module.scss'
 
 const SelfWithdrawal = () => {
   const theme = useAccountStore((state) => state.theme);
@@ -16,34 +17,24 @@ const SelfWithdrawal = () => {
   const [showSpecialAddCardModal, setShowSpecialAddCardModal] = useState(false);
   const [showAddCardModal, setShowAddCardModal] = useState(false);
   const [selectedBindCard, setSelectedBindCard] = useState<MemberCardList>({});
-  const [bindCards, setBindCards] = useState<MemberCardList[] | undefined>();
-  const [selectedCard, setSelectedCard] = useState(selectedBindCard ? selectedBindCard : null);
+  const [selectedCard, setSelectedCard] = useState(bindCardList?.memberCardList?.[0]);
   const [showSafeBox, setShowSafeBox] = useState(false);
   const [specialCard, setSpecialCard] = useState<SpecialBankInfoMap>({});
   const [alertNotif, setAlertNotif] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
+  const fetchBindCardList = useAccountStore((state) => state.fetchBindCardList);
 
   const [passedBankName, setPassedBankName] = useState('');
   const [passedBankID, setPassedBankID] = useState();
 
   useEffect(() => {
-    setBindCards(bindCardList?.memberCardList);
-    // setSelectedBindCard(bindCardList?.memberCardList[0]);
+    fetchBindCardList();
   }, []);
 
-  useEffect(() => {
-    setSelectedCard(selectedBindCard);
-  }, [selectedBindCard]);
-
-  useEffect(() => {
-    // setSpecialCard(bindCardList?.specialBankInfoMap);
-    // withdrawPassIsOpen().then((res) => {
-    //   dispatch(setWithdrawPassIsSet(res.data?.data));
-    // });
-  }, []);
-
-  const refreshCardList = () => {
-    setBindCards(bindCardList?.memberCardList);
+  const handleToggleClick = (item) => {
+    setSelectedCard((prevSelectedCard) =>
+      prevSelectedCard?.id === item.id ? null : item
+    );
   };
 
   const handleWithdraw = () => {
@@ -64,6 +55,13 @@ const SelfWithdrawal = () => {
     <>
       {/* Should be replaced by openAlert() from useModalStore */}
       {/* <AlertContainer alertMe={alertNotif} notify={alertMessage} /> */}
+      <AddCardModal
+        showMe={showAddCardModal}
+        onClose={() => {
+          setShowAddCardModal(!showAddCardModal);
+        }}
+        special={false}
+      />
       <div className={styles.selfWithdrawalWrapper}>
         <section className={styles.panel}>
           <div className={styles.headerWrapper}>
@@ -91,14 +89,14 @@ const SelfWithdrawal = () => {
           <div className={styles.headerWrapper}>
             <span>提现方式</span>
           </div>
-          {bindCards && bindCards.length > 0 && (
+          {bindCardList?.memberCardList?.length > 0 && (
             <ul className={styles.selectBindCardList}>
-              {bindCards.map((item, index) => {
+              {bindCardList?.memberCardList?.map((item, index) => {
                 return (
                   <li
                     key={index}
                     className={classnames(styles.bankCard, {
-                      [styles.selectedCard]: item?.id === selectedBindCard?.id,
+                      [styles.selectedCard]: item?.id === selectedCard?.id
                     })}
                     onClick={() => {
                       setSelectedBindCard(item);
@@ -107,13 +105,21 @@ const SelfWithdrawal = () => {
                     }}
                   >
                     <div className={styles.bankDetails}>
-                      <Image src={item?.bankIcon || ''} width={200} height={200} alt='Bank Icon' />
-                      <span
-                        className={classnames(styles.toggle, {
-                          [styles.toggleSelected]: item?.id === selectedCard?.id,
-                        })}
+                      <Image
+                        src={item?.bankIcon || ''}
+                        width={200}
+                        height={200}
+                        alt='Bank Icon'
                       />
+                      {item?.bankName} 尾号 {item?.bankAccount?.substr(item?.bankAccount?.length - 4)}
                     </div>
+                    <span
+                      key={item.id}
+                      className={classnames(styles.toggle, {
+                        [styles.toggleSelected]: item?.id === selectedCard?.id
+                      })}
+                      onClick={() => handleToggleClick(item)}
+                    />
                   </li>
                 );
               })}
@@ -127,31 +133,35 @@ const SelfWithdrawal = () => {
                 setShowAddCardModal(!showAddCardModal);
               }}
             >
-              <Image src={require(`@/assets/${theme}/withdraw/plusVector.png`)} width={50} height={50} alt='Add Bank' />
+              <Image
+                src={require(`@/assets/${theme}/withdraw/plusVector.png`)}
+                width={50}
+                height={50}
+                alt='Add Bank'
+              />
               <span>绑定银行卡</span>
             </div>
-            {specialCard &&
-              Object.keys(specialCard)?.map((card, index) => {
-                return (
-                  <div
-                    key={index}
-                    className={styles.addCard}
-                    onClick={() => {
-                      setShowSpecialAddCardModal(!showSpecialAddCardModal);
-                      // setPassedBankID(specialCard[card]);
-                      setPassedBankName(card);
-                    }}
-                  >
-                    <Image
-                      src={require(`@/assets/${theme}/withdraw/plusVector.png`)}
-                      width={50}
-                      height={50}
-                      alt='Add Bank'
-                    />
-                    <span>{card}</span>
-                  </div>
-                );
-              })}
+            {bindCardList?.specialBankInfoMap && Object.keys(bindCardList?.specialBankInfoMap).map((card, index) => {
+              return (
+                <div
+                  key={index}
+                  className={styles.addCard}
+                  onClick={() => {
+                    setShowSpecialAddCardModal(!showSpecialAddCardModal);
+                    setPassedBankID(specialCard[card]);
+                    setPassedBankName(card);
+                  }}
+                >
+                  <Image
+                    src={require(`@/assets/${theme}/withdraw/plusVector.png`)}
+                    width={50}
+                    height={50}
+                    alt='Add Bank'
+                  />
+                  <span>{card}</span>
+                </div>
+              )
+            })}
           </div>
         </section>
 

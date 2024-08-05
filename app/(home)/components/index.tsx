@@ -7,7 +7,6 @@ import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import { useMessageStore } from '@/components/Providers/MessageStoreProvider';
 import { initState } from '@/store/account';
 import {
-  BindCardList,
   ErrorData,
   GetGameTypes,
   Init,
@@ -27,7 +26,6 @@ export type HomePageComponent = FC<
     gameInfosData?: RspGameInfo[] | ErrorData;
     messageOnSites?: MessageOnSites[] | ErrorData;
     getBoxPassIsOpen?: boolean | ErrorData;
-    bindCardList?: BindCardList | ErrorData;
   }>
 >;
 
@@ -38,10 +36,9 @@ export const HomePage: HomePageComponent = ({
   gameInfosData,
   messageOnSites,
   getBoxPassIsOpen,
-  bindCardList,
 }) => {
   const setMessageOnSites = useMessageStore((state) => state.setMessageOnSites);
-  const { theme, setInit, setBoxPassIsSet, setBindCardList } = useAccountStore((state) => state);
+  const { theme, setInit, setBoxPassIsSet } = useAccountStore((state) => state);
   const { activeSideBarItem, setGameInfos, setAnnounceText, setSideBar, setActiveSideBarItem } = useGameStore(
     (state) => state,
   );
@@ -84,10 +81,7 @@ export const HomePage: HomePageComponent = ({
       setBoxPassIsSet(getBoxPassIsOpen);
     }
 
-    if (bindCardList && !('message' in bindCardList)) {
-      setBindCardList(bindCardList);
-    }
-  }, [init, messageHomeNoticesData, gameTypesData, gameInfosData, messageOnSites, getBoxPassIsOpen, bindCardList]);
+  }, [init, messageHomeNoticesData, gameTypesData, gameInfosData, messageOnSites, getBoxPassIsOpen]);
 
   return (
     <div className='mainColor' data-theme={theme}>

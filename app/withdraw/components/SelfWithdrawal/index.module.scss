@@ -5,7 +5,7 @@
   overflow-y: auto;
   padding: 0.1rem;
   width: 100%;
-  height: 100%;
+  height: auto;
   .panel {
     @include flex-xy(flex-start, center);
     flex-direction: column;
@@ -72,19 +72,20 @@
             @include flex-xy;
             gap: 0.1rem;
             font-size: 0.15rem;
+            color: var(--withdrawSelf-text-add);
             img {
               width: 0.2rem;
               height: 0.2rem;
             }
-            .toggle {
-              width: 0.2rem;
-              height: 0.2rem;
-              border-radius: 100%;
-              background: #1f1e1b;
-              border: #dec18c 0.004rem solid;
-              &.toggleSelected {
-                background: linear-gradient(to top, #ff9900, #fee78a);
-              }
+          }
+          .toggle {
+            width: 0.2rem;
+            height: 0.2rem;
+            border-radius: 100%;
+            background: #1f1e1b;
+            border: #dec18c 0.004rem solid;
+            &.toggleSelected {
+              background: linear-gradient(to top, #ff9900, #fee78a);
             }
           }
         }
