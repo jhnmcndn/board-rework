@@ -1,10 +1,18 @@
 import { getAccountInfo } from '@/api/game';
 import { getAccountNow } from '@/api/platform';
-import { AccountInfo, AccountNow, BankList, BindCardList, Init } from '@/types/app';
+import {
+  AccountInfo,
+  AccountNow,
+  BankList,
+  BindCardList,
+  Init,
+  WithdrawRechargeBody,
+  WithdrawRechargeDetail,
+} from '@/types/app';
 import { THEME } from '@/types/enums';
 import { createStore } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { getBankList, getBindCardList } from "@/api/pay";
+import { getBankList, getBindCardList, getWithdrawRechargeDetail } from '@/api/pay';
 
 export const initState = {
   actionSwitch: undefined,
@@ -56,8 +64,20 @@ export const bankListState = {
   id: undefined,
   bankName: undefined,
   bankIcon: undefined,
-  sort: undefined
+  sort: undefined,
 } satisfies BankList;
+
+export const withdrawRecordListState = {
+  money: undefined,
+  orderNo: undefined,
+  requestTime: undefined,
+  bankName: undefined,
+  status: undefined,
+  remark: undefined,
+  color: undefined,
+  bankAccount: undefined,
+  bankAddress: undefined,
+};
 
 type AccountState = {
   init: Init;
@@ -68,6 +88,7 @@ type AccountState = {
   bindCardList: BindCardList;
   withdrawActiveTab: number;
   bankList: BankList[];
+  withdrawRecordList: WithdrawRechargeDetail[];
 };
 
 type AccountActions = {
@@ -77,10 +98,12 @@ type AccountActions = {
   setAccountNow: (accountNow: Partial<AccountNow>) => void;
   setBoxPassIsSet: (boxPassIsSet: boolean) => void;
   setBindCardList: (bindCardList: BindCardList) => void;
+  setWithdrawRecordList: (withdrawRecordList: WithdrawRechargeDetail) => void;
   setWithdrawActiveTab: (index: number) => void;
   setBankList: (bankList: BankList) => void;
   fetchBankList: () => void;
   fetchBindCardList: () => void;
+  fetchWithdrawRecordList: ({ type, pageNum, pageSize }: WithdrawRechargeBody) => void;
 };
 
 export type AccountApiCalls = {
@@ -102,12 +125,14 @@ export const createAccountStore = () =>
         bindCardList: bindCardListState,
         withdrawActiveTab: 0,
         bankList: [bankListState],
+        withdrawRecordList: [withdrawRecordListState],
         setInit: (init) => set(() => ({ init: { ...init } })),
         setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
         setTheme: (theme) => set(() => ({ theme })),
         setAccountNow: (accountNow) => set(() => ({ accountNow: { ...accountNow } })),
         setBoxPassIsSet: (boxPassIsSet) => set(() => ({ boxPassIsSet })),
         setBindCardList: (bindCardList) => set(() => ({ bindCardList })),
+        setWithdrawRecordList: (withdrawRecordList) => set(() => ({ withdrawRecordList })),
         setWithdrawActiveTab: (index) => set(() => ({ withdrawActiveTab: index })),
         setBankList: (bankList) => set(() => ({ bankList: bankList })),
         fetchAccountInfo: async () => {
@@ -129,6 +154,17 @@ export const createAccountStore = () =>
           const bindCardList = await getBindCardList();
           if (!bindCardList || 'message' in bindCardList) return set(() => ({ bindCardList: bindCardListState }));
           return set(() => ({ bindCardList }));
+        },
+        fetchWithdrawRecordList: async ({ type, pageNum, pageSize }) => {
+          const withdrawRecordList = await getWithdrawRechargeDetail({
+            type: type,
+            pageNum: pageNum,
+            pageSize: pageSize,
+          });
+          if (!withdrawRecordList || 'message' in withdrawRecordList) {
+            return set(() => ({ withdrawRecordList: withdrawRecordListState }));
+          }
+          return set(() => ({ withdrawRecordList }));
         },
       }),
       {
