@@ -10,7 +10,7 @@ import { BankList, BindCardList, ErrorData } from '@/types/app';
 export type WithdrawPageComponent = FC<
   Readonly<{
     bindCardList?: BindCardList | ErrorData;
-    bankList?: BankList | ErrorData;
+    bankList?: BankList[] | ErrorData;
   }>
 >;
 
