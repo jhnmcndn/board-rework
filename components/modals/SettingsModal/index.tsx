@@ -1,5 +1,6 @@
 'use client';
 import HeaderModalTitle from '@/components/HeaderModalTitle';
+import useModalStore from '@/store/modals';
 import { onClickSound } from '@/utils/audioFile';
 import classNames from 'classnames';
 import { useState } from 'react';
@@ -16,12 +17,9 @@ type ListItemProps = {
   title: string;
 };
 
-type SettingsModalProps = {
-  handleClose: () => void;
-};
-
-const SettingsModal: React.FC<SettingsModalProps> = ({ handleClose }) => {
+const SettingsModal: React.FC = () => {
   const [selectedId, setSelectedId] = useState<number>(0);
+  const { closeSettings, isSettingsOpen } = useModalStore();
   const listItems: ListItemProps[] = [
     { id: 0, title: '个人信息' },
     { id: 1, title: '音乐切换' },
@@ -52,10 +50,12 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ handleClose }) => {
     }
   };
 
+  if (!isSettingsOpen) return null;
+
   return (
     <ModalLayout>
       <div className={styles.settingsContainer}>
-        <HeaderModalTitle title='设置' onClick={handleClose} />
+        <HeaderModalTitle title='设置' onClick={closeSettings} />
         <div className={styles.contentModal}>
           <div className={styles.sidebarContainer}>
             <ul className={styles.sidebarList}>

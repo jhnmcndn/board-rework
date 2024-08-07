@@ -5,31 +5,23 @@ import useModalStore from '@/store/modals';
 import { onClickSound } from '@/utils/audioFile';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import styles from './index.module.scss';
 
 const HeaderButtons = () => {
   const { push } = useRouter();
   const { images } = useImages();
   const { authCheck } = useAuthCheck();
-  const { openSettings, closeSettings } = useModalStore();
-  const [isSettings, setIsSetttings] = useState(false);
-
-  const handleClose = () => {
-    setIsSetttings(false);
-    closeSettings();
-  };
+  const { openSettings } = useModalStore();
 
   const handleSetting = () => {
     onClickSound('pop');
     authCheck(() => {
-      setIsSetttings(true);
       openSettings();
     });
   };
   return (
     <>
-      {isSettings && <SettingsModal handleClose={handleClose} />}
+      <SettingsModal />
 
       <div className={styles.headerButtons}>
         <Image
