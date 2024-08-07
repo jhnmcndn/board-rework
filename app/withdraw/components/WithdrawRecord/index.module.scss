@@ -1,0 +1,74 @@
+.withdrawalRecordWrapper {
+  width: 100%;
+  height: 100%;
+  padding: 0.1rem;
+  overflow-y: auto;
+
+  .recordWrapper {
+    @include flex-xy(flex-start, center);
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    gap: 0.05rem;
+
+    .recordList {
+      background: #222;
+      height: 0.28rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      > span {
+        text-align: center;
+        //border: 1px solid purple;
+      }
+
+      &:nth-child(even) {
+        background: #2c2c2c;
+      }
+
+      .time {
+        font-size: 0.12rem;
+        color: #757575;
+        width: 30%;
+      }
+
+      .orderWrapper {
+        @include flex-xy(space-between, center);
+        width: 35%;
+
+        .orderNumber {
+          font-size: 0.12rem;
+          color: #fff;
+        }
+
+        .copyBtn {
+          font-size: 0.09rem;
+          color: #757575;
+          border: 0.001rem solid #72728f;
+          padding: 0.03rem;
+          border-radius: 0.2rem;
+          width: 0.3rem;
+        }
+      }
+
+      .remark {
+        font-size: 0.12rem;
+        width: 15%;
+      }
+
+      .money {
+        font-size: 0.12rem;
+        color: #fff;
+        width: 15%;
+      }
+    }
+  }
+
+  :global {
+    .ptr__pull-down--pull-more {
+      display: none !important;
+    }
+  }
+}

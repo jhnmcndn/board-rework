@@ -192,3 +192,21 @@ export type BankList = {
   bankIcon?: string;
   sort?: number;
 };
+
+export type WithdrawRechargeDetail = {
+  money?: number;
+  orderNo?: string;
+  requestTime?: string;
+  bankName?: string;
+  status?: number;
+  remark?: string;
+  color?: string;
+  bankAccount?: string;
+  bankAddress?: string;
+};
+
+export type WithdrawRechargeBody = {
+  type?: string;
+  pageNum?: number;
+  pageSize?: number;
+};
