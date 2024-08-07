@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { MemberCardList, SpecialBankInfoMap } from '@/types/app';
 import { onClickSound } from '@/utils/audioFile';
-import AddCardModal from "@/app/withdraw/components/AddCardModal";
+import AddCardModal from '@/app/withdraw/components/AddCardModal';
 import classnames from 'classnames';
 import Image from 'next/image';
-import styles from './index.module.scss'
+import styles from './index.module.scss';
 
 const SelfWithdrawal = () => {
   const theme = useAccountStore((state) => state.theme);
@@ -32,9 +32,7 @@ const SelfWithdrawal = () => {
   }, []);
 
   const handleToggleClick = (item) => {
-    setSelectedCard((prevSelectedCard) =>
-      prevSelectedCard?.id === item.id ? null : item
-    );
+    setSelectedCard((prevSelectedCard) => (prevSelectedCard?.id === item.id ? null : item));
   };
 
   const handleWithdraw = () => {
@@ -96,7 +94,7 @@ const SelfWithdrawal = () => {
                   <li
                     key={index}
                     className={classnames(styles.bankCard, {
-                      [styles.selectedCard]: item?.id === selectedCard?.id
+                      [styles.selectedCard]: item?.id === selectedCard?.id,
                     })}
                     onClick={() => {
                       setSelectedBindCard(item);
@@ -105,18 +103,13 @@ const SelfWithdrawal = () => {
                     }}
                   >
                     <div className={styles.bankDetails}>
-                      <Image
-                        src={item?.bankIcon || ''}
-                        width={200}
-                        height={200}
-                        alt='Bank Icon'
-                      />
+                      <Image src={item?.bankIcon || ''} width={200} height={200} alt='Bank Icon' />
                       {item?.bankName} 尾号 {item?.bankAccount?.substr(item?.bankAccount?.length - 4)}
                     </div>
                     <span
                       key={item.id}
                       className={classnames(styles.toggle, {
-                        [styles.toggleSelected]: item?.id === selectedCard?.id
+                        [styles.toggleSelected]: item?.id === selectedCard?.id,
                       })}
                       onClick={() => handleToggleClick(item)}
                     />
@@ -134,34 +127,35 @@ const SelfWithdrawal = () => {
               }}
             >
               <Image
-                src={require(`@/assets/${theme}/withdraw/plusVector.png`)}
+                src={require(`@/assets/${theme}/fragments/plusVector.png`)}
                 width={50}
                 height={50}
                 alt='Add Bank'
               />
               <span>绑定银行卡</span>
             </div>
-            {bindCardList?.specialBankInfoMap && Object.keys(bindCardList?.specialBankInfoMap).map((card, index) => {
-              return (
-                <div
-                  key={index}
-                  className={styles.addCard}
-                  onClick={() => {
-                    setShowSpecialAddCardModal(!showSpecialAddCardModal);
-                    setPassedBankID(specialCard[card]);
-                    setPassedBankName(card);
-                  }}
-                >
-                  <Image
-                    src={require(`@/assets/${theme}/withdraw/plusVector.png`)}
-                    width={50}
-                    height={50}
-                    alt='Add Bank'
-                  />
-                  <span>{card}</span>
-                </div>
-              )
-            })}
+            {bindCardList?.specialBankInfoMap &&
+              Object.keys(bindCardList?.specialBankInfoMap).map((card, index) => {
+                return (
+                  <div
+                    key={index}
+                    className={styles.addCard}
+                    onClick={() => {
+                      setShowSpecialAddCardModal(!showSpecialAddCardModal);
+                      setPassedBankID(specialCard[card]);
+                      setPassedBankName(card);
+                    }}
+                  >
+                    <Image
+                      src={require(`@/assets/${theme}/fragments/plusVector.png`)}
+                      width={50}
+                      height={50}
+                      alt='Add Bank'
+                    />
+                    <span>{card}</span>
+                  </div>
+                );
+              })}
           </div>
         </section>
 
