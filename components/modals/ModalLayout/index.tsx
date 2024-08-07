@@ -9,9 +9,16 @@ interface ModalLayoutProps {
   children: ReactNode;
   isAlert?: boolean;
   closeOnOutsideClick?: boolean;
+  backdrop?: number;
 }
 
-function ModalLayout({ closeOnOutsideClick = false, isAlert = false, children, onClose }: ModalLayoutProps) {
+function ModalLayout({
+  closeOnOutsideClick = false,
+  isAlert = false,
+  children,
+  onClose,
+  backdrop = 0,
+}: ModalLayoutProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const clickOutSide = useClickOutside(modalRef);
   document.body.style.overflow = 'hidden';
@@ -30,7 +37,12 @@ function ModalLayout({ closeOnOutsideClick = false, isAlert = false, children, o
   };
 
   return (
-    <div className={styles.modalOverlay} onClick={handleClose} id='modal-layout'>
+    <div
+      className={styles.modalOverlay}
+      onClick={handleClose}
+      id='modal-layout'
+      style={{ background: `rgba(0,0,0,${backdrop})` }}
+    >
       <div className={styles.modalOverlay__container} ref={modalRef}>
         {children}
       </div>
