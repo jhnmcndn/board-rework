@@ -28,6 +28,21 @@
         width: auto;
         aspect-ratio: 15/23;
 
+        .isMaintain {
+          position: absolute;
+          @include flex-xy;
+          justify-items: center;
+          z-index: 1;
+          font-size: 0.15rem;
+          color: white;
+          background-color: #00000080;
+          text-align: center;
+          width: 100%;
+          height: 100%;
+          border: #5b5b5b 0.004rem solid;
+          border-radius: 0.1rem;
+        }
+
         img {
           position: relative;
           cursor: pointer;

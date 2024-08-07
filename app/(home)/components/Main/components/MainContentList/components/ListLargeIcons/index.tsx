@@ -1,5 +1,5 @@
 import { getGameInfos } from '@/api/game';
-import ImgWithFallback from '@/components/ImgWithFallback';
+import MemoizedIconHolder from '@/components/MemoizedIconHolder';
 import NoData from '@/components/NoData';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
@@ -131,7 +131,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
   return (
     <>
       {!showPlatform && filteredData?.length === 0 && !isGamesLoading && <NoData />}
-      {!showPlatform && filteredData?.length !== 0 && (
+      {!showPlatform && !isGamesLoading && filteredData?.length !== 0 && (
         <div
           id='listLargeWrapper'
           className={classNames(styles.listLargeWrapper, {
@@ -161,28 +161,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
               className={styles.firstRow}
             >
               {filteredData?.map((item) => {
-                return (
-                  <div
-                    key={item.id}
-                    className={classNames(styles.iconHolder, {
-                      [styles.isMaintenance]: item.maintain,
-                    })}
-                    onClick={() => handleOnClick(item)}
-                  >
-                    {item.maintain && (
-                      <div className='isMaintainLargeIcon'>
-                        <div>正在维修</div>
-                      </div>
-                    )}
-
-                    <ImgWithFallback
-                      src={(activeSideBarItem.type === 3 ? item.cardIcon : item.icon) || ''}
-                      fallback={images.fallback}
-                      loadingIcon={images.loading}
-                      alt={item.icon || item.cardIcon || ''}
-                    />
-                  </div>
-                );
+                return <MemoizedIconHolder item={item} handleOnClick={handleOnClick} styles={styles} />;
               })}
             </motion.div>
           </motion.div>
@@ -192,19 +171,16 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
       {showPlatform && (
         <>
           {renderPlatFormListHeader()}
-          <>
-            {data &&
-              data.map(
-                (item, idx) =>
-                  item.id === activePlatform?.id && (
-                    <ListSmallIcons
-                      key={item.id || '' + idx}
-                      searchFieldData={searchFieldData}
-                      setSearchFieldData={setSearchFieldData}
-                    />
-                  ),
-              )}
-          </>
+          {data.map(
+            (item, idx) =>
+              item.id === activePlatform?.id && (
+                <ListSmallIcons
+                  key={item.id || '' + idx}
+                  searchFieldData={searchFieldData}
+                  setSearchFieldData={setSearchFieldData}
+                />
+              ),
+          )}
         </>
       )}
     </>
