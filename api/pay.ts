@@ -18,7 +18,7 @@ export const getBindCardList = async () => {
 
 export const getBankList = async () => {
   const token = getFromLocalStorage('token');
-  const data = await request<RootResponse<BankList>>({
+  const data = await request<RootResponse<BankList[]>>({
     route: APP_ROUTE.PAY,
     endpoint: API_ENDPOINT.BANK_LIST,
     tags: API_ENDPOINT.BANK_LIST,
@@ -57,7 +57,7 @@ export const getWithdrawRechargeDetail = async ({ type, pageNum = 1, pageSize = 
     pageNum,
     pageSize,
   };
-  const data = await request<RootResponse<WithdrawRechargeDetail>>({
+  const data = await request<RootResponse<WithdrawRechargeDetail[]>>({
     route: APP_ROUTE.PAY,
     endpoint: API_ENDPOINT.WITHDRAW_RECHARGE_DETAIL,
     tags: API_ENDPOINT.WITHDRAW_RECHARGE_DETAIL,

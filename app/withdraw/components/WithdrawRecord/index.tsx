@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import NoData from '@/components/NoData';
-import styles from './index.module.scss';
-import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
-import PullToRefresh from 'react-simple-pull-to-refresh';
-import useModalStore from '@/store/modals';
 import { refetch } from '@/api/refetch';
+import NoData from '@/components/NoData';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import useModalStore from '@/store/modals';
 import { API_ENDPOINT } from '@/types/enums';
+import { useEffect, useRef } from 'react';
+import PullToRefresh from 'react-simple-pull-to-refresh';
+import styles from './index.module.scss';
 
 const WithdrawRecord = () => {
   const fetchWithdrawRecordList = useAccountStore((state) => state.fetchWithdrawRecordList);
@@ -37,7 +37,7 @@ const WithdrawRecord = () => {
     <div className={styles.withdrawalRecordWrapper}>
       <PullToRefresh onRefresh={() => refetch(API_ENDPOINT.WITHDRAW_RECHARGE_DETAIL)}>
         {withdrawRecordList?.length > 0 ? (
-          <ul style={styles.recordWrapper}>
+          <ul className={styles.recordWrapper}>
             {withdrawRecordList.map((item, index) => {
               return (
                 <li key={index} className={styles.recordList}>
