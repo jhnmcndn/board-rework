@@ -1,6 +1,7 @@
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useImages from '@/hooks/useImages';
 import Image, { StaticImageData } from 'next/image';
+import ButtonContainer from './component/ButtonContainer';
 import styles from './index.module.scss';
 
 const isValidSrc = (src: string | StaticImageData | undefined): src is string | StaticImageData => {
@@ -30,23 +31,13 @@ const PersonalInfo: React.FC = () => {
               <span>账号:</span>
               <span className={styles.nickName}>{accountInfo.nickName || '用戶名'}</span>
             </div>
-
-            {/* {process.env.REACT_APP_SITE === '8803' && (
-              <div className={styles.idContainer}>
-                <div className='wd-15'></div>
-                <div className='wd-85'>
-                  <span>ID:</span>
-                  <span className={styles.accountId}>{accountInfo.id || '用戶名'}</span>
-                </div>
-              </div>
-            )} */}
-
             <div className={styles.vipContainer}>
               <span className={styles.labelVip}> 等级: </span>
               <Image src={images.vipLevel} alt='vip level' width={50} height={50} />
             </div>
           </div>
         </div>
+        <ButtonContainer />
       </div>
     </>
   );
