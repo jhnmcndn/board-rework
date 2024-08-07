@@ -1,6 +1,5 @@
-import ImgWithFallback from '@/components/ImgWithFallback';
+import MemoizedIconHolder from '@/components/MemoizedIconHolder';
 import NoData from '@/components/NoData';
-import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import useAuthCheck from '@/hooks/useAuthCheck';
 import useImages from '@/hooks/useImages';
@@ -26,7 +25,6 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
   const [isDragging, setIsDragging] = useState(false);
   const [filteredData, setFilteredData] = useState<RspGameInfo[] | undefined>();
   const { gameInfos, activeSideBarItem, isGamesLoading } = useGameStore((state) => state);
-  const { fetchAccountInfo, accountInfo } = useAccountStore((state) => state);
   const { authCheck } = useAuthCheck();
 
   useEffect(() => {
@@ -108,30 +106,7 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
           >
             {filteredData?.map((item, idx) => {
               if (idx % 2 !== 0) return;
-              return (
-                <div
-                  key={item.id}
-                  id={item.id?.toString()}
-                  className={classNames(styles.iconHolder, {
-                    [styles.isMaintenance]: item.maintain,
-                  })}
-                  onClick={() => {
-                    handleGameClick(item);
-                  }}
-                >
-                  {item.maintain && (
-                    <div className='isMaintain'>
-                      <div>正在维修</div>
-                    </div>
-                  )}
-                  <ImgWithFallback
-                    src={item.icon || ''}
-                    fallback={images.fallback}
-                    loadingIcon={images.loading}
-                    alt={item.icon || ''}
-                  />
-                </div>
-              );
+              return <MemoizedIconHolder item={item} handleOnClick={handleGameClick} styles={styles} />;
             })}
           </motion.div>
 
@@ -143,30 +118,7 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
           >
             {filteredData?.map((item, idx) => {
               if (idx % 2 === 0) return;
-              return (
-                <div
-                  key={item.id}
-                  id={item.id?.toString()}
-                  className={classNames(styles.iconHolder, {
-                    [styles.isMaintenance]: item.maintain,
-                  })}
-                  onClick={() => {
-                    handleGameClick(item);
-                  }}
-                >
-                  {item.maintain && (
-                    <div className='isMaintain'>
-                      <div>正在维修</div>
-                    </div>
-                  )}
-                  <ImgWithFallback
-                    src={item.icon || ''}
-                    fallback={images.fallback}
-                    loadingIcon={images.loading}
-                    alt={item.icon || ''}
-                  />
-                </div>
-              );
+              return <MemoizedIconHolder item={item} handleOnClick={handleGameClick} styles={styles} />;
             })}
           </motion.div>
         </motion.div>
