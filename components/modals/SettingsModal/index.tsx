@@ -53,7 +53,7 @@ const SettingsModal: React.FC = () => {
   if (!isSettingsOpen) return null;
 
   return (
-    <ModalLayout>
+    <ModalLayout backdrop={1}>
       <div className={styles.settingsContainer}>
         <HeaderModalTitle title='设置' onClick={closeSettings} />
         <div className={styles.contentModal}>
