@@ -2,6 +2,7 @@
 
 import SelfWithdrawal from '@/app/withdraw/components/SelfWithdrawal';
 import WithdrawRecord from '@/app/withdraw/components/WithdrawRecord';
+import BindCards from '@/app/withdraw/components/BindCards';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { FC, useEffect } from 'react';
 
@@ -32,7 +33,7 @@ export const WithdrawPage: WithdrawPageComponent = ({ bindCardList, bankList }) 
     <div style={{ width: '100%', height: '100%', overflowY: 'auto' }}>
       {withdrawActiveTab === 0 && <SelfWithdrawal />}
       {/*{withdrawActiveTab === 1 && <CodingDetails />}*/}
-      {/*{withdrawActiveTab === 2 && <BindCards />}*/}
+      {withdrawActiveTab === 2 && <BindCards />}
       {withdrawActiveTab === 3 && <WithdrawRecord />}
     </div>
   );

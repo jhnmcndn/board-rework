@@ -1,0 +1,54 @@
+.bindCardContainer {
+  width: 100%;
+  height: 100%;
+  padding: 0.1rem;
+  overflow-y: auto;
+
+  .cardWrapper {
+    @include flex-xy(flex-start, center);
+    flex-direction: column;
+    width: 100%;
+    gap: 0.1rem;
+
+
+    .cardList {
+      @include flex-xy(space-between, center);
+      background: #222222;
+      border-radius: 0.1rem;
+      padding: 0.12rem;
+      width: 100%;
+
+      .bankDetails {
+        @include flex-xy;
+        height: 100%;
+        gap: 0.1rem;
+
+        .leftIcons {
+          width: 0.25rem;
+          height: 0.25rem;
+        }
+
+        .text {
+          font-size: 0.15rem;
+          color: #fff;
+        }
+      }
+
+      .bankAccount {
+        font-size: 0.15rem;
+        color: #fff;
+      }
+
+      .arrowIcon {
+        width: auto;
+        height: 0.2rem;
+      }
+    }
+  }
+
+  :global {
+    .ptr__pull-down--pull-more {
+      display: none !important;
+    }
+  }
+}
