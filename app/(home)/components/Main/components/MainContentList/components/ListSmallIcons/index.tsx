@@ -106,7 +106,7 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
           >
             {filteredData?.map((item, idx) => {
               if (idx % 2 !== 0) return;
-              return <MemoizedIconHolder item={item} handleOnClick={handleGameClick} styles={styles} />;
+              return <MemoizedIconHolder key={idx} item={item} handleOnClick={handleGameClick} styles={styles} />;
             })}
           </motion.div>
 
@@ -118,7 +118,7 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
           >
             {filteredData?.map((item, idx) => {
               if (idx % 2 === 0) return;
-              return <MemoizedIconHolder item={item} handleOnClick={handleGameClick} styles={styles} />;
+              return <MemoizedIconHolder key={idx} item={item} handleOnClick={handleGameClick} styles={styles} />;
             })}
           </motion.div>
         </motion.div>
