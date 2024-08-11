@@ -27,6 +27,7 @@ type GameState = {
   showPlatform: boolean;
   activePlatform: GameInfoGroup;
   isGamesLoading: boolean;
+  gameVolume: number;
 };
 
 type GameActions = {
@@ -39,6 +40,7 @@ type GameActions = {
   setShowPlatform: (showPlatform: boolean) => void;
   setActivePlatform: (activePlatform: GameInfoGroup) => void;
   setIsGamesLoading: (isGamesLoading: boolean) => void;
+  setGameVolume: (gameVolume: number) => void;
 };
 
 export type GameStore = GameState & GameActions;
@@ -56,6 +58,7 @@ export const createGameStore = () =>
         showPlatform: false,
         activePlatform: initialActivePlatform,
         isGamesLoading: false,
+        gameVolume: 100,
         setSideBar: (sideBar) => set(() => ({ sideBar })),
         setActiveSideBarItem: (activeSideBarItem) => set(() => ({ activeSideBarItem })),
         setGameInfoGroup: (gameInfoGroup) => set(() => ({ gameInfoGroup })),
@@ -65,6 +68,7 @@ export const createGameStore = () =>
         setShowPlatform: (showPlatform) => set(() => ({ showPlatform })),
         setActivePlatform: (activePlatform) => set(() => ({ activePlatform })),
         setIsGamesLoading: (isGamesLoading) => set(() => ({ isGamesLoading })),
+        setGameVolume: (gameVolume) => set(() => ({ gameVolume })),
       }),
       {
         name: 'game-store',
