@@ -1,16 +1,51 @@
-.MusicContainer {
+.mainContainer {
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  .pBasicInfo {
-    width: 100%;
-    height: 0.29rem;
+
+  .musicTitle {
+    height: 0.3rem;
     border-radius: 0.032rem;
     font-size: 0.15rem;
     padding: 0.05rem;
+    background-color: var(--setting-title-info);
+    color: var(--setting-title-text);
+
     .infoTitle {
       margin-left: 0.09rem;
+    }
+  }
+
+  .volume {
+    width: 100%;
+    margin-top: 0.1rem;
+    display: flex;
+    gap: 0.1rem;
+    position: relative;
+
+    .musicIcon {
+      position: relative;
+      align-items: center;
+      display: flex;
+      margin-left: 0.14rem;
+      font-size: 0.15rem;
+
+      img {
+        margin-top: 0.05rem;
+        width: auto;
+        height: 0.18rem;
+        margin-right: 0.05rem;
+      }
+
+      span {
+        word-break: keep-all;
+      }
+    }
+
+    .switchContainer {
+      width: 2.8rem;
+      display: flex;
+      align-items: center;
     }
   }
 }

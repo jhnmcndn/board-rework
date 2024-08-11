@@ -10,6 +10,9 @@
   --vip-bg-bar: #0a0a0a;
   --vip-progress-bar: linear-gradient(180deg, #fee587, #ffb02b);
   --settings-header: linear-gradient(180deg, #ffffff 0%, #fce9c9 86.3%);
+  --setting-border-profile: #feeba6;
+  --setting-title-info: #2c2c2c;
+  --setting-title-text: #fff;
   --profile-bg: #dec28c;
   --footer-text-list: linear-gradient(#fff, #f9d57a);
   --footer-dialog-text: -webkit-linear-gradient(#fff, #f9d57a);
@@ -92,6 +95,8 @@
   //   --vip-balance-bg: #c4a994;
   //   --vip-balance-text: #fff;
   //   --vip-balance-amount: #00ff00;
+  // --setting-title-info: #c4a994;
+  // --setting-title-text: #fff;
   //   --nodata-bg: #bfbfbf;
   //   --sidebar-modal-bg: linear-gradient(270deg, #634126 0%, #432b0a 100%);
   //   --promotion-lower-bg: #ededed;
@@ -133,6 +138,9 @@
   //   --balance-bg-header: #fff;
   //   --balance-outline-header: #fff;
   //   --settings-header: linear-gradient(180deg, #bea288 0%, #a11300 100%);
+  // --setting-border-profile: #feeba6;
+  // --setting-title-info: #0a0a0a;
+  // --setting-title-text: #ffc400;
   //   --vip-outline-bar: #0a0a0a;
   //   --vip-progress-bar: #fff;
   //   --profile-bg: linear-gradient(150deg, #ffffff, #0a0a0a) border-box;
@@ -200,6 +208,9 @@
   //   --vip-outline-bar: #e29300;
   //   --vip-bg-bar: #013629;
   //   --vip-progress-bar: linear-gradient(180deg, #ffea01, #e29300);
+  // --setting-border-profile: #ffea01;
+  // --setting-title-info: #0e9473;
+  // --setting-title-info: #face13;
   //   --profile-bg: linear-gradient(300deg, #df8e00, #ffea01) border-box;
   //   --footer-text-list: linear-gradient(180deg, #ffffff 25.19%, #facd12 80.14%);
   //   --footer-dialog-text: linear-gradient(180deg, #fff 25.19%, #facd12 80.14%);
@@ -281,6 +292,9 @@
   //   --vip-balance-bg: #0ca0e9;
   //   --vip-balance-text: #fff;
   //   --vip-balance-amount: #fff;
+  // --setting-border-profile: #feeba6;
+  // --setting-title-info: #0ca0e9;
+  // --setting-title-text: #fff;
   //   --nodata-bg: #bfbfbf;
   //   --sidebar-modal-bg: #0081ca;
   //   --sidebar-modal-border: none;
@@ -349,6 +363,9 @@
   //   --vip-balance-btn: linear-gradient(#29468d, #162752);
   //   --vip-btn-bg: linear-gradient(#29468d, #162752);
   //   --vip-btn-text: #fff;
+  // --setting-border-profile: #8aeaff;
+  // --setting-title-info: linear-gradient(180deg, #29468d 0%, #162752 100%);
+  // --setting-title-text: #8498c9;
   //   --nodata-bg: #4d6296;
   //   --sidebar-modal-bg: linear-gradient(270deg, #29334b 0%, #4d6296 100%);
   //   --sidebar-modal-border: #8aeaff;
@@ -384,6 +401,9 @@
   //   --balance-bg-header: #480909;
   //   --vip-bg-bar: #331b20;
   //   --settings-header: linear-gradient(180deg, #ffffff 0%, #f9d57a 100%);
+  // --setting-border-profile: #dec18c;
+  // --setting-title-info: linear-gradient(90deg, #af0100 0%, #ff6b00 100%);
+  // --setting-title-text: f7eeee;
   //   --home-bg-sidebar: linear-gradient(270deg, #771818 0%, #af0100 100%);
   //   --home-placeholder-search: #fff;
   //   --record-dropdownLabel-color: #080000;
@@ -435,6 +455,9 @@
   //   --vip-header: #fea800;
   //   --balance-bg-header: #737378;
   //   --settings-header: #435689;
+  // --setting-border-profile: #feeba6;
+  // --setting-title-info: #e9cb7b;
+  // --setting-title-text: #461d09;
   //   --vip-outline-bar: #737378;
   //   --vip-bg-bar: #737378;
   //   --profile-bg: linear-gradient(150deg, #fff2c5, #d8aa42) border-box;

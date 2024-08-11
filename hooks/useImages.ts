@@ -11,7 +11,9 @@ import loginRegisterBtn from '@/assets/blackGold/loginModal/loginRegisterBtn.png
 import sidebarTitle from '@/assets/blackGold/sidebar/sidebarTitle.png';
 import fallback from '@/assets/commons/fallBacks/onErrorImg.png';
 import loading from '@/assets/commons/fallBacks/squareLoad2.gif';
+import hasSound from '@/assets/commons/have-sound.png';
 import loginBtn from '@/assets/commons/loginBtn.png';
+import noSound from '@/assets/commons/no-sound.png';
 import vipBadge from '@/assets/commons/vipBadge.png';
 import vipAdvJackpot from '@/assets/commons/vipImages/advancementJackpot.png';
 import vipGift from '@/assets/commons/vipImages/gift.png';
@@ -38,6 +40,8 @@ export default function useImages() {
     loginRegisterBtn,
     promote,
     task,
+    hasSound,
+    noSound,
     arrowDown: require(`@/assets/${theme}/fragments/arrowDown.png`),
     audio: require(`@/assets/${theme}/main/audioIcon.png`),
     backBtn: require(`@/assets/${theme}/header/backBtn.png`),
