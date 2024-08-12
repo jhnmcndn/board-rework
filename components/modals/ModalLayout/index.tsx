@@ -47,7 +47,7 @@ function ModalLayout({
       className={styles.modalOverlay}
       onClick={handleClose}
       id='modal-layout'
-      style={{ background: `rgba(0,0,0,${backdrop})` }}
+      style={{ background: `rgba(0,0,0,${backdrop})`, ...(isAlert ? { pointerEvents: 'none' } : {}) }}
     >
       <motion.div
         variants={!isAlert ? MODAL_CONTENT_ANIMATION : {}}
