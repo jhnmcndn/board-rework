@@ -86,7 +86,7 @@ const LoginTypesModal = () => {
     </ModalLayout>
   );
 
-  const element = document.getElementById('modal-root') as HTMLDivElement;
+  const element = typeof window !== 'undefined' ? (document.getElementById('modal-root') as HTMLDivElement) : null;
 
   if (!element) return;
   return createPortal(<AnimatePresence>{isLoginOptionsOpen && modalContent}</AnimatePresence>, element);
