@@ -10,12 +10,13 @@ export type CombinedGameInfo = RspGameInfo & GameInfoGroup;
 type TProps = {
   item: CombinedGameInfo;
   handleOnClick: (item: CombinedGameInfo) => void;
+  isLargeIcon?: boolean;
   styles: { [key: string]: string };
 };
 
 const MemoizedImgWithFallback = memo(ImgWithFallback);
 
-const MemoizedIconHolder: FC<TProps> = memo(({ item, handleOnClick, styles }) => {
+const MemoizedIconHolder: FC<TProps> = memo(({ item, handleOnClick, isLargeIcon = false, styles }) => {
   const { images } = useImages();
   const { activeSideBarItem } = useGameStore((state) => state);
 
@@ -34,7 +35,7 @@ const MemoizedIconHolder: FC<TProps> = memo(({ item, handleOnClick, styles }) =>
       )}
 
       <MemoizedImgWithFallback
-        src={(activeSideBarItem.type === 3 ? item.cardIcon : item.icon) || ''}
+        src={(activeSideBarItem.type === 3 && isLargeIcon ? item.cardIcon : item.icon) || ''}
         fallback={images.fallback}
         loadingIcon={images.loading}
         alt={item.icon || item.cardIcon || ''}
