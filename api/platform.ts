@@ -117,5 +117,36 @@ export const getVipGiftInfo = async () => {
       token: token || '',
     },
   });
+  if (!data.data || 'message' in data.data)
+    return {
+      vipSetList: [],
+      levelBonusStatus: 0,
+      weekBonusStatus: 0,
+    } satisfies VIPGiftInfo;
   return data.data;
+};
+
+export type ReceiveVipGift = {
+  message?: string;
+};
+
+export const receiveVipGift = async ({ type }: { type: number }): Promise<ReceiveVipGift> => {
+  const data = await request<RootResponse<ReceiveVipGift>>({
+    endpoint: API_ENDPOINT.RECEIVE_VIP_GIFT,
+    route: APP_ROUTE.PLATFORM,
+    tags: API_ENDPOINT.RECEIVE_VIP_GIFT,
+    body: {
+      type,
+    },
+    otherHeaders: {
+      token: cookies().get('token')?.value || '',
+    },
+  });
+  if (!data.data || 'message' in data.data)
+    return {
+      message: data.msg,
+    } satisfies ReceiveVipGift;
+  return {
+    message: data.msg,
+  } satisfies ReceiveVipGift;
 };

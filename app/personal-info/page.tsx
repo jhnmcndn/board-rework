@@ -1,19 +1,14 @@
-import PersonalInfoContent from '@/app/personal-info/components/PersonalInfoContent';
-import PersonalInfoSidebar from '@/app/personal-info/components/PersonalInfoSidebar';
-import styles from '@/app/personal-info/index.module.scss';
+import { getVipGiftInfo } from '@/api/platform';
 import OtherHeader from '@/components/OtherHeader';
 import { Fragment } from 'react';
+import MainContent from './MainContent';
 
-const PersonalInfo = () => {
+const PersonalInfo = async () => {
+  const vipGiftInfo = await getVipGiftInfo();
   return (
     <Fragment>
       <OtherHeader headerTitle='个人中心' showPurse />
-      <main className={styles.container}>
-        <PersonalInfoSidebar />
-        <section className={styles.wrapper}>
-          <PersonalInfoContent />
-        </section>
-      </main>
+      <MainContent vipGiftInfo={vipGiftInfo} />
     </Fragment>
   );
 };

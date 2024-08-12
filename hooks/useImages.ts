@@ -63,6 +63,8 @@ export default function useImages() {
     message: require(`@/assets/${theme}/footer/iconMessage.png`),
     more: require(`@/assets/${theme}/footer/iconMore.png`),
     // VIP
+    crown: require(`@/assets/${theme}/crown.png`),
+    darkBlueCrown: require(`@/assets/darkBlue/crown.png`),
     vipAdvJackpot,
     vipBadge,
     vipGift,

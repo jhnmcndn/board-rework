@@ -35,19 +35,19 @@ export const accountInfoState = {
   accountCharge: undefined,
   accountNow: undefined,
   codeNow: undefined,
-  codeTotal: undefined,
+  codeTotal: 0,
   codeWill: undefined,
   headImg: undefined,
   id: undefined,
   inviterCode: undefined,
   newAccount: undefined,
-  nextLevelIntegral: undefined,
+  nextLevelIntegral: 0,
   nickName: undefined,
   phone: undefined,
   registerType: undefined,
   status: undefined,
   token: undefined,
-  vip: undefined,
+  vip: 1,
 } satisfies AccountInfo;
 
 export const accountNowState = {
@@ -93,7 +93,7 @@ type AccountState = {
 
 type AccountActions = {
   setInit: (init: Partial<Init>) => void;
-  setAccountInfo: (accountInfo: Partial<AccountInfo>) => void;
+  setAccountInfo: (accountInfo: AccountInfo) => void;
   setTheme: (theme: THEME) => void;
   setAccountNow: (accountNow: Partial<AccountNow>) => void;
   setBoxPassIsSet: (boxPassIsSet: boolean) => void;
