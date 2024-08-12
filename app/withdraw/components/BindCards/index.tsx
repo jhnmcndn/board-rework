@@ -4,14 +4,14 @@ import { useEffect, useState } from 'react';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 import { refetch } from '@/api/refetch';
-import AddCardModal from '@/app/withdraw/components/AddCardModal';
+import AddCardModal from '../Modals/AddCardModal';
+import AddUSDTModal from '../Modals/AddUSDTModal';
 import Image from 'next/image';
 import styles from './index.module.scss';
+import { API_ENDPOINT } from '@/types/enums';
 
 type ListItem = {
   text: string;
-  addIcon: string;
-  arrowIcon: string;
   onClick: () => void;
 };
 
@@ -25,15 +25,11 @@ const BindCards = () => {
   const listItems: ListItem[] = [
     {
       text: '绑定银行卡',
-      addIcon: 'plusVector.png',
-      arrowIcon: 'arrowVector.png',
-      onClick: () => setShowAddCardModal((prev) => !prev),
+      onClick: () => setShowAddCardModal((prevState) => !prevState),
     },
     {
       text: '添加USDT',
-      addIcon: 'plusVector.png',
-      arrowIcon: 'arrowVector.png',
-      onClick: () => setShowUSDTModal((prev) => !prev),
+      onClick: () => setShowUSDTModal((prevState) => !prevState),
     },
   ];
 
@@ -50,12 +46,9 @@ const BindCards = () => {
 
   return (
     <div className={styles.bindCardContainer}>
-      <AddCardModal
-        showMe={showAddCardModal}
-        onSuccess={() => fetchBindCardList()}
-        onClose={() => setShowAddCardModal(!showAddCardModal)}
-      />
-      <PullToRefresh onRefresh={() => refetch(APIasd_ENDPOINT.BIND_CARD_LIST)}>
+      <AddCardModal showMe={showAddCardModal} onClose={() => setShowAddCardModal(!showAddCardModal)} />
+      <AddUSDTModal showMe={showUSDTModal} onClose={() => setShowUSDTModal(!showUSDTModal)} />
+      <PullToRefresh onRefresh={() => refetch(API_ENDPOINT.BIND_CARD_LIST)}>
         <ul className={styles.cardWrapper}>
           {bindCardList?.memberCardList?.map((item, index) => {
             return (
@@ -70,7 +63,7 @@ const BindCards = () => {
                   />
                   <span className={styles.text}>{item?.bankName}</span>
                 </div>
-                <span className={styles.bankAccount}>{censorMyAccount(item?.bankAccount)}</span>
+                <span className={styles.bankAccount}>{censorMyAccount(item?.bankAccount as string)}</span>
               </li>
             );
           })}
@@ -78,7 +71,7 @@ const BindCards = () => {
             <li key={index} className={styles.cardList} onClick={item.onClick}>
               <div className={styles.bankDetails}>
                 <Image
-                  src={require(`@/assets/${theme}/fragments/${item.addIcon}`)}
+                  src={require(`@/assets/${theme}/fragments/plusVector.png`)}
                   className={styles.leftIcons}
                   width={50}
                   height={50}
@@ -87,7 +80,7 @@ const BindCards = () => {
                 <span className={styles.text}>{item.text}</span>
               </div>
               <Image
-                src={require(`@/assets/${theme}/fragments/${item.arrowIcon}`)}
+                src={require(`@/assets/${theme}/fragments/arrowVector.png`)}
                 className={styles.arrowIcon}
                 width={26}
                 height={50}

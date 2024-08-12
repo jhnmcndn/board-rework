@@ -2,36 +2,29 @@
 
 import { useEffect, useState } from 'react';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
-import { MemberCardList, SpecialBankInfoMap } from '@/types/app';
 import { onClickSound } from '@/utils/audioFile';
-import AddCardModal from '@/app/withdraw/components/AddCardModal';
 import classnames from 'classnames';
 import Image from 'next/image';
 import styles from './index.module.scss';
+import AddCardModal from '@/app/withdraw/components/Modals/AddCardModal';
+import AddUSDTModal from '@/app/withdraw/components/Modals/AddUSDTModal';
 
 const SelfWithdrawal = () => {
   const theme = useAccountStore((state) => state.theme);
   const bindCardList = useAccountStore((state) => state.bindCardList);
   const userBalance = useAccountStore((state) => state.accountNow.balance);
   const [amountToWithdraw, setAmountToWithdraw] = useState('');
-  const [showSpecialAddCardModal, setShowSpecialAddCardModal] = useState(false);
-  const [showAddCardModal, setShowAddCardModal] = useState(false);
-  const [selectedBindCard, setSelectedBindCard] = useState<MemberCardList>({});
   const [selectedCard, setSelectedCard] = useState(bindCardList?.memberCardList?.[0]);
   const [showSafeBox, setShowSafeBox] = useState(false);
-  const [specialCard, setSpecialCard] = useState<SpecialBankInfoMap>({});
-  const [alertNotif, setAlertNotif] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
   const fetchBindCardList = useAccountStore((state) => state.fetchBindCardList);
-
-  const [passedBankName, setPassedBankName] = useState('');
-  const [passedBankID, setPassedBankID] = useState();
+  const [showAddCardModal, setShowAddCardModal] = useState(false);
+  const [showUSDTModal, setShowUSDTModal] = useState(false);
 
   useEffect(() => {
     fetchBindCardList();
   }, []);
 
-  const handleToggleClick = (item) => {
+  const handleToggleClick = (item: any) => {
     setSelectedCard((prevSelectedCard) => (prevSelectedCard?.id === item.id ? null : item));
   };
 
@@ -51,15 +44,8 @@ const SelfWithdrawal = () => {
 
   return (
     <>
-      {/* Should be replaced by openAlert() from useModalStore */}
-      {/* <AlertContainer alertMe={alertNotif} notify={alertMessage} /> */}
-      <AddCardModal
-        showMe={showAddCardModal}
-        onClose={() => {
-          setShowAddCardModal(!showAddCardModal);
-        }}
-        special={false}
-      />
+      <AddCardModal showMe={showAddCardModal} onClose={() => setShowAddCardModal(!showAddCardModal)} />
+      <AddUSDTModal showMe={showUSDTModal} onClose={() => setShowUSDTModal(!showUSDTModal)} />
       <div className={styles.selfWithdrawalWrapper}>
         <section className={styles.panel}>
           <div className={styles.headerWrapper}>
@@ -87,7 +73,7 @@ const SelfWithdrawal = () => {
           <div className={styles.headerWrapper}>
             <span>提现方式</span>
           </div>
-          {bindCardList?.memberCardList?.length > 0 && (
+          {bindCardList.memberCardList && bindCardList?.memberCardList?.length > 0 && (
             <ul className={styles.selectBindCardList}>
               {bindCardList?.memberCardList?.map((item, index) => {
                 return (
@@ -97,7 +83,6 @@ const SelfWithdrawal = () => {
                       [styles.selectedCard]: item?.id === selectedCard?.id,
                     })}
                     onClick={() => {
-                      setSelectedBindCard(item);
                       selectedCard === item ? setSelectedCard(null) : setSelectedCard(item);
                       onClickSound('pop');
                     }}
@@ -141,9 +126,7 @@ const SelfWithdrawal = () => {
                     key={index}
                     className={styles.addCard}
                     onClick={() => {
-                      setShowSpecialAddCardModal(!showSpecialAddCardModal);
-                      setPassedBankID(specialCard[card]);
-                      setPassedBankName(card);
+                      setShowUSDTModal(!showUSDTModal);
                     }}
                   >
                     <Image
