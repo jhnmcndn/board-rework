@@ -40,7 +40,7 @@ function ModalLayout({
 
   return (
     <motion.div
-      variants={MODAL_BG_ANIMATION}
+      variants={!isAlert ? MODAL_BG_ANIMATION : {}}
       initial='hidden'
       animate='visible'
       exit='exit'
@@ -50,7 +50,7 @@ function ModalLayout({
       style={{ background: `rgba(0,0,0,${backdrop})` }}
     >
       <motion.div
-        variants={MODAL_CONTENT_ANIMATION}
+        variants={!isAlert ? MODAL_CONTENT_ANIMATION : {}}
         initial='hidden'
         animate='visible'
         exit='exit'
