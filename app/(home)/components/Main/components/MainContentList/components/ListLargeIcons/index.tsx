@@ -3,6 +3,7 @@ import MemoizedIconHolder from '@/components/MemoizedIconHolder';
 import NoData from '@/components/NoData';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import useImages from '@/hooks/useImages';
 import { GameInfoGroup, RspGameInfo } from '@/types/app';
 import classNames from 'classnames';
@@ -23,6 +24,7 @@ type CombinedGameInfo = RspGameInfo & GameInfoGroup;
 const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => {
   const router = useRouter();
   const { images } = useImages();
+  const { authCheck } = useAuthCheck();
   const rowsContainerRef = useRef<HTMLDivElement | null>(null);
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
   const [isDragging, setIsDragging] = useState(false);
@@ -121,13 +123,15 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
   const handleOnClick = (item: CombinedGameInfo) => {
     if (isDragging) return;
 
-    if (activeSideBarItem.type === 2) {
-      router.push(`/games?id=${item.id}`);
-    } else {
-      setActivePlatform(item);
-      fetchGameInfo({ id: activeSideBarItem.id || 1, pid: item.id || 1 });
-      setShowPlatform(true);
-    }
+    authCheck(() => {
+      if (activeSideBarItem.type === 2) {
+        router.push(`/games?id=${item.id}`);
+      } else {
+        setActivePlatform(item);
+        fetchGameInfo({ id: activeSideBarItem.id || 1, pid: item.id || 1 });
+        setShowPlatform(true);
+      }
+    });
   };
 
   return (

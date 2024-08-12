@@ -2,7 +2,6 @@ import MemoizedIconHolder from '@/components/MemoizedIconHolder';
 import NoData from '@/components/NoData';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import useAuthCheck from '@/hooks/useAuthCheck';
-import useImages from '@/hooks/useImages';
 import { RspGameInfo } from '@/types/app';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
@@ -19,7 +18,6 @@ interface IProps {
 
 const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => {
   const router = useRouter();
-  const { images } = useImages();
   const rowsContainerRef = useRef<HTMLDivElement | null>(null);
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
   const [isDragging, setIsDragging] = useState(false);
