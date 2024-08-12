@@ -10,7 +10,7 @@ import SelfServiceCW from '../SelfServiceCW';
 import styles from './index.module.scss';
 
 const MainContent = () => {
-  const [activeSidebar, setActiveSidebar] = useState(0);
+  const [activeSidebarItem, setActiveSidebarItem] = useState(0);
   const theme = useAccountStore((state) => state.theme);
   const list = ['自助洗码', '洗码记录', '洗码比例'];
 
@@ -18,11 +18,15 @@ const MainContent = () => {
     <div className={styles.washCodePage}>
       <OtherHeader headerTitle={'洗码'} showPurse />
       <div className={styles.wrapper}>
-        <Sidebar sidebarItems={list} activeSidebar={activeSidebar} setActiveSidebar={setActiveSidebar} />
+        <Sidebar
+          sidebarItems={list}
+          activeSidebarItem={activeSidebarItem}
+          setActiveSidebarItem={setActiveSidebarItem}
+        />
         <div className={styles.mainContent} data-theme={theme}>
-          {activeSidebar === 0 && <SelfServiceCW />}
-          {activeSidebar === 1 && <CodeWashingRecord />}
-          {activeSidebar === 2 && <CodeWashingRatio />}
+          {activeSidebarItem === 0 && <SelfServiceCW />}
+          {activeSidebarItem === 1 && <CodeWashingRecord />}
+          {activeSidebarItem === 2 && <CodeWashingRatio />}
         </div>
       </div>
     </div>
