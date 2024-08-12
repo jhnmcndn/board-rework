@@ -3,6 +3,7 @@ import HeaderModalTitle from '@/components/HeaderModalTitle';
 import useModalStore from '@/store/modals';
 import { onClickSound } from '@/utils/audioFile';
 import classNames from 'classnames';
+import { AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import ModalLayout from '../ModalLayout';
 import ChangePassword from './components/ChangePassword';
@@ -50,30 +51,32 @@ const SettingsModal: React.FC = () => {
     }
   };
 
-  if (!isSettingsOpen) return null;
-
   return (
-    <ModalLayout backdrop={0.8}>
-      <div className={styles.settingsContainer}>
-        <HeaderModalTitle title='设置' onClick={closeSettings} />
-        <div className={styles.contentModal}>
-          <div className={styles.sidebarContainer}>
-            <ul className={styles.sidebarList}>
-              {listItems.map((item) => (
-                <li
-                  key={item.id}
-                  className={classNames({ [styles.sidebarItem]: selectedId === item.id })}
-                  onClick={() => handleSetSelect(item.id)}
-                >
-                  <span>{item.title}</span>
-                </li>
-              ))}
-            </ul>
+    <AnimatePresence>
+      {isSettingsOpen && (
+        <ModalLayout backdrop={0.8}>
+          <div className={styles.settingsContainer}>
+            <HeaderModalTitle title='设置' onClick={closeSettings} />
+            <div className={styles.contentModal}>
+              <div className={styles.sidebarContainer}>
+                <ul className={styles.sidebarList}>
+                  {listItems.map((item) => (
+                    <li
+                      key={item.id}
+                      className={classNames({ [styles.sidebarItem]: selectedId === item.id })}
+                      onClick={() => handleSetSelect(item.id)}
+                    >
+                      <span>{item.title}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className={styles.settingContent}>{renderComponent()}</div>
+            </div>
           </div>
-          <div className={styles.settingContent}>{renderComponent()}</div>
-        </div>
-      </div>
-    </ModalLayout>
+        </ModalLayout>
+      )}
+    </AnimatePresence>
   );
 };
 
