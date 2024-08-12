@@ -1,7 +1,5 @@
 'use client';
 
-import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
-import { useCSStore } from '@/components/Providers/CSStoreProvider';
 import styles from '@/components/Sidebar/index.module.scss';
 import { onClickSound } from '@/utils/audioFile';
 import classNames from 'classnames';
@@ -11,28 +9,15 @@ import { Dispatch, FC, SetStateAction } from 'react';
 
 export type SidebarComponentProps = {
   sidebarItems: string[];
-  activeSidebar?: number;
-  setActiveSidebar?: Dispatch<SetStateAction<number>>;
-  dispatch?: Function;
+  activeSidebarItem: number;
+  setActiveSidebarItem: Dispatch<SetStateAction<number>>;
 };
 
 export type SidebarComponent = FC<Readonly<SidebarComponentProps>>;
 
-const Sidebar: SidebarComponent = ({ sidebarItems, activeSidebar, setActiveSidebar, dispatch }) => {
+const Sidebar: SidebarComponent = ({ sidebarItems, activeSidebarItem, setActiveSidebarItem }) => {
   const pathname = usePathname();
   const isRechargePage = pathname.toLowerCase().includes('recharge');
-  const activeTab = useCSStore((state) => state.activeTab);
-  const setActiveTab = useCSStore((state) => state.setActiveTab);
-  const withdrawActiveTab = useAccountStore((state) => state.withdrawActiveTab);
-  const setWithdrawActiveTab = useAccountStore((state) => state.setWithdrawActiveTab);
-
-  const handleTabClick = (index: number) => {
-    onClickSound('pop');
-    setWithdrawActiveTab(index);
-    setActiveTab(index);
-    setActiveSidebar && setActiveSidebar(index || 0);
-    dispatch && dispatch(index);
-  };
 
   return (
     <motion.div
@@ -80,11 +65,13 @@ const Sidebar: SidebarComponent = ({ sidebarItems, activeSidebar, setActiveSideb
           <div
             key={index}
             className={classNames(styles.sidebarItem, {
-              [styles.activeTab]:
-                index === activeTab || index === withdrawActiveTab || (activeSidebar && activeSidebar === index),
+              [styles.activeTab]: index === activeSidebarItem,
             })}
             bet-data={item === '' ? 'none' : undefined}
-            onClick={() => handleTabClick(index)}
+            onClick={() => {
+              onClickSound('pop');
+              setActiveSidebarItem(index);
+            }}
           >
             <span className={styles.text}>{item}</span>
           </div>

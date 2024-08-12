@@ -5,6 +5,7 @@ import Sidebar from '@/components/Sidebar';
 import { VIPGiftInfo } from '@/types/app';
 import { FC, useState } from 'react';
 import Privilege from './components/Privilege';
+import VipDetails from './components/VipDetails';
 import styles from './index.module.scss';
 
 const MainContent: FC<
@@ -17,10 +18,15 @@ const MainContent: FC<
   const [activeSidebarItem, setActiveSidebarItem] = useState(0);
   return (
     <main className={styles.container}>
-      <Sidebar sidebarItems={sidebarItems} />
+      <Sidebar
+        sidebarItems={sidebarItems}
+        activeSidebarItem={activeSidebarItem}
+        setActiveSidebarItem={setActiveSidebarItem}
+      />
       <section className={styles.wrapper}>
         <div className={styles.content} data-theme={theme}>
           {activeSidebarItem === 0 && <Privilege theme={theme} vipGiftInfo={vipGiftInfo} />}
+          {activeSidebarItem === 1 && <VipDetails vipGiftInfo={vipGiftInfo} />}
         </div>
       </section>
     </main>
