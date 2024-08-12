@@ -4,6 +4,7 @@ import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import { GameInfoGroup } from '@/types/app';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import styles from './index.module.scss';
 
@@ -59,7 +60,9 @@ const CategoryListBar: FC<IProps> = ({ setActivePlatformId }) => {
               onClick={() => handleOnClick(item, index)}
               data-theme={theme}
             >
-              <img loading='lazy' src={item.icon} alt='Icon' />
+              <div className={styles.icon}>
+                <Image loading='lazy' src={item.icon || ''} alt='Icon' fill quality={100} />
+              </div>
               <span>{item.name} </span>
             </motion.div>
           );
