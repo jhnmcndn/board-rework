@@ -1,5 +1,6 @@
 import AlertModal from '@/components/modals/AlertModal';
 import LoginTypesModal from '@/components/modals/LoginTypesModal';
+import SettingsModal from './SettingsModal';
 
 function ModalRoot() {
   // Only add common/global scope modals here,
@@ -9,6 +10,7 @@ function ModalRoot() {
     <>
       <AlertModal />
       <LoginTypesModal />
+      <SettingsModal />
       <div id='modal-root' />
     </>
   );

@@ -1,4 +1,3 @@
-import SettingsModal from '@/components/modals/SettingsModal';
 import useAuthCheck from '@/hooks/useAuthCheck';
 import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
@@ -21,8 +20,6 @@ const HeaderButtons = () => {
   };
   return (
     <>
-      <SettingsModal />
-
       <div className={styles.headerButtons}>
         <Image
           src={images.calendar}

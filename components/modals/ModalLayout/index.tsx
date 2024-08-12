@@ -1,6 +1,8 @@
 'use client';
 
 import useClickOutside from '@/hooks/useClickOutside';
+import { MODAL_BG_ANIMATION, MODAL_CONTENT_ANIMATION } from '@/utils/helpers';
+import { motion } from 'framer-motion';
 import { type ReactNode, useEffect, useRef } from 'react';
 import styles from './index.module.scss';
 
@@ -37,16 +39,27 @@ function ModalLayout({
   };
 
   return (
-    <div
+    <motion.div
+      variants={MODAL_BG_ANIMATION}
+      initial='hidden'
+      animate='visible'
+      exit='exit'
       className={styles.modalOverlay}
       onClick={handleClose}
       id='modal-layout'
       style={{ background: `rgba(0,0,0,${backdrop})` }}
     >
-      <div className={styles.modalOverlay__container} ref={modalRef}>
+      <motion.div
+        variants={MODAL_CONTENT_ANIMATION}
+        initial='hidden'
+        animate='visible'
+        exit='exit'
+        className={styles.modalOverlay__container}
+        ref={modalRef}
+      >
         {children}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
