@@ -8,6 +8,7 @@ import { GameInfoGroup, RspGameInfo } from '@/types/app';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { Dispatch, FC, SetStateAction, useEffect, useRef, useState } from 'react';
 import ListSmallIcons from '../ListSmallIcons';
 import styles from './index.module.scss';
@@ -20,6 +21,7 @@ interface IProps {
 type CombinedGameInfo = RspGameInfo & GameInfoGroup;
 
 const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => {
+  const router = useRouter();
   const { images } = useImages();
   const rowsContainerRef = useRef<HTMLDivElement | null>(null);
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
@@ -120,7 +122,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     if (isDragging) return;
 
     if (activeSideBarItem.type === 2) {
-      // TO DO
+      router.push(`/games?id=${item.id}`);
     } else {
       setActivePlatform(item);
       fetchGameInfo({ id: activeSideBarItem.id || 1, pid: item.id || 1 });
