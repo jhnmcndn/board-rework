@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import AddCardModal from '@/app/withdraw/components/Modals/AddCardModal';
+import AddUSDTModal from '@/app/withdraw/components/Modals/AddUSDTModal';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { onClickSound } from '@/utils/audioFile';
 import classnames from 'classnames';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
-import AddCardModal from '@/app/withdraw/components/Modals/AddCardModal';
-import AddUSDTModal from '@/app/withdraw/components/Modals/AddUSDTModal';
 
 const SelfWithdrawal = () => {
   const theme = useAccountStore((state) => state.theme);
@@ -83,7 +83,7 @@ const SelfWithdrawal = () => {
                       [styles.selectedCard]: item?.id === selectedCard?.id,
                     })}
                     onClick={() => {
-                      selectedCard === item ? setSelectedCard(null) : setSelectedCard(item);
+                      selectedCard === item ? setSelectedCard(undefined) : setSelectedCard(item);
                       onClickSound('pop');
                     }}
                   >

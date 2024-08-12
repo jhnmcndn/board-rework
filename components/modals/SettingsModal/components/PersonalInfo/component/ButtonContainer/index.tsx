@@ -4,12 +4,22 @@ const ButtonContainer: React.FC = () => {
   return (
     <div className={styles.buttonContainer}>
       <div className={styles.infoBtn}>
-        <div className={styles.logoutBtn} onClick={() => handleLogoutButton()}>
+        <div
+          className={styles.logoutBtn}
+          onClick={() => {
+            // handleLogoutButton()
+          }}
+        >
           账号切换
         </div>
       </div>
       <div className={styles.infoBtn}>
-        <div className={styles.logoutBtn} onClick={() => lineSwitch()}>
+        <div
+          className={styles.logoutBtn}
+          onClick={() => {
+            // lineSwitch()
+          }}
+        >
           切换线路
         </div>
       </div>

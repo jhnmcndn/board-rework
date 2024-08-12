@@ -6,22 +6,17 @@ import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import { useMessageStore } from '@/components/Providers/MessageStoreProvider';
 import { initState } from '@/store/account';
-import {
-  ErrorData,
-  GetGameTypes,
-  Init,
-  MessageHomeNotice,
-  MessageOnSites,
-  RootResponse,
-  RspGameInfo,
-} from '@/types/app';
+import { ErrorData, GetGameTypes, Init, MessageHomeNotice, MessageOnSites, RspGameInfo } from '@/types/app';
 import { FC, useEffect } from 'react';
 import Main from './Main';
 
 export type HomePageComponent = FC<
   Readonly<{
     init?: Init | ErrorData;
-    messageHomeNoticesData?: Pick<RootResponse<MessageHomeNotice[] | ErrorData>, 'data' | 'otherData'>;
+    messageHomeNoticesData?: {
+      data: ErrorData | MessageHomeNotice[] | undefined;
+      otherData: string | undefined;
+    };
     gameTypesData?: GetGameTypes | ErrorData;
     gameInfosData?: RspGameInfo[] | ErrorData;
     messageOnSites?: MessageOnSites[] | ErrorData;
@@ -80,7 +75,6 @@ export const HomePage: HomePageComponent = ({
     if (getBoxPassIsOpen && typeof getBoxPassIsOpen === 'boolean') {
       setBoxPassIsSet(getBoxPassIsOpen);
     }
-
   }, [init, messageHomeNoticesData, gameTypesData, gameInfosData, messageOnSites, getBoxPassIsOpen]);
 
   return (
