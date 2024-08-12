@@ -48,7 +48,7 @@ export const request = async <T>({
   });
   if (!response.ok) return errorRootResponse;
   const data = await response.json();
-  return data;
+  return data as T;
 };
 
 export const getIp = async (): Promise<string> => {

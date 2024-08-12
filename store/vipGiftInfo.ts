@@ -4,9 +4,9 @@ import { createStore } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 export const initialVipGiftInfoState = {
-  levelBonusStatus: undefined,
-  weekBonusStatus: undefined,
-  vipSetList: undefined,
+  levelBonusStatus: 0,
+  weekBonusStatus: 0,
+  vipSetList: [],
 } satisfies VIPGiftInfo;
 
 export type VIPGiftInfoState = {
@@ -14,7 +14,7 @@ export type VIPGiftInfoState = {
 };
 
 export type VIPGiftInfoAction = {
-  setVipGiftInfo: (vipGiftInfo: Partial<VIPGiftInfo>) => void;
+  setVipGiftInfo: (vipGiftInfo: VIPGiftInfo) => void;
   fetchVipGiftInfo: () => void;
 };
 

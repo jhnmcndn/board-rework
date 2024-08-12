@@ -1,4 +1,4 @@
-.giftboxWrapper {
+.container {
   width: 2rem;
   height: 1rem;
   text-align: center;
@@ -11,6 +11,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  color: white;
 
   .header {
     height: 0.25rem;
@@ -24,16 +25,16 @@
 
     img {
       width: 0.16rem;
-      height: 0.16rem;
+      height: auto;
     }
 
-    .headerTitle {
+    .giftTitle {
       padding-bottom: 0.02rem;
       padding-top: 0.002rem;
     }
   }
 
-  .body {
+  .giftContent {
     flex: 1;
     width: 100%;
     display: flex;
@@ -43,11 +44,11 @@
     border-bottom-right-radius: 0.08rem;
     border-bottom-left-radius: 0.08rem;
 
-    .yenCount {
+    .levelBonus {
       font-size: 0.25rem;
     }
 
-    .receiveBtn {
+    .bonusStatus {
       font-size: 0.1rem;
       background-color: #888888;
       border-radius: 0.2rem;
@@ -57,7 +58,23 @@
 
       &.active {
         background: linear-gradient(to bottom, #ffe800, #e38c00);
+        cursor: pointer;
       }
+    }
+  }
+
+  .header,
+  .giftContent {
+    &.pink {
+      background: linear-gradient(to bottom, #f49e97, #fa6653);
+    }
+
+    &.blue {
+      background: linear-gradient(to bottom, #76c6dd, #00ac90);
+    }
+
+    &.orange {
+      background: linear-gradient(to bottom, #f7c697, #de7900);
     }
   }
 }

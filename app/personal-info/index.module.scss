@@ -20,6 +20,37 @@
       width: 100%;
       padding: 0.1rem;
       overflow-y: scroll;
+
+      &[data-theme='blackGold'] {
+        background: #000;
+      }
+
+      &[data-theme='brownGold'] {
+        background: #ededed;
+      }
+
+      &[data-theme='yellowWhite'] {
+        background: #ebedf1;
+      }
+
+      &[data-theme='greenYellow'] {
+        background: #d6eae4;
+      }
+
+      &[data-theme='skyBlue'] {
+        background: #dff4ff;
+      }
+      &[data-theme='darkBlue'] {
+        background: #d7e8f0;
+      }
+
+      &[data-theme='redGold'] {
+        background: #c9bebe;
+      }
+
+      &[data-theme='whiteGold'] {
+        background: #dadce7;
+      }
     }
   }
 }

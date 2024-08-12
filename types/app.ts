@@ -9,13 +9,13 @@ export type ErrorData = {
   message: string;
 };
 
-export type RootResponse<T = {}> = {
-  code?: number;
-  msg?: string;
-  data?: T;
-  total?: number;
-  hasNext?: boolean;
-  otherData?: string;
+export type RootResponse<T = unknown> = {
+  code: number;
+  msg: string;
+  data: T;
+  total: number;
+  hasNext: boolean;
+  otherData: string;
 };
 
 export type Init = {
@@ -53,14 +53,14 @@ export type AccountInfo = {
   token?: string;
   id?: string;
   nickName?: string;
-  vip?: number;
+  vip: number;
   headImg?: string;
   accountNow?: number;
   accountCharge?: number;
   codeNow?: number;
   codeWill?: number;
-  codeTotal?: number;
-  nextLevelIntegral?: number;
+  codeTotal: number;
+  nextLevelIntegral: number;
   status?: number;
   inviterCode?: string;
   registerType?: number;
@@ -174,16 +174,16 @@ export type MessageCommonProblems = {
 };
 
 export type VIPGiftInfo = {
-  vipSetList?: VIPSetList[];
-  levelBonusStatus?: number;
-  weekBonusStatus?: number;
+  vipSetList: VIPSetList[];
+  levelBonusStatus: number;
+  weekBonusStatus: number;
 };
 
 export type VIPSetList = {
-  level?: number;
-  levelBonus?: number;
-  weekBonus?: number;
-  bcode?: number;
+  level: number;
+  levelBonus: number;
+  weekBonus: number;
+  bcode: number;
 };
 
 export type BankList = {
