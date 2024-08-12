@@ -5,13 +5,15 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 11;
+  z-index: 20;
   background-color: rgba(0, 0, 0, 0.5019607843);
+
   .wrapper {
     font-size: 0.15rem;
     color: white;
     position: relative;
     width: 4.08rem;
+
     .header {
       @include flex-xy;
       position: relative;
@@ -35,6 +37,7 @@
         right: 0.1rem;
       }
     }
+
     .addCardContainer {
       width: 100%;
       position: relative;
@@ -43,72 +46,53 @@
       border: 0.01rem solid #8d7c4f;
       border-radius: 0 0 0.05rem 0.05rem;
       padding: 0.2rem 0.2rem;
+
       .bodyContainer {
-        @include flex-xy;
-        flex-direction: column;
+
         .inputFields {
           width: 100%;
           display: flex;
+
           ul {
             display: flex;
             flex-direction: column;
             width: 100%;
+
             li {
               @include flex-xy(space-between, center);
               width: 100%;
-              .templatedInputForUser {
-                display: flex;
-                justify-content: space-between;
-                width: 100%;
-                .inputLabel {
-                  font-size: 0.15rem;
-                  width: 0.8rem;
-                  height: 0.2rem;
-                }
-                .inputHolder {
-                  display: flex;
-                  align-items: center;
-                  font-size: 0.15rem;
-                  height: 0.2rem;
-                  input {
-                    width: 2.8rem;
-                    color: white;
-                    font-size: 0.15rem;
-                    height: 0.2rem;
-                    background: #1a1a1a;
-                    border: none;
-                    border-radius: 0.3rem;
-                    padding: 0.15rem 0.15rem;
-                    caret-color: #fff;
-                  }
-                  input:focus {
-                    outline: none;
-                  }
-                }
-              }
+
               &.list {
                 margin-bottom: 0.1rem;
               }
+
               &.listSpecial {
                 margin-top: 0.15rem;
               }
+
               .bankListSpan {
                 font-size: 0.15rem;
               }
+
               .selectContainer {
                 width: 2.8rem;
               }
             }
           }
         }
-        .buttonHolder {
-          margin-top: 0.1rem;
+
+        .button {
+          margin-top: 0.25rem;
+          width: 0.8rem;
+          height: 0.3rem;
         }
+
         :global {
           .css-1xc3v61-indicatorContainer,
           .css-15lsz6c-indicatorContainer {
             padding: 0;
           }
+
           .bindCardSelect__control {
             position: relative;
             margin: 0 !important;
@@ -122,20 +106,24 @@
             background-color: #000;
             min-height: 0 !important;
             padding: 0 0.10rem 0 0.05rem;
+
             .bindCardSelect__value-container {
               height: 100%;
               display: flex;
               align-items: center;
               position: relative;
+
               .bindCardSelect__single-value {
                 display: flex;
                 align-items: center;
                 height: 100%;
+
                 > span {
                   color: #fff;
                   display: flex;
                   align-items: center;
                   font-size: 0.15rem !important;
+
                   .bankIcons {
                     width: 0.2rem;
                     height: 0.2rem;
@@ -143,6 +131,7 @@
                 }
               }
             }
+
             .bindCardSelect__indicator {
               @include flex-xy;
               outline: none;
@@ -150,6 +139,7 @@
               box-shadow: none;
               width: 0.25rem;
               height: 0.25rem;
+
               svg {
                 width: 0.25rem;
               }
@@ -170,9 +160,11 @@
               color: #fff;
             }
           }
+
           .bindCardSelect__menu {
             background-color: #1a1a1a !important;
           }
+
           .bindCardSelect__menu-list {
             background-color: #1a1a1a !important;
           }

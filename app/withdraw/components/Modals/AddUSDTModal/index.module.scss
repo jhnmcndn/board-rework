@@ -1,0 +1,92 @@
+.overlay {
+  position: absolute;
+  @include flex-xy;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 20;
+  background-color: rgba(0, 0, 0, 0.5019607843);
+
+  .wrapper {
+    font-size: 0.15rem;
+    color: white;
+    position: relative;
+    width: 4.08rem;
+
+    .header {
+      @include flex-xy;
+      position: relative;
+      width: 100%;
+      height: 0.41rem;
+      z-index: 11;
+      background: var(--withdraw-header-modal) center / 100% 100% no-repeat;
+      border-radius: 0.05rem 0.05rem 0 0;
+
+      .headerTitle {
+        color: #651d00;
+        font-size: 0.2rem;
+        font-weight: 900;
+      }
+
+      .closeBtn {
+        position: absolute;
+        background: var(--withdraw-header-modal-close) center / contain no-repeat;
+        width: 0.2rem;
+        height: 0.2rem;
+        right: 0.1rem;
+      }
+    }
+
+    .addCardContainer {
+      width: 100%;
+      position: relative;
+      z-index: 10;
+      background: #1f1e1b;
+      border: 0.01rem solid #8d7c4f;
+      border-radius: 0 0 0.05rem 0.05rem;
+      padding: 0.2rem 0.2rem;
+
+      .bodyContainer {
+
+        .inputFields {
+          width: 100%;
+          display: flex;
+
+          ul {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            li {
+              @include flex-xy(space-between, center);
+              width: 100%;
+
+              &.list {
+                margin-bottom: 0.1rem;
+              }
+
+              &.listSpecial {
+                margin-top: 0.15rem;
+              }
+
+              .bankListSpan {
+                font-size: 0.15rem;
+              }
+
+              .selectContainer {
+                width: 2.8rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.bankIcons {
+  width: 0.2rem;
+  height: 0.2rem;
+}
+
