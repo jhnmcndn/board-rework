@@ -1,5 +1,5 @@
 .loginTypes {
-  position: absolute;
+  position: relative;
   inset: 0;
   background: blue url('~/assets/blackGold/loginModal/loginTypesBg.png') center / contain no-repeat;
   border-radius: 0.1rem;
@@ -7,7 +7,6 @@
   width: 5.71rem;
   max-height: 75vh;
   max-width: calc(75vh * 1.64);
-  margin: auto;
 
   &__close {
     position: absolute;

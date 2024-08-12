@@ -9,6 +9,7 @@ import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useImages from '@/hooks/useImages';
 import useLogin from '@/hooks/useLogin';
 import useModalStore from '@/store/modals';
+import { AnimatePresence } from 'framer-motion';
 import ModalLayout from '../ModalLayout';
 import styles from './index.module.scss';
 
@@ -85,10 +86,10 @@ const LoginTypesModal = () => {
     </ModalLayout>
   );
 
-  if (isLoginOptionsOpen) {
-    const element = document.getElementById('modal-root') as HTMLDivElement;
-    return createPortal(modalContent, element);
-  }
+  const element = document.getElementById('modal-root') as HTMLDivElement;
+
+  if (!element) return;
+  return createPortal(<AnimatePresence>{isLoginOptionsOpen && modalContent}</AnimatePresence>, element);
 };
 
 export default LoginTypesModal;
