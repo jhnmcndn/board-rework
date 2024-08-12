@@ -163,7 +163,15 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
               className={styles.firstRow}
             >
               {filteredData?.map((item) => {
-                return <MemoizedIconHolder key={item.id} item={item} handleOnClick={handleOnClick} styles={styles} />;
+                return (
+                  <MemoizedIconHolder
+                    key={item.id}
+                    item={item}
+                    handleOnClick={handleOnClick}
+                    styles={styles}
+                    isLargeIcon
+                  />
+                );
               })}
             </motion.div>
           </motion.div>
