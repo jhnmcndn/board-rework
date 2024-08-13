@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 import { refetch } from '@/api/refetch';
-import AddCardModal from '../Modals/AddCardModal';
-import AddUSDTModal from '../Modals/AddUSDTModal';
+import BindUSDTModal from '../Modals/BindUSDTModal';
 import Image from 'next/image';
 import styles from './index.module.scss';
 import { API_ENDPOINT } from '@/types/enums';
+import useModalStore from '@/store/modals';
 
 type ListItem = {
   text: string;
@@ -19,17 +19,17 @@ const BindCards = () => {
   const theme = useAccountStore((state) => state.theme);
   const bindCardList = useAccountStore((state) => state.bindCardList);
   const fetchBindCardList = useAccountStore((state) => state.fetchBindCardList);
-  const [showAddCardModal, setShowAddCardModal] = useState(false);
   const [showUSDTModal, setShowUSDTModal] = useState(false);
+  const { openBindBank } = useModalStore();
 
   const listItems: ListItem[] = [
     {
       text: '绑定银行卡',
-      onClick: () => setShowAddCardModal((prevState) => !prevState),
+      onClick: () => openBindBank(),
     },
     {
       text: '添加USDT',
-      onClick: () => setShowUSDTModal((prevState) => !prevState),
+      onClick: () => setShowUSDTModal(!showUSDTModal),
     },
   ];
 
@@ -46,8 +46,7 @@ const BindCards = () => {
 
   return (
     <div className={styles.bindCardContainer}>
-      <AddCardModal showMe={showAddCardModal} onClose={() => setShowAddCardModal(!showAddCardModal)} />
-      <AddUSDTModal showMe={showUSDTModal} onClose={() => setShowUSDTModal(!showUSDTModal)} />
+      <BindUSDTModal showMe={showUSDTModal} onClose={() => setShowUSDTModal(!showUSDTModal)} />
       <PullToRefresh onRefresh={() => refetch(API_ENDPOINT.BIND_CARD_LIST)}>
         <ul className={styles.cardWrapper}>
           {bindCardList?.memberCardList?.map((item, index) => {

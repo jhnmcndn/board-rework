@@ -15,7 +15,7 @@ type Props = {
   onClose: () => void;
 };
 
-const AddUSDTModal = ({ showMe, onClose }: Props) => {
+const BindUSDTModal = ({ showMe, onClose }: Props) => {
   const fetchBindCardList = useAccountStore((state) => state.fetchBindCardList);
   const [usdtAddress, setUsdtAddress] = useState('');
   const [realName, setRealName] = useState('');
@@ -111,4 +111,4 @@ const AddUSDTModal = ({ showMe, onClose }: Props) => {
   );
 };
 
-export default AddUSDTModal;
+export default BindUSDTModal;
