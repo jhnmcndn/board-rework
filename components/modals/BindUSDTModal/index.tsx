@@ -9,6 +9,7 @@ import Form, { FormField } from '@/components/Fragments/Form';
 import ModalLayout from '@/components/modals/ModalLayout';
 import HeaderModalTitle from '@/components/HeaderModalTitle';
 import { createPortal } from 'react-dom';
+import useIsMounted from '@/hooks/useIsMounted';
 import styles from './index.module.scss';
 
 const BindUSDTModal = () => {
@@ -16,6 +17,7 @@ const BindUSDTModal = () => {
   const [usdtAddress, setUsdtAddress] = useState('');
   const [realName, setRealName] = useState('');
   const { openAlert, closeBindUSDT, isBindUSDTOpen } = useModalStore();
+  const isMounted = useIsMounted();
 
   const formFields: FormField[] = useMemo(
     () => [
@@ -79,8 +81,8 @@ const BindUSDTModal = () => {
     </AnimatePresence>
   );
 
-  const element = document?.getElementById('modal-root') as HTMLDivElement;
-  if (element) {
+  if (isMounted() && isBindUSDTOpen) {
+    const element = document.getElementById('modal-root') as HTMLDivElement;
     return createPortal(modalContent, element);
   }
 

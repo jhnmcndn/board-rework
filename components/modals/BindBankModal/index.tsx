@@ -109,7 +109,7 @@ const BindBankModal = () => {
     </AnimatePresence>
   );
 
-  if (isMounted()) {
+  if (isMounted() && isBindBankOpen) {
     const element = document.getElementById('modal-root') as HTMLDivElement;
     return createPortal(modalContent, element);
   }

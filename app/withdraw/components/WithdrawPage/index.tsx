@@ -1,24 +1,27 @@
 'use client';
 
+import { FC, useEffect, useState } from 'react';
 import BindCards from '@/app/withdraw/components/BindCards';
 import SelfWithdrawal from '@/app/withdraw/components/SelfWithdrawal';
 import WithdrawRecord from '@/app/withdraw/components/WithdrawRecord';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
-import { FC, Fragment, useEffect, useState } from 'react';
-
 import Sidebar from '@/components/Sidebar';
-import { BankList, BindCardList, ErrorData } from '@/types/app';
+import { BankList, BindCardList, CodeFlowList, ErrorData } from '@/types/app';
+import OtherHeader from '@/components/OtherHeader';
+import CodingDetails from '@/app/withdraw/components/CodeDetails';
+import styles from './index.module.scss';
 
 export type WithdrawPageComponent = FC<
   Readonly<{
     bindCardList?: BindCardList | ErrorData;
     bankList?: BankList[] | ErrorData;
+    codeFlowList?: CodeFlowList[] | ErrorData;
   }>
 >;
 
-export const WithdrawPage: WithdrawPageComponent = ({ bindCardList, bankList }) => {
-  // const withdrawActiveTab = useAccountStore((state) => state.withdrawActiveTab);
-  const { setBindCardList, setBankList } = useAccountStore((state) => state);
+export const WithdrawPage: WithdrawPageComponent = ({ bindCardList, bankList, codeFlowList }) => {
+  // const isWithdrawSuccessModalOpen = useModalStore((state) => state.isWithdrawSuccessModalOpen);
+  const { setBindCardList, setBankList, setCodeFlowList } = useAccountStore((state) => state);
   const [activeSidebarItem, setActiveSidebarItem] = useState(0);
   const sidebarItems = ['自主提现', '打码详情', '钱包管理', '提现记录'];
 
@@ -30,21 +33,29 @@ export const WithdrawPage: WithdrawPageComponent = ({ bindCardList, bankList }) 
     if (bankList && !('message' in bankList)) {
       setBankList(bankList);
     }
-  }, [bindCardList, bankList]);
+
+    if (codeFlowList && !('message' in codeFlowList)) {
+      setCodeFlowList(codeFlowList);
+    }
+  }, [bindCardList, bankList, codeFlowList]);
 
   return (
-    <Fragment>
-      <Sidebar
-        sidebarItems={sidebarItems}
-        activeSidebarItem={activeSidebarItem}
-        setActiveSidebarItem={setActiveSidebarItem}
-      />
-      <div style={{ width: '100%', height: '100%', overflowY: 'auto' }}>
-        {activeSidebarItem === 0 && <SelfWithdrawal />}
-        {/*{activeSidebarItem === 1 && <CodingDetails />}*/}
-        {activeSidebarItem === 2 && <BindCards />}
-        {activeSidebarItem === 3 && <WithdrawRecord />}
+    <div className={styles.withdrawPageContainer}>
+      {/*{isWithdrawSuccessModalOpen && <SuccessWithdrawModal />}*/}
+      <OtherHeader headerTitle='提现' />
+      <div className={styles.withdrawPageBody}>
+        <Sidebar
+          sidebarItems={sidebarItems}
+          activeSidebarItem={activeSidebarItem}
+          setActiveSidebarItem={setActiveSidebarItem}
+        />
+        <div className={styles.child}>
+          {activeSidebarItem === 0 && <SelfWithdrawal />}
+          {activeSidebarItem === 1 && <CodingDetails />}
+          {activeSidebarItem === 2 && <BindCards />}
+          {activeSidebarItem === 3 && <WithdrawRecord />}
+        </div>
       </div>
-    </Fragment>
+    </div>
   );
 };

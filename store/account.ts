@@ -1,12 +1,13 @@
 import { getAccountInfo } from '@/api/game';
 import { getBankList, getBindCardList, getWithdrawRechargeDetail } from '@/api/pay';
-import { getAccountNow } from '@/api/platform';
+import { getAccountNow, getCodeFlowList } from '@/api/platform';
 import { defaultInitData } from '@/constants/defaultReturnData';
 import {
   AccountInfo,
   AccountNow,
   BankList,
   BindCardList,
+  CodeFlowList,
   Init,
   WithdrawRechargeBody,
   WithdrawRechargeDetail,
@@ -73,6 +74,7 @@ type AccountState = {
   withdrawActiveTab: number;
   bankList: BankList[];
   withdrawRecordList: WithdrawRechargeDetail[];
+  codeFlowList: CodeFlowList[];
 };
 
 type AccountActions = {
@@ -85,9 +87,11 @@ type AccountActions = {
   setWithdrawRecordList: (withdrawRecordList: WithdrawRechargeDetail[]) => void;
   setWithdrawActiveTab: (index: number) => void;
   setBankList: (bankList: BankList[]) => void;
+  setCodeFlowList: (codeFlowList: CodeFlowList[]) => void;
   fetchBankList: () => void;
   fetchBindCardList: () => void;
   fetchWithdrawRecordList: ({ type, pageNum, pageSize }: WithdrawRechargeBody) => void;
+  fetchCodeFlowList: () => void;
 };
 
 export type AccountApiCalls = {
@@ -110,6 +114,7 @@ export const createAccountStore = () =>
         withdrawActiveTab: 0,
         bankList: [],
         withdrawRecordList: [],
+        codeFlowList: [],
         setInit: (init) => set(() => ({ init: { ...init } })),
         setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
         setTheme: (theme) => set(() => ({ theme })),
@@ -119,6 +124,7 @@ export const createAccountStore = () =>
         setWithdrawRecordList: (withdrawRecordList) => set(() => ({ withdrawRecordList })),
         setWithdrawActiveTab: (index) => set(() => ({ withdrawActiveTab: index })),
         setBankList: (bankList) => set(() => ({ bankList })),
+        setCodeFlowList: (codeFlowList) => set(() => ({ codeFlowList })),
         fetchAccountInfo: async () => {
           const accountInfo = await getAccountInfo();
           if (!accountInfo || 'message' in accountInfo) return set(() => ({ accountInfo: accountInfoState }));
@@ -149,6 +155,13 @@ export const createAccountStore = () =>
             return set(() => ({ withdrawRecordList: [] }));
           }
           return set(() => ({ withdrawRecordList }));
+        },
+        fetchCodeFlowList: async () => {
+          const codeFlowList = await getCodeFlowList();
+          if (!codeFlowList || 'message' in codeFlowList) {
+            return set(() => ({ codeFlowList: [] }));
+          }
+          return set(() => ({ codeFlowList }));
         },
       }),
       {
