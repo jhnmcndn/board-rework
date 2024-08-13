@@ -5,6 +5,7 @@ import { defaultInitData } from '@/constants/defaultReturnData';
 import {
   AccountInfo,
   AccountNow,
+  CodeFlowList,
   CustomerService,
   Init,
   LoginDevicePayload,
@@ -165,4 +166,21 @@ export const resetPassword = async ({ oldPasswd, newPasswd }: { oldPasswd: strin
     body: { oldPasswd, newPasswd },
   });
   return data;
+};
+
+export const getCodeFlowList = async () => {
+  const token = cookies().get('token')?.value || '';
+  const data = await request<RootResponse<CodeFlowList[]>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.CODE_FLOW_LIST,
+    tags: API_ENDPOINT.CODE_FLOW_LIST,
+    otherHeaders: {
+      token: token || '',
+    },
+    body: {
+      pageNum: 1,
+      pageSize: 10,
+    },
+  });
+  return data.data;
 };
