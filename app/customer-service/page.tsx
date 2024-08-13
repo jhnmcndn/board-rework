@@ -1,17 +1,17 @@
-import styles from '@/app/customer-service/index.module.scss';
+import { customerService as customerServiceApi, getMessageCommonProblems, init as initApi } from '@/api/platform';
 import OtherHeader from '@/components/OtherHeader';
+import { Fragment } from 'react';
 import MainContent from './components/MainContent';
-import CSSidebar from './components/Sidebar';
 
-const CustomerService = () => {
+const CustomerService = async () => {
+  const init = await initApi();
+  const customerService = await customerServiceApi();
+  const messageCommonProblems = await getMessageCommonProblems();
   return (
-    <main className={styles.cs}>
+    <Fragment>
       <OtherHeader headerTitle='客户服务' />
-      <div className={styles.wrapper}>
-        <CSSidebar />
-        <MainContent />
-      </div>
-    </main>
+      <MainContent init={init} customerService={customerService} messageCommonProblems={messageCommonProblems} />
+    </Fragment>
   );
 };
 

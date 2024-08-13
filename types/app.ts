@@ -127,16 +127,16 @@ export interface MessageOnSites {
 }
 
 export type CustomerService = {
-  id?: number;
-  title?: string;
-  icon?: string;
-  details?: string;
-  url?: string;
-  status?: boolean;
-  createBy?: string;
-  createTime?: string;
-  updateBy?: string;
-  updateTime?: string;
+  id: number;
+  title: string;
+  icon: string;
+  details: string;
+  url: string;
+  status: boolean;
+  createBy: string;
+  createTime: string;
+  updateBy: string;
+  updateTime: string;
 };
 
 export type BindCardList = {
@@ -168,9 +168,9 @@ export type SpecialBankInfoMap = {
 };
 
 export type MessageCommonProblems = {
-  id?: number;
-  title?: string;
-  content?: string;
+  id: number;
+  title: string;
+  content: string;
 };
 
 export type VIPGiftInfo = {

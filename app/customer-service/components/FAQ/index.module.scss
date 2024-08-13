@@ -4,6 +4,8 @@
   height: 100%;
   width: 100%;
   display: flex;
+  overflow-y: scroll;
+  user-select: none;
 
   .wrapper {
     font-size: 0.15rem;
@@ -16,26 +18,11 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 0;
-      margin: 0;
-      overflow: auto;
-    }
 
-    li {
-      width: 100%;
-      list-style-type: none;
-      margin-bottom: 5px;
-    }
-
-    .pullToRefresh {
-      :global {
-        .ptr__pull-down > div {
-          p {
-            font-size: 0.15rem;
-            color: #f6da85;
-            text-align: center !important;
-          }
-        }
+      li {
+        width: 100%;
+        list-style-type: none;
+        margin-bottom: 5px;
       }
     }
   }

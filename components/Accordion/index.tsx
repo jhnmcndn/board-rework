@@ -1,6 +1,7 @@
 'use client';
 
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { FC, ReactElement, useMemo, useState } from 'react';
@@ -64,7 +65,11 @@ const Accordion: AccordionComponent = ({ title, content, createdAt, delay, backg
             )}
           </div>
           {dropdownImg && (
-            <div className={styles.headerImage}>
+            <div
+              className={classNames(styles.headerImage, {
+                [styles.expand]: expand,
+              })}
+            >
               <Image src={dropdownImg} alt='Header image' width={27} height={27} />
             </div>
           )}
