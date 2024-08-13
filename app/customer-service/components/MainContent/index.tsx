@@ -1,27 +1,33 @@
 'use client';
 
-import CSPop from '@/app/customer-service/components/CSPop';
-import Iframe from '@/app/customer-service/components/Iframe';
-import styles from '@/app/customer-service/components/MainContent/index.module.scss';
-import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
-import { useCSStore } from '@/components/Providers/CSStoreProvider';
-import { useEffect } from 'react';
-import FAQ from '../FAQ';
+import Sidebar from '@/components/Sidebar';
+import { CustomerService, Init, MessageCommonProblems } from '@/types/app';
+import { FC, useState } from 'react';
+import Chatbox from '../Chatbox';
+import Faq from '../Faq';
+import styles from './index.module.scss';
 
-const MainContent = () => {
-  const theme = useAccountStore((state) => state.theme);
-  const { csData, activeTab, fetchCSData } = useCSStore((state) => state);
-
-  useEffect(() => {
-    fetchCSData();
-  }, []);
-
+const MainContent: FC<
+  Readonly<{
+    init: Init;
+    customerService: CustomerService[];
+    messageCommonProblems: MessageCommonProblems[];
+  }>
+> = ({ init, customerService, messageCommonProblems }) => {
+  const sidebarItems = customerService.length ? ['在线客服', 'POP客服', '常见问题'] : ['在线客服', '常见问题'];
+  const [activeSidebarItem, setActiveSidebarItem] = useState(0);
   return (
-    <section className={styles.mainContent} data-theme={theme}>
-      {activeTab === 0 && <Iframe />}
-      {csData.length > 0 && activeTab === 1 && <CSPop />}
-      {csData.length < 1 ? activeTab === 1 && <FAQ /> : activeTab === 2 && <FAQ />}
-    </section>
+    <main className={styles.container}>
+      <Sidebar
+        sidebarItems={sidebarItems}
+        activeSidebarItem={activeSidebarItem}
+        setActiveSidebarItem={setActiveSidebarItem}
+      />
+      <section className={styles.wrapper}>
+        {activeSidebarItem === 0 && <Chatbox init={init} />}
+        {activeSidebarItem === 1 && <Faq messageCommonProblems={messageCommonProblems} />}
+      </section>
+    </main>
   );
 };
 

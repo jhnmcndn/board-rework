@@ -19,7 +19,6 @@ import {
   WithToken,
 } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
-import { CustomerServiceFn } from '@/types/fns';
 import { cookies } from 'next/headers';
 
 export const loginDevice = async (payload: LoginDevicePayload) => {
@@ -90,16 +89,16 @@ export const boxPassIsOpen = async () => {
   return data.data;
 };
 
-export const customerService: CustomerServiceFn = async () => {
-  const token = cookies().get('token')?.value || '';
+export const customerService = async () => {
   const data = await request<RootResponse<CustomerService[]>>({
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.CUSTOMER_SERVICE,
     tags: API_ENDPOINT.CUSTOMER_SERVICE,
     otherHeaders: {
-      token: token || '',
+      token: cookies().get('token')?.value || '',
     },
   });
+  if (!data.data || 'message' in data.data) return [] satisfies CustomerService[];
   return data.data;
 };
 
@@ -110,17 +109,17 @@ export const getMessageCommonProblems = async () => {
     tags: API_ENDPOINT.MESSAGE_COMMON_PROBLEMS,
     otherHeaders: {},
   });
+  if (!data.data || 'message' in data.data) return [] satisfies CustomerService[];
   return data.data;
 };
 
-export const getVipGiftInfo = async () => {
-  const token = cookies().get('token')?.value || '';
+export const getVipGiftInfo = async (token?: string) => {
   const data = await request<RootResponse<VIPGiftInfo>>({
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.VIP_GIFT_INFO,
     tags: API_ENDPOINT.VIP_GIFT_INFO,
     otherHeaders: {
-      token: token || '',
+      token: token ? token : cookies().get('token')?.value || '',
     },
   });
   if (!data.data || 'message' in data.data)
@@ -160,7 +159,7 @@ export const resetPassword = async ({ oldPasswd, newPasswd }: { oldPasswd: strin
     endpoint: API_ENDPOINT.RESET_PASSWD,
     tags: API_ENDPOINT.RESET_PASSWD,
     otherHeaders: {
-      token: token || '',
+      token: token,
     },
     body: { oldPasswd, newPasswd },
   });

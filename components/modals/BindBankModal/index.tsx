@@ -1,16 +1,16 @@
 'use client';
 
-import { AnimatePresence } from 'framer-motion';
-import styles from './index.module.scss';
-import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
-import { ChangeEvent, useEffect, useMemo, useState } from 'react';
-import Image from 'next/image';
 import { setBindCard } from '@/api/pay';
-import useModalStore from '@/store/modals';
 import Form, { FormField } from '@/components/Fragments/Form';
-import ModalLayout from '@/components/modals/ModalLayout';
 import HeaderModalTitle from '@/components/HeaderModalTitle';
+import ModalLayout from '@/components/modals/ModalLayout';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import useModalStore from '@/store/modals';
+import { AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
+import styles from './index.module.scss';
 
 const BindBankModal = () => {
   const bankList = useAccountStore((state) => state.bankList);
@@ -107,7 +107,7 @@ const BindBankModal = () => {
     </AnimatePresence>
   );
 
-  const element = document?.getElementById('modal-root') as HTMLDivElement;
+  const element = typeof window === 'undefined' ? null : (document.getElementById('modal-root') as HTMLDivElement);
   if (element) {
     return createPortal(modalContent, element);
   }
