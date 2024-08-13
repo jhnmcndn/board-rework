@@ -5,14 +5,13 @@ import { Header } from '@/app/(home)/components/Header';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import { useMessageStore } from '@/components/Providers/MessageStoreProvider';
-import { initState } from '@/store/account';
 import { ErrorData, GetGameTypes, Init, MessageHomeNotice, MessageOnSites, RspGameInfo } from '@/types/app';
 import { FC, useEffect } from 'react';
 import Main from './Main';
 
 export type HomePageComponent = FC<
   Readonly<{
-    init?: Init | ErrorData;
+    init: Init;
     messageHomeNoticesData?: {
       data: ErrorData | MessageHomeNotice[] | undefined;
       otherData: string | undefined;
@@ -39,9 +38,7 @@ export const HomePage: HomePageComponent = ({
   );
 
   useEffect(() => {
-    if (init && !('message' in init)) {
-      setInit(init || initState);
-    }
+    setInit(init);
 
     if (messageHomeNoticesData && !('message' in messageHomeNoticesData)) {
       setAnnounceText(messageHomeNoticesData.otherData || '');

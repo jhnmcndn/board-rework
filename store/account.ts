@@ -1,6 +1,7 @@
 import { getAccountInfo } from '@/api/game';
 import { getBankList, getBindCardList, getWithdrawRechargeDetail } from '@/api/pay';
 import { getAccountNow } from '@/api/platform';
+import { defaultInitData } from '@/constants/defaultReturnData';
 import {
   AccountInfo,
   AccountNow,
@@ -13,23 +14,6 @@ import {
 import { THEME } from '@/types/enums';
 import { createStore } from 'zustand';
 import { persist } from 'zustand/middleware';
-
-export const initState = {
-  actionSwitch: undefined,
-  captchaId: undefined,
-  customerUrl: undefined,
-  customerUrl2: undefined,
-  downUrl: undefined,
-  firstRechargeUrl: undefined,
-  hasNew: undefined,
-  heCai6: undefined,
-  latestFore: undefined,
-  latestVersion: undefined,
-  productId: undefined,
-  starPic: undefined,
-  updateText: undefined,
-  webUrl: undefined,
-} satisfies Init;
 
 export const accountInfoState = {
   accountCharge: undefined,
@@ -92,7 +76,7 @@ type AccountState = {
 };
 
 type AccountActions = {
-  setInit: (init: Partial<Init>) => void;
+  setInit: (init: Init) => void;
   setAccountInfo: (accountInfo: AccountInfo) => void;
   setTheme: (theme: THEME) => void;
   setAccountNow: (accountNow: Partial<AccountNow>) => void;
@@ -117,7 +101,7 @@ export const createAccountStore = () =>
   createStore<AccountStore>()(
     persist(
       (set) => ({
-        init: initState,
+        init: defaultInitData,
         accountInfo: accountInfoState,
         theme: THEME.BLACK_GOLD,
         accountNow: accountNowState,
