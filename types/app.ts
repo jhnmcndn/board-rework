@@ -19,26 +19,26 @@ export type RootResponse<T = unknown> = {
 };
 
 export type Init = {
-  latestVersion?: string;
-  latestFore?: string;
-  downUrl?: string;
-  hasNew?: boolean;
-  updateText?: string;
-  customerUrl?: string;
-  customerUrl2?: string;
-  webUrl?: string;
-  starPic?: string;
-  heCai6?: HeCai6;
-  captchaId?: string;
-  actionSwitch?: string;
-  productId?: string;
-  firstRechargeUrl?: string;
+  latestVersion: string;
+  latestFore: string;
+  downUrl: string;
+  hasNew: boolean;
+  updateText: string;
+  customerUrl: string;
+  customerUrl2: string;
+  webUrl: string;
+  starPic: string;
+  heCai6: HeCai6;
+  captchaId: string;
+  actionSwitch: string;
+  productId: string;
+  firstRechargeUrl: string;
 };
 
 export type HeCai6 = {
-  reds?: string[];
-  blue?: string[];
-  green?: string[];
+  reds: string[];
+  blue: string[];
+  green: string[];
 };
 
 export type LoginDevicePayload = {
@@ -214,4 +214,16 @@ export type WithdrawRechargeBody = {
 export type ResetPassword = {
   oldPasswd?: string;
   newPasswd?: string;
+};
+
+export type WithToken = {
+  token?: string;
+};
+
+export type ReceiveVipGiftParams = {
+  type: number;
+};
+
+export type ReceiveVipGift = {
+  message?: string;
 };

@@ -1,6 +1,7 @@
 'use server';
 
 import { request } from '@/api';
+import { defaultInitData } from '@/constants/defaultReturnData';
 import {
   AccountInfo,
   AccountNow,
@@ -10,9 +11,12 @@ import {
   MessageCommonProblems,
   MessageHomeNotice,
   MessageOnSites,
+  ReceiveVipGift,
+  ReceiveVipGiftParams,
   ResetPassword,
   RootResponse,
   VIPGiftInfo,
+  WithToken,
 } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import { CustomerServiceFn } from '@/types/fns';
@@ -47,10 +51,11 @@ export const init = async () => {
     endpoint: API_ENDPOINT.INIT,
     tags: API_ENDPOINT.INIT,
     body: {
-      token: 'uEd2844af8c6220e11faa797b8bab0cc70',
-      id: 'uEd2844af8c6220e11faa797b8bab0cc70',
+      token: cookies().get('token')?.value || '',
+      id: cookies().get('token')?.value || '',
     },
   });
+  if (!data.data || 'message' in data.data) return defaultInitData;
   return data.data;
 };
 
@@ -127,11 +132,7 @@ export const getVipGiftInfo = async () => {
   return data.data;
 };
 
-export type ReceiveVipGift = {
-  message?: string;
-};
-
-export const receiveVipGift = async ({ type }: { type: number }): Promise<ReceiveVipGift> => {
+export const receiveVipGift = async ({ type, token }: ReceiveVipGiftParams & WithToken): Promise<ReceiveVipGift> => {
   const data = await request<RootResponse<ReceiveVipGift>>({
     endpoint: API_ENDPOINT.RECEIVE_VIP_GIFT,
     route: APP_ROUTE.PLATFORM,
@@ -140,7 +141,7 @@ export const receiveVipGift = async ({ type }: { type: number }): Promise<Receiv
       type,
     },
     otherHeaders: {
-      token: cookies().get('token')?.value || '',
+      token: token ? token : cookies().get('token')?.value || '',
     },
   });
   if (!data.data || 'message' in data.data)
