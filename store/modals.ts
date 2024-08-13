@@ -31,6 +31,9 @@ interface ModalStore {
   isVersionOpen: boolean;
   openVersion: () => void;
   closeVersion: () => void;
+  isPassCodeOpen: boolean;
+  openPassCode: () => void;
+  closePassCode: () => void;
 }
 
 export type ModalStoreActions = {};
@@ -45,6 +48,7 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   isBindUSDTOpen: false,
   isWithdrawSuccessOpen: false,
   isVersionOpen: false,
+  isPassCodeOpen: false,
   openAlert: (content) => {
     set((state) => ({ ...state, isAlertOpen: true, content: { ...content } }));
   },
@@ -63,6 +67,8 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   closeWithdrawSuccess: () => set((state) => ({ ...state, isWithdrawSuccessOpen: false })),
   openVersion: () => set((state) => ({ ...state, isVersionOpen: true })),
   closeVersion: () => set((state) => ({ ...state, isVersionOpen: false })),
+  openPassCode: () => set((state) => ({ ...state, isPassCodeOpen: true })),
+  closePassCode: () => set((state) => ({ ...state, isPassCodeOpen: false })),
 }));
 
 export default useModalStore;

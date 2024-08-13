@@ -5,6 +5,7 @@ import LoginTypesModal from '@/components/modals/LoginTypesModal';
 import SuccessWithdrawModal from '@/components/modals/SuccessWIthdrawModal';
 import SettingsModal from './SettingsModal';
 import VersionModal from './VersionModal';
+import PassCodeModal from '@/components/modals/PassCodeModal';
 
 function ModalRoot() {
   // Only add common/global scope modals here,
@@ -19,6 +20,7 @@ function ModalRoot() {
       <BindUSDTModal />
       <SuccessWithdrawModal />
       <VersionModal />
+      <PassCodeModal />
       <div id='modal-root' />
     </>
   );

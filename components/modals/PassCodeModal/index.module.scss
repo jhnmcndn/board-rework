@@ -1,0 +1,29 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+  animation: tilt-shaking 0.1s infinite;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
+@keyframes tilt-shaking {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
