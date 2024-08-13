@@ -5,6 +5,7 @@ import Form, { FormField } from '@/components/Fragments/Form';
 import HeaderModalTitle from '@/components/HeaderModalTitle';
 import ModalLayout from '@/components/modals/ModalLayout';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import useIsMounted from '@/hooks/useIsMounted';
 import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
@@ -21,6 +22,7 @@ const BindBankModal = () => {
   const [bindBankAccount, setBindBankAccount] = useState('');
   const [bindBankId, setBindBankId] = useState(139);
   const { openAlert, closeBindBank, isBindBankOpen } = useModalStore();
+  const isMounted = useIsMounted();
 
   const bankOptions = bankList.map((item) => ({
     value: item.id,
@@ -107,8 +109,8 @@ const BindBankModal = () => {
     </AnimatePresence>
   );
 
-  const element = typeof window === 'undefined' ? null : (document.getElementById('modal-root') as HTMLDivElement);
-  if (element) {
+  if (isMounted() && isBindBankOpen) {
+    const element = document.getElementById('modal-root') as HTMLDivElement;
     return createPortal(modalContent, element);
   }
 
