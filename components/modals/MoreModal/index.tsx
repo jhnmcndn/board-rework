@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { FC, useEffect, useRef } from 'react';
 import styles from './index.module.scss';
+import useModalStore from '@/store/modals';
 
 type MoreModalComponentProps = {
   setOpenAnnounceModal: () => void;
@@ -25,6 +26,7 @@ const MoreModal: MoreModalComponent = ({ setOpenAnnounceModal, setSafeBoxModal, 
   const { theme } = useAccountStore((state) => state);
   const moreOptionsRef = useRef<HTMLDivElement>(null);
   const clickOutSide = useClickOutSide(moreOptionsRef);
+  const { openPassCode } = useModalStore();
 
   useEffect(() => {
     if (clickOutSide) {
@@ -46,7 +48,12 @@ const MoreModal: MoreModalComponent = ({ setOpenAnnounceModal, setSafeBoxModal, 
           <span>公告</span>
         </li>
 
-        <li className={styles.more__listItem} onClick={() => authCheck(() => setSafeBoxModal())}>
+        {/*<li className={styles.more__listItem} onClick={() => authCheck(() => setSafeBoxModal())}>*/}
+        {/*  <Image src={images.vault} alt='Vault Icon' />*/}
+        {/*  <span>保险箱</span>*/}
+        {/*</li>*/}
+
+        <li className={styles.more__listItem} onClick={openPassCode}>
           <Image src={images.vault} alt='Vault Icon' />
           <span>保险箱</span>
         </li>
