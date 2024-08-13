@@ -61,7 +61,14 @@ const CategoryListBar: FC<IProps> = ({ setActivePlatformId }) => {
               data-theme={theme}
             >
               <div className={styles.icon}>
-                <Image loading='lazy' src={item.icon || ''} alt='Icon' fill quality={100} />
+                <Image
+                  loading='lazy'
+                  src={item.icon || ''}
+                  alt='Icon'
+                  fill
+                  quality={100}
+                  sizes={'(max-width: 600px) 100vw, 50vw'}
+                />
               </div>
               <span>{item.name} </span>
             </motion.div>

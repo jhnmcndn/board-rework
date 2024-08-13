@@ -54,8 +54,6 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
 
   const handleGameClick = (item: RspGameInfo) => {
     if (isDragging) return;
-    sessionStorage.setItem('id', String(item.id));
-    sessionStorage.setItem('id_2', String(item.id));
     var data_Category = item.gameCategory === 'HG' ? true : false;
 
     authCheck(() => {

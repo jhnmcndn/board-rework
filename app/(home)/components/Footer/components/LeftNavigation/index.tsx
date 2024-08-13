@@ -1,3 +1,4 @@
+import { useRouter } from 'next-nprogress-bar';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -9,12 +10,11 @@ import useAuthCheck from '@/hooks/useAuthCheck';
 import useImages from '@/hooks/useImages';
 import { MessageOnSites } from '@/types/app';
 import { AudioType, onClickSound } from '@/utils/audioFile';
-import { useRouter } from 'next/navigation';
 import { isIOS } from 'react-device-detect';
 import styles from './index.module.scss';
 
 const LeftNavigation: React.FC = () => {
-  const { push } = useRouter();
+  const router = useRouter();
   const { images } = useImages();
   const { authCheck } = useAuthCheck();
   const [showMoreModal, setShowMoreModal] = useState(false);
@@ -36,7 +36,7 @@ const LeftNavigation: React.FC = () => {
 
   const handleNavigation = (route: string, soundKey?: string) => {
     if (isIOS && soundKey) onClickSound(soundKey as AudioType);
-    authCheck(() => push(route));
+    authCheck(() => router.push(route));
   };
 
   return (
