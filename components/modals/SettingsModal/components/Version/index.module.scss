@@ -1,0 +1,42 @@
+.versionContainer {
+  width: 100%;
+  font-size: 0.12rem;
+  display: flex;
+  gap: 0.1rem;
+  flex-direction: column;
+  margin-top: 0.3rem;
+
+  .container {
+    @include flex-xy(space-around, center);
+    width: 100%;
+    flex-direction: row;
+
+    .row {
+      width: 2.2rem;
+      display: flex;
+
+      .label {
+        width: 0.7rem;
+        text-align: right;
+        margin-right: 0.1rem;
+      }
+
+      .value {
+        width: 1.4rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    button {
+      height: 0.25rem;
+      width: 0.7rem;
+      font-size: 0.12rem;
+      font-weight: 600;
+      text-align: center;
+      background: url('~@/assets/commons/button.png') no-repeat;
+      background-size: 100% 100%;
+      border: none;
+    }
+  }
+}
