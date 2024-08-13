@@ -5,7 +5,7 @@ import styles from '@/components/OtherHeader/index.module.scss';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useImages from '@/hooks/useImages';
 import { THEME } from '@/types/enums';
-import { onClickSound } from '@/utils/audioFile';
+import { sfx } from '@/utils/audioFile';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -55,7 +55,6 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
   }, [isGamePage, isWebviewPage]);
 
   const handleBack = () => {
-    onClickSound('pop');
     if (isRechargeHistoryPage) return router.push('/recharge?from=recharge-history');
     if (isSharePage) return router.push('/promotion-agent');
     if (isWebview) return router.push('/recharge');
@@ -73,7 +72,6 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
   };
 
   const handleHistoryRecordBtnClick = () => {
-    onClickSound('pop');
     if (isRechargePage) return router.push('/recharge-history');
     router.push('/recharge');
   };
@@ -87,7 +85,7 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
         onStart={() => setStarted(true)}
         onDrag={handleDrag}
       >
-        <div className={styles.exit} onClick={() => onClickSound('pop')} id='23'>
+        <div data-click={sfx.popAudio} className={styles.exit} id='23'>
           返回
         </div>
       </Draggable>
@@ -105,7 +103,7 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
     >
       <div className={styles.otherHeaderContainer}>
         <div className={styles.backBtnContainer}>
-          <div onClick={handleBack}>
+          <div data-click={sfx.popAudio} onClick={handleBack}>
             <Image src={images.backBtn} alt='Back' width={72} height={69} className={styles.backBtn} />
           </div>
         </div>
@@ -120,7 +118,7 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
           <span>{headerTitle}</span>
         </div>
         {headerTitle === '充值' && (
-          <div className={styles.historyRecordBtn} onClick={handleHistoryRecordBtnClick}>
+          <div data-click={sfx.popAudio} className={styles.historyRecordBtn} onClick={handleHistoryRecordBtnClick}>
             <Image src={images.historyRecord} alt='History Record' width={38} height={54} className={styles.hrImage} />
             {/* styles.prioRed does not exist in the scss module. Remove if necessary! */}
             <span className={classNames({ [styles.prioRed]: theme === THEME.YELLOW_WHITE })}>充值记录 &gt;</span>

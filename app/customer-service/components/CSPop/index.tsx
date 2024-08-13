@@ -5,7 +5,7 @@ import styles from '@/app/customer-service/components/CSPop/index.module.scss';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useCSStore } from '@/components/Providers/CSStoreProvider';
 import { API_ENDPOINT } from '@/types/enums';
-import { onClickSound } from '@/utils/audioFile';
+import { sfx } from '@/utils/audioFile';
 import { copyToClipboard } from '@/utils/helpers';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -42,8 +42,8 @@ const CSPop = () => {
 
                     <div className={styles.rightContent} data-theme={theme}>
                       <div
+                        data-click={sfx.popAudio}
                         onClick={() => {
-                          onClickSound('pop');
                           copyToClipboard(data.url || '');
                           // <Alert />
                         }}

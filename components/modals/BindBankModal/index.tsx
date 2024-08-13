@@ -1,18 +1,20 @@
 'use client';
 
-import { AnimatePresence } from 'framer-motion';
-import styles from './index.module.scss';
-import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
-import { ChangeEvent, useEffect, useMemo, useState } from 'react';
-import Image from 'next/image';
 import { setBindCard } from '@/api/pay';
-import useModalStore from '@/store/modals';
 import Form, { FormField } from '@/components/Fragments/Form';
-import ModalLayout from '@/components/modals/ModalLayout';
 import HeaderModalTitle from '@/components/HeaderModalTitle';
+import ModalLayout from '@/components/modals/ModalLayout';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import useIsMounted from '@/hooks/useIsMounted';
+import useModalStore from '@/store/modals';
+import { AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
+import styles from './index.module.scss';
 
 const BindBankModal = () => {
+  const isMounted = useIsMounted();
   const bankList = useAccountStore((state) => state.bankList);
   const fetchBankList = useAccountStore((state) => state.fetchBankList);
   const fetchBindCardList = useAccountStore((state) => state.fetchBindCardList);
@@ -107,8 +109,8 @@ const BindBankModal = () => {
     </AnimatePresence>
   );
 
-  const element = document?.getElementById('modal-root') as HTMLDivElement;
-  if (element) {
+  if (isMounted()) {
+    const element = document.getElementById('modal-root') as HTMLDivElement;
     return createPortal(modalContent, element);
   }
 

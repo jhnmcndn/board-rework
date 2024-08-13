@@ -40,67 +40,23 @@ export type AudioType =
   | 'vip'
   | 'withdraw';
 
-export const onClickSound = (type: AudioType) => {
-  let audioFile;
-
-  switch (type) {
-    case 'pop':
-      audioFile = popAudio;
-      break;
-    case 'gift':
-      audioFile = giftAudio;
-      break;
-    case 'activityPop':
-      audioFile = activityAudio;
-      break;
-    case 'baijialefp':
-      audioFile = baijialefpAudio;
-      break;
-    case 'bjlEndBet':
-      audioFile = bjlEndBetAudio;
-      break;
-    case 'bjlStartBet':
-      audioFile = bjlStartBetAudio;
-      break;
-    case 'cleanCode':
-      audioFile = cleanCodeAudio;
-      break;
-    case 'customer':
-      audioFile = customerAudio;
-      break;
-    case 'kaijiang':
-      audioFile = kaijiangAudio;
-      break;
-    case 'lottery':
-      audioFile = lotteryAudio;
-      break;
-    case 'message':
-      audioFile = messageAudio;
-      break;
-    case 'musicWebviewController':
-      audioFile = webviewAudio;
-      break;
-    case 'music':
-      audioFile = musicAudio;
-      break;
-    case 'promotion':
-      audioFile = promotionAudio;
-      break;
-    case 'recharge':
-      audioFile = rechargeAudio;
-      break;
-    case 'vaultAct':
-      audioFile = vaultActAudio;
-      break;
-    case 'vip':
-      audioFile = vipAudio;
-      break;
-    case 'withdraw':
-      audioFile = withdrawAudio;
-      break;
-    default:
-      audioFile = giftAudio;
-  }
-  const audio = new Audio(audioFile);
-  return audio.play();
+export const sfx = {
+  activityAudio,
+  baijialefpAudio,
+  bjlEndBetAudio,
+  bjlStartBetAudio,
+  customerAudio,
+  giftAudio,
+  popAudio,
+  cleanCodeAudio,
+  kaijiangAudio,
+  lotteryAudio,
+  messageAudio,
+  musicAudio,
+  webviewAudio,
+  promotionAudio,
+  rechargeAudio,
+  vaultActAudio,
+  vipAudio,
+  withdrawAudio,
 };

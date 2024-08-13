@@ -1,3 +1,4 @@
+import ClickSound from '@/components/ClickSoundProvider';
 import Loading from '@/components/Loading';
 import { GlobalProvider } from '@/components/Providers';
 import ModalRoot from '@/components/modals';
@@ -34,6 +35,7 @@ export default function RootLayout({
           {children}
           <Loading />
           <ModalRoot />
+          <ClickSound />
         </GlobalProvider>
       </body>
     </html>
