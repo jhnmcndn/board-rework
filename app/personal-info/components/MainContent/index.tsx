@@ -4,8 +4,8 @@ import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import Sidebar from '@/components/Sidebar';
 import { VIPGiftInfo } from '@/types/app';
 import { FC, useState } from 'react';
-import Privilege from './components/Privilege';
-import VipDetails from './components/VipDetails';
+import Privilege from '../Privilege';
+import VipDetails from '../VipDetails';
 import styles from './index.module.scss';
 
 const MainContent: FC<

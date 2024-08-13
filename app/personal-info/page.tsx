@@ -1,7 +1,7 @@
 import { getVipGiftInfo } from '@/api/platform';
 import OtherHeader from '@/components/OtherHeader';
 import { Fragment } from 'react';
-import MainContent from './MainContent';
+import MainContent from './components/MainContent';
 
 const PersonalInfo = async () => {
   const vipGiftInfo = await getVipGiftInfo();
