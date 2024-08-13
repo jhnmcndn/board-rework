@@ -1,7 +1,8 @@
 'use client';
+
 import HeaderModalTitle from '@/components/HeaderModalTitle';
 import useModalStore from '@/store/modals';
-import { onClickSound } from '@/utils/audioFile';
+import { sfx } from '@/utils/audioFile';
 import classNames from 'classnames';
 import { AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
@@ -28,11 +29,6 @@ const SettingsModal: React.FC = () => {
     { id: 3, title: '网站详情' },
     { id: 4, title: '改变主题' },
   ];
-
-  const handleSetSelect = (id: number) => {
-    onClickSound('pop');
-    setSelectedId(id);
-  };
 
   const renderComponent = () => {
     switch (selectedId) {
@@ -63,8 +59,9 @@ const SettingsModal: React.FC = () => {
                   {listItems.map((item) => (
                     <li
                       key={item.id}
+                      data-click={sfx.popAudio}
                       className={classNames({ [styles.sidebarItem]: selectedId === item.id })}
-                      onClick={() => handleSetSelect(item.id)}
+                      onClick={() => setSelectedId(item.id)}
                     >
                       <span>{item.title}</span>
                     </li>

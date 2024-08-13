@@ -1,11 +1,11 @@
 'use client';
 
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
-import { onClickSound } from '@/utils/audioFile';
+import useModalStore from '@/store/modals';
+import { sfx } from '@/utils/audioFile';
 import classnames from 'classnames';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import useModalStore from '@/store/modals';
 import styles from './index.module.scss';
 
 const SelfWithdrawal = () => {
@@ -37,7 +37,6 @@ const SelfWithdrawal = () => {
       alert('请选择提现卡');
       return;
     }
-    onClickSound('pop');
   };
 
   return (
@@ -74,12 +73,12 @@ const SelfWithdrawal = () => {
               return (
                 <li
                   key={index}
+                  data-click={sfx.popAudio}
                   className={classnames(styles.bankCard, {
                     [styles.selectedCard]: item?.id === selectedCard?.id,
                   })}
                   onClick={() => {
                     selectedCard === item ? setSelectedCard(undefined) : setSelectedCard(item);
-                    onClickSound('pop');
                   }}
                 >
                   <div className={styles.bankDetails}>
@@ -100,9 +99,9 @@ const SelfWithdrawal = () => {
         )}
         <div className={styles.addCardsCont}>
           <div
+            data-click={sfx.popAudio}
             className={styles.addCard}
             onClick={() => {
-              onClickSound('pop');
               openBindBank();
             }}
           >
@@ -140,7 +139,7 @@ const SelfWithdrawal = () => {
               <span className={styles.hardCodeNaDigit}>0.00</span>
             </div>
           </div>
-          <div className={styles.withdrawButton} onClick={handleWithdraw}>
+          <div data-click={sfx.popAudio} className={styles.withdrawButton} onClick={handleWithdraw}>
             <span>立即提现</span>
           </div>
         </div>

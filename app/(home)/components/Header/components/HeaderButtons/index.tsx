@@ -1,7 +1,7 @@
 import useAuthCheck from '@/hooks/useAuthCheck';
 import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
-import { onClickSound } from '@/utils/audioFile';
+import { sfx } from '@/utils/audioFile';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './index.module.scss';
@@ -13,11 +13,9 @@ const HeaderButtons = () => {
   const { openSettings } = useModalStore();
 
   const handleSetting = () => {
-    onClickSound('pop');
-    authCheck(() => {
-      openSettings();
-    });
+    authCheck(() => openSettings());
   };
+
   return (
     <>
       <div className={styles.headerButtons}>
@@ -42,7 +40,7 @@ const HeaderButtons = () => {
           height={110}
           onClick={() => authCheck(() => console.log('// TODO OPEN TASKS MODAL'))}
         />
-        <div className={styles.settingContainer} onClick={handleSetting}>
+        <div data-click={sfx.popAudio} className={styles.settingContainer} onClick={handleSetting}>
           <Image src={images.settings} alt='Settings' width={55} height={55} />
           <span className={styles.settingText}>设置</span>
         </div>

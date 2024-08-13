@@ -4,7 +4,7 @@ import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useAuthCheck from '@/hooks/useAuthCheck';
 import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
-import { onClickSound } from '@/utils/audioFile';
+import { sfx } from '@/utils/audioFile';
 import { copyToClipboard } from '@/utils/helpers';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -64,8 +64,8 @@ const VipPart = () => {
                 alt='Login'
                 width={310}
                 height={80}
+                data-click={sfx.popAudio}
                 onClick={() => {
-                  onClickSound('pop');
                   openLoginOptions();
                 }}
               />

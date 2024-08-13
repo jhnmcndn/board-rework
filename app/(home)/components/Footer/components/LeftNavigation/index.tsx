@@ -9,12 +9,11 @@ import { useMessageStore } from '@/components/Providers/MessageStoreProvider';
 import useAuthCheck from '@/hooks/useAuthCheck';
 import useImages from '@/hooks/useImages';
 import { MessageOnSites } from '@/types/app';
-import { AudioType, onClickSound } from '@/utils/audioFile';
-import { isIOS } from 'react-device-detect';
+import { sfx } from '@/utils/audioFile';
 import styles from './index.module.scss';
 
 const LeftNavigation: React.FC = () => {
-  const router = useRouter();
+  const { push } = useRouter();
   const { images } = useImages();
   const { authCheck } = useAuthCheck();
   const [showMoreModal, setShowMoreModal] = useState(false);
@@ -34,9 +33,8 @@ const LeftNavigation: React.FC = () => {
     }
   }, [messageOnSites]);
 
-  const handleNavigation = (route: string, soundKey?: string) => {
-    if (isIOS && soundKey) onClickSound(soundKey as AudioType);
-    authCheck(() => router.push(route));
+  const handleNavigation = (route: string) => {
+    authCheck(() => push(route));
   };
 
   return (
@@ -58,7 +56,7 @@ const LeftNavigation: React.FC = () => {
           </Link>
         </li>
 
-        <li onClick={() => handleNavigation('/code-washing', 'cleanCode')}>
+        <li data-click={sfx.cleanCodeAudio} onClick={() => handleNavigation('/code-washing')}>
           <div className={styles.listContainer}>
             <Image src={images.chip} alt='Chip Icon' />
             <span className={styles.text}>洗码</span>
@@ -66,10 +64,9 @@ const LeftNavigation: React.FC = () => {
         </li>
 
         <li
+          data-click={sfx.giftAudio}
           onClick={() => {
             accountInfo?.id ? setActiveSideLoggedIn(1) : setActiveSideLoggedIn(3);
-
-            onClickSound('gift');
             // handleClick({ fn: setOmOpen, params: true, isActivity: true });
           }}
         >
@@ -79,7 +76,7 @@ const LeftNavigation: React.FC = () => {
           </div>
         </li>
 
-        <li onClick={() => handleNavigation('/mailbox', 'message')}>
+        <li data-click={sfx.messageAudio} onClick={() => handleNavigation('/mailbox')}>
           <div className={styles.listContainer}>
             {(!isLoggedIn || unreadMsgs.length > 0) && <center className='alertIcon' />}
             <Image src={images.message} alt='Message Icon' />
@@ -88,8 +85,8 @@ const LeftNavigation: React.FC = () => {
         </li>
 
         <li
+          data-click={sfx.popAudio}
           onClick={() => {
-            onClickSound('pop');
             setShowMoreModal(!showMoreModal);
           }}
         >

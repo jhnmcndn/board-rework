@@ -4,7 +4,7 @@ import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useAuthCheck from '@/hooks/useAuthCheck';
 import useClickOutSide from '@/hooks/useClickOutside';
 import useImages from '@/hooks/useImages';
-import { onClickSound } from '@/utils/audioFile';
+import { sfx } from '@/utils/audioFile';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { FC, useEffect, useRef } from 'react';
@@ -36,10 +36,10 @@ const MoreModal: MoreModalComponent = ({ setOpenAnnounceModal, setSafeBoxModal, 
     <div className={styles.container} ref={moreOptionsRef} data-theme={theme}>
       <ul className={styles.more__list}>
         <li
+          data-click={sfx.popAudio}
           className={styles.more__listItem}
           onClick={() => {
             setOpenAnnounceModal();
-            onClickSound('pop');
           }}
         >
           <Image src={images.megaphone} alt='Megaphone Icon' />

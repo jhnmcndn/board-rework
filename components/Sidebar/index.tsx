@@ -1,7 +1,7 @@
 'use client';
 
 import styles from '@/components/Sidebar/index.module.scss';
-import { onClickSound } from '@/utils/audioFile';
+import { sfx } from '@/utils/audioFile';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
@@ -64,12 +64,12 @@ const Sidebar: SidebarComponent = ({ sidebarItems, activeSidebarItem, setActiveS
         sidebarItems.map((item, index) => (
           <div
             key={index}
+            data-click={sfx.popAudio}
             className={classNames(styles.sidebarItem, {
               [styles.activeTab]: index === activeSidebarItem,
             })}
             bet-data={item === '' ? 'none' : undefined}
             onClick={() => {
-              onClickSound('pop');
               setActiveSidebarItem(index);
             }}
           >
