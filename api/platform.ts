@@ -10,6 +10,7 @@ import {
   MessageCommonProblems,
   MessageHomeNotice,
   MessageOnSites,
+  ResetPassword,
   RootResponse,
   VIPGiftInfo,
 } from '@/types/app';
@@ -149,4 +150,18 @@ export const receiveVipGift = async ({ type }: { type: number }): Promise<Receiv
   return {
     message: data.msg,
   } satisfies ReceiveVipGift;
+};
+
+export const resetPassword = async ({ oldPasswd, newPasswd }: { oldPasswd: string; newPasswd: string }) => {
+  const token = cookies().get('token')?.value || '';
+  const data = await request<RootResponse<ResetPassword>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.RESET_PASSWD,
+    tags: API_ENDPOINT.RESET_PASSWD,
+    otherHeaders: {
+      token: token || '',
+    },
+    body: { oldPasswd, newPasswd },
+  });
+  return data;
 };

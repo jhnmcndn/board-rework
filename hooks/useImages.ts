@@ -66,6 +66,8 @@ export default function useImages() {
     gift: require(`@/assets/${theme}/footer/iconGift.png`),
     message: require(`@/assets/${theme}/footer/iconMessage.png`),
     more: require(`@/assets/${theme}/footer/iconMore.png`),
+    eyeShow: require(`@/assets/${theme}/footer/eyeShow.png`),
+    eyeHide: require(`@/assets/${theme}/footer/eyeHide.png`),
     // VIP
     crown: require(`@/assets/${theme}/crown.png`),
     darkBlueCrown: require(`@/assets/darkBlue/crown.png`),
