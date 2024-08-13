@@ -29,27 +29,30 @@ const Table: FC<
   Readonly<{
     headers: string[];
     content: any[];
+    withHeader?: boolean;
     withPullToRefresh?: {
       isPullable: boolean;
       onRefresh: () => Promise<any>;
     };
   }>
-> = ({ headers, content, withPullToRefresh }) => {
+> = ({ headers, content, withHeader, withPullToRefresh }) => {
   return (
     <div className={styles.table}>
-      <div
-        className={styles.header}
-        style={{
-          display: 'grid',
-          gridTemplateColumns: `repeat(${headers.length}, 1fr)`,
-        }}
-      >
-        {headers.map((header, index) => (
-          <div key={index}>
-            <span>{header}</span>
-          </div>
-        ))}
-      </div>
+      {withHeader && (
+        <div
+          className={styles.header}
+          style={{
+            display: 'grid',
+            gridTemplateColumns: `repeat(${headers.length}, 1fr)`,
+          }}
+        >
+          {headers.map((header, index) => (
+            <div key={index}>
+              <span>{header}</span>
+            </div>
+          ))}
+        </div>
+      )}
       {withPullToRefresh ? (
         <PullToRefresh isPullable={withPullToRefresh.isPullable} onRefresh={withPullToRefresh.onRefresh}>
           <TableBody content={content} headerLength={headers.length} />
