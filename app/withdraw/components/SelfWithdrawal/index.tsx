@@ -1,12 +1,12 @@
 'use client';
 
-import AddCardModal from '@/app/withdraw/components/Modals/AddCardModal';
-import AddUSDTModal from '@/app/withdraw/components/Modals/AddUSDTModal';
+import BindUSDTModal from '@/app/withdraw/components/Modals/BindUSDTModal';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { onClickSound } from '@/utils/audioFile';
 import classnames from 'classnames';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import useModalStore from '@/store/modals';
 import styles from './index.module.scss';
 
 const SelfWithdrawal = () => {
@@ -17,8 +17,8 @@ const SelfWithdrawal = () => {
   const [selectedCard, setSelectedCard] = useState(bindCardList?.memberCardList?.[0]);
   const [showSafeBox, setShowSafeBox] = useState(false);
   const fetchBindCardList = useAccountStore((state) => state.fetchBindCardList);
-  const [showAddCardModal, setShowAddCardModal] = useState(false);
   const [showUSDTModal, setShowUSDTModal] = useState(false);
+  const { openBindBank } = useModalStore();
 
   useEffect(() => {
     fetchBindCardList();
@@ -44,8 +44,7 @@ const SelfWithdrawal = () => {
 
   return (
     <>
-      <AddCardModal showMe={showAddCardModal} onClose={() => setShowAddCardModal(!showAddCardModal)} />
-      <AddUSDTModal showMe={showUSDTModal} onClose={() => setShowUSDTModal(!showUSDTModal)} />
+      <BindUSDTModal showMe={showUSDTModal} onClose={() => setShowUSDTModal(!showUSDTModal)} />
       <div className={styles.selfWithdrawalWrapper}>
         <section className={styles.panel}>
           <div className={styles.headerWrapper}>
@@ -108,7 +107,7 @@ const SelfWithdrawal = () => {
               className={styles.addCard}
               onClick={() => {
                 onClickSound('pop');
-                setShowAddCardModal(!showAddCardModal);
+                openBindBank();
               }}
             >
               <Image
