@@ -14,20 +14,16 @@ const VersionModal: React.FC = () => {
 
   const modalContent = (
     <AnimatePresence>
-      {isVersionOpen && (
-        <ModalLayout closeOnOutsideClick>
-          <div
-            className={styles.versionMainContainer}
-            style={{ border: '1px solid red', width: '100%', height: '100%' }}
-          >
-            asdadfadfadf
-          </div>
-        </ModalLayout>
-      )}
+      <ModalLayout closeOnOutsideClick onClose={closeVersion}>
+        <div className={styles.versionMainContainer} style={{ border: '1px solid red', width: '100%', height: '100%' }}>
+          Display Version
+        </div>
+      </ModalLayout>
     </AnimatePresence>
   );
+
   if (isMounted() && isVersionOpen) {
-    const element = typeof window === 'undefined' ? null : (document.getElementById('modal-root') as HTMLDivElement);
+    const element = document.getElementById('modal-root') as HTMLDivElement;
     if (element) return createPortal(modalContent, element);
   }
 
