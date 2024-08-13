@@ -28,6 +28,9 @@ interface ModalStore {
   isWithdrawSuccessOpen: boolean;
   openWithdrawSuccess: () => void;
   closeWithdrawSuccess: () => void;
+  isVersionOpen: boolean;
+  openVersion: () => void;
+  closeVersion: () => void;
 }
 
 export type ModalStoreActions = {};
@@ -41,6 +44,7 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   isBindBankOpen: false,
   isBindUSDTOpen: false,
   isWithdrawSuccessOpen: false,
+  isVersionOpen: false,
   openAlert: (content) => {
     set((state) => ({ ...state, isAlertOpen: true, content: { ...content } }));
   },
@@ -57,6 +61,8 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   closeBindUSDT: () => set((state) => ({ ...state, isBindUSDTOpen: false })),
   openWithdrawSuccess: () => set((state) => ({ ...state, isWithdrawSuccessOpen: true })),
   closeWithdrawSuccess: () => set((state) => ({ ...state, isWithdrawSuccessOpen: false })),
+  openVersion: () => set((state) => ({ ...state, isVersionOpen: true })),
+  closeVersion: () => set((state) => ({ ...state, isVersionOpen: false })),
 }));
 
 export default useModalStore;
