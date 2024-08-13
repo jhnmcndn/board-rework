@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import PullToRefresh from 'react-simple-pull-to-refresh';
+import NoData from '../NoData';
 import styles from './index.module.scss';
 
 const TableBody: FC<Readonly<{ content: any[]; headerLength: number }>> = ({ content, headerLength }) => {
@@ -36,6 +37,7 @@ const Table: FC<
     };
   }>
 > = ({ headers, content, withHeader, withPullToRefresh }) => {
+  if (!content.length) return <NoData />;
   return (
     <div className={styles.table}>
       {withHeader && (
