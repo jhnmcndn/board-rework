@@ -227,3 +227,12 @@ export type ReceiveVipGiftParams = {
 export type ReceiveVipGift = {
   message?: string;
 };
+
+export type CodeFlowList = {
+  createTime?: string;
+  income?: number;
+  des?: string;
+  cur?: number;
+  status?: number;
+  charge?: number;
+};
