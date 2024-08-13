@@ -37,7 +37,6 @@ const Table: FC<
     };
   }>
 > = ({ headers, content, withHeader, withPullToRefresh }) => {
-  if (!content.length) return <NoData />;
   return (
     <div className={styles.table}>
       {withHeader && (
@@ -57,10 +56,12 @@ const Table: FC<
       )}
       {withPullToRefresh ? (
         <PullToRefresh isPullable={withPullToRefresh.isPullable} onRefresh={withPullToRefresh.onRefresh}>
-          <TableBody content={content} headerLength={headers.length} />
+          {content.length ? <TableBody content={content} headerLength={headers.length} /> : <NoData />}
         </PullToRefresh>
-      ) : (
+      ) : content.length ? (
         <TableBody content={content} headerLength={headers.length} />
+      ) : (
+        <NoData />
       )}
     </div>
   );
