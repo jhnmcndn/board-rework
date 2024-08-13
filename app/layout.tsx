@@ -1,3 +1,4 @@
+import Loading from '@/components/Loading';
 import { GlobalProvider } from '@/components/Providers';
 import ModalRoot from '@/components/modals';
 import { serverConfig } from '@/server';
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body>
         <GlobalProvider>
           {children}
+          <Loading />
           <ModalRoot />
         </GlobalProvider>
       </body>
