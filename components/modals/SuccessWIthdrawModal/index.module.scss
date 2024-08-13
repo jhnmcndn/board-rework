@@ -1,0 +1,68 @@
+.modalWrapper {
+  width: 5rem;
+  border-radius: 0.08rem;
+  overflow: hidden;
+  border: 1px solid #8d7c4f;
+
+  .header {
+    @include flex-xy;
+    position: relative;
+    width: 100%;
+    height: 0.4rem;
+    background: var(--withdraw-header-modal) center/100% 100% no-repeat;
+
+    span {
+      font-family: "FZZhengHeiS-B-GB";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.2rem;
+      color: #511a00;
+      text-shadow: 0 4px 4px #fef2b9;
+      text-align: center;
+    }
+
+    img {
+      position: absolute;
+      right: 0.1rem;
+      height: 50%;
+      width: auto;
+    }
+  }
+
+  .body {
+    @include flex-xy(flex-end, center);
+    flex-direction: column;
+    background: var(--withdraw-body-modal);
+    width: 100%;
+    padding: 0.15rem;
+
+    .withdrawSuccessImg {
+      width: 0.7rem;
+      height: 0.7rem;
+    }
+
+    .notice, .instructions {
+      text-align: center;
+      margin-top: 0.3rem;
+      white-space: nowrap;
+    }
+
+    .notice {
+      font-size: 0.17rem;
+      color: #fff;
+    }
+
+    .instructions {
+      font-size: 0.14rem;
+      color: #757575;
+    }
+
+    .button {
+      font-family: "FZZhengHeiS-B-GB";
+      width: 1rem;
+      height: 0.35rem;
+      font-size: 0.12rem;
+      margin-top: 0.3rem;
+    }
+  }
+}

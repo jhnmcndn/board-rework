@@ -20,7 +20,6 @@ export type WithdrawPageComponent = FC<
 >;
 
 export const WithdrawPage: WithdrawPageComponent = ({ bindCardList, bankList, codeFlowList }) => {
-  // const isWithdrawSuccessModalOpen = useModalStore((state) => state.isWithdrawSuccessModalOpen);
   const { setBindCardList, setBankList, setCodeFlowList } = useAccountStore((state) => state);
   const [activeSidebarItem, setActiveSidebarItem] = useState(0);
   const sidebarItems = ['自主提现', '打码详情', '钱包管理', '提现记录'];
@@ -41,7 +40,6 @@ export const WithdrawPage: WithdrawPageComponent = ({ bindCardList, bankList, co
 
   return (
     <div className={styles.withdrawPageContainer}>
-      {/*{isWithdrawSuccessModalOpen && <SuccessWithdrawModal />}*/}
       <OtherHeader headerTitle='提现' />
       <div className={styles.withdrawPageBody}>
         <Sidebar

@@ -16,7 +16,6 @@ interface ModalStore {
   closeAlert: () => void;
   closeLoginOptions: () => void;
   isAnnouncementOpen: boolean;
-  isWithdrawSuccessModalOpen: boolean;
   isSettingsOpen: boolean;
   openSettings: () => void;
   closeSettings: () => void;
@@ -26,21 +25,22 @@ interface ModalStore {
   isBindUSDTOpen: boolean;
   openBindUSDT: () => void;
   closeBindUSDT: () => void;
+  isWithdrawSuccessOpen: boolean;
+  openWithdrawSuccess: () => void;
+  closeWithdrawSuccess: () => void;
 }
 
-export type ModalStoreActions = {
-  closeWithdrawSuccessModal: () => void;
-};
+export type ModalStoreActions = {};
 
 const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   isAlertOpen: false,
   isLoginOptionsOpen: false,
   content: {},
   isAnnouncementOpen: false,
-  isWithdrawSuccessModalOpen: false,
   isSettingsOpen: false,
   isBindBankOpen: false,
   isBindUSDTOpen: false,
+  isWithdrawSuccessOpen: false,
   openAlert: (content) => {
     set((state) => ({ ...state, isAlertOpen: true, content: { ...content } }));
   },
@@ -49,14 +49,14 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   closeLoginOptions: () => set((state) => ({ ...state, isLoginOptionsOpen: false })),
   openAnnouncement: () => set((state) => ({ ...state, isAnnouncementOpen: true })),
   closeAnnouncement: () => set((state) => ({ ...state, isAnnouncementOpen: false })),
-  openWithdrawSuccessModal: () => set((state) => ({ ...state, isWithdrawSuccessModalOpen: true })),
-  closeWithdrawSuccessModal: () => set((state) => ({ ...state, isWithdrawSuccessModalOpen: false })),
   openSettings: () => set((state) => ({ ...state, isSettingsOpen: true })),
   closeSettings: () => set((state) => ({ ...state, isSettingsOpen: false })),
   openBindBank: () => set((state) => ({ ...state, isBindBankOpen: true })),
   closeBindBank: () => set((state) => ({ ...state, isBindBankOpen: false })),
   openBindUSDT: () => set((state) => ({ ...state, isBindUSDTOpen: true })),
   closeBindUSDT: () => set((state) => ({ ...state, isBindUSDTOpen: false })),
+  openWithdrawSuccess: () => set((state) => ({ ...state, isWithdrawSuccessOpen: true })),
+  closeWithdrawSuccess: () => set((state) => ({ ...state, isWithdrawSuccessOpen: false })),
 }));
 
 export default useModalStore;

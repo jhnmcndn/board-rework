@@ -62,4 +62,10 @@
       }
     }
   }
+
+  :global {
+    .ptr__pull-down--pull-more {
+      display: none !important;
+    }
+  }
 }
