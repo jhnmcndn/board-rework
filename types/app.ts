@@ -210,3 +210,8 @@ export type WithdrawRechargeBody = {
   pageNum?: number;
   pageSize?: number;
 };
+
+export type ResetPassword = {
+  oldPasswd?: string;
+  newPasswd?: string;
+};
