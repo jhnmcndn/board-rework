@@ -1,25 +1,21 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
-import { MODAL_BG_ANIMATION, MODAL_CONTENT_ANIMATION } from '@/utils/helpers';
+import { AnimatePresence } from 'framer-motion';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
-import { onClickSound } from '@/utils/audioFile';
 import { ChangeEvent, useMemo, useState } from 'react';
 import { setBindCard } from '@/api/pay';
 import useModalStore from '@/store/modals';
 import Form, { FormField } from '@/components/Fragments/Form';
+import ModalLayout from '@/components/modals/ModalLayout';
+import HeaderModalTitle from '@/components/HeaderModalTitle';
+import { createPortal } from 'react-dom';
 import styles from './index.module.scss';
 
-type Props = {
-  showMe?: boolean;
-  onClose: () => void;
-};
-
-const BindUSDTModal = ({ showMe, onClose }: Props) => {
+const BindUSDTModal = () => {
   const fetchBindCardList = useAccountStore((state) => state.fetchBindCardList);
   const [usdtAddress, setUsdtAddress] = useState('');
   const [realName, setRealName] = useState('');
-  const { openAlert } = useModalStore();
+  const { openAlert, closeBindUSDT, isBindUSDTOpen } = useModalStore();
 
   const formFields: FormField[] = useMemo(
     () => [
@@ -59,56 +55,36 @@ const BindUSDTModal = ({ showMe, onClose }: Props) => {
       fetchBindCardList();
       openAlert({ body: msg });
       setTimeout(() => {
-        onClose();
+        closeBindUSDT();
       }, 500);
     } else if (code === 500) {
       openAlert({ body: msg });
     }
   };
 
-  return (
+  const modalContent = (
     <AnimatePresence>
-      {showMe && (
-        <>
-          <motion.div
-            variants={MODAL_BG_ANIMATION}
-            initial='hidden'
-            animate='visible'
-            exit='exit'
-            className={styles.overlay}
-            onClick={onClose}
-          >
-            <motion.div
-              variants={MODAL_CONTENT_ANIMATION}
-              initial='hidden'
-              animate='visible'
-              exit='exit'
-              className={styles.wrapper}
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            >
-              <div className={styles.header}>
-                <div className={styles.headerTitle}>绑定USDT</div>
-                <span
-                  onClick={() => {
-                    onClose();
-                    onClickSound('pop');
-                  }}
-                  className={styles.closeBtn}
-                />
+      {isBindUSDTOpen && (
+        <ModalLayout onClose={closeBindUSDT} backdrop={0.8}>
+          <div className={styles.wrapper}>
+            <HeaderModalTitle title='绑定USDT' onClick={closeBindUSDT} />
+            <div className={styles.addCardContainer}>
+              <div className={styles.bodyContainer}>
+                <Form fields={formFields} onSubmit={handleSubmit} />
               </div>
-              <div className={styles.addCardContainer}>
-                <div className={styles.bodyContainer}>
-                  <Form fields={formFields} onSubmit={handleSubmit} />
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </>
+            </div>
+          </div>
+        </ModalLayout>
       )}
     </AnimatePresence>
   );
+
+  const element = document?.getElementById('modal-root') as HTMLDivElement;
+  if (element) {
+    return createPortal(modalContent, element);
+  }
+
+  return null;
 };
 
 export default BindUSDTModal;

@@ -1,10 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 import { refetch } from '@/api/refetch';
-import BindUSDTModal from '../Modals/BindUSDTModal';
 import Image from 'next/image';
 import styles from './index.module.scss';
 import { API_ENDPOINT } from '@/types/enums';
@@ -19,8 +18,7 @@ const BindCards = () => {
   const theme = useAccountStore((state) => state.theme);
   const bindCardList = useAccountStore((state) => state.bindCardList);
   const fetchBindCardList = useAccountStore((state) => state.fetchBindCardList);
-  const [showUSDTModal, setShowUSDTModal] = useState(false);
-  const { openBindBank } = useModalStore();
+  const { openBindBank, openBindUSDT } = useModalStore();
 
   const listItems: ListItem[] = [
     {
@@ -29,7 +27,7 @@ const BindCards = () => {
     },
     {
       text: '添加USDT',
-      onClick: () => setShowUSDTModal(!showUSDTModal),
+      onClick: () => openBindUSDT(),
     },
   ];
 
@@ -46,7 +44,6 @@ const BindCards = () => {
 
   return (
     <div className={styles.bindCardContainer}>
-      <BindUSDTModal showMe={showUSDTModal} onClose={() => setShowUSDTModal(!showUSDTModal)} />
       <PullToRefresh onRefresh={() => refetch(API_ENDPOINT.BIND_CARD_LIST)}>
         <ul className={styles.cardWrapper}>
           {bindCardList?.memberCardList?.map((item, index) => {
