@@ -28,6 +28,10 @@
         width: auto;
         aspect-ratio: 15/23;
 
+        &--pointer {
+          cursor: pointer;
+        }
+
         .isMaintain {
           position: absolute;
           @include flex-xy;
@@ -45,7 +49,6 @@
 
         img {
           position: relative;
-          cursor: pointer;
           border-radius: 0.1rem;
           object-fit: cover;
           object-position: center;
