@@ -2,6 +2,7 @@
 
 import { request } from '@/api';
 import { defaultInitData } from '@/constants/defaultReturnData';
+import { COOKIE_MAX_AGE } from '@/constants/misc';
 import {
   AccountInfo,
   AccountNow,
@@ -29,7 +30,7 @@ export const loginDevice = async (payload: LoginDevicePayload) => {
     endpoint: API_ENDPOINT.LOGIN_DEVICE,
     tags: API_ENDPOINT.LOGIN_DEVICE,
   });
-  if (data.data && 'token' in data.data) cookies().set('token', `${data.data.token}`);
+  if (data.data && 'token' in data.data) cookies().set('token', `${data.data.token}`, { maxAge: COOKIE_MAX_AGE });
   return data.data;
 };
 
