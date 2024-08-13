@@ -11,6 +11,7 @@ import Form, { FormField } from '@/components/Fragments/Form';
 import ModalLayout from '@/components/modals/ModalLayout';
 import HeaderModalTitle from '@/components/HeaderModalTitle';
 import { createPortal } from 'react-dom';
+import useIsMounted from '@/hooks/useIsMounted';
 
 const BindBankModal = () => {
   const bankList = useAccountStore((state) => state.bankList);
@@ -21,6 +22,7 @@ const BindBankModal = () => {
   const [bindBankAccount, setBindBankAccount] = useState('');
   const [bindBankId, setBindBankId] = useState(139);
   const { openAlert, closeBindBank, isBindBankOpen } = useModalStore();
+  const isMounted = useIsMounted();
 
   const bankOptions = bankList.map((item) => ({
     value: item.id,
@@ -107,8 +109,8 @@ const BindBankModal = () => {
     </AnimatePresence>
   );
 
-  const element = document?.getElementById('modal-root') as HTMLDivElement;
-  if (element) {
+  if (isMounted() && isBindBankOpen) {
+    const element = document.getElementById('modal-root') as HTMLDivElement;
     return createPortal(modalContent, element);
   }
 
