@@ -110,8 +110,8 @@ const BindBankModal = () => {
   );
 
   if (isMounted() && isBindBankOpen) {
-    const element = document.getElementById('modal-root') as HTMLDivElement;
-    return createPortal(modalContent, element);
+    const element = typeof window === 'undefined' ? null : (document.getElementById('modal-root') as HTMLDivElement);
+    if (element) return createPortal(modalContent, element);
   }
 
   return null;
