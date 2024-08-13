@@ -1,5 +1,4 @@
 import { AccountStoreProvider } from '@/components/Providers/AccountStoreProvider';
-import { CSStoreProvider } from '@/components/Providers/CSStoreProvider';
 import { GameStoreProvider } from '@/components/Providers/GameStoreProvider';
 import { MessageProvider } from '@/components/Providers/MessageStoreProvider';
 import { PersonalInfoStoreProvider } from '@/components/Providers/PersonalInfoStoreProvider';
@@ -13,11 +12,9 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
     <AccountStoreProvider>
       <GameStoreProvider>
         <MessageProvider>
-          <CSStoreProvider>
-            <PersonalInfoStoreProvider>
-              <VipGiftInfoStoreProvider>{children}</VipGiftInfoStoreProvider>
-            </PersonalInfoStoreProvider>
-          </CSStoreProvider>
+          <PersonalInfoStoreProvider>
+            <VipGiftInfoStoreProvider>{children}</VipGiftInfoStoreProvider>
+          </PersonalInfoStoreProvider>
         </MessageProvider>
       </GameStoreProvider>
     </AccountStoreProvider>
