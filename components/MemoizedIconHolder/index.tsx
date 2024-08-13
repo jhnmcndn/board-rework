@@ -4,6 +4,7 @@ import useImages from '@/hooks/useImages';
 import { GameInfoGroup, RspGameInfo } from '@/types/app';
 import classNames from 'classnames';
 import { FC, memo } from 'react';
+import styling from './index.module.scss';
 
 export type CombinedGameInfo = RspGameInfo & GameInfoGroup;
 
@@ -25,14 +26,17 @@ const MemoizedIconHolder: FC<TProps> = memo(({ item, handleOnClick, isLargeIcon 
       key={item.id}
       className={classNames(styles.iconHolder, {
         [styles.isMaintenance]: item.maintain,
+        [styles['iconHolder--pointer']]: isLargeIcon,
       })}
-      onClick={() => handleOnClick(item)}
+      onClick={() => isLargeIcon && handleOnClick(item)}
     >
       {item.maintain && (
         <div className={styles.isMaintain}>
           <div>正在维修</div>
         </div>
       )}
+
+      {!isLargeIcon && <div className={styling.clickArea} onClick={() => handleOnClick(item)} />}
 
       <MemoizedImgWithFallback
         src={(activeSideBarItem.type === 3 && isLargeIcon ? item.cardIcon : item.icon) || ''}
