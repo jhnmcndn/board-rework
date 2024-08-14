@@ -4,6 +4,7 @@ import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useIsMounted from '@/hooks/useIsMounted';
 import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import ModalLayout from '../ModalLayout';
@@ -23,9 +24,9 @@ const VersionModal: React.FC = () => {
             <button className={styles.close} onClick={() => closeVersion()}>
               取消
             </button>
-            <button className={styles.redirect} onClick={() => window.open('http://' + init.webUrl, '_blank')}>
+            <Link className={styles.redirect} href={`http://${init.webUrl}`} target='_blank'>
               确定
-            </button>
+            </Link>
           </div>
         </div>
       </ModalLayout>
