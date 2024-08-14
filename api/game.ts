@@ -59,3 +59,17 @@ export const getGameCategoryList = async () => {
   if (!response.data || 'message' in response.data) return [];
   return response.data;
 };
+
+export const getGameDataList = async ({ gameCategory, enumReqTime }: { gameCategory: string; enumReqTime: string }) => {
+  const response = await request<RootResponse<[]>>({
+    endpoint: API_ENDPOINT.GAME_DATA_LIST,
+    route: APP_ROUTE.GAME,
+    tags: API_ENDPOINT.GAME_DATA_LIST,
+    body: {
+      enumReqTime,
+      gameCategory,
+    },
+  });
+  if (!response.data || 'message' in response.data) return [];
+  return response.data;
+};
