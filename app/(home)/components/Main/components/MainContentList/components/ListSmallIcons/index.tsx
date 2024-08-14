@@ -68,8 +68,6 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     });
   };
 
-  console.log(dragConstraints, 'qweqweqwe');
-
   return (
     <div
       id='listSmallWrapper'
