@@ -3,6 +3,7 @@ import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import useImages from '@/hooks/useImages';
 import { GameInfoGroup, RspGameInfo } from '@/types/app';
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
 import { FC, memo } from 'react';
 import styling from './index.module.scss';
 
@@ -13,17 +14,21 @@ type TProps = {
   handleOnClick: (item: CombinedGameInfo) => void;
   isLargeIcon?: boolean;
   styles: { [key: string]: string };
+  idx: number;
 };
 
 const MemoizedImgWithFallback = memo(ImgWithFallback);
 
-const MemoizedIconHolder: FC<TProps> = memo(({ item, handleOnClick, isLargeIcon = false, styles }) => {
+const MemoizedIconHolder: FC<TProps> = memo(({ idx, item, handleOnClick, isLargeIcon = false, styles }) => {
   const { images } = useImages();
   const { activeSideBarItem } = useGameStore((state) => state);
 
   return (
-    <div
+    <motion.div
       key={item.id}
+      initial={{ x: '60vw' }}
+      animate={{ x: 0 }}
+      transition={{ delay: idx * 0.02 }}
       className={classNames(styles.iconHolder, {
         [styles.isMaintenance]: item.maintain,
         [styles['iconHolder--pointer']]: isLargeIcon,
@@ -44,7 +49,7 @@ const MemoizedIconHolder: FC<TProps> = memo(({ item, handleOnClick, isLargeIcon 
         loadingIcon={images.loading}
         alt={item.icon || item.cardIcon || ''}
       />
-    </div>
+    </motion.div>
   );
 });
 
