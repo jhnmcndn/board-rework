@@ -1,42 +1,53 @@
 .container {
   width: 100%;
   height: 100%;
-  font-weight: 700;
+  color: var(--record-roundedTabs-color);
+  font-size: 0.14rem;
+  display: flex;
+  flex-direction: column;
 
-  .wrapper {
+  .tabContainer {
+    position: relative;
     width: 100%;
-    height: 100%;
-    font-size: 0.15rem;
-    overflow: scroll;
-    display: flex;
-    flex-direction: column;
+    height: 0.35rem;
+    background: var(--record-roundedTabs-bg);
+    border-radius: 2rem;
+    overflow: hidden;
+    margin-bottom: 0.1rem;
 
-    .tabs {
-      margin: 0.05rem 0;
-      width: 100%;
-      height: 0.35rem;
-      border-radius: 2rem;
-      position: relative;
-      background: var(--record-roundedTabs-bg);
-      color: var(--record-roundedTabs-color);
-      overflow-x: scroll;
-      white-space: nowrap;
-      overflow: scroll;
-      text-overflow: ellipsis;
-      text-align: center;
-      font-size: 0.12rem !important;
-      overflow-y: hidden;
+    .scrollWrapper {
+      height: 100%;
+      display: flex;
 
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      ul {
-        position: relative;
-        list-style: none;
-        display: flex;
+      .list {
+        white-space: nowrap;
         height: 100%;
+        padding: 0 0.2rem;
+        display: grid;
+        place-content: center;
+        border-radius: 2rem;
+        font-weight: 700;
+        cursor: pointer;
+
+        &.active {
+          background: var(--record-activeNav-bg);
+          color: #511a00;
+        }
       }
+    }
+  }
+
+  .filterContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+    padding-left: 0.1rem;
+    margin-bottom: 0.1rem;
+
+    span {
+      @include flex-xy;
+      width: 0.85rem;
+      color: var(--record-dropdownLabel-color);
     }
   }
 }
