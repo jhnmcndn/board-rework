@@ -40,15 +40,7 @@ const Version: React.FC = () => {
     <div className={styles.versionContainer}>
       <VersionRow label='官方网址:' value={init.webUrl} buttonLabel='复制' onButtonClick={getUrl} />
       <VersionRow label='客服线:' value={linkUrl} buttonLabel='复制' onButtonClick={getLinkUrl} />
-      <VersionRow
-        label='当前版本号:'
-        value={version}
-        buttonLabel='获取版本'
-        onButtonClick={() => {
-          openVersion();
-          console.log('hehehehe');
-        }}
-      />
+      <VersionRow label='当前版本号:' value={version} buttonLabel='获取版本' onButtonClick={() => openVersion()} />
     </div>
   );
 };

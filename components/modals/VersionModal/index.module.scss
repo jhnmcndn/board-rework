@@ -1,0 +1,55 @@
+.versionMainContainer {
+  background: var(--version-bg-modal);
+  border-radius: inherit;
+  border: var(--version-border-modal) 0.01rem solid;
+
+  flex: 1;
+  width: 100%;
+  position: relative;
+  padding: 0.35rem 0.15rem;
+  font-size: 0.13rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  z-index: 1;
+  .notice {
+    font-size: 0.14rem;
+    color: #fff;
+    white-space: nowrap;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    .touristText {
+      color: #f2dd9d;
+    }
+  }
+
+  .buttonsContainer {
+    display: flex;
+    gap: 0.2rem;
+
+    .redirect,
+    .close {
+      width: 1.5rem;
+      height: 0.3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 1rem;
+      cursor: pointer;
+      border: none;
+    }
+    .redirect {
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #11d38a 0%, #018b57 100%);
+    }
+    .close {
+      color: #651d00;
+      background: linear-gradient(180deg, #ffe800 0%, #e38c00 100%);
+    }
+  }
+}
