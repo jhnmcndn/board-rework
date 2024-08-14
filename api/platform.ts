@@ -164,3 +164,14 @@ export const getCodeFlowList = async () => {
   });
   return data.data;
 };
+
+export const setBoxPass = async (boxPass: string) => {
+  const data = await request<Pick<RootResponse<null>, 'msg' | 'code'>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.BOX_PASS_SET,
+    tags: API_ENDPOINT.BOX_PASS_SET,
+    body: { boxPass },
+  });
+  const { msg, code } = data;
+  return { msg, code };
+};

@@ -70,3 +70,14 @@ export const withdrawBank = async ({ memberCardId, withdrawMoney, withdrawalPass
   const { code, msg } = data;
   return { code, msg };
 };
+
+export const setWithdrawPass = async (boxPass: string) => {
+  const data = await request<Pick<RootResponse<null>, 'code' | 'msg'>>({
+    route: APP_ROUTE.PAY,
+    endpoint: API_ENDPOINT.WITHDRAW_PASS_SET,
+    tags: API_ENDPOINT.WITHDRAW_PASS_SET,
+    body: { boxPass },
+  });
+  const { code, msg } = data;
+  return { code, msg };
+};
