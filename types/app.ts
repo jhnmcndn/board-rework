@@ -248,3 +248,23 @@ export type GameCategoryList = {
   name: string;
   platforms: any[];
 };
+
+export type PasswordsState = {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+  showOldPassword: boolean;
+  showNewPassword: boolean;
+  showConfirmPassword: boolean;
+};
+
+export type PasswordProps = {
+  label: string;
+  value: string;
+  type: string;
+  name: keyof PasswordsState;
+  placeholder: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  toggleVisibility: () => void;
+  icon: string;
+};
