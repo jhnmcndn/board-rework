@@ -6,61 +6,25 @@
   .passwordContainer {
     @include flex-xy;
     flex-direction: column;
+  }
 
-    .oldPass,
-    .newPass,
-    .confirmPass {
-      width: 2.6rem;
-      height: 0.4rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+  .passwordHandler {
+    @include flex-xy;
+    height: 0.42rem;
 
-    span {
+    .passwordBtn {
+      width: 1.1rem;
+      height: 0.3rem;
+      background-repeat: no-repeat;
+      background: url('~@/assets/commons/button.png');
       font-size: 0.12rem;
-      width: 0.6rem;
-      font-weight: 500;
-      color: var(--setting-password-label);
-    }
-
-    input {
-      padding: 0.08rem 0.12rem;
-      width: 1.7rem;
-      border-radius: 0.2rem;
+      font-weight: 700;
+      border: 1px solid red;
+      color: #511a00;
+      padding: 0.06rem;
+      background-size: 100% 100%;
+      text-align: center;
       border: none;
-      color: #000;
-      font-size: 0.12rem;
-      caret-color: #fff;
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-    img {
-      width: 0.15rem;
-      height: 0.13rem;
-      margin-left: -0.35rem;
-    }
-
-    .passwordHandler {
-      @include flex-xy;
-      height: 0.42rem;
-
-      .passwordBtn {
-        width: 1.1rem;
-        height: 0.3rem;
-        background-repeat: no-repeat;
-        background: url('~@/assets/commons/button.png');
-        font-size: 0.12rem;
-        font-weight: 700;
-        color: #511a00;
-        padding: 0.06rem;
-        background-size: 100% 100%;
-        text-align: center;
-        border: none;
-      }
     }
   }
 }
