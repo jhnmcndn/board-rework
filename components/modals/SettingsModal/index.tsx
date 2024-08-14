@@ -1,11 +1,13 @@
 'use client';
 
 import HeaderModalTitle from '@/components/HeaderModalTitle';
+import useIsMounted from '@/hooks/useIsMounted';
 import useModalStore from '@/store/modals';
 import { sfx } from '@/utils/audioFile';
 import classNames from 'classnames';
 import { AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import ModalLayout from '../ModalLayout';
 import ChangePassword from './components/ChangePassword';
 import ColorSystem from './components/ColorSystem';
@@ -22,6 +24,8 @@ type ListItemProps = {
 const SettingsModal: React.FC = () => {
   const [selectedId, setSelectedId] = useState<number>(0);
   const { closeSettings, isSettingsOpen } = useModalStore();
+  const isMounted = useIsMounted();
+
   const listItems: ListItemProps[] = [
     { id: 0, title: '个人信息' },
     { id: 1, title: '音乐切换' },
@@ -47,34 +51,39 @@ const SettingsModal: React.FC = () => {
     }
   };
 
-  return (
+  const modalContent = (
     <AnimatePresence>
-      {isSettingsOpen && (
-        <ModalLayout backdrop={0.8}>
-          <div className={styles.settingsContainer}>
-            <HeaderModalTitle title='设置' onClick={closeSettings} />
-            <div className={styles.contentModal}>
-              <div className={styles.sidebarContainer}>
-                <ul className={styles.sidebarList}>
-                  {listItems.map((item) => (
-                    <li
-                      key={item.id}
-                      data-click={sfx.popAudio}
-                      className={classNames({ [styles.sidebarItem]: selectedId === item.id })}
-                      onClick={() => setSelectedId(item.id)}
-                    >
-                      <span>{item.title}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className={styles.settingContent}>{renderComponent()}</div>
+      <ModalLayout backdrop={0.8}>
+        <div className={styles.settingsContainer}>
+          <HeaderModalTitle title='设置' onClick={closeSettings} />
+          <div className={styles.contentModal}>
+            <div className={styles.sidebarContainer}>
+              <ul className={styles.sidebarList}>
+                {listItems.map((item) => (
+                  <li
+                    key={item.id}
+                    data-click={sfx.popAudio}
+                    className={classNames({ [styles.sidebarItem]: selectedId === item.id })}
+                    onClick={() => setSelectedId(item.id)}
+                  >
+                    <span>{item.title}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
+            <div className={styles.settingContent}>{renderComponent()}</div>
           </div>
-        </ModalLayout>
-      )}
+        </div>
+      </ModalLayout>
     </AnimatePresence>
   );
+
+  if (isMounted() && isSettingsOpen) {
+    const element = document.getElementById('modal-root') as HTMLDivElement;
+    if (element) return createPortal(modalContent, element);
+  }
+
+  return null;
 };
 
 export default SettingsModal;

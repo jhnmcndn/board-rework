@@ -1,6 +1,4 @@
 import { useRouter } from 'next-nprogress-bar';
-import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import MoreModal from '@/components/modals/MoreModal';
@@ -8,9 +6,11 @@ import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useMessageStore } from '@/components/Providers/MessageStoreProvider';
 import useAuthCheck from '@/hooks/useAuthCheck';
 import useImages from '@/hooks/useImages';
+import useModalStore from '@/store/modals';
 import { MessageOnSites } from '@/types/app';
 import { sfx } from '@/utils/audioFile';
 import styles from './index.module.scss';
+import ListContainer from './ListContainer';
 
 const LeftNavigation: React.FC = () => {
   const { push } = useRouter();
@@ -19,13 +19,10 @@ const LeftNavigation: React.FC = () => {
   const [showMoreModal, setShowMoreModal] = useState(false);
   const accountInfo = useAccountStore((state) => state.accountInfo);
   const messageOnSites = useMessageStore((state) => state.messageOnSites);
+  const { openAnnouncement } = useModalStore();
   const isLoggedIn = Boolean(accountInfo.id);
 
   const [unreadMsgs, setUnreadMsgs] = useState<MessageOnSites[]>([]);
-  const [omOpen, setOmOpen] = useState(false);
-  const [activeSideLoggedIn, setActiveSideLoggedIn] = useState(3);
-  const [isMegaphone, setMegaphone] = useState(false);
-  const [safeBoxModalOpen, setSafeBoxModal] = useState(false);
 
   useEffect(() => {
     if (messageOnSites?.length > 0) {
@@ -39,73 +36,35 @@ const LeftNavigation: React.FC = () => {
 
   return (
     <>
-      {/* <GiftBoxModal
-        open={omOpen}
-        onClose={() => {
-          setOmOpen(!omOpen);
-        }}
-        activesideTab={activeSideLoggedIn}
-        isSettings={false}
-      /> */}
-
       <ul className={styles.leftNavigation}>
-        <li>
-          <Link href='/customer-service' className={styles.listContainer}>
-            <Image src={images.support} alt='Support Icon' />
-            <span className={styles.text}>客服</span>
-          </Link>
-        </li>
+        <ListContainer icon={images.support} text='客服' onClick={() => handleNavigation('/customer-service')} />
+        <ListContainer icon={images.chip} text='洗码' onClick={() => handleNavigation('/code-washing')} />
+        <ListContainer dataClick={sfx.giftAudio} onClick={() => openAnnouncement()} icon={images.gift} text='活动' />
+        <div>
+          {(!isLoggedIn || unreadMsgs.length > 0) && <center className='alertIcon' />}
+          <ListContainer
+            dataClick={sfx.messageAudio}
+            icon={images.message}
+            text='消息'
+            onClick={() => handleNavigation('/mailbox')}
+          />
+        </div>
 
-        <li data-click={sfx.cleanCodeAudio} onClick={() => handleNavigation('/code-washing')}>
-          <div className={styles.listContainer}>
-            <Image src={images.chip} alt='Chip Icon' />
-            <span className={styles.text}>洗码</span>
-          </div>
-        </li>
-
-        <li
-          data-click={sfx.giftAudio}
-          onClick={() => {
-            accountInfo?.id ? setActiveSideLoggedIn(1) : setActiveSideLoggedIn(3);
-            // handleClick({ fn: setOmOpen, params: true, isActivity: true });
-          }}
-        >
-          <div className={styles.listContainer}>
-            <Image src={images.gift} alt='Gift Icon' />
-            <span className={styles.text}>活动</span>
-          </div>
-        </li>
-
-        <li data-click={sfx.messageAudio} onClick={() => handleNavigation('/mailbox')}>
-          <div className={styles.listContainer}>
-            {(!isLoggedIn || unreadMsgs.length > 0) && <center className='alertIcon' />}
-            <Image src={images.message} alt='Message Icon' />
-            <span className={styles.text}>消息</span>
-          </div>
-        </li>
-
-        <li
-          data-click={sfx.popAudio}
-          onClick={() => {
-            setShowMoreModal(!showMoreModal);
-          }}
-        >
-          <div className={styles.listContainer}>
-            <Image src={images.more} alt='More Icon' />
-            <span className={styles.text}>更多</span>
-          </div>
-        </li>
+        <ListContainer
+          dataClick={sfx.popAudio}
+          icon={images.more}
+          text='更多'
+          onClick={() => setShowMoreModal(!showMoreModal)}
+        />
       </ul>
       {showMoreModal && (
         <MoreModal
           setShowMore={setShowMoreModal}
           setOpenAnnounceModal={() => {
-            setMegaphone(true);
             setShowMoreModal(false);
           }}
           setSafeBoxModal={() => {
             setShowMoreModal(false);
-            setSafeBoxModal(true);
           }}
         />
       )}

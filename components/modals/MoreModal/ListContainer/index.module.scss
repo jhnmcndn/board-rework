@@ -1,0 +1,22 @@
+.listItem {
+  @include flex-xy;
+  flex-direction: column;
+  width: 30%;
+
+  > img {
+    height: 50%;
+    width: auto;
+    margin-bottom: 0.035rem;
+  }
+
+  > span {
+    text-align: center;
+    white-space: nowrap;
+    width: 100%;
+    font-size: 0.1rem;
+    font-weight: 600;
+    background: var(--footer-dialog-text);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}

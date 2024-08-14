@@ -16,6 +16,8 @@ interface ModalStore {
   closeAlert: () => void;
   closeLoginOptions: () => void;
   isAnnouncementOpen: boolean;
+  openAnnouncement: () => void;
+  closeAnnouncement: () => void;
   isSettingsOpen: boolean;
   openSettings: () => void;
   closeSettings: () => void;
