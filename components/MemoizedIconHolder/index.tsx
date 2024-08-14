@@ -26,8 +26,18 @@ const MemoizedIconHolder: FC<TProps> = memo(({ idx, item, handleOnClick, isLarge
   return (
     <motion.div
       key={item.id}
-      initial={{ x: '60vw' }}
-      animate={{ x: 0 }}
+      initial={{ x: '90vw' }}
+      animate={{
+        x: 0,
+        transition: {
+          x: {
+            type: 'spring',
+            duration: 0.8,
+            bounce: 0.2,
+            delay: 0.04 + idx * 0.02,
+          },
+        },
+      }}
       transition={{ delay: idx * 0.02 }}
       className={classNames(styles.iconHolder, {
         [styles.isMaintenance]: item.maintain,
