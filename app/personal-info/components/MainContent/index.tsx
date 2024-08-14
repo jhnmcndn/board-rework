@@ -4,6 +4,7 @@ import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import Sidebar from '@/components/Sidebar';
 import { VIPGiftInfo } from '@/types/app';
 import { FC, useState } from 'react';
+import Betting from '../Betting';
 import Privilege from '../Privilege';
 import VipDetails from '../VipDetails';
 import styles from './index.module.scss';
@@ -27,6 +28,7 @@ const MainContent: FC<
         <div className={styles.content} data-theme={theme}>
           {activeSidebarItem === 0 && <Privilege theme={theme} vipGiftInfo={vipGiftInfo} />}
           {activeSidebarItem === 1 && <VipDetails vipGiftInfo={vipGiftInfo} />}
+          {activeSidebarItem === 2 && <Betting />}
         </div>
       </section>
     </main>

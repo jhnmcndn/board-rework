@@ -1,18 +1,17 @@
 import { request } from '@/api';
-import { AccountInfo, GameInfoGroup, GetGameTypes, RootResponse, RspGameInfo } from '@/types/app';
+import { AccountInfo, GameCategoryList, GameInfoGroup, GetGameTypes, RootResponse, RspGameInfo } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import { GetGameInfoGroupFn, GetGameInfosFn } from '@/types/fns';
-import { getFromLocalStorage } from '@/utils/helpers';
 
 export const getAccountInfo = async () => {
-  const token = getFromLocalStorage('token');
+  // const token = getFromLocalStorage('token');
   const data = await request<RootResponse<AccountInfo>>({
     route: APP_ROUTE.GAME,
     endpoint: API_ENDPOINT.ACCOUNT_INFO,
     tags: API_ENDPOINT.ACCOUNT_INFO,
-    otherHeaders: {
-      token: token || '',
-    },
+    // otherHeaders: {
+    //   token: token || '',
+    // },
   });
   return data.data;
 };
@@ -48,5 +47,15 @@ export const getGameInfos: GetGameInfosFn = async (params) => {
     body,
     tags: API_ENDPOINT.GAME_INFOS,
   });
+  return response.data;
+};
+
+export const getGameCategoryList = async () => {
+  const response = await request<RootResponse<GameCategoryList[]>>({
+    endpoint: API_ENDPOINT.GAME_CATEGORY_LIST,
+    route: APP_ROUTE.GAME,
+    tags: API_ENDPOINT.GAME_CATEGORY_LIST,
+  });
+  if (!response.data || 'message' in response.data) return [];
   return response.data;
 };

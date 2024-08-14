@@ -1,0 +1,42 @@
+.container {
+  width: 100%;
+  height: 100%;
+  font-weight: 700;
+
+  .wrapper {
+    width: 100%;
+    height: 100%;
+    font-size: 0.15rem;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+
+    .tabs {
+      margin: 0.05rem 0;
+      width: 100%;
+      height: 0.35rem;
+      border-radius: 2rem;
+      position: relative;
+      background: var(--record-roundedTabs-bg);
+      color: var(--record-roundedTabs-color);
+      overflow-x: scroll;
+      white-space: nowrap;
+      overflow: scroll;
+      text-overflow: ellipsis;
+      text-align: center;
+      font-size: 0.12rem !important;
+      overflow-y: hidden;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      ul {
+        position: relative;
+        list-style: none;
+        display: flex;
+        height: 100%;
+      }
+    }
+  }
+}

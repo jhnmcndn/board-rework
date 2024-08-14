@@ -242,3 +242,9 @@ export type WithdrawBankBody = {
   withdrawMoney?: number;
   withdrawalPass?: string;
 };
+
+export type GameCategoryList = {
+  des: string;
+  name: string;
+  platforms: any[];
+};
