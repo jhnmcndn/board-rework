@@ -7,6 +7,7 @@ import { createPortal } from 'react-dom';
 // import NECaptchaComponent from 'src/commons/Captcha/NECaptchaComponent';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useImages from '@/hooks/useImages';
+import useIsMounted from '@/hooks/useIsMounted';
 import useLogin from '@/hooks/useLogin';
 import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
@@ -15,6 +16,7 @@ import styles from './index.module.scss';
 
 // const LoginTypesModal = ({ setIsShowUserAuth }) => {
 const LoginTypesModal = () => {
+  const isMounted = useIsMounted();
   const { login } = useLogin();
   const { images } = useImages();
   const { openAlert, isLoginOptionsOpen, closeLoginOptions } = useModalStore();
@@ -31,19 +33,21 @@ const LoginTypesModal = () => {
   // };
 
   const modalContent = (
-    <ModalLayout>
-      <div className={styles.loginTypes}>
-        <Image
-          src={images.loginClose}
-          alt='close'
-          height={44}
-          width={44}
-          quality={100}
-          className={styles.loginTypes__close}
-          onClick={() => closeLoginOptions()}
-        />
+    <AnimatePresence>
+      {isLoginOptionsOpen && (
+        <ModalLayout backdrop={0.6}>
+          <div className={styles.loginTypes}>
+            <Image
+              src={images.loginClose}
+              alt='close'
+              height={44}
+              width={44}
+              quality={100}
+              className={styles.loginTypes__close}
+              onClick={() => closeLoginOptions()}
+            />
 
-        {/* {isCaptchaOpen && isCaptchaEnabled && (
+            {/* {isCaptchaOpen && isCaptchaEnabled && (
           <NECaptchaComponent
             onSuccess={handleCaptchaSuccess}
             onFailure={handleCaptchaFailure}
@@ -53,43 +57,44 @@ const LoginTypesModal = () => {
           />
         )} */}
 
-        <div className={styles.loginTypes__buttonsContainer}>
-          <Image
-            src={images.loginRegisterBtn}
-            alt='password-login-register'
-            height={79}
-            width={228}
-            quality={100}
-            // onClick={() => setIsShowUserAuth(true)}
-          />
-          <Image
-            src={images.guestLoginBtn}
-            alt='guest-login'
-            height={79}
-            width={228}
-            quality={100}
-            onClick={() => {
-              if (isCaptchaEnabled) setIsCaptchaOpen(true);
-              else login();
-            }}
-          />
-          <Image
-            src={images.guestNoticeBtn}
-            alt='guest-login-notice'
-            height={79}
-            width={228}
-            quality={100}
-            onClick={() => openAlert({ body: '没有发现其他域名' })}
-          />
-        </div>
-      </div>
-    </ModalLayout>
+            <div className={styles.loginTypes__buttonsContainer}>
+              <Image
+                src={images.loginRegisterBtn}
+                alt='password-login-register'
+                height={79}
+                width={228}
+                quality={100}
+                // onClick={() => setIsShowUserAuth(true)}
+              />
+              <Image
+                src={images.guestLoginBtn}
+                alt='guest-login'
+                height={79}
+                width={228}
+                quality={100}
+                onClick={() => {
+                  if (isCaptchaEnabled) setIsCaptchaOpen(true);
+                  else login();
+                }}
+              />
+              <Image
+                src={images.guestNoticeBtn}
+                alt='guest-login-notice'
+                height={79}
+                width={228}
+                quality={100}
+                onClick={() => openAlert({ body: '没有发现其他域名' })}
+              />
+            </div>
+          </div>
+        </ModalLayout>
+      )}
+    </AnimatePresence>
   );
 
-  const element = typeof window !== 'undefined' ? (document.getElementById('modal-root') as HTMLDivElement) : null;
-
-  if (!element) return;
-  return createPortal(<AnimatePresence>{isLoginOptionsOpen && modalContent}</AnimatePresence>, element);
+  if (!isMounted()) return;
+  const element = document.getElementById('modal-root') as HTMLDivElement;
+  return createPortal(modalContent, element);
 };
 
 export default LoginTypesModal;
