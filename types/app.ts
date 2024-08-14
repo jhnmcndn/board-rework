@@ -236,3 +236,9 @@ export type CodeFlowList = {
   status?: number;
   charge?: number;
 };
+
+export type WithdrawBankBody = {
+  memberCardId?: number;
+  withdrawMoney?: number;
+  withdrawalPass?: string;
+};
