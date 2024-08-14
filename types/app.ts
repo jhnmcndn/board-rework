@@ -268,3 +268,16 @@ export type PasswordProps = {
   toggleVisibility: () => void;
   icon: string;
 };
+
+export type listContainerProps = {
+  onClick?: () => void;
+  icon: string;
+  text: string;
+};
+
+export type ListContainerProps = {
+  dataClick?: boolean;
+  onClick?: () => void;
+  icon: string;
+  text: string;
+};
