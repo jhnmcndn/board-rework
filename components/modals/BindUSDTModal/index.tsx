@@ -81,7 +81,7 @@ const BindUSDTModal = () => {
     </AnimatePresence>
   );
 
-  if (isMounted() && isBindUSDTOpen) {
+  if (isMounted()) {
     const element = document.getElementById('modal-root') as HTMLDivElement;
     return createPortal(modalContent, element);
   }

@@ -42,7 +42,7 @@ const SuccessWithdrawModal = () => {
     </AnimatePresence>
   );
 
-  if (isMounted() && isWithdrawSuccessOpen) {
+  if (isMounted()) {
     const element = typeof window === 'undefined' ? null : (document.getElementById('modal-root') as HTMLDivElement);
     if (element) return createPortal(modalContent, element);
   }
