@@ -1,3 +1,5 @@
+'use client';
+
 import Table from '@/components/Table';
 import { VIPGiftInfo } from '@/types/app';
 import { FC, useMemo } from 'react';

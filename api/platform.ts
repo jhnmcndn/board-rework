@@ -39,9 +39,9 @@ export const getAccountNow = async () => {
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.ACCOUNT_NOW,
     tags: API_ENDPOINT.ACCOUNT_NOW,
-    otherHeaders: {
-      token: cookies().get('token')?.value || '',
-    },
+    // otherHeaders: {
+    //   token: cookies().get('token')?.value || '',
+    // },
   });
   return data.data;
 };
@@ -84,9 +84,6 @@ export const boxPassIsOpen = async () => {
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.BOX_PASS_IS_OPEN,
     tags: API_ENDPOINT.BOX_PASS_IS_OPEN,
-    otherHeaders: {
-      token: '',
-    },
   });
   return data.data;
 };
@@ -96,10 +93,8 @@ export const customerService = async () => {
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.CUSTOMER_SERVICE,
     tags: API_ENDPOINT.CUSTOMER_SERVICE,
-    otherHeaders: {
-      token: cookies().get('token')?.value || '',
-    },
   });
+  console.log(data);
   if (!data.data || 'message' in data.data) return [] satisfies CustomerService[];
   return data.data;
 };
@@ -109,20 +104,16 @@ export const getMessageCommonProblems = async () => {
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.MESSAGE_COMMON_PROBLEMS,
     tags: API_ENDPOINT.MESSAGE_COMMON_PROBLEMS,
-    otherHeaders: {},
   });
   if (!data.data || 'message' in data.data) return [] satisfies CustomerService[];
   return data.data;
 };
 
-export const getVipGiftInfo = async (token?: string) => {
+export const getVipGiftInfo = async () => {
   const data = await request<RootResponse<VIPGiftInfo>>({
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.VIP_GIFT_INFO,
     tags: API_ENDPOINT.VIP_GIFT_INFO,
-    otherHeaders: {
-      token: token ? token : cookies().get('token')?.value || '',
-    },
   });
   if (!data.data || 'message' in data.data)
     return {
@@ -141,9 +132,6 @@ export const receiveVipGift = async ({ type, token }: ReceiveVipGiftParams & Wit
     body: {
       type,
     },
-    otherHeaders: {
-      token: token ? token : cookies().get('token')?.value || '',
-    },
   });
   if (!data.data || 'message' in data.data)
     return {
@@ -155,28 +143,20 @@ export const receiveVipGift = async ({ type, token }: ReceiveVipGiftParams & Wit
 };
 
 export const resetPassword = async ({ oldPasswd, newPasswd }: { oldPasswd: string; newPasswd: string }) => {
-  const token = cookies().get('token')?.value || '';
   const data = await request<RootResponse<ResetPassword>>({
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.RESET_PASSWD,
     tags: API_ENDPOINT.RESET_PASSWD,
-    otherHeaders: {
-      token: token,
-    },
     body: { oldPasswd, newPasswd },
   });
   return data;
 };
 
 export const getCodeFlowList = async () => {
-  const token = cookies().get('token')?.value || '';
   const data = await request<RootResponse<CodeFlowList[]>>({
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.CODE_FLOW_LIST,
     tags: API_ENDPOINT.CODE_FLOW_LIST,
-    otherHeaders: {
-      token: token || '',
-    },
     body: {
       pageNum: 1,
       pageSize: 10,
