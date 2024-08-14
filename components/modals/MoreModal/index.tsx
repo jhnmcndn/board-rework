@@ -37,7 +37,7 @@ const MoreModal: MoreModalComponent = ({ setOpenAnnounceModal, setSafeBoxModal, 
     <div className={styles.container} ref={moreOptionsRef} data-theme={theme}>
       <ul className={styles.more__list}>
         <ListContainer icon={images.megaphone} text='公告' onClick={() => setOpenAnnounceModal()} />
-        <ListContainer icon={images.vault} text='保险箱' onClick={() => openPassCode} />
+        <ListContainer icon={images.vault} text='保险箱' onClick={openPassCode} />
         <ListContainer icon={images.user} text='个人信息' onClick={() => authCheck(() => push('/personal-info'))} />
       </ul>
     </div>
