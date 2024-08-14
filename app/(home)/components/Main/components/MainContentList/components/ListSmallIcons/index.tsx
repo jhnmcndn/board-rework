@@ -29,7 +29,7 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     const timeout = setTimeout(() => {
       if (rowsContainerRef.current) {
         const containerWidth = rowsContainerRef.current.scrollWidth;
-        const viewportWidth = rowsContainerRef.current.clientWidth * 2.1;
+        const viewportWidth = rowsContainerRef.current.clientWidth * 1.6;
         setDragConstraints({ left: -(containerWidth - viewportWidth), right: 0 });
       }
     }, 100);
@@ -68,6 +68,8 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     });
   };
 
+  console.log(dragConstraints, 'qweqweqwe');
+
   return (
     <div
       id='listSmallWrapper'
@@ -94,29 +96,29 @@ const ListSmallIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
           onDragStart={() => setIsDragging(true)}
           onDragEnd={() => setIsDragging(false)}
         >
-          <motion.div
-            animate={{ x: 0 }}
-            initial={{ x: '100vw' }}
-            transition={{ delay: 0.4 }}
-            className={styles.firstRow}
-          >
+          <div className={styles.firstRow}>
             {filteredData?.map((item, idx) => {
               if (idx % 2 !== 0) return;
-              return <MemoizedIconHolder key={idx} item={item} handleOnClick={handleGameClick} styles={styles} />;
+              return (
+                <MemoizedIconHolder key={idx} idx={idx} item={item} handleOnClick={handleGameClick} styles={styles} />
+              );
             })}
-          </motion.div>
+          </div>
 
-          <motion.div
-            animate={{ x: 0 }}
-            initial={{ x: '100vw' }}
-            transition={{ delay: 0.4 }}
-            className={styles.secondRow}
-          >
+          <div className={styles.secondRow}>
             {filteredData?.map((item, idx) => {
               if (idx % 2 === 0) return;
-              return <MemoizedIconHolder key={idx} item={item} handleOnClick={handleGameClick} styles={styles} />;
+              return (
+                <MemoizedIconHolder
+                  key={idx}
+                  idx={idx + 0.5}
+                  item={item}
+                  handleOnClick={handleGameClick}
+                  styles={styles}
+                />
+              );
             })}
-          </motion.div>
+          </div>
         </motion.div>
       )}
     </div>

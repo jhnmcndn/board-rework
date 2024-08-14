@@ -48,7 +48,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     const timeout = setTimeout(() => {
       if (rowsContainerRef.current) {
         const containerWidth = rowsContainerRef.current.scrollWidth;
-        const viewportWidth = rowsContainerRef.current.clientWidth * 2.1;
+        const viewportWidth = rowsContainerRef.current.clientWidth * 1.6;
         setDragConstraints({ left: -(containerWidth - viewportWidth), right: 0 });
       }
     }, 100);
@@ -160,16 +160,12 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
             onDragStart={() => setIsDragging(true)}
             onDragEnd={() => setIsDragging(false)}
           >
-            <motion.div
-              animate={{ x: 0 }}
-              initial={{ x: '100vw' }}
-              transition={{ delay: 0.4 }}
-              className={styles.firstRow}
-            >
-              {filteredData?.map((item) => {
+            <motion.div className={styles.firstRow}>
+              {filteredData?.map((item, idx) => {
                 return (
                   <MemoizedIconHolder
                     key={item.id}
+                    idx={idx}
                     item={item}
                     handleOnClick={handleOnClick}
                     styles={styles}
