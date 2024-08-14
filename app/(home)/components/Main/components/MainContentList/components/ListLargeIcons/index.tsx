@@ -48,7 +48,7 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
     const timeout = setTimeout(() => {
       if (rowsContainerRef.current) {
         const containerWidth = rowsContainerRef.current.scrollWidth;
-        const viewportWidth = rowsContainerRef.current.clientWidth * 1.6;
+        const viewportWidth = rowsContainerRef.current.clientWidth * 2;
         setDragConstraints({ left: -(containerWidth - viewportWidth), right: 0 });
       }
     }, 100);
