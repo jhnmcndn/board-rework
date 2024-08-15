@@ -30,13 +30,15 @@ export const createPersonalInfoStore = () =>
               activeTab,
             },
           })),
-        setBettingFilter: (filter) =>
-          set((state) => ({
+        setBettingFilter: (filter) => {
+          const dateFilter = filter === '今天' ? 'today' : filter === '昨天' ? 'yesterday' : 'month';
+          return set((state) => ({
             betting: {
               ...state.betting,
-              filter,
+              filter: dateFilter,
             },
-          })),
+          }));
+        },
       }),
       {
         name: 'personal-info-store',

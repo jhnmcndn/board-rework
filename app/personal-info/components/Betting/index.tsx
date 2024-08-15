@@ -1,6 +1,7 @@
 'use client';
 
 import { getGameDataList } from '@/api/game';
+import Dropdown from '@/components/Dropdown';
 import { usePersonalInfoStore } from '@/components/Providers/PersonalInfoStoreProvider';
 import Table from '@/components/Table';
 import { GameCategoryList } from '@/types/app';
@@ -22,6 +23,8 @@ const Betting: FC<
   const setBettingFilter = usePersonalInfoStore((s) => s.setBettingFilter);
   const activeTab = usePersonalInfoStore((s) => s.betting.activeTab);
   const filter = usePersonalInfoStore((s) => s.betting.filter);
+  const filterOptions = ['今天', '昨天', '一个月'];
+  const filterDefaultValue = filter === 'today' ? '今天' : filter === 'yesterday' ? '昨天' : '一个月';
   useEffect(() => {
     const scroll = () => {
       if (!scrollWrapperRef.current) return;
@@ -58,9 +61,9 @@ const Betting: FC<
               key={index}
               onClick={async () => {
                 if (activeTab === index || isDragging) return;
+                setBettingActiveTab(index);
                 const gameDataList = await getGameDataList({ gameCategory: category.name, enumReqTime: filter });
                 setGameDataList(gameDataList);
-                setBettingActiveTab(index);
               }}
             >
               {category.des}
@@ -70,6 +73,7 @@ const Betting: FC<
       </div>
       <div className={styles.filterContainer}>
         <span>交易时间</span>
+        <Dropdown defaultValue={filterDefaultValue} options={filterOptions} onSelect={setBettingFilter} />
       </div>
       <Table
         withHeader
