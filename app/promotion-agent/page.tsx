@@ -1,6 +1,7 @@
-const PromotionAgent = () => {
+import MainContent from './components/MainContent';
 
-  return <div>Promotion Agent</div>;
+const PromotionAgent = () => {
+  return <MainContent />;
 };
 
 export default PromotionAgent;

@@ -1,0 +1,36 @@
+.myPromotion {
+  width: 100vw;
+  height: 100vh;
+  padding: 0 0.1rem;
+  overflow-y: auto;
+
+  &__searchContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 8px 5px;
+    border-bottom: 1px solid gray;
+    margin-bottom: 5px;
+
+    button {
+      padding: 0 40px;
+      height: 0.3rem;
+      background: linear-gradient(to bottom, #ffe800, #e38c00);
+      border-radius: 0.2rem;
+      font-size: 0.13rem;
+      color: #511a00;
+      font-weight: 600;
+      border: none;
+    }
+  }
+
+  &__searchWrapper {
+    width: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.2rem;
+    height: 0.3rem;
+    z-index: 1;
+  }
+}

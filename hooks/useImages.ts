@@ -60,6 +60,7 @@ export default function useImages() {
     search: require(`@/assets/blackGold/main/searchIcon.png`),
     searchClear: require(`@/assets/blackGold/main/searchClear.png`),
     settings: require(`@/assets/${theme}/header/setting.png`),
+    shareIcon: require(`@/assets/${theme}/header/shareIcon.png`),
     // Footer
     support: require(`@/assets/${theme}/footer/iconSupport.png`),
     chip: require(`@/assets/${theme}/footer/iconChip.png`),
