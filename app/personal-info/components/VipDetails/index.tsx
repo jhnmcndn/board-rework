@@ -14,7 +14,7 @@ const VipDetails: FC<
   const vipSetList = useMemo(
     () =>
       vipGiftInfo.vipSetList.map((setList) => ({
-        0: `VIP${setList.level}`,
+        0: <span className={styles.setListLevel}>{`VIP${setList.level}`}</span>,
         1: `${setList.bcode.toFixed(2)}+`,
         2: `${setList.levelBonus.toFixed(2)}元`,
         3: `${parseFloat(setList.weekBonus.toFixed(2))}元`,
@@ -28,7 +28,7 @@ const VipDetails: FC<
           <span>VIP晋级模式</span>
         </div>
         <div className={styles.details}>
-          <Table withHeader headers={headers} content={vipSetList} />
+          <Table withHeader headers={headers} content={vipSetList} withBorder />
         </div>
       </div>
     </div>
