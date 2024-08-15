@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC } from 'react';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 import NoData from '../NoData';
@@ -16,8 +17,8 @@ const TableBody: FC<Readonly<{ content: any[]; headerLength: number }>> = ({ con
           }}
         >
           {Object.keys(data).map((d, idx) => (
-            <div className={styles.item} key={idx}>
-              <span>{data[d]}</span>
+            <div key={idx} className={styles.item}>
+              {data[d]}
             </div>
           ))}
         </div>
@@ -35,8 +36,9 @@ const Table: FC<
       isPullable: boolean;
       onRefresh: () => Promise<any>;
     };
+    withBorder?: boolean;
   }>
-> = ({ headers, content, withHeader, withPullToRefresh }) => {
+> = ({ headers, content, withHeader, withPullToRefresh, withBorder }) => {
   return (
     <div className={styles.table}>
       {withHeader && (
@@ -48,7 +50,12 @@ const Table: FC<
           }}
         >
           {headers.map((header, index) => (
-            <div key={index}>
+            <div
+              key={index}
+              className={classNames({
+                [styles.withBorder]: withBorder,
+              })}
+            >
               <span>{header}</span>
             </div>
           ))}

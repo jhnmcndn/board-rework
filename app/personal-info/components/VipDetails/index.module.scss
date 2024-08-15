@@ -35,6 +35,13 @@
       &::-webkit-scrollbar {
         display: none;
       }
+
+      .setListLevel {
+        font-weight: 600;
+        background: linear-gradient(rgb(255, 255, 255), rgb(250, 205, 18)) text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: 0.001rem;
+      }
     }
   }
 }
