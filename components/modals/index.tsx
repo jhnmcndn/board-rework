@@ -1,12 +1,14 @@
 import AlertModal from '@/components/modals/AlertModal';
-import BindBankModal from '@/components/modals/BindBankModal';
-import BindUSDTModal from '@/components/modals/BindUSDTModal';
 import LoginTypesModal from '@/components/modals/LoginTypesModal';
-import PassCodeModal from '@/components/modals/PassCodeModal';
-import SuccessWithdrawModal from '@/components/modals/SuccessWIthdrawModal';
-import AnnoucementModal from './AnnouncementModal';
-import SettingsModal from './SettingsModal';
-import VersionModal from './VersionModal';
+import dynamic from 'next/dynamic';
+
+const SettingsModal = dynamic(() => import('./SettingsModal'), { ssr: false });
+const VersionModal = dynamic(() => import('./VersionModal'), { ssr: false });
+const AnnouncementModal = dynamic(() => import('./AnnouncementModal'), { ssr: false });
+const SuccessWithdrawModal = dynamic(() => import('./SuccessWithdrawModal'), { ssr: false });
+const PassCodeModal = dynamic(() => import('./PassCodeModal'), { ssr: false });
+const BindUSDTModal = dynamic(() => import('./BindUSDTModal'), { ssr: false });
+const BindBankModal = dynamic(() => import('./BindBankModal'), { ssr: false });
 
 function ModalRoot() {
   // Only add common/global scope modals here,
@@ -22,7 +24,7 @@ function ModalRoot() {
       <SuccessWithdrawModal />
       <VersionModal />
       <PassCodeModal />
-      <AnnoucementModal />
+      <AnnouncementModal />
       <div id='modal-root' />
     </>
   );
