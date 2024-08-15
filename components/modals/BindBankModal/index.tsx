@@ -9,14 +9,13 @@ import useIsMounted from '@/hooks/useIsMounted';
 import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { ChangeEvent, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './index.module.scss';
 
 const BindBankModal = () => {
   const isMounted = useIsMounted();
   const bankList = useAccountStore((state) => state.bankList);
-  const fetchBankList = useAccountStore((state) => state.fetchBankList);
   const fetchBindCardList = useAccountStore((state) => state.fetchBindCardList);
   const [bindRealName, setBindRealName] = useState('');
   const [bindBankAddress, setBindBankAddress] = useState('');
@@ -64,10 +63,6 @@ const BindBankModal = () => {
     ],
     [bankOptions],
   );
-
-  useEffect(() => {
-    fetchBankList();
-  }, []);
 
   const handleSubmit = async () => {
     if (!bindRealName) {
