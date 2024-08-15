@@ -49,7 +49,7 @@
         display: grid;
         place-content: center;
 
-        &:not(:last-child) {
+        &.withBorder:not(:last-child) {
           border-right: var(--table-header-right-border) 0.001rem solid;
         }
       }

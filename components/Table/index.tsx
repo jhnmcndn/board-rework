@@ -4,7 +4,25 @@ import PullToRefresh from 'react-simple-pull-to-refresh';
 import NoData from '../NoData';
 import styles from './index.module.scss';
 
-const TableBody: FC<Readonly<{ content: any[]; headerLength: number }>> = ({ content, headerLength }) => {
+export type TableProps = {
+  content: any[];
+  withHeader?: {
+    headers: string[];
+  };
+  withPullToRefresh?: {
+    isPullable: boolean;
+    onRefresh: () => Promise<any>;
+  };
+  withBorder?: boolean;
+};
+
+const TableBody: FC<
+  Readonly<
+    Pick<TableProps, 'content' | 'withBorder'> & {
+      headerLength: number;
+    }
+  >
+> = ({ content, withBorder, headerLength }) => {
   return (
     <div className={styles.body}>
       {content.map((data, index) => (
@@ -17,7 +35,12 @@ const TableBody: FC<Readonly<{ content: any[]; headerLength: number }>> = ({ con
           }}
         >
           {Object.keys(data).map((d, idx) => (
-            <div key={idx} className={styles.item}>
+            <div
+              key={idx}
+              className={classNames(styles.item, {
+                [styles.withBorder]: withBorder,
+              })}
+            >
               {data[d]}
             </div>
           ))}
@@ -27,18 +50,7 @@ const TableBody: FC<Readonly<{ content: any[]; headerLength: number }>> = ({ con
   );
 };
 
-const Table: FC<
-  Readonly<{
-    headers: string[];
-    content: any[];
-    withHeader?: boolean;
-    withPullToRefresh?: {
-      isPullable: boolean;
-      onRefresh: () => Promise<any>;
-    };
-    withBorder?: boolean;
-  }>
-> = ({ headers, content, withHeader, withPullToRefresh, withBorder }) => {
+const Table: FC<Readonly<TableProps>> = ({ content, withHeader, withPullToRefresh, withBorder }) => {
   return (
     <div className={styles.table}>
       {withHeader && (
@@ -46,10 +58,10 @@ const Table: FC<
           className={styles.header}
           style={{
             display: 'grid',
-            gridTemplateColumns: `repeat(${headers.length}, 1fr)`,
+            gridTemplateColumns: `repeat(${withHeader.headers.length}, 1fr)`,
           }}
         >
-          {headers.map((header, index) => (
+          {withHeader.headers.map((header, index) => (
             <div
               key={index}
               className={classNames({
@@ -63,10 +75,14 @@ const Table: FC<
       )}
       {withPullToRefresh ? (
         <PullToRefresh isPullable={withPullToRefresh.isPullable} onRefresh={withPullToRefresh.onRefresh}>
-          {content.length ? <TableBody content={content} headerLength={headers.length} /> : <NoData />}
+          {content.length ? (
+            <TableBody content={content} headerLength={withHeader?.headers.length || 0} withBorder />
+          ) : (
+            <NoData />
+          )}
         </PullToRefresh>
       ) : content.length ? (
-        <TableBody content={content} headerLength={headers.length} />
+        <TableBody content={content} headerLength={withHeader?.headers.length || 0} withBorder />
       ) : (
         <NoData />
       )}

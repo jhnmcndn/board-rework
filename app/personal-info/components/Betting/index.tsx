@@ -25,6 +25,7 @@ const Betting: FC<
   const filter = usePersonalInfoStore((s) => s.betting.filter);
   const filterOptions = ['今天', '昨天', '一个月'];
   const filterDefaultValue = filter === 'today' ? '今天' : filter === 'yesterday' ? '昨天' : '一个月';
+  const headers = ['派彩时间', '游戏-注单号', '投注金额', '盈利金额'];
   useEffect(() => {
     const scroll = () => {
       if (!scrollWrapperRef.current) return;
@@ -76,8 +77,7 @@ const Betting: FC<
         <Dropdown defaultValue={filterDefaultValue} options={filterOptions} onSelect={setBettingFilter} />
       </div>
       <Table
-        withHeader
-        headers={['派彩时间', '游戏-注单号', '投注金额', '盈利金额']}
+        withHeader={{ headers }}
         content={gameDataList}
         withPullToRefresh={{
           isPullable: true,
