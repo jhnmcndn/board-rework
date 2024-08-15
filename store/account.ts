@@ -1,5 +1,5 @@
 import { getAccountInfo } from '@/api/game';
-import { getBankList, getBindCardList, getWithdrawRechargeDetail } from '@/api/pay';
+import { getBindCardList, getWithdrawRechargeDetail } from '@/api/pay';
 import { getAccountNow, getCodeFlowList } from '@/api/platform';
 import { defaultInitData } from '@/constants/defaultReturnData';
 import {
@@ -45,25 +45,6 @@ export const bindCardListState = {
   specialBankInfoMap: undefined,
 } satisfies BindCardList;
 
-export const bankListState = {
-  id: undefined,
-  bankName: undefined,
-  bankIcon: undefined,
-  sort: undefined,
-} satisfies BankList;
-
-export const withdrawRecordListState = {
-  money: undefined,
-  orderNo: undefined,
-  requestTime: undefined,
-  bankName: undefined,
-  status: undefined,
-  remark: undefined,
-  color: undefined,
-  bankAccount: undefined,
-  bankAddress: undefined,
-};
-
 type AccountState = {
   init: Init;
   accountInfo: AccountInfo;
@@ -88,7 +69,6 @@ type AccountActions = {
   setWithdrawActiveTab: (index: number) => void;
   setBankList: (bankList: BankList[]) => void;
   setCodeFlowList: (codeFlowList: CodeFlowList[]) => void;
-  fetchBankList: () => void;
   fetchBindCardList: () => void;
   fetchWithdrawRecordList: ({ type, pageNum, pageSize }: WithdrawRechargeBody) => void;
   fetchCodeFlowList: () => void;
@@ -134,11 +114,6 @@ export const createAccountStore = () =>
           const accountNow = await getAccountNow();
           if (!accountNow || 'message' in accountNow) return set(() => ({ accountNow: accountNowState }));
           return set(() => ({ accountNow }));
-        },
-        fetchBankList: async () => {
-          const bankList = await getBankList();
-          if (!bankList || 'message' in bankList) return set(() => ({ bankList: [bankListState] }));
-          return set(() => ({ bankList }));
         },
         fetchBindCardList: async () => {
           const bindCardList = await getBindCardList();
