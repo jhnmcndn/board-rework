@@ -281,3 +281,18 @@ export type ListContainerProps = {
   icon: string;
   text: string;
 };
+
+export interface WashCodeDetail {
+  washCodeAmount: number;
+  washCodeTime: string;
+  money: any;
+  rspGameTypeWashCodes: RspGameTypeWashCode[];
+}
+
+export interface RspGameTypeWashCode {
+  codeAmountTotal: number;
+  washCodeRate: string;
+  gameTypeName: string;
+  gameTypeId: number;
+  washCodeAmount: number;
+}
