@@ -22,6 +22,7 @@ const MemoizedImgWithFallback = memo(ImgWithFallback);
 const MemoizedIconHolder: FC<TProps> = memo(({ idx, item, handleOnClick, isLargeIcon = false, styles }) => {
   const { images } = useImages();
   const { activeSideBarItem } = useGameStore((state) => state);
+  const delayDuration = isLargeIcon ? 0.1 : 0.02;
 
   return (
     <motion.div
@@ -34,11 +35,10 @@ const MemoizedIconHolder: FC<TProps> = memo(({ idx, item, handleOnClick, isLarge
             type: 'spring',
             duration: 0.8,
             bounce: 0.2,
-            delay: 0.04 + idx * 0.02,
+            delay: 0.04 + idx * delayDuration,
           },
         },
       }}
-      transition={{ delay: idx * 0.02 }}
       className={classNames(styles.iconHolder, {
         [styles.isMaintenance]: item.maintain,
         [styles['iconHolder--pointer']]: isLargeIcon,
