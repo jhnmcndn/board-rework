@@ -4,7 +4,7 @@ import Sidebar from '@/components/Sidebar';
 import { CustomerService, Init, MessageCommonProblems } from '@/types/app';
 import { FC, useState } from 'react';
 import Chatbox from '../Chatbox';
-import Faq from '../Faq';
+import Faq from '../FAQ';
 import styles from './index.module.scss';
 
 const MainContent: FC<

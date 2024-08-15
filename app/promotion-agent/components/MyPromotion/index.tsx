@@ -19,7 +19,7 @@ const MyPromotion = () => {
           <button>搜索 </button>
         </div>
       </div>
-      <Table withHeader headers={['ID', '时间', '领取金额', '推广级别']} content={[]} />
+      <Table withHeader={{ headers: ['ID', '时间', '领取金额', '推广级别'] }} content={[]} />
     </div>
   );
 };
