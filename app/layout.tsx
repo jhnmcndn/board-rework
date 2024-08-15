@@ -1,7 +1,7 @@
 import ClickSound from '@/components/ClickSoundProvider';
 import Loading from '@/components/Loading';
-import { GlobalProvider } from '@/components/Providers';
 import ModalRoot from '@/components/modals';
+import { GlobalProvider } from '@/components/Providers';
 import { serverConfig } from '@/server';
 import '@/styles/main.scss';
 import type { Metadata } from 'next';
