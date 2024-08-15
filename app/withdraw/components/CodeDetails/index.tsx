@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
+import { refetch } from '@/api/refetch';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import Table from '@/components/Table';
-import { refetch } from '@/api/refetch';
 import { API_ENDPOINT } from '@/types/enums';
 import Image from 'next/image';
+import { useEffect, useMemo } from 'react';
 import styles from './index.module.scss';
 
 const CodingDetails = () => {
@@ -39,8 +39,9 @@ const CodingDetails = () => {
   return (
     <div className={styles.codeDetailsWrapper}>
       <Table
-        headers={headers}
-        withHeader={true}
+        withHeader={{
+          headers,
+        }}
         content={listOfEwan}
         withPullToRefresh={{
           isPullable: true,
