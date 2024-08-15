@@ -76,6 +76,8 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
     router.push('/recharge');
   };
 
+  const handleShareBtnClick = () => router.push('/share');
+
   if (isDraggable)
     return (
       <Draggable
@@ -116,7 +118,15 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
       >
         <div className={styles.headerTitle}>
           <span>{headerTitle}</span>
+          {headerTitle === '推广代理' && (
+            <div className={styles.historyRecordBtn} onClick={handleShareBtnClick}>
+              <Image src={images.shareIcon} alt='Share Icon' width={38} height={54} className={styles.hrImage} />
+              {/* styles.prioRed does not exist in the scss module. Remove if necessary! */}
+              <span className={classNames({ [styles.prioRed]: theme === THEME.YELLOW_WHITE })}>推广攻略 &gt;</span>
+            </div>
+          )}
         </div>
+
         {headerTitle === '充值' && (
           <div data-click={sfx.popAudio} className={styles.historyRecordBtn} onClick={handleHistoryRecordBtnClick}>
             <Image src={images.historyRecord} alt='History Record' width={38} height={54} className={styles.hrImage} />

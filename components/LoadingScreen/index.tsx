@@ -22,7 +22,7 @@ const LoadingScreen = () => {
         setLoadingWidth((prevVal) => prevVal + 20);
       }
 
-      if (loadingWidth === 101) {
+      if (loadingWidth === 120) {
         clearInterval(loadingInterval);
         localStorage.setItem('loadingScreen', 'done');
         setShowLoading(false);
