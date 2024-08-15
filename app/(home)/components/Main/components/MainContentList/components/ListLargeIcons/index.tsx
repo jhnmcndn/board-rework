@@ -123,15 +123,15 @@ const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => 
   const handleOnClick = (item: CombinedGameInfo) => {
     if (isDragging) return;
 
-    authCheck(() => {
-      if (activeSideBarItem.type === 2) {
+    if (activeSideBarItem.type === 2) {
+      authCheck(() => {
         router.push(`/games?id=${item.id}`);
-      } else {
-        setActivePlatform(item);
-        fetchGameInfo({ id: activeSideBarItem.id || 1, pid: item.id || 1 });
-        setShowPlatform(true);
-      }
-    });
+      });
+    } else {
+      setActivePlatform(item);
+      fetchGameInfo({ id: activeSideBarItem.id || 1, pid: item.id || 1 });
+      setShowPlatform(true);
+    }
   };
 
   return (
