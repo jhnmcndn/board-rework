@@ -28,7 +28,7 @@ const VipDetails: FC<
           <span>VIP晋级模式</span>
         </div>
         <div className={styles.details}>
-          <Table withHeader headers={headers} content={vipSetList} withBorder />
+          <Table withHeader={{ headers: headers }} content={vipSetList} withBorder />
         </div>
       </div>
     </div>
