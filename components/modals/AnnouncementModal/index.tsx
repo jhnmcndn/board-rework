@@ -2,6 +2,7 @@
 
 import HeaderModalTitle from '@/components/HeaderModalTitle';
 import useIsMounted from '@/hooks/useIsMounted';
+import { serverConfig } from '@/server';
 import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
 import React from 'react';
@@ -12,18 +13,21 @@ import styles from './index.module.scss';
 const AnnoucementModal: React.FC = () => {
   const isMounted = useIsMounted();
   const { isAnnouncementOpen, closeAnnouncement } = useModalStore();
+  const logoIcon = require(`@/assets/${serverConfig.server}/modal_logo.png`);
   const modalContent = (
     <AnimatePresence>
-      <ModalLayout closeOnOutsideClick onClose={closeAnnouncement} backdrop={0.5}>
-        <div className={styles.announcementContainer}>
-          <HeaderModalTitle title='设置' onClick={closeAnnouncement} />
-          asfsdfklj
-        </div>
-      </ModalLayout>
+      {isAnnouncementOpen && (
+        <ModalLayout closeOnOutsideClick onClose={closeAnnouncement} backdrop={0.5}>
+          <div className={styles.announcementContainer}>
+            <HeaderModalTitle logoSrc={logoIcon} onClick={closeAnnouncement} />
+            asfsdfklj
+          </div>
+        </ModalLayout>
+      )}
     </AnimatePresence>
   );
 
-  if (isMounted() && isAnnouncementOpen) {
+  if (isMounted()) {
     const element = document.getElementById('modal-root') as HTMLDivElement;
     if (element) return createPortal(modalContent, element);
   }
