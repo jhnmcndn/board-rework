@@ -1,5 +1,13 @@
 import { request } from '@/api';
-import { AccountInfo, GameCategoryList, GameInfoGroup, GetGameTypes, RootResponse, RspGameInfo } from '@/types/app';
+import {
+  AccountInfo,
+  GameCategoryList,
+  GameInfoGroup,
+  GetGameTypes,
+  RootResponse,
+  RspGameInfo,
+  WashCodeDetail,
+} from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import { GetGameInfoGroupFn, GetGameInfosFn } from '@/types/fns';
 
@@ -71,5 +79,21 @@ export const getGameDataList = async ({ gameCategory, enumReqTime }: { gameCateg
     },
   });
   if (!response.data || 'message' in response.data) return [];
+  return response.data;
+};
+
+export const getWashCodeDetail = async () => {
+  const response = await request<RootResponse<WashCodeDetail>>({
+    endpoint: API_ENDPOINT.WASH_CODE_DETAIL,
+    route: APP_ROUTE.GAME,
+    tags: API_ENDPOINT.WASH_CODE_DETAIL,
+  });
+  if (!response.data || 'message' in response.data)
+    return {
+      washCodeAmount: 0,
+      washCodeTime: '',
+      money: null,
+      rspGameTypeWashCodes: [],
+    };
   return response.data;
 };
