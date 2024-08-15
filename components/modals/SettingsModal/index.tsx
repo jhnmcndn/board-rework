@@ -53,32 +53,34 @@ const SettingsModal: React.FC = () => {
 
   const modalContent = (
     <AnimatePresence>
-      <ModalLayout backdrop={0.8}>
-        <div className={styles.settingsContainer}>
-          <HeaderModalTitle title='设置' onClick={closeSettings} />
-          <div className={styles.contentModal}>
-            <div className={styles.sidebarContainer}>
-              <ul className={styles.sidebarList}>
-                {listItems.map((item) => (
-                  <li
-                    key={item.id}
-                    data-click={sfx.popAudio}
-                    className={classNames({ [styles.sidebarItem]: selectedId === item.id })}
-                    onClick={() => setSelectedId(item.id)}
-                  >
-                    <span>{item.title}</span>
-                  </li>
-                ))}
-              </ul>
+      {isSettingsOpen && (
+        <ModalLayout backdrop={0.8}>
+          <div className={styles.settingsContainer}>
+            <HeaderModalTitle title='设置' onClick={closeSettings} />
+            <div className={styles.contentModal}>
+              <div className={styles.sidebarContainer}>
+                <ul className={styles.sidebarList}>
+                  {listItems.map((item) => (
+                    <li
+                      key={item.id}
+                      data-click={sfx.popAudio}
+                      className={classNames({ [styles.sidebarItem]: selectedId === item.id })}
+                      onClick={() => setSelectedId(item.id)}
+                    >
+                      <span>{item.title}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className={styles.settingContent}>{renderComponent()}</div>
             </div>
-            <div className={styles.settingContent}>{renderComponent()}</div>
           </div>
-        </div>
-      </ModalLayout>
+        </ModalLayout>
+      )}
     </AnimatePresence>
   );
 
-  if (isMounted() && isSettingsOpen) {
+  if (isMounted()) {
     const element = document.getElementById('modal-root') as HTMLDivElement;
     if (element) return createPortal(modalContent, element);
   }

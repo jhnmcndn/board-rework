@@ -36,6 +36,17 @@ const LeftNavigation: React.FC = () => {
 
   return (
     <>
+      {showMoreModal && (
+        <MoreModal
+          setShowMore={setShowMoreModal}
+          setOpenAnnounceModal={() => {
+            setShowMoreModal(false);
+          }}
+          setSafeBoxModal={() => {
+            setShowMoreModal(false);
+          }}
+        />
+      )}
       <ul className={styles.leftNavigation}>
         <ListContainer icon={images.support} text='客服' onClick={() => handleNavigation('/customer-service')} />
         <ListContainer icon={images.chip} text='洗码' onClick={() => handleNavigation('/code-washing')} />
@@ -57,17 +68,6 @@ const LeftNavigation: React.FC = () => {
           onClick={() => setShowMoreModal(!showMoreModal)}
         />
       </ul>
-      {showMoreModal && (
-        <MoreModal
-          setShowMore={setShowMoreModal}
-          setOpenAnnounceModal={() => {
-            setShowMoreModal(false);
-          }}
-          setSafeBoxModal={() => {
-            setShowMoreModal(false);
-          }}
-        />
-      )}
     </>
   );
 };
