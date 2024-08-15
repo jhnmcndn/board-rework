@@ -11,8 +11,8 @@ import styles from './index.module.scss';
 
 const MainContent: FC<
   Readonly<{
-    vipGiftInfo: PromiseSettledResult<VIPGiftInfo>;
-    gameCategoryList: PromiseSettledResult<GameCategoryList[]>;
+    vipGiftInfo: VIPGiftInfo;
+    gameCategoryList: GameCategoryList[];
   }>
 > = ({ vipGiftInfo, gameCategoryList }) => {
   const theme = useAccountStore((s) => s.theme);
@@ -27,15 +27,9 @@ const MainContent: FC<
       />
       <section className={styles.wrapper}>
         <div className={styles.content} data-theme={theme}>
-          {activeSidebarItem === 0 && vipGiftInfo.status === 'fulfilled' && (
-            <Privilege theme={theme} vipGiftInfo={vipGiftInfo.value} />
-          )}
-          {activeSidebarItem === 1 && vipGiftInfo.status === 'fulfilled' && (
-            <VipDetails vipGiftInfo={vipGiftInfo.value} />
-          )}
-          {activeSidebarItem === 2 && gameCategoryList.status === 'fulfilled' && (
-            <Betting gameCategoryList={gameCategoryList.value} />
-          )}
+          {activeSidebarItem === 0 && <Privilege theme={theme} vipGiftInfo={vipGiftInfo} />}
+          {activeSidebarItem === 1 && <VipDetails vipGiftInfo={vipGiftInfo} />}
+          {activeSidebarItem === 2 && <Betting gameCategoryList={gameCategoryList} />}
         </div>
       </section>
     </main>

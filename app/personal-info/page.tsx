@@ -5,7 +5,8 @@ import { Fragment } from 'react';
 import MainContent from './components/MainContent';
 
 const PersonalInfo = async () => {
-  const [vipGiftInfo, gameCategoryList] = await Promise.allSettled([getVipGiftInfo(), getGameCategoryList()]);
+  const vipGiftInfo = await getVipGiftInfo();
+  const gameCategoryList = await getGameCategoryList();
   return (
     <Fragment>
       <OtherHeader headerTitle='个人中心' showPurse />
