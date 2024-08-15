@@ -20,11 +20,7 @@ export default function AlertContainer() {
           <div className={styles.alert__imageContainer}>
             <Image src={alertIcon} alt='alert' className={styles.alert__icon} />
           </div>
-          {content.body && (
-            <span className={styles.alert__message}>
-              {content.body}
-            </span>
-          )}
+          {content.body && <span className={styles.alert__message}>{content.body}</span>}
           {content.notify && <span className={styles.alert__message}>{content.notify}</span>}
         </div>
       </div>
@@ -33,7 +29,7 @@ export default function AlertContainer() {
 
   if (isMounted() && isAlertOpen) {
     const element = document.getElementById('modal-root') as HTMLDivElement;
-    return createPortal(modalContent, element);
+    if (element) return createPortal(modalContent, element);
   }
 
   return null;

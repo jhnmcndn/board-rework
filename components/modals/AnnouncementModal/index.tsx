@@ -10,17 +10,17 @@ import { createPortal } from 'react-dom';
 import ModalLayout from '../ModalLayout';
 import styles from './index.module.scss';
 
-const AnnoucementModal: React.FC = () => {
+const AnnouncementModal: React.FC = () => {
   const isMounted = useIsMounted();
   const { isAnnouncementOpen, closeAnnouncement } = useModalStore();
   const logoIcon = require(`@/assets/${serverConfig.server}/modal_logo.png`);
+
   const modalContent = (
     <AnimatePresence>
       {isAnnouncementOpen && (
         <ModalLayout closeOnOutsideClick onClose={closeAnnouncement} backdrop={0.5}>
           <div className={styles.announcementContainer}>
             <HeaderModalTitle logoSrc={logoIcon} onClick={closeAnnouncement} />
-            asfsdfklj
           </div>
         </ModalLayout>
       )}
@@ -35,4 +35,4 @@ const AnnoucementModal: React.FC = () => {
   return null;
 };
 
-export default AnnoucementModal;
+export default AnnouncementModal;

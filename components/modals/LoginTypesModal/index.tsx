@@ -93,6 +93,7 @@ const LoginTypesModal = () => {
   );
 
   if (!isMounted()) return;
+
   const element = document.getElementById('modal-root') as HTMLDivElement;
   return createPortal(modalContent, element);
 };
