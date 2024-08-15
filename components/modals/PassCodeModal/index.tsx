@@ -1,14 +1,14 @@
 'use client';
 
-import useModalStore from '@/store/modals';
-import { createPortal } from 'react-dom';
-import useIsMounted from '@/hooks/useIsMounted';
-import ModalLayout from '@/components/modals/ModalLayout';
-import HeaderModalTitle from '@/components/HeaderModalTitle';
-import styles from './index.module.scss';
 import Button from '@/components/Fragments/Button';
+import HeaderModalTitle from '@/components/HeaderModalTitle';
+import ModalLayout from '@/components/modals/ModalLayout';
+import useIsMounted from '@/hooks/useIsMounted';
+import useModalStore from '@/store/modals';
 import classnames from 'classnames';
 import { AnimatePresence } from 'framer-motion';
+import { createPortal } from 'react-dom';
+import styles from './index.module.scss';
 
 const PassCodeModal = () => {
   const isMounted = useIsMounted();
@@ -63,7 +63,7 @@ const PassCodeModal = () => {
   );
 
   if (isMounted()) {
-    const element = typeof window === 'undefined' ? null : (document.getElementById('modal-root') as HTMLDivElement);
+    const element = document.getElementById('modal-root') as HTMLDivElement;
     if (element) return createPortal(modalContent, element);
   }
 

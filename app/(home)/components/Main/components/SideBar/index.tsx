@@ -64,7 +64,6 @@ const SideBar = () => {
     }
     fetchGameInfo({ id: item.id || 0, pid: -1 }, item);
     setActiveSideBarItem(item);
-    // popSound();
   };
 
   return (
@@ -98,7 +97,7 @@ const SideBar = () => {
                       [styles.sidebarItemActive]: item.id === activeSideBarItem.id,
                     })}
                   >
-                    <img className={styles.icon} src={item.icon} alt='icon' />
+                    <Image className={styles.icon} width={23} height={28} src={item?.icon || ''} alt='icon' />
                     <span>{item.name}</span>
                   </div>
 

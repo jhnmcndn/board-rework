@@ -14,6 +14,7 @@ const ImgWithFallback: FC<IProps> = ({
   onErrorCall,
   fallback,
   loadingIcon,
+  alt,
   src,
   sizes,
   quality,
@@ -34,6 +35,7 @@ const ImgWithFallback: FC<IProps> = ({
   return (
     <Image
       sizes={sizes || '(max-width: 600px) 100vw, 50vw'}
+      alt={alt || ''}
       fill
       quality={quality || 100}
       src={imgSrc || fallback}

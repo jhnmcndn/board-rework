@@ -1,15 +1,15 @@
 'use client';
 
-import useImages from '@/hooks/useImages';
-import useModalStore from '@/store/modals';
-import Image from 'next/image';
-import styles from './index.module.scss';
-import { AnimatePresence } from 'framer-motion';
-import useIsMounted from '@/hooks/useIsMounted';
-import ModalLayout from '@/components/modals/ModalLayout';
-import HeaderModalTitle from '@/components/HeaderModalTitle';
 import Button from '@/components/Fragments/Button';
+import HeaderModalTitle from '@/components/HeaderModalTitle';
+import ModalLayout from '@/components/modals/ModalLayout';
+import useImages from '@/hooks/useImages';
+import useIsMounted from '@/hooks/useIsMounted';
+import useModalStore from '@/store/modals';
+import { AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { createPortal } from 'react-dom';
+import styles from './index.module.scss';
 
 const SuccessWithdrawModal = () => {
   const { images } = useImages();
@@ -43,7 +43,7 @@ const SuccessWithdrawModal = () => {
   );
 
   if (isMounted()) {
-    const element = typeof window === 'undefined' ? null : (document.getElementById('modal-root') as HTMLDivElement);
+    const element = document.getElementById('modal-root') as HTMLDivElement;
     if (element) return createPortal(modalContent, element);
   }
 
