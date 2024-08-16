@@ -1,17 +1,12 @@
 'use client';
 
 import useImages from '@/hooks/useImages';
+import { SearchFieldProps } from '@/types/app';
 import Image from 'next/image';
-import { ChangeEvent, Dispatch, FC, SetStateAction } from 'react';
+import { ChangeEvent, FC } from 'react';
 import styles from './index.module.scss';
 
-interface IProps {
-  setSearchFieldData: Dispatch<SetStateAction<string>>;
-  searchFieldData: string;
-  placeholder?: string;
-}
-
-const SearchField: FC<IProps> = ({ searchFieldData, setSearchFieldData, placeholder = '搜索游戏' }) => {
+const SearchField: FC<SearchFieldProps> = ({ searchFieldData, setSearchFieldData, placeholder = '搜索游戏' }) => {
   const { images } = useImages();
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => setSearchFieldData(e.target.value);

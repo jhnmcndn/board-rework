@@ -5,23 +5,18 @@ import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import useAuthCheck from '@/hooks/useAuthCheck';
 import useImages from '@/hooks/useImages';
-import { GameInfoGroup, RspGameInfo } from '@/types/app';
+import { GameInfoGroup, ListIconProps, RspGameInfo } from '@/types/app';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Dispatch, FC, SetStateAction, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import ListSmallIcons from '../ListSmallIcons';
 import styles from './index.module.scss';
 
-interface IProps {
-  searchFieldData: string;
-  setSearchFieldData: Dispatch<SetStateAction<string>>;
-}
-
 type CombinedGameInfo = RspGameInfo & GameInfoGroup;
 
-const ListLargeIcons: FC<IProps> = ({ searchFieldData, setSearchFieldData }) => {
+const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData, setSearchFieldData }) => {
   const router = useRouter();
   const { images } = useImages();
   const { authCheck } = useAuthCheck();
