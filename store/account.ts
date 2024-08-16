@@ -1,10 +1,12 @@
 import { getAccountInfo } from '@/api/game';
 import { getBindCardList, getWithdrawRechargeDetail } from '@/api/pay';
-import { getAccountNow, getCodeFlowList } from '@/api/platform';
+import { getAccountNow, getActivityInfos, getActivityTypes, getCodeFlowList } from '@/api/platform';
 import { defaultInitData } from '@/constants/defaultReturnData';
 import {
   AccountInfo,
   AccountNow,
+  ActivityInfos,
+  ActivityTypes,
   BankList,
   BindCardList,
   CodeFlowList,
@@ -56,6 +58,8 @@ type AccountState = {
   bankList: BankList[];
   withdrawRecordList: WithdrawRechargeDetail[];
   codeFlowList: CodeFlowList[];
+  activityTypes: ActivityTypes[];
+  activityInfos: ActivityInfos[];
 };
 
 type AccountActions = {
@@ -72,6 +76,8 @@ type AccountActions = {
   fetchBindCardList: () => void;
   fetchWithdrawRecordList: ({ type, pageNum, pageSize }: WithdrawRechargeBody) => void;
   fetchCodeFlowList: () => void;
+  fetchActivityTypes: () => void;
+  fetchActivityInfos: (activityType: number) => void;
 };
 
 export type AccountApiCalls = {
@@ -95,6 +101,8 @@ export const createAccountStore = () =>
         bankList: [],
         withdrawRecordList: [],
         codeFlowList: [],
+        activityTypes: [],
+        activityInfos: [],
         setInit: (init) => set(() => ({ init: { ...init } })),
         setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
         setTheme: (theme) => set(() => ({ theme })),
@@ -137,6 +145,20 @@ export const createAccountStore = () =>
             return set(() => ({ codeFlowList: [] }));
           }
           return set(() => ({ codeFlowList }));
+        },
+        fetchActivityTypes: async () => {
+          const activityTypes = await getActivityTypes();
+          if (!activityTypes || 'message' in activityTypes) {
+            return set(() => ({ activityTypes: [] }));
+          }
+          return set(() => ({ activityTypes }));
+        },
+        fetchActivityInfos: async (activityType) => {
+          const activityInfos = await getActivityInfos(activityType);
+          if (!activityInfos || 'message' in activityInfos) {
+            return set(() => ({ activityInfos: [] }));
+          }
+          return set(() => ({ activityInfos }));
         },
       }),
       {

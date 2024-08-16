@@ -59,7 +59,7 @@ const SettingsModal: React.FC = () => {
             <HeaderModalTitle title='设置' onClick={closeSettings} />
             <div className={styles.contentModal}>
               <div className={styles.sidebarContainer}>
-                <ul className={styles.sidebarList}>
+                <ul>
                   {listItems.map((item) => (
                     <li
                       key={item.id}

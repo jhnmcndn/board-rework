@@ -17,23 +17,25 @@ const VersionModal: React.FC = () => {
 
   const modalContent = (
     <AnimatePresence>
-      <ModalLayout closeOnOutsideClick onClose={closeVersion} backdrop={0.5}>
-        <div className={styles.versionMainContainer}>
-          <span className={styles.notice}>有新版本，是否前往更新</span>
-          <div className={styles.buttonsContainer}>
-            <button className={styles.close} onClick={() => closeVersion()}>
-              取消
-            </button>
-            <Link className={styles.redirect} href={`http://${init.webUrl}`} target='_blank'>
-              确定
-            </Link>
+      {isVersionOpen && (
+        <ModalLayout closeOnOutsideClick onClose={closeVersion} backdrop={0.5}>
+          <div className={styles.versionMainContainer}>
+            <span className={styles.notice}>有新版本，是否前往更新</span>
+            <div className={styles.buttonsContainer}>
+              <button className={styles.close} onClick={() => closeVersion()}>
+                取消
+              </button>
+              <Link className={styles.redirect} href={`http://${init.webUrl}`} target='_blank'>
+                确定
+              </Link>
+            </div>
           </div>
-        </div>
-      </ModalLayout>
+        </ModalLayout>
+      )}
     </AnimatePresence>
   );
 
-  if (isMounted() && isVersionOpen) {
+  if (isMounted()) {
     const element = document.getElementById('modal-root') as HTMLDivElement;
     if (element) return createPortal(modalContent, element);
   }

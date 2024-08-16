@@ -1,0 +1,25 @@
+.sideContainerTab {
+  position: absolute;
+  left: -0.45rem;
+  top: 0.5rem;
+  font-size: 0.15rem;
+  z-index: -1;
+
+  li {
+    background: var(--announcement-sidetab-inactive);
+    color: var(--announcement-sidetab-text);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 2rem;
+    padding: 0.1rem;
+    font-weight: 900;
+    margin-bottom: 0.05rem;
+
+    &.sideActiveTab {
+      color: #511a00;
+      background: var(--announcement-sidetab-active);
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+}

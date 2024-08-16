@@ -19,7 +19,7 @@ const LeftNavigation: React.FC = () => {
   const [showMoreModal, setShowMoreModal] = useState(false);
   const accountInfo = useAccountStore((state) => state.accountInfo);
   const messageOnSites = useMessageStore((state) => state.messageOnSites);
-  const { openAnnouncement } = useModalStore();
+  const { openAnnouncement, setSidebarAnnouncement } = useModalStore();
   const isLoggedIn = Boolean(accountInfo.id);
 
   const [unreadMsgs, setUnreadMsgs] = useState<MessageOnSites[]>([]);
@@ -50,7 +50,15 @@ const LeftNavigation: React.FC = () => {
       <ul className={styles.leftNavigation}>
         <ListContainer icon={images.support} text='客服' onClick={() => handleNavigation('/customer-service')} />
         <ListContainer icon={images.chip} text='洗码' onClick={() => handleNavigation('/code-washing')} />
-        <ListContainer dataClick={sfx.giftAudio} onClick={() => openAnnouncement()} icon={images.gift} text='活动' />
+        <ListContainer
+          dataClick={sfx.giftAudio}
+          onClick={() => {
+            openAnnouncement();
+            setSidebarAnnouncement(0);
+          }}
+          icon={images.gift}
+          text='活动'
+        />
         <div>
           {(!isLoggedIn || unreadMsgs.length > 0) && <center className='alertIcon' />}
           <ListContainer
