@@ -62,6 +62,7 @@
   --withdrawSelf-text-add: #fff;
   --version-bg-modal: linear-gradient(270deg, #1f1e1b, #1e1b19 26.56%, #262520);
   --version-border-modal: #8d7c4f;
+  --announcement-sidetab-text: #fff;
   --withdraw-header-modal-close: url('../assets/blackGold/withdraw/closeBtnModal.png');
   --withdraw-header-modal: url('../assets/blackGold/withdraw/withdrawHeaderModal.png');
   --common-btn: url('../assets/commons/button.png');
@@ -79,6 +80,8 @@
   --sidebar-bg-active: url('../assets/blackGold/sidebar/vipActive.png');
   --setting-close: url('../assets/blackGold/headerModal/closeBtn.png');
   --setting-bg-header-modal: url('../assets/blackGold/headerModal/headerTitleBg.png');
+  --announcement-sidetab-active: url('../assets/blackGold/announcementModal/activeTab.png');
+  --announcement-sidetab-inactive: url('../assets/blackGold/announcementModal/inactiveTab.png');
 
   &[data-theme='brownGold'] {
     //   --balance-bg-header: #875b32;
@@ -120,6 +123,7 @@
     //   --withdrawSelf-text-add: #888888;
     // --version-bg-modal: #fff;
     --version-border-modal: none;
+    --announcement-sidetab-text: #fff;
     //   --withdraw-header-modal-close: url('../assets/brownGold/withdraw/closeBtnModal.png');
     //   --withdraw-header-modal: url('../assets/brownGold/withdraw/withdrawHeaderModal.png');
     //   --sidebar-modal-divider: url('../assets/brownGold/Sidebar/divider.png');
@@ -135,6 +139,9 @@
     //   --sidebar-bg-active: url('../assets/brownGold/Sidebar/btn-vipactive.png');
     // --setting-close: url('../assets/brownGold/headerModal/closeBtn.png');
     // --setting-bg-header-modal: url('../assets/brownGold/headerModal/headerTitleBg.png');
+
+    --announcement-sidetab-active: url('../assets/brownGold/announcementModal/activeTab.png');
+    --announcement-sidetab-inactive: url('../assets/brownGold/announcementModal/inactiveTab.png');
   }
 
   &[data-theme='yellowWhite'] {
@@ -194,6 +201,7 @@
     //   --withdrawSelf-text-add: #C5915A;
     // --version-bg-modal: #fefeff;
     --version-border-modal: #ffc400;
+    --announcement-sidetab-text: #ffc400;
     //   --withdraw-header-modal-close: url('../assets/yellowWhite/withdraw/closeBtnModal.png');
     //   --withdraw-header-modal: url('../assets/yellowWhite/withdraw/withdrawHeaderModal.png');
     //   --sidebar-modal-divider: url('../assets/yellowWhite/Sidebar/divider.png');
@@ -209,6 +217,9 @@
     //   --sidebar-bg-active: url('../assets/yellowWhite/Sidebar/btn-vipactive.png');
     //   --setting-close: url('../assets/yellowWhite/headerModal/closeBtn.png');
     //   --setting-bg-header-modal: url('../assets/yellowWhite/headerModal/headerTitleBg.png');
+
+    --announcement-sidetab-active: url('../assets/yellowWhite/announcementModal/activeTab.png');
+    --announcement-sidetab-inactive: url('../assets/yellowWhite/announcementModal/inactiveTab.png');
   }
 
   &[data-theme='greenYellow'] {
@@ -264,6 +275,7 @@
     //   --withdrawSelf-text-add: #511A00;
     // --version-bg-modal: #d6eae4;
     --version-border-modal: none;
+    --announcement-sidetab-text: #fff;
     //   --withdraw-header-modal-close: url('../assets/greenYellow/withdraw/closeBtnModal.png');
     //   --withdraw-header-modal: url('../assets/greenYellow/withdraw/withdrawHeaderModal.png');
     //   --sidebar-modal-divider: url('../assets/greenYellow/Sidebar/divider.png');
@@ -279,6 +291,9 @@
     //   --sidebar-bg-active: url('../assets/greenYellow/Sidebar/btn-vipactive.png');
     //   --setting-close: url('../assets/greenYellow/headerModal/closeBtn.png');
     //   --setting-bg-header-modal: url('../assets/greenYellow/headerModal/headerTitleBg.png');
+
+    --announcement-sidetab-active: url('../assets/greenYellow/announcementModal/activeTab.png');
+    --announcement-sidetab-inactive: url('../assets/greenYellow/announcementModal/inactiveTab.png');
   }
 
   &[data-theme='skyBlue'] {
@@ -328,6 +343,7 @@
     //   --withdrawSelf-text-add: #888888;
     // --version-bg-modal: #f4f6f9;
     --version-border-modal: none;
+    --announcement-sidetab-text: #fff;
     //   --withdraw-header-modal-close: url('../assets/skyBlue/withdraw/closeBtnModal.png');
     //   --withdraw-header-modal: url('../assets/skyBlue/withdraw/withdrawHeaderModal.png');
     //   --sidebar-modal-divider: url('../assets/skyBlue/Sidebar/divider.png');
@@ -343,6 +359,9 @@
     //   --sidebar-bg-active: url('../assets/skyBlue/Sidebar/btn-vipactive.png');
     //   --setting-close: url('../assets/skyBlue/headerModal/closeBtn.png');
     //   --setting-bg-header-modal: url('../assets/skyBlue/headerModal/headerTitleBg.png');
+
+    --announcement-sidetab-active: url('../assets/skyBlue/announcementModal/activeTab.png');
+    --announcement-sidetab-inactive: url('../assets/skyBlue/announcementModal/inactiveTab.png');
   }
 
   &[data-theme='darkBlue'] {
@@ -400,6 +419,7 @@
     //   --withdrawSelf-user-balance: #d7e8f0;
     // --version-bg-modal: linear-gradient(270deg, #29334b, #4d6296);
     --version-border-modal: none;
+    --announcement-sidetab-text: #fff;
     //   --withdraw-header-modal-close: url('../assets/darkBlue/withdraw/closeBtnModal.png');
     //   --withdraw-header-modal: url('../assets/darkBlue/withdraw/withdrawHeaderModal.png');
     //   --sidebar-modal-divider: url('../assets/darkBlue/Sidebar/divider.png');
@@ -415,6 +435,9 @@
     //   --sidebar-bg-active: url('../assets/darkBlue/Sidebar/btn-vipactive.png');
     //   --setting-close: url('../assets/darkBlue/headerModal/closeBtn.png');
     //   --setting-bg-header-modal: url('../assets/darkBlue/headerModal/headerTitleBg.png');
+
+    --announcement-sidetab-active: url('../assets/darkBlue/announcementModal/activeTab.png');
+    --announcement-sidetab-inactive: url('../assets/darkBlue/announcementModal/inactiveTab.png');
   }
 
   &[data-theme='redGold'] {
@@ -454,6 +477,7 @@
     //   --withdrawSelf-text-add: #080000;
     // --version-bg-modal: #f4f6f9;
     --version-border-modal: #8d7c4f;
+    --announcement-sidetab-text: #fff;
     //   --withdraw-header-modal-close: url('../assets/redGold/withdraw/closeBtnModal.png');
     //   --withdraw-header-modal: url('../assets/redGold/withdraw/withdrawHeaderModal.png');
     //   --sidebar-modal-divider: url('../assets/redGold/Sidebar/divider.png');
@@ -469,6 +493,9 @@
     //   --sidebar-bg-active: url('../assets/redGold/Sidebar/btn-vipactive.png');
     //   --setting-close: url('../assets/redGold/headerModal/closeBtn.png');
     //   --setting-bg-header-modal: url('../assets/redGold/headerModal/headerTitleBg.png');
+
+    --announcement-sidetab-active: url('../assets/redGold/announcementModal/activeTab.png');
+    --announcement-sidetab-inactive: url('../assets/redGold/announcementModal/inactiveTab.png');
   }
 
   &[data-theme='whiteGold'] {
@@ -523,6 +550,7 @@
     //   --withdrawSelf-user-balance: #435689;
     //   --withdrawSelf-text-add: #435689;
     --version-border-modal: #8d7c4f;
+    --announcement-sidetab-text: #435689;
     //   --withdraw-header-modal-close: url('../assets/whiteGold/withdraw/closeBtnModal.png');
     //   --withdraw-header-modal: url('../assets/whiteGold/withdraw/withdrawHeaderModal.png');
     //   --sidebar-modal-divider: url('../assets/whiteGold/Sidebar/divider.png');
@@ -538,5 +566,8 @@
     //   --sidebar-bg-active: url('../assets/whiteGold/Sidebar/btn-vipactive.png');
     //   --setting-close: url('../assets/whiteGold/headerModal/closeBtn.png');
     //   --setting-bg-header-modal: url('../assets/whiteGold/headerModal/headerTitleBg.png');
+
+    --announcement-sidetab-active: url('../assets/whiteGold/announcementModal/activeTab.png');
+    --announcement-sidetab-inactive: url('../assets/whiteGold/announcementModal/inactiveTab.png');
   }
 }

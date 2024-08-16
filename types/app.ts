@@ -296,3 +296,33 @@ export interface RspGameTypeWashCode {
   gameTypeId: number;
   washCodeAmount: number;
 }
+
+export type ActivityInfos = {
+  id: number;
+  icon: string;
+  title: string;
+  createTime: string;
+  content: string;
+  effect: boolean;
+  type: number;
+  url: any;
+  typeId: number;
+};
+
+export type ActivityList = {
+  id: number;
+  icon: string;
+  title: string;
+  createTime: string;
+  content: string;
+  effect: boolean;
+  type: number;
+  url: any;
+  typeId: number;
+};
+
+export type ActivityTypes = {
+  activityList: ActivityList[];
+  id: number;
+  name: string;
+};
