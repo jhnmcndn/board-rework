@@ -10,7 +10,7 @@ const PassCodeModal = dynamic(() => import('./PassCodeModal'), { ssr: false });
 const BindUSDTModal = dynamic(() => import('./BindUSDTModal'), { ssr: false });
 const BindBankModal = dynamic(() => import('./BindBankModal'), { ssr: false });
 
-function ModalRoot() {
+const ModalRoot = () => {
   // Only add common/global scope modals here,
   // import specific modals only on the component it is being used
 
@@ -28,6 +28,6 @@ function ModalRoot() {
       <div id='modal-root' />
     </>
   );
-}
+};
 
 export default ModalRoot;

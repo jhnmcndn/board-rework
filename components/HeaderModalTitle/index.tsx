@@ -1,13 +1,7 @@
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import { HeaderProps } from '@/types/app';
 import Image from 'next/image';
 import React, { FC } from 'react';
 import styles from './index.module.scss';
-
-interface HeaderProps {
-  title?: string;
-  logoSrc?: string | StaticImport;
-  onClick?: () => void;
-}
 
 const TextTitle: FC<Required<Pick<HeaderProps, 'title'>>> = ({ title }) => {
   return (

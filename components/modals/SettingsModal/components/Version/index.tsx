@@ -1,14 +1,8 @@
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useModalStore from '@/store/modals';
+import { VersionRowProps } from '@/types/app';
 import { copyToClipboard } from '@/utils/helpers';
 import styles from './index.module.scss';
-
-interface VersionRowProps {
-  label: string;
-  value: string | React.ReactNode;
-  buttonLabel: string;
-  onButtonClick?: () => void;
-}
 
 const VersionRow: React.FC<VersionRowProps> = ({ label, value, buttonLabel, onButtonClick }) => (
   <div className={styles.container}>

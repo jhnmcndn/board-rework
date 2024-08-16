@@ -1,26 +1,19 @@
 'use client';
 
 import useClickOutside from '@/hooks/useClickOutside';
+import { ModalLayoutProps } from '@/types/app';
 import { MODAL_BG_ANIMATION, MODAL_CONTENT_ANIMATION } from '@/utils/helpers';
 import { motion } from 'framer-motion';
-import { type ReactNode, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import styles from './index.module.scss';
 
-interface ModalLayoutProps {
-  onClose?: () => void;
-  children: ReactNode;
-  isAlert?: boolean;
-  closeOnOutsideClick?: boolean;
-  backdrop?: number;
-}
-
-function ModalLayout({
+const ModalLayout = ({
   closeOnOutsideClick = false,
   isAlert = false,
   children,
   onClose,
   backdrop = 0,
-}: ModalLayoutProps) {
+}: ModalLayoutProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const clickOutSide = useClickOutside(modalRef);
   document.body.style.overflow = 'hidden';
@@ -61,6 +54,6 @@ function ModalLayout({
       </motion.div>
     </motion.div>
   );
-}
+};
 
 export default ModalLayout;
