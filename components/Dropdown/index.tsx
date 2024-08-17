@@ -1,6 +1,7 @@
 'use client';
 
 import useImages from '@/hooks/useImages';
+import classNames from 'classnames';
 import Image from 'next/image';
 import { FC, useState } from 'react';
 import styles from './index.module.scss';
@@ -14,6 +15,7 @@ const Dropdown: FC<
 > = ({ defaultValue, options, onSelect }) => {
   const { images } = useImages();
   const [showDropdown, setShowDropdown] = useState(false);
+
   return (
     <div className={styles.container} onClick={() => setShowDropdown(!showDropdown)}>
       <span>{defaultValue}</span>
@@ -21,7 +23,16 @@ const Dropdown: FC<
       {showDropdown && (
         <div>
           {options.map((option, index) => (
-            <li key={index} onClick={() => onSelect(option)}>
+            <li
+              key={index}
+              onClick={() => {
+                onSelect(option);
+                console.log(option === defaultValue);
+              }}
+              className={classNames({
+                [styles.highlight]: option === defaultValue,
+              })}
+            >
               {option}
             </li>
           ))}
