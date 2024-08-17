@@ -1,3 +1,6 @@
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
+
 export type ServerConfig = {
   agent: string;
   domain: string;
@@ -72,11 +75,11 @@ export type AccountNow = {
   balance?: number;
 };
 
-export interface MessageHomeNotice {
+export type MessageHomeNotice = {
   id?: number;
   title?: string;
   content?: string;
-}
+};
 
 export type RspGameType = {
   id?: number;
@@ -111,20 +114,20 @@ export type GameInfoGroup = {
   rspGameInfos?: RspGameInfo[];
 };
 
-export interface ActiveSideBarItem {
+export type ActiveSideBarItem = {
   id?: number;
   name?: string;
   icon?: string;
   type?: number;
-}
+};
 
-export interface MessageOnSites {
+export type MessageOnSites = {
   id?: number;
   title?: string;
   content?: string;
   createTime?: string;
   isRead?: boolean;
-}
+};
 
 export type CustomerService = {
   id: number;
@@ -282,17 +285,88 @@ export type ListContainerProps = {
   text: string;
 };
 
-export interface WashCodeDetail {
+export type WashCodeDetail = {
   washCodeAmount: number;
   washCodeTime: string;
   money: any;
   rspGameTypeWashCodes: RspGameTypeWashCode[];
-}
+};
 
-export interface RspGameTypeWashCode {
+export type RspGameTypeWashCode = {
   codeAmountTotal: number;
   washCodeRate: string;
   gameTypeName: string;
   gameTypeId: number;
   washCodeAmount: number;
-}
+};
+
+export type ActivityInfos = {
+  id: number;
+  icon: string;
+  title: string;
+  createTime: string;
+  content: string;
+  effect: boolean;
+  type: number;
+  url: any;
+  typeId: number;
+};
+
+export type ActivityList = {
+  id: number;
+  icon: string;
+  title: string;
+  createTime: string;
+  content: string;
+  effect: boolean;
+  type: number;
+  url: any;
+  typeId: number;
+};
+
+export type ActivityTypes = {
+  activityList: ActivityList[];
+  id: number;
+  name: string;
+};
+
+export type ListItemProps = {
+  id: number;
+  title: string;
+};
+
+export type ModalLayoutProps = {
+  onClose?: () => void;
+  children: ReactNode;
+  isAlert?: boolean;
+  closeOnOutsideClick?: boolean;
+  backdrop?: number;
+};
+
+export type VersionRowProps = {
+  label: string;
+  value: string | React.ReactNode;
+  buttonLabel: string;
+  onButtonClick?: () => void;
+};
+
+export type SearchFieldProps = {
+  setSearchFieldData: Dispatch<SetStateAction<string>>;
+  searchFieldData: string;
+  placeholder?: string;
+};
+
+export type ListIconProps = {
+  searchFieldData: string;
+  setSearchFieldData: Dispatch<SetStateAction<string>>;
+};
+
+export type CategoryListBarProps = {
+  setActivePlatformId: Dispatch<SetStateAction<number>>;
+};
+
+export type HeaderProps = {
+  title?: string;
+  logoSrc?: string | StaticImport;
+  onClick?: () => void;
+};

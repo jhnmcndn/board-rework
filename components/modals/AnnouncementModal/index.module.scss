@@ -1,10 +1,20 @@
-.announcementContainer {
+.mainAnnouncement {
   position: relative;
-  display: flex;
-  background: red;
-  border: 1px solid red;
+  @include flex-xy;
   flex-direction: column;
-  height: 3.1rem;
+  font-size: 0.3rem;
   width: 5.1rem;
-  z-index: 3;
+  height: 3.1rem;
+  background: white;
+
+  .announcementContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 3.1rem;
+    width: 100%;
+    z-index: 2;
+    overflow: hidden;
+    // background: var(--side)
+  }
 }

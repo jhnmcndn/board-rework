@@ -3,6 +3,7 @@
 import HeaderModalTitle from '@/components/HeaderModalTitle';
 import useIsMounted from '@/hooks/useIsMounted';
 import useModalStore from '@/store/modals';
+import { ListItemProps } from '@/types/app';
 import { sfx } from '@/utils/audioFile';
 import classNames from 'classnames';
 import { AnimatePresence } from 'framer-motion';
@@ -15,11 +16,6 @@ import Music from './components/Music';
 import PersonalInfo from './components/PersonalInfo';
 import Version from './components/Version';
 import styles from './index.module.scss';
-
-type ListItemProps = {
-  id: number;
-  title: string;
-};
 
 const SettingsModal: React.FC = () => {
   const [selectedId, setSelectedId] = useState<number>(0);
@@ -59,7 +55,7 @@ const SettingsModal: React.FC = () => {
             <HeaderModalTitle title='设置' onClick={closeSettings} />
             <div className={styles.contentModal}>
               <div className={styles.sidebarContainer}>
-                <ul className={styles.sidebarList}>
+                <ul>
                   {listItems.map((item) => (
                     <li
                       key={item.id}

@@ -18,6 +18,7 @@ import vipBadge from '@/assets/commons/vipBadge.png';
 import vipAdvJackpot from '@/assets/commons/vipImages/advancementJackpot.png';
 import vipGift from '@/assets/commons/vipImages/gift.png';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import { serverConfig } from '@/server';
 
 export default function useImages() {
   const theme = useAccountStore((state) => state.theme);
@@ -77,6 +78,8 @@ export default function useImages() {
     vipGift,
     vipLevel: require(`@/assets/commons/vipLevels/vip${vipLevel}.png`),
     vipNextLevel: require(`@/assets/commons/vipLevels/vip${nextVipLevel}.png`),
+    //Announcement
+    logoIcon: require(`@/assets/${serverConfig.server}/modal_logo.png`),
   };
 
   return { images };

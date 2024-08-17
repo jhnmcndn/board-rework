@@ -1,18 +1,14 @@
 import { getGameInfos } from '@/api/game';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
-import { GameInfoGroup } from '@/types/app';
+import { CategoryListBarProps, GameInfoGroup } from '@/types/app';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styles from './index.module.scss';
 
-interface IProps {
-  setActivePlatformId: Dispatch<SetStateAction<number>>;
-}
-
-const CategoryListBar: FC<IProps> = ({ setActivePlatformId }) => {
+const CategoryListBar: FC<CategoryListBarProps> = ({ setActivePlatformId }) => {
   const [activeTab, setActiveTab] = useState(0);
   const theme = useAccountStore((state) => state.theme);
   const { gameInfoGroup, activeSideBarItem, setGameInfos, setIsGamesLoading } = useGameStore((state) => state);

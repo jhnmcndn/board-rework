@@ -6,6 +6,8 @@ import { COOKIE_MAX_AGE } from '@/constants/misc';
 import {
   AccountInfo,
   AccountNow,
+  ActivityInfos,
+  ActivityTypes,
   CodeFlowList,
   CustomerService,
   Init,
@@ -174,4 +176,25 @@ export const setBoxPass = async (boxPass: string) => {
   });
   const { msg, code } = data;
   return { msg, code };
+};
+
+export const getActivityTypes = async () => {
+  const data = await request<RootResponse<ActivityTypes[]>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.ACTIVITY_TYPES,
+    tags: API_ENDPOINT.ACTIVITY_TYPES,
+  });
+
+  return data.data;
+};
+
+export const getActivityInfos = async (activityType: number) => {
+  const data = await request<RootResponse<ActivityInfos[]>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.ACTIVITY_INFOS,
+    tags: API_ENDPOINT.ACTIVITY_INFOS,
+    body: { activityType },
+  });
+  if (!data.data || 'message' in data.data) return [] satisfies ActivityInfos[];
+  return data.data;
 };
