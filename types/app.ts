@@ -370,3 +370,25 @@ export type HeaderProps = {
   logoSrc?: string | StaticImport;
   onClick?: () => void;
 };
+
+export type PayTypeList = {
+  id: number;
+  name: string;
+  iconUrl: string;
+  sort: number;
+  recommend: boolean;
+  effect: boolean;
+  type: number;
+  deviceType: string;
+  openLevelMin: number;
+  openLevelMax: number;
+  createBy: string;
+  createTime: string;
+  updateBy: string;
+  updateTime: string;
+  tex1: string;
+  tex2: string;
+  tex3: string;
+  tex4: string;
+  tex5: string;
+};

@@ -11,6 +11,7 @@ import {
   BindCardList,
   CodeFlowList,
   Init,
+  PayTypeList,
   WithdrawRechargeBody,
   WithdrawRechargeDetail,
 } from '@/types/app';
@@ -60,6 +61,7 @@ type AccountState = {
   codeFlowList: CodeFlowList[];
   activityTypes: ActivityTypes[];
   activityInfos: ActivityInfos[];
+  payTypeList: PayTypeList[];
 };
 
 type AccountActions = {
@@ -73,6 +75,7 @@ type AccountActions = {
   setWithdrawActiveTab: (index: number) => void;
   setBankList: (bankList: BankList[]) => void;
   setCodeFlowList: (codeFlowList: CodeFlowList[]) => void;
+  setPayTypeList: (payTypeList: PayTypeList[]) => void;
   fetchBindCardList: () => void;
   fetchWithdrawRecordList: ({ type, pageNum, pageSize }: WithdrawRechargeBody) => void;
   fetchCodeFlowList: () => void;
@@ -103,6 +106,7 @@ export const createAccountStore = () =>
         codeFlowList: [],
         activityTypes: [],
         activityInfos: [],
+        payTypeList: [],
         setInit: (init) => set(() => ({ init: { ...init } })),
         setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
         setTheme: (theme) => set(() => ({ theme })),
@@ -113,6 +117,7 @@ export const createAccountStore = () =>
         setWithdrawActiveTab: (index) => set(() => ({ withdrawActiveTab: index })),
         setBankList: (bankList) => set(() => ({ bankList })),
         setCodeFlowList: (codeFlowList) => set(() => ({ codeFlowList })),
+        setPayTypeList: (payTypeList) => set(() => ({ payTypeList })),
         fetchAccountInfo: async () => {
           const accountInfo = await getAccountInfo();
           if (!accountInfo || 'message' in accountInfo) return set(() => ({ accountInfo: accountInfoState }));

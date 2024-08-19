@@ -2,6 +2,7 @@ import { request } from '@/api';
 import {
   BankList,
   BindCardList,
+  PayTypeList,
   RootResponse,
   WithdrawBankBody,
   WithdrawRechargeBody,
@@ -80,4 +81,13 @@ export const setWithdrawPass = async (boxPass: string) => {
   });
   const { code, msg } = data;
   return { code, msg };
+};
+
+export const getPayTypeList = async () => {
+  const data = await request<RootResponse<PayTypeList[]>>({
+    route: APP_ROUTE.PAY,
+    endpoint: API_ENDPOINT.PAY_TYPE_LIST,
+    tags: API_ENDPOINT.PAY_TYPE_LIST,
+  });
+  return data.data;
 };

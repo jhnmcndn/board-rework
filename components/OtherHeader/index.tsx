@@ -4,7 +4,6 @@ import CoinPurse from '@/components/CoinPurse';
 import styles from '@/components/OtherHeader/index.module.scss';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useImages from '@/hooks/useImages';
-import { THEME } from '@/types/enums';
 import { sfx } from '@/utils/audioFile';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
@@ -14,7 +13,7 @@ import { FC, useEffect, useState } from 'react';
 import Draggable from 'react-draggable';
 
 export type OtherHeaderProps = {
-  headerTitle: string;
+  headerTitle?: string;
   isWebview?: boolean;
   showPurse?: boolean;
 };
@@ -29,11 +28,12 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
   const [isDraggable, setIsDraggable] = useState(false);
   const theme = useAccountStore((state) => state.theme);
   const accountBalance = useAccountStore((state) => state.accountNow.balance);
-  const isRechargeHistoryPage = pathname.toLowerCase().includes('recharge-history');
   const isRechargePage = pathname.toLowerCase().includes('recharge');
   const isWebviewPage = pathname.toLowerCase().includes('webview');
   const isSharePage = pathname.toLowerCase().includes('share');
   const isGamePage = pathname.toLowerCase().includes('games');
+
+  const rechargeTitle = pathname.includes('rechargeHistory') ? '充值记录' : '充值';
 
   // NOTE: Modify this line after creating the music store
   // const turnBgMusicOn = useMusicStore((state) => state.turnBgMusicOn)
@@ -54,13 +54,6 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
     }
   }, [isGamePage, isWebviewPage]);
 
-  const handleBack = () => {
-    if (isRechargeHistoryPage) return router.push('/recharge?from=recharge-history');
-    if (isSharePage) return router.push('/promotion-agent');
-    if (isWebview) return router.push('/recharge');
-    router.push('/');
-  };
-
   const handleDragStop = () => {
     if (started) return setHasData(true);
     setHasData(false);
@@ -69,11 +62,6 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
 
   const handleDrag = () => {
     setTimeout(() => setStarted(false), 50);
-  };
-
-  const handleHistoryRecordBtnClick = () => {
-    if (isRechargePage) return router.push('/recharge-history');
-    router.push('/recharge');
   };
 
   const handleShareBtnClick = () => router.push('/share');
@@ -95,6 +83,7 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
 
   return (
     <motion.div
+      key={pathname}
       className={classNames(styles.otherHeader, {
         [styles.webviewOverrides]: isWebviewPage,
       })}
@@ -103,12 +92,8 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className={styles.otherHeaderContainer}>
-        <div className={styles.backBtnContainer}>
-          <div data-click={sfx.popAudio} onClick={handleBack}>
-            <Image src={images.backBtn} alt='Back' width={72} height={69} className={styles.backBtn} />
-          </div>
-        </div>
+      <div className={styles.backBtnContainer} data-click={sfx.popAudio} onClick={() => router.back()}>
+        <Image src={images.backBtn} alt='Back' width={72} height={69} className={styles.backBtn} />
       </div>
 
       <div
@@ -117,21 +102,29 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
         })}
       >
         <div className={styles.headerTitle}>
-          <span>{headerTitle}</span>
+          <span>{headerTitle || rechargeTitle}</span>
           {headerTitle === '推广代理' && (
             <div className={styles.historyRecordBtn} onClick={handleShareBtnClick}>
-              <Image src={images.shareIcon} alt='Share Icon' width={38} height={54} className={styles.hrImage} />
-              {/* styles.prioRed does not exist in the scss module. Remove if necessary! */}
-              <span className={classNames({ [styles.prioRed]: theme === THEME.YELLOW_WHITE })}>推广攻略 &gt;</span>
+              <Image src={images.shareIcon} alt='Share Icon' width={38} height={54} className={styles.shareIcon} />
+              <span className={styles.text}>推广攻略 &gt;</span>
             </div>
           )}
         </div>
 
-        {headerTitle === '充值' && (
-          <div data-click={sfx.popAudio} className={styles.historyRecordBtn} onClick={handleHistoryRecordBtnClick}>
-            <Image src={images.historyRecord} alt='History Record' width={38} height={54} className={styles.hrImage} />
-            {/* styles.prioRed does not exist in the scss module. Remove if necessary! */}
-            <span className={classNames({ [styles.prioRed]: theme === THEME.YELLOW_WHITE })}>充值记录 &gt;</span>
+        {isRechargePage && !pathname.includes('rechargeHistory') && (
+          <div
+            data-click={sfx.popAudio}
+            className={styles.historyRecordBtn}
+            onClick={() => router.push('/recharge/rechargeHistory')}
+          >
+            <Image
+              src={images.historyRecord}
+              alt='History Record'
+              width={38}
+              height={54}
+              className={styles.historyIcon}
+            />
+            <span className={styles.text}>充值记录 &gt;</span>
           </div>
         )}
       </div>
