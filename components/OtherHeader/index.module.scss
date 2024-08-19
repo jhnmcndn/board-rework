@@ -7,35 +7,22 @@
   justify-content: space-between;
   position: relative;
 
-  .otherHeaderContainer {
-    width: 10%;
+  .backBtnContainer {
+    @include flex-xy;
+    height: 100%;
+    cursor: pointer;
+    width: 0.8rem;
 
-    .backBtnContainer {
-      width: 0.4rem;
-      height: 0.4rem;
-      height: 100%;
-      width: 100%;
-
-      div {
-        @include flex-xy;
-        position: relative;
-        height: 100%;
-        cursor: pointer;
-      }
-
-      img {
-        position: relative;
-        top: -0.03rem;
-        left: -0.1rem;
-        width: 0.3rem;
-        height: auto;
-      }
+    img {
+      width: 0.3rem;
+      height: auto;
     }
   }
 
   .titleContainer {
-    width: 5rem;
+    @include flex-xy(flex-start, center);
     flex: 1;
+    width: 5rem;
     margin-left: 0.1rem;
 
     &.isWebview {
@@ -70,26 +57,27 @@
     height: 100%;
     align-items: center;
     position: relative;
+    margin-left: 0.1rem;
 
-    img {
-      margin-left: 0.1rem;
+    .historyIcon {
+      width: 0.14rem;
+      height: auto;
+    }
+
+    .shareIcon {
+      width: 0.16rem;
+      height: auto;
       margin-right: 0.04rem;
-      width: 0.15rem;
-      height: 0.2rem;
     }
 
-    .hrImage {
-      width: auto;
-      height: 50%;
-    }
-
-    > span {
+    .text {
       font-size: 0.15rem;
       background: linear-gradient(180deg, #ffffff 0%, #fce9c9 86.3%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       -webkit-text-fill-color: transparent;
+      margin-left: 0.04rem;
     }
   }
 
@@ -102,69 +90,6 @@
     align-items: center;
   }
 
-  &[data-theme='yellowWhite'] {
-    .headerTitle {
-      > div:nth-child(2) {
-        span {
-          background: -webkit-linear-gradient(#a11300, #a11300);
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-      }
-    }
-
-    .historyRecordBtn {
-      img {
-        height: 0.15rem !important;
-      }
-
-      > span {
-        background: linear-gradient(180deg, #a11300 0%, #a11300 86.3%);
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-    }
-  }
-
-  &[data-theme='greenYellow'] {
-    .historyRecordBtn {
-      > span {
-        background: linear-gradient(180deg, #ffffff 0%, #fffae9 0.01%, #face13 27.6%);
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-    }
-  }
-
-  &[data-theme='skyBlue'] {
-    .historyRecordBtn {
-      > span {
-        background: linear-gradient(180deg, #ffffff 0%, #fce9c9 86.3%);
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-    }
-  }
-
-  &[data-theme='darkBlue'] {
-    .historyRecordBtn {
-      > span {
-        background: linear-gradient(180deg, #ffffff 0%, #8aeaff 100%);
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-    }
-  }
-
-  &[data-theme='whiteGold'] {
-    .historyRecordBtn {
-      > span {
-        background: linear-gradient(180deg, #435689 0%, #435689 100%);
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-    }
-  }
 }
 
 .exit {
