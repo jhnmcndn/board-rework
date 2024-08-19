@@ -1,0 +1,16 @@
+.rechargePageContainer {
+  width: 100%;
+  position: relative;
+  height: calc(100% - 0.4rem);
+
+  .rechargePageBody {
+    display: flex;
+    height: 100%;
+
+    .child {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+    }
+  }
+}
