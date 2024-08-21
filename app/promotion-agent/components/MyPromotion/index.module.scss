@@ -1,36 +1,192 @@
 .myPromotion {
   width: 100vw;
   height: 100vh;
-  padding: 0 0.1rem;
-  overflow-y: auto;
 
-  &__searchContainer {
+  &__topSection {
+    background-color: #222;
+    width: 100%;
+    border-radius: 5px;
+  }
+
+  &__headerContent {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    padding: 8px 5px;
-    border-bottom: 1px solid gray;
-    margin-bottom: 5px;
+    justify-content: space-between;
+    border-bottom: 0.00001rem solid #525252;
 
-    button {
-      padding: 0 40px;
-      height: 0.3rem;
-      background: linear-gradient(to bottom, #ffe800, #e38c00);
-      border-radius: 0.2rem;
-      font-size: 0.13rem;
-      color: #511a00;
-      font-weight: 600;
-      border: none;
+    span:first-child {
+      padding: 10px 35px;
+      background: linear-gradient(90deg, #222, #444);
+      color: #fff6c2;
+    }
+
+    span:last-child {
+      margin-right: 10px;
     }
   }
 
-  &__searchWrapper {
-    width: 2rem;
+  &__mainContent {
+    width: 100%;
+    background-color: #222;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  &__gridInput {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.2rem 0.4rem;
+    padding: 0.2rem 0.6rem;
+  }
+
+  &__inputContainer {
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-right: 0.2rem;
-    height: 0.3rem;
-    z-index: 1;
+    justify-content: flex-end;
+
+    &:nth-of-type(even) {
+      justify-content: flex-start;
+    }
+
+    span {
+      letter-spacing: 0.005rem;
+      padding: 0.1rem;
+      background-color: #363636;
+      width: 100%;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      display: flex;
+      align-items: center;
+      font-size: 0.17rem;
+
+      img {
+        margin-right: 10px;
+        width: 22px;
+        height: 22px;
+      }
+    }
+
+    input {
+      background-color: #1a1a1a;
+      color: #cdcaca;
+      height: 100%;
+      border: none;
+      padding-left: 15px;
+      font-size: 0.18rem;
+      width: 100%;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+  }
+
+  &__receiveCommissionBtn {
+    width: 100%;
+    padding: 0 0 0.2rem 0;
+    text-align: center;
+
+    button {
+      background: linear-gradient(180deg, #ffe800, #e38c00);
+      border: none;
+      border-radius: 0.2rem;
+      color: #511a00;
+      font-size: 0.17rem;
+      font-weight: 600;
+      height: 0.35rem;
+      width: 1.4rem;
+    }
+  }
+
+  &__bottomSection {
+    width: 100%;
+    background-color: #222;
+    margin-top: 10px;
+    padding: 0.2rem 0.1rem 0.05rem 0.1rem;
+    border-radius: 5px;
+  }
+
+  &__userInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+
+    & > * {
+      background-color: #1a1a1a;
+      flex-basis: 50%;
+      height: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-radius: 5px;
+
+      h1 {
+        -webkit-text-fill-color: transparent;
+        background: -webkit-linear-gradient(#fedf7f, #bf8734);
+        -webkit-background-clip: text;
+      }
+
+      span {
+        display: block;
+        color: #fff6c2;
+      }
+    }
+  }
+
+  &__userId {
+    margin-left: 40px;
+  }
+
+  &__inviterCode {
+    margin-right: 40px;
+  }
+
+  &__shareQRCode {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0.2rem 0;
+
+    button {
+      background: linear-gradient(180deg, #ffe800, #e38c00);
+      border: none;
+      border-radius: 0.2rem;
+      color: #511a00;
+      font-size: 0.17rem;
+      font-weight: 600;
+      height: 0.35rem;
+      width: 1.4rem;
+      margin-left: 18px;
+    }
+
+    div:last-child {
+      flex-basis: 85%;
+      margin-left: 15px;
+      background-color: #000;
+      color: #fff;
+      height: 0.35rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 0.1rem;
+      border-radius: 0.2rem;
+      position: relative;
+      margin-right: 18px;
+
+      span {
+        height: 0.35rem;
+        width: 1.2rem;
+        border-radius: 0 0.2rem 0.2rem 0.5rem;
+        background: linear-gradient(180deg, #ffe800, #e38c00);
+        position: absolute;
+        right: 0;
+        text-align: center;
+        color: #511a00;
+        font-size: 0.17rem;
+        font-weight: 600;
+        line-height: 2;
+      }
+    }
   }
 }
