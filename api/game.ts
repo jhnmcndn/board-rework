@@ -6,8 +6,8 @@ import {
   GetGameTypes,
   RootResponse,
   RspGameInfo,
+  TWashCodeLogs,
   WashCodeDetail,
-  WashCodeLogs,
 } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import { GetGameInfoGroupFn, GetGameInfosFn } from '@/types/fns';
@@ -99,22 +99,18 @@ export const getWashCodeDetail = async () => {
   return response.data;
 };
 
-export const getWashCodeLogs = async () => {
-  const response = await request<RootResponse<WashCodeLogs>>({
+export const getWashCodeLogs = async ({ pageNum = 1, pageSize = 50 }: { pageNum: number; pageSize: number }) => {
+  const body = {
+    pageNum,
+    pageSize,
+  };
+  const response = await request<RootResponse<TWashCodeLogs[]>>({
     endpoint: API_ENDPOINT.WASH_CODE_LOGS,
     route: APP_ROUTE.GAME,
     tags: API_ENDPOINT.WASH_CODE_LOGS,
+    body,
   });
-  if (!response.data || 'message' in response.data)
-    return {
-      memberId: '',
-      codeAmount: 0,
-      washCodeTime: '',
-      washCodeAmount: 0,
-      washCodeRate: '',
-      gameTypeName: '',
-      gameTypeId: 0,
-    };
+  if (!response.data || 'message' in response.data) return [];
   return response.data;
 };
 

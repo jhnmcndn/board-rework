@@ -286,7 +286,7 @@ export type WashCodeDetail = {
   rspGameTypeWashCodes: RspGameTypeWashCode[];
 };
 
-export type WashCodeLogs = {
+export type TWashCodeLogs = {
   memberId: string;
   codeAmount: number;
   washCodeTime: string;
