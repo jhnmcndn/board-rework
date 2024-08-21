@@ -45,7 +45,7 @@ export const WithdrawPage: WithdrawPageComponent = ({ bindCardList, bankList, co
 
   return (
     <div className={styles.withdrawPageContainer}>
-      <OtherHeader headerTitle='提现' />
+      <OtherHeader headerTitle='提现' showPurse />
       <div className={styles.withdrawPageBody}>
         <Sidebar
           sidebarItems={sidebarItems}
