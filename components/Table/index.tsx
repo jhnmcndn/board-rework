@@ -8,6 +8,7 @@ export type TableProps = {
   content: any[];
   withHeader?: {
     headers: string[];
+    height?: number;
   };
   withPullToRefresh?: {
     isPullable: boolean;
@@ -27,7 +28,7 @@ const TableBody: FC<
     <div className={styles.body}>
       {content.map((data, index) => (
         <div
-          className={styles.row}
+          className={`${styles.row} table-row`}
           key={index}
           style={{
             display: 'grid',
@@ -59,6 +60,7 @@ const Table: FC<Readonly<TableProps>> = ({ content, withHeader, withPullToRefres
           style={{
             display: 'grid',
             gridTemplateColumns: `repeat(${withHeader.headers.length}, 1fr)`,
+            ...(withHeader.height && { height: `${withHeader.height}rem` }),
           }}
         >
           {withHeader.headers.map((header, index) => (
