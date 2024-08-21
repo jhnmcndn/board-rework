@@ -100,6 +100,17 @@ export const getWashCodeDetail = async () => {
   return response.data;
 };
 
+export const getRecommendDetail = async () => {
+  const response = await request<RootResponse<[]>>({
+    endpoint: API_ENDPOINT.RECOMMEND_DETAIL,
+    route: APP_ROUTE.PLATFORM,
+    tags: API_ENDPOINT.RECOMMEND_DETAIL,
+    body: {},
+  });
+  if (!response.data || 'message' in response.data) return [];
+  return response.data;
+};
+
 export const getWashCodeLogs = async ({ pageNum = 1, pageSize = 50 }: { pageNum: number; pageSize: number }) => {
   const body = {
     pageNum,

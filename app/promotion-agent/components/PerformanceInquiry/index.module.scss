@@ -1,181 +1,36 @@
 .performanceInquiry {
   width: 100vw;
   height: 100vh;
+  padding: 0 0.1rem;
+  overflow-y: auto;
 
-  &__topSection {
-    background-color: #222;
-    width: 100%;
-    border-radius: 5px;
-  }
-
-  &__headerContent {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 0.00001rem solid #525252;
-
-    span:first-child {
-      padding: 10px 35px;
-      background: linear-gradient(90deg, #222, #444);
-      color: #fff6c2;
-    }
-
-    span:last-child {
-      margin-right: 10px;
-    }
-  }
-
-  &__mainContent {
-    width: 100%;
-    background-color: #222;
-  }
-
-  &__gridInput {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.2rem 0.4rem;
-    padding: 0.2rem 0.7rem;
-  }
-
-  &__inputContainer {
+  &__searchContainer {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
-    &:nth-of-type(even) {
-      justify-content: flex-start;
-    }
-
-    span {
-      letter-spacing: 0.005rem;
-      padding: 0.08rem;
-      background-color: #363636;
-      width: 100%;
-      text-align: center;
-      border-top-left-radius: 10px;
-      border-bottom-left-radius: 10px;
-    }
-
-    input {
-      background-color: #1a1a1a;
-      color: #cdcaca;
-      height: 100%;
-      border: none;
-      padding-left: 15px;
-      font-size: 0.15rem;
-      width: 100%;
-      border-top-right-radius: 10px;
-      border-bottom-right-radius: 10px;
-    }
-  }
-
-  &__receiveCommissionBtn {
-    width: 100%;
-    padding: 0 0 0.2rem 0;
-    text-align: center;
+    padding: 8px 5px;
+    border-bottom: 1px solid gray;
+    margin-bottom: 5px;
 
     button {
-      background: linear-gradient(180deg, #ffe800, #e38c00);
-      border: none;
+      padding: 0 40px;
+      height: 0.3rem;
+      background: linear-gradient(to bottom, #ffe800, #e38c00);
       border-radius: 0.2rem;
-      color: #511a00;
       font-size: 0.13rem;
+      color: #511a00;
       font-weight: 600;
-      height: 0.35rem;
-      width: 1.2rem;
+      border: none;
     }
   }
 
-  &__bottomSection {
-    width: 100%;
-    background-color: #222;
-    margin-top: 10px;
-    padding: 0.3rem 0.1rem;
-    border-radius: 5px;
-  }
-
-  &__userInfo {
+  &__searchWrapper {
+    width: 2rem;
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 0.2rem;
-
-    & > * {
-      background-color: #1a1a1a;
-      flex-basis: 50%;
-      height: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      border-radius: 10px;
-
-      h1 {
-        -webkit-text-fill-color: transparent;
-        background: -webkit-linear-gradient(#fedf7f, #bf8734);
-        -webkit-background-clip: text;
-      }
-
-      span {
-        display: block;
-        color: #fff6c2;
-      }
-    }
-  }
-
-  &__userId {
-    margin-left: 30px;
-  }
-
-  &__inviterCode {
-    margin-right: 30px;
-  }
-
-  &__shareQRCode {
-    width: 100%;
-    display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    padding: 0.2rem 0;
-
-    button {
-      background: linear-gradient(180deg, #ffe800, #e38c00);
-      border: none;
-      border-radius: 0.2rem;
-      color: #511a00;
-      font-size: 0.13rem;
-      font-weight: 600;
-      height: 0.35rem;
-      width: 1.2rem;
-    }
-
-    div:last-child {
-      flex-basis: 85%;
-      margin-left: 20px;
-      background-color: #000;
-      color: #fff;
-      height: 0.35rem;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding-left: 0.1rem;
-      border-radius: 0.2rem;
-      position: relative;
-
-      &::after {
-        content: attr(data-text);
-        height: 0.35rem;
-        width: 1.2rem;
-        border-radius: 0 0.2rem 0.2rem 0.5rem;
-        background: linear-gradient(180deg, #ffe800, #e38c00);
-        position: absolute;
-        right: 0;
-        text-align: center;
-        color: #511a00;
-        font-size: 0.13rem;
-        font-weight: 600;
-        line-height: 2.5;
-      }
-    }
+    margin-right: 0.2rem;
+    height: 0.3rem;
+    z-index: 1;
   }
 }
