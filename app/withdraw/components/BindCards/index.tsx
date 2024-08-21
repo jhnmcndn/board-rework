@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 import { refetch } from '@/api/refetch';
@@ -17,7 +16,6 @@ type ListItem = {
 const BindCards = () => {
   const theme = useAccountStore((state) => state.theme);
   const bindCardList = useAccountStore((state) => state.bindCardList);
-  const fetchBindCardList = useAccountStore((state) => state.fetchBindCardList);
   const { openBindBank, openBindUSDT } = useModalStore();
 
   const listItems: ListItem[] = [
@@ -30,10 +28,6 @@ const BindCards = () => {
       onClick: () => openBindUSDT(),
     },
   ];
-
-  useEffect(() => {
-    fetchBindCardList();
-  }, []);
 
   const censorMyAccount = (myAccount: string): string => {
     if (myAccount.length < 4) {
