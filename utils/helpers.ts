@@ -80,3 +80,13 @@ export const generateMachineCode = () => {
   }
   return machineId;
 };
+
+export const moneyFormat = (money: number) => {
+  const roundedNumber = Math.floor(money);
+  const formatter = Intl.NumberFormat('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
+  return formatter.format(roundedNumber);
+};
