@@ -13,6 +13,7 @@ const SelfServiceCW = () => {
   const setActiveSideBarItem = useGameStore((state) => state.setActiveSideBarItem);
   const { push } = useRouter();
 
+  const updateWashCode = (newWashCode: WashCodeDetail) => setWashCode(newWashCode);
   const handleRedirect = (gameTypeId: number) => {
     const item = sideBar.find((item) => item.id === gameTypeId);
     if (item) setActiveSideBarItem(item);
@@ -34,7 +35,6 @@ const SelfServiceCW = () => {
       })),
     [washCode],
   );
-
   const total = codeWashList?.reduce((total, code) => total + code[3], 0) || 0;
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const SelfServiceCW = () => {
   return (
     <div className={styles.wrapper} style={{ height: codeWashList?.length ? 'auto' : '100%' }}>
       <CodeWashList list={codeWashList} />
-      <TotalReceived total={total} listLength={codeWashList?.length || 0} />
+      <TotalReceived total={total} listLength={codeWashList?.length || 0} updateWashCode={updateWashCode} />
     </div>
   );
 };

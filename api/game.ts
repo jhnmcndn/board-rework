@@ -117,3 +117,19 @@ export const getWashCodeLogs = async () => {
     };
   return response.data;
 };
+
+export const toWashCode = async () => {
+  const response = await request<RootResponse<WashCodeDetail>>({
+    endpoint: API_ENDPOINT.TO_WASH_CODE,
+    route: APP_ROUTE.GAME,
+    tags: API_ENDPOINT.TO_WASH_CODE,
+  });
+  if (!response.data || 'message' in response.data)
+    return {
+      washCodeAmount: 0,
+      washCodeTime: '',
+      money: null,
+      rspGameTypeWashCodes: [],
+    };
+  return response.data;
+};
