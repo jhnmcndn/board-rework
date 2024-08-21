@@ -5,23 +5,14 @@ import NoData from '@/components/NoData';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useModalStore from '@/store/modals';
 import { API_ENDPOINT } from '@/types/enums';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 import styles from './index.module.scss';
 
 const WithdrawRecord = () => {
-  const fetchWithdrawRecordList = useAccountStore((state) => state.fetchWithdrawRecordList);
   const withdrawRecordList = useAccountStore((state) => state.withdrawRecordList);
   const { openAlert } = useModalStore();
   const textRef = useRef(null);
-
-  useEffect(() => {
-    fetchWithdrawRecordList({
-      type: 'withdraw',
-      pageNum: 1,
-      pageSize: 10,
-    });
-  }, []);
 
   const copyToClipboard = (text: string, msg: string) => {
     navigator.clipboard.writeText(text).then(() => {

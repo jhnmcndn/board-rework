@@ -1,5 +1,5 @@
 import { getAccountInfo } from '@/api/game';
-import { getBindCardList, getWithdrawRechargeDetail } from '@/api/pay';
+import { getBindCardList } from '@/api/pay';
 import { getAccountNow, getActivityInfos, getActivityTypes, getCodeFlowList } from '@/api/platform';
 import { defaultInitData } from '@/constants/defaultReturnData';
 import {
@@ -12,7 +12,6 @@ import {
   CodeFlowList,
   Init,
   PayTypeList,
-  WithdrawRechargeBody,
   WithdrawRechargeDetail,
 } from '@/types/app';
 import { THEME } from '@/types/enums';
@@ -77,7 +76,6 @@ type AccountActions = {
   setCodeFlowList: (codeFlowList: CodeFlowList[]) => void;
   setPayTypeList: (payTypeList: PayTypeList[]) => void;
   fetchBindCardList: () => void;
-  fetchWithdrawRecordList: ({ type, pageNum, pageSize }: WithdrawRechargeBody) => void;
   fetchCodeFlowList: () => void;
   fetchActivityTypes: () => void;
   fetchActivityInfos: (activityType: number) => void;
@@ -132,17 +130,6 @@ export const createAccountStore = () =>
           const bindCardList = await getBindCardList();
           if (!bindCardList || 'message' in bindCardList) return set(() => ({ bindCardList: bindCardListState }));
           return set(() => ({ bindCardList }));
-        },
-        fetchWithdrawRecordList: async ({ type, pageNum, pageSize }) => {
-          const withdrawRecordList = await getWithdrawRechargeDetail({
-            type: type,
-            pageNum: pageNum,
-            pageSize: pageSize,
-          });
-          if (!withdrawRecordList || 'message' in withdrawRecordList) {
-            return set(() => ({ withdrawRecordList: [] }));
-          }
-          return set(() => ({ withdrawRecordList }));
         },
         fetchCodeFlowList: async () => {
           const codeFlowList = await getCodeFlowList();

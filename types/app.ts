@@ -208,12 +208,6 @@ export type WithdrawRechargeDetail = {
   bankAddress?: string;
 };
 
-export type WithdrawRechargeBody = {
-  type?: string;
-  pageNum?: number;
-  pageSize?: number;
-};
-
 export type ResetPassword = {
   oldPasswd?: string;
   newPasswd?: string;
