@@ -68,6 +68,7 @@ const Betting: FC<
               }}
             >
               {category.des}
+              {activeTab === index && <motion.span layoutId='span-active' className={styles.active} />}
             </li>
           ))}
         </motion.ul>
