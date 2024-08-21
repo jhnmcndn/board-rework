@@ -286,6 +286,16 @@ export type WashCodeDetail = {
   rspGameTypeWashCodes: RspGameTypeWashCode[];
 };
 
+export type WashCodeLogs = {
+  memberId: string;
+  codeAmount: number;
+  washCodeTime: string;
+  washCodeAmount: number;
+  washCodeRate: string;
+  gameTypeName: string;
+  gameTypeId: number;
+};
+
 export type RspGameTypeWashCode = {
   codeAmountTotal: number;
   washCodeRate: string;
