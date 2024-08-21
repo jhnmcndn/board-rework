@@ -7,7 +7,7 @@ type RateListProps = {
   list: Omit<WashCodeRate, 'washCodeDescList'>[];
 };
 
-type RateItemProp = Pick<WashCodeRate, 'id' | 'name'> & {
+type RateItemProp = Omit<WashCodeRate, 'washCodeDescList'> & {
   active: number;
   onSetActive: (id: number) => void;
 };
