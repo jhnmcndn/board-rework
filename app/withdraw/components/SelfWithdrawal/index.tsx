@@ -5,7 +5,7 @@ import useModalStore from '@/store/modals';
 import { sfx } from '@/utils/audioFile';
 import classnames from 'classnames';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './index.module.scss';
 
 const SelfWithdrawal = () => {
@@ -15,12 +15,7 @@ const SelfWithdrawal = () => {
   const [amountToWithdraw, setAmountToWithdraw] = useState('');
   const [selectedCard, setSelectedCard] = useState(bindCardList?.memberCardList?.[0]);
   const [showSafeBox, setShowSafeBox] = useState(false);
-  const fetchBindCardList = useAccountStore((state) => state.fetchBindCardList);
   const { openBindBank, openBindUSDT } = useModalStore();
-
-  useEffect(() => {
-    fetchBindCardList();
-  }, []);
 
   const handleToggleClick = (item: any) => {
     setSelectedCard((prevSelectedCard) => (prevSelectedCard?.id === item.id ? null : item));
@@ -108,26 +103,25 @@ const SelfWithdrawal = () => {
             <Image src={require(`@/assets/${theme}/fragments/plusVector.png`)} width={50} height={50} alt='Add Bank' />
             <span>绑定银行卡</span>
           </div>
-          {bindCardList?.specialBankInfoMap &&
-            Object.keys(bindCardList?.specialBankInfoMap).map((card, index) => {
-              return (
-                <div
-                  key={index}
-                  className={styles.addCard}
-                  onClick={() => {
-                    openBindUSDT();
-                  }}
-                >
-                  <Image
-                    src={require(`@/assets/${theme}/fragments/plusVector.png`)}
-                    width={50}
-                    height={50}
-                    alt='Add Bank'
-                  />
-                  <span>{card}</span>
-                </div>
-              );
-            })}
+          {Object.entries(bindCardList?.specialBankInfoMap ?? {}).map(([key, value], index) => {
+            return (
+              <div
+                key={index}
+                className={styles.addCard}
+                onClick={() => {
+                  openBindUSDT();
+                }}
+              >
+                <Image
+                  src={require(`@/assets/${theme}/fragments/plusVector.png`)}
+                  width={50}
+                  height={50}
+                  alt='Add Bank'
+                />
+                <span>{key}</span>
+              </div>
+            );
+          })}
         </div>
       </section>
 

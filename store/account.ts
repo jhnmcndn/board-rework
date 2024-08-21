@@ -1,6 +1,6 @@
 import { getAccountInfo } from '@/api/game';
 import { getBindCardList } from '@/api/pay';
-import { getAccountNow, getActivityInfos, getActivityTypes, getCodeFlowList } from '@/api/platform';
+import { getAccountNow, getActivityInfos, getActivityTypes } from '@/api/platform';
 import { defaultInitData } from '@/constants/defaultReturnData';
 import {
   AccountInfo,
@@ -76,7 +76,6 @@ type AccountActions = {
   setCodeFlowList: (codeFlowList: CodeFlowList[]) => void;
   setPayTypeList: (payTypeList: PayTypeList[]) => void;
   fetchBindCardList: () => void;
-  fetchCodeFlowList: () => void;
   fetchActivityTypes: () => void;
   fetchActivityInfos: (activityType: number) => void;
 };
@@ -130,13 +129,6 @@ export const createAccountStore = () =>
           const bindCardList = await getBindCardList();
           if (!bindCardList || 'message' in bindCardList) return set(() => ({ bindCardList: bindCardListState }));
           return set(() => ({ bindCardList }));
-        },
-        fetchCodeFlowList: async () => {
-          const codeFlowList = await getCodeFlowList();
-          if (!codeFlowList || 'message' in codeFlowList) {
-            return set(() => ({ codeFlowList: [] }));
-          }
-          return set(() => ({ codeFlowList }));
         },
         fetchActivityTypes: async () => {
           const activityTypes = await getActivityTypes();
