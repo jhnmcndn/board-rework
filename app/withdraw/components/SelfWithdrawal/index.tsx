@@ -7,24 +7,22 @@ import classnames from 'classnames';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
+import { MemberCardList } from '@/types/app';
 
 const SelfWithdrawal = () => {
   const theme = useAccountStore((state) => state.theme);
   const bindCardList = useAccountStore((state) => state.bindCardList);
   const userBalance = useAccountStore((state) => state.accountNow.balance);
   const [amountToWithdraw, setAmountToWithdraw] = useState('');
-  const [selectedCard, setSelectedCard] = useState(bindCardList?.memberCardList?.[0]);
+  const [selectedCard, setSelectedCard] = useState<MemberCardList | null>(null);
   const [showSafeBox, setShowSafeBox] = useState(false);
-  const fetchBindCardList = useAccountStore((state) => state.fetchBindCardList);
   const { openBindBank, openBindUSDT } = useModalStore();
 
   useEffect(() => {
-    fetchBindCardList();
-  }, []);
-
-  const handleToggleClick = (item: any) => {
-    setSelectedCard((prevSelectedCard) => (prevSelectedCard?.id === item.id ? null : item));
-  };
+    if (bindCardList?.memberCardList && bindCardList.memberCardList.length > 0) {
+      setSelectedCard(bindCardList.memberCardList[0]);
+    }
+  }, [bindCardList]);
 
   const handleWithdraw = () => {
     setShowSafeBox(true);
@@ -78,7 +76,7 @@ const SelfWithdrawal = () => {
                     [styles.selectedCard]: item?.id === selectedCard?.id,
                   })}
                   onClick={() => {
-                    selectedCard === item ? setSelectedCard(undefined) : setSelectedCard(item);
+                    setSelectedCard(item);
                   }}
                 >
                   <div className={styles.bankDetails}>
@@ -90,7 +88,6 @@ const SelfWithdrawal = () => {
                     className={classnames(styles.toggle, {
                       [styles.toggleSelected]: item?.id === selectedCard?.id,
                     })}
-                    onClick={() => handleToggleClick(item)}
                   />
                 </li>
               );
@@ -108,26 +105,25 @@ const SelfWithdrawal = () => {
             <Image src={require(`@/assets/${theme}/fragments/plusVector.png`)} width={50} height={50} alt='Add Bank' />
             <span>绑定银行卡</span>
           </div>
-          {bindCardList?.specialBankInfoMap &&
-            Object.keys(bindCardList?.specialBankInfoMap).map((card, index) => {
-              return (
-                <div
-                  key={index}
-                  className={styles.addCard}
-                  onClick={() => {
-                    openBindUSDT();
-                  }}
-                >
-                  <Image
-                    src={require(`@/assets/${theme}/fragments/plusVector.png`)}
-                    width={50}
-                    height={50}
-                    alt='Add Bank'
-                  />
-                  <span>{card}</span>
-                </div>
-              );
-            })}
+          {Object.entries(bindCardList?.specialBankInfoMap ?? {}).map(([key, value], index) => {
+            return (
+              <div
+                key={index}
+                className={styles.addCard}
+                onClick={() => {
+                  openBindUSDT();
+                }}
+              >
+                <Image
+                  src={require(`@/assets/${theme}/fragments/plusVector.png`)}
+                  width={50}
+                  height={50}
+                  alt='Add Bank'
+                />
+                <span>{key}</span>
+              </div>
+            );
+          })}
         </div>
       </section>
 

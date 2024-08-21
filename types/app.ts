@@ -208,12 +208,6 @@ export type WithdrawRechargeDetail = {
   bankAddress?: string;
 };
 
-export type WithdrawRechargeBody = {
-  type?: string;
-  pageNum?: number;
-  pageSize?: number;
-};
-
 export type ResetPassword = {
   oldPasswd?: string;
   newPasswd?: string;
@@ -290,6 +284,16 @@ export type WashCodeDetail = {
   washCodeTime: string;
   money: any;
   rspGameTypeWashCodes: RspGameTypeWashCode[];
+};
+
+export type TWashCodeLogs = {
+  memberId: string;
+  codeAmount: number;
+  washCodeTime: string;
+  washCodeAmount: number;
+  washCodeRate: string;
+  gameTypeName: string;
+  gameTypeId: number;
 };
 
 export type RspGameTypeWashCode = {
@@ -391,4 +395,16 @@ export type PayTypeList = {
   tex3: string;
   tex4: string;
   tex5: string;
+};
+
+export type WashCodeDesc = {
+  beat: string;
+  codeInterval: string;
+  washRate: string;
+};
+
+export type WashCodeRate = {
+  id: number;
+  name: string;
+  washCodeDescList: WashCodeDesc[];
 };

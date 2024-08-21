@@ -5,7 +5,6 @@ import {
   PayTypeList,
   RootResponse,
   WithdrawBankBody,
-  WithdrawRechargeBody,
   WithdrawRechargeDetail,
 } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
@@ -45,7 +44,15 @@ export const setBindCard = async (realName: string, bankAccount: string, bankAdd
   return { code, msg };
 };
 
-export const getWithdrawRechargeDetail = async ({ type, pageNum = 1, pageSize = 50 }: WithdrawRechargeBody) => {
+export const getWithdrawRechargeDetail = async ({
+  type,
+  pageNum = 1,
+  pageSize = 50,
+}: {
+  type: string;
+  pageNum: number;
+  pageSize: number;
+}) => {
   const body = {
     type,
     pageNum,
