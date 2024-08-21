@@ -1,20 +1,12 @@
 import { getWashCodeDetail } from '@/api/game';
-import Table from '@/components/Table';
 import { WashCodeDetail } from '@/types/app';
 import { useEffect, useMemo, useState } from 'react';
+import CodeWashList from './CodeWashList';
 import styles from './index.module.scss';
+import TotalReceived from './TotalReceived';
 
 const SelfServiceCW = () => {
-  const headers = ['游戏类型', '打码总额', '洗码比例', '洗码金额', ''];
   const [washCode, setWashCode] = useState<WashCodeDetail>();
-
-  useEffect(() => {
-    const fetchWashCodeDetails = async () => {
-      const codeWash = await getWashCodeDetail();
-      setWashCode(codeWash);
-    };
-    fetchWashCodeDetails();
-  }, []);
 
   const codeWashList = useMemo(
     () =>
@@ -28,18 +20,20 @@ const SelfServiceCW = () => {
     [washCode],
   );
 
-  useEffect(() => {}, [washCode]);
+  const total = codeWashList?.reduce((total, code) => total + code[3], 0) || 0;
+
+  useEffect(() => {
+    const fetchWashCodeDetails = async () => {
+      const codeWash = await getWashCodeDetail();
+      setWashCode(codeWash);
+    };
+    fetchWashCodeDetails();
+  }, []);
 
   return (
-    <div className={styles.wrapper}>
-      <Table
-        withHeader={{ headers, height: 0.7 }}
-        content={codeWashList || []}
-        withPullToRefresh={{
-          isPullable: true,
-          onRefresh: async () => await console.log('自助派彩刷新'),
-        }}
-      />
+    <div className={styles.wrapper} style={{ height: codeWashList?.length ? 'auto' : '100%' }}>
+      <CodeWashList list={codeWashList} />
+      <TotalReceived total={total} listLength={codeWashList?.length || 0} />
     </div>
   );
 };

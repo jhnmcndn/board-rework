@@ -251,16 +251,6 @@
 
 .wrapper {
   width: 100%;
-
-  :global {
-    .table-row {
-      height: 0.62rem !important;
-
-      > div {
-        border-right: 0 !important;
-      }
-    }
-  }
 }
 
 .button {
@@ -268,11 +258,12 @@
   border-radius: 0.2rem;
   font-size: 0.14rem;
   font-weight: 700;
-  width: 0.6rem;
+  width: 0.58rem;
   height: 0.3rem;
   border: 0;
   color: var(--vip-btn-text);
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 
   &:hover {
     opacity: 0.8;
