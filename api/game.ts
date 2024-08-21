@@ -8,6 +8,7 @@ import {
   RspGameInfo,
   TWashCodeLogs,
   WashCodeDetail,
+  WashCodeRate,
 } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import { GetGameInfoGroupFn, GetGameInfosFn } from '@/types/fns';
@@ -127,5 +128,15 @@ export const toWashCode = async () => {
       money: null,
       rspGameTypeWashCodes: [],
     };
+  return response.data;
+};
+
+export const getWashCodeRateList = async () => {
+  const response = await request<RootResponse<WashCodeRate[]>>({
+    endpoint: API_ENDPOINT.WASH_CODE_RATE_LIST,
+    route: APP_ROUTE.GAME,
+    tags: API_ENDPOINT.WASH_CODE_RATE_LIST,
+  });
+  if (!response.data || 'message' in response.data) return [];
   return response.data;
 };

@@ -396,3 +396,15 @@ export type PayTypeList = {
   tex4: string;
   tex5: string;
 };
+
+export type WashCodeDesc = {
+  beat: string;
+  codeInterval: string;
+  washRate: string;
+};
+
+export type WashCodeRate = {
+  id: number;
+  name: string;
+  washCodeDescList: WashCodeDesc[];
+};
