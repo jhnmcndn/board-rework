@@ -5,11 +5,10 @@ import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import Table from '@/components/Table';
 import { API_ENDPOINT } from '@/types/enums';
 import Image from 'next/image';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import styles from './index.module.scss';
 
 const CodingDetails = () => {
-  const fetchCodeFlowList = useAccountStore((state) => state.fetchCodeFlowList);
   const codeFlowList = useAccountStore((state) => state.codeFlowList);
   const headers = ['流水时间', '需求打码', '实际打码', '流水状态'];
 
@@ -31,10 +30,6 @@ const CodingDetails = () => {
       })),
     [codeFlowList],
   );
-
-  useEffect(() => {
-    fetchCodeFlowList();
-  }, []);
 
   return (
     <div className={styles.codeDetailsWrapper}>

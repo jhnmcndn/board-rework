@@ -7,6 +7,7 @@ import {
   RootResponse,
   RspGameInfo,
   WashCodeDetail,
+  WashCodeLogs,
 } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import { GetGameInfoGroupFn, GetGameInfosFn } from '@/types/fns';
@@ -94,6 +95,25 @@ export const getWashCodeDetail = async () => {
       washCodeTime: '',
       money: null,
       rspGameTypeWashCodes: [],
+    };
+  return response.data;
+};
+
+export const getWashCodeLogs = async () => {
+  const response = await request<RootResponse<WashCodeLogs>>({
+    endpoint: API_ENDPOINT.WASH_CODE_LOGS,
+    route: APP_ROUTE.GAME,
+    tags: API_ENDPOINT.WASH_CODE_LOGS,
+  });
+  if (!response.data || 'message' in response.data)
+    return {
+      memberId: '',
+      codeAmount: 0,
+      washCodeTime: '',
+      washCodeAmount: 0,
+      washCodeRate: '',
+      gameTypeName: '',
+      gameTypeId: 0,
     };
   return response.data;
 };
