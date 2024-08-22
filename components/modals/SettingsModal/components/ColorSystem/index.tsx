@@ -21,7 +21,7 @@ const ColorSystem: React.FC = () => {
                   setTheme(btn.theme);
                 }}
               >
-                {theme === btn.color && <Image src={btn.pic} alt='Theme Color' />}
+                {theme === btn.theme && <Image src={btn.pic} alt='Theme Color' />}
               </div>
             );
           })}
