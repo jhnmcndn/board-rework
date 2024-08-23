@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev-8801": "node ./scripts/8801/index.js && next dev -p 8000",
+    "dev-8801": "node ./scripts/8801/index.js && next dev",
     "dev-8802": "node ./scripts/8802/index.js && next dev",
     "dev-8803": "node ./scripts/8803/index.js && next dev",
     "build-8801": "node ./scripts/8801/index.js && next build",
