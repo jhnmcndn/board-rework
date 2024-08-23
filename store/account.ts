@@ -105,7 +105,7 @@ export const createAccountStore = () =>
         withdrawRecordList: [],
         codeFlowList: [],
         payTypeList: [],
-        activityTypes: [],
+        activityTypes: [activityTypeState],
         setInit: (init) => set(() => ({ init: { ...init } })),
         setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
         setTheme: (theme) => set(() => ({ theme })),

@@ -208,7 +208,7 @@ export const getActivityInfos = async (activityType: number) => {
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.ACTIVITY_INFOS,
     tags: API_ENDPOINT.ACTIVITY_INFOS,
-    body: { activityType },
+    body: { id: activityType },
   });
   if (!data.data || 'message' in data.data) return [] satisfies ActivityInfos[];
   return data.data;
