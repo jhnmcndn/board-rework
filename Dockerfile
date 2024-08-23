@@ -4,13 +4,13 @@ WORKDIR /build
 
 COPY package*.json ./
 
-RUN bun install
+RUN npm install --legacy-peer-deps
 
 COPY . .
 
 ARG ENVIRONMENT
 
-RUN bun run build-${ENVIRONMENT}
+RUN npm run build-${ENVIRONMENT}
 
 FROM alpine:latest
 
