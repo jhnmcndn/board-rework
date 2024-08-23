@@ -11,14 +11,11 @@ const Sidebar: React.FC = () => {
   const activityTypes = useAccountStore((state) => state.activityTypes);
   const fetchActivityType = useAccountStore((state) => state.fetchActivityType);
   const setContentAnnouncement = useModalStore((state) => state.setContentAnnouncement);
-  const openContentAnnouncement = useModalStore((state) => state.openContentAnnouncement);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
   useEffect(() => {
     fetchActivityType();
   }, [fetchActivityType]);
-
-  console.log(typeof activityTypes[0]?.id, 'typeof');
 
   useEffect(() => {
     if (activityTypes.length > 0) {

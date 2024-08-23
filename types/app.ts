@@ -305,15 +305,20 @@ export type RspGameTypeWashCode = {
 };
 
 export type ActivityInfos = {
+  id?: number;
+  icon?: string;
+  title?: string;
+  createTime?: string;
+  content?: string;
+  effect?: boolean;
+  type?: number;
+  url?: any;
+  typeId?: number;
+};
+
+export type ActivityListState = {
   id: number;
-  icon: string;
-  title: string;
-  createTime: string;
-  content: string;
-  effect: boolean;
-  type: number;
-  url: any;
-  typeId: number;
+  list: ActivityInfos[];
 };
 
 export type ActivityList = {
