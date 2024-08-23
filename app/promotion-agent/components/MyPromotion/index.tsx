@@ -43,36 +43,19 @@ const MyPromotion = ({ recommendDetailData, updateRecommendDetail }: MyPromotion
       receiveRecommendReward()
         .then((res) => {
           if (res?.code === 200) {
-            openAlert({
-              notify: '操作成功',
-              onClose: closeAlert,
-            });
+            openAlert({ notify: '操作成功' });
           } else {
-            openAlert({
-              notify: res.msg,
-              onClose: closeAlert,
-            });
+            openAlert({ notify: res.msg });
           }
         })
-        .catch((err) =>
-          openAlert({
-            notify: err.msg,
-            onClose: closeAlert,
-          }),
-        );
+        .catch((err) => openAlert({ notify: err.msg }));
     } else {
-      openAlert({
-        notify: '暂无可领取的佣金',
-        onClose: closeAlert,
-      });
+      openAlert({ notify: '暂无可领取的佣金' });
     }
   };
 
   const handleCopyURLCode = () => {
-    openAlert({
-      notify: channelCodeURL,
-      onClose: closeAlert,
-    });
+    openAlert({ notify: channelCodeURL });
     copyToClipboard(channelCodeURL);
   };
 
