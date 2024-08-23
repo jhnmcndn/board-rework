@@ -409,6 +409,11 @@ export type WashCodeRate = {
   washCodeDescList: WashCodeDesc[];
 };
 
+export type BoxAccount = {
+  accountNow: number;
+  boxAccount: number;
+};
+
 export type TradeTypes = {
   type: number;
   des: string;
