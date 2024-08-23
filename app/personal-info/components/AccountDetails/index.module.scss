@@ -1,0 +1,25 @@
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.headerContainer {
+  @include flex-xy(space-between, center);
+  margin-inline: 0.1rem;
+  margin-block-end: 0.1rem;
+}
+
+.filterContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  padding-left: 0.1rem;
+
+  span {
+    @include flex-xy;
+    width: 1rem;
+    color: var(--promotion-text-title);
+    font-size: 0.14rem;
+    font-weight: 600;
+  }
+}
