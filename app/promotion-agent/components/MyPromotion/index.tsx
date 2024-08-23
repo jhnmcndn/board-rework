@@ -1,5 +1,8 @@
+import { receiveRecommendReward } from '@/api/game';
 import useImages from '@/hooks/useImages';
+import useModalStore from '@/store/modals';
 import { copyToClipboard } from '@/utils/helpers';
+import classnames from 'classnames';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -26,6 +29,8 @@ const MyPromotion = ({ recommendDetailData, updateRecommendDetail }: MyPromotion
   const { images } = useImages();
   const router = useRouter();
   const [channelCode, setChannelCode] = useState('1001');
+  const { openCommission, openAlert, closeAlert } = useModalStore();
+  const channelCodeURL = recommendDetailData?.url ? recommendDetailData?.url : 'www.example.com';
 
   useEffect(() => {
     if (localStorage.getItem('channelCode')) {
@@ -33,12 +38,37 @@ const MyPromotion = ({ recommendDetailData, updateRecommendDetail }: MyPromotion
     }
   }, []);
 
+  const handleGetCommission = () => {
+    if (recommendDetailData?.canSion !== 0) {
+      receiveRecommendReward()
+        .then((res) => {
+          if (res?.code === 200) {
+            openAlert({ notify: '操作成功' });
+          } else {
+            openAlert({ notify: res.msg });
+          }
+        })
+        .catch((err) => openAlert({ notify: err.msg }));
+    } else {
+      openAlert({ notify: '暂无可领取的佣金' });
+    }
+  };
+
+  const handleCopyURLCode = () => {
+    openAlert({ notify: channelCodeURL });
+    copyToClipboard(channelCodeURL);
+  };
+
   return (
     <div className={styles.myPromotion}>
       <div className={styles.myPromotion__topSection}>
         <div className={styles.myPromotion__headerContent}>
-          <span>我的佣金</span>
-          <span>返佣金额对照表 &gt;&gt;</span>
+          <span className={classnames(styles['myPromotion--limeTextColor'], styles.myPromotion__headerLeftText)}>
+            我的佣金
+          </span>
+          <span onClick={openCommission}>
+            返佣金额对照表 <span className={styles['myPromotion--limeTextColor']}>&gt;&gt;</span>
+          </span>
         </div>
         <div className={styles.myPromotion__mainContent}>
           <div className={styles.myPromotion__gridInput}>
@@ -94,7 +124,7 @@ const MyPromotion = ({ recommendDetailData, updateRecommendDetail }: MyPromotion
             </div>
           </div>
           <div className={styles.myPromotion__receiveCommissionBtn}>
-            <button>领取佣金</button>
+            <button onClick={handleGetCommission}>领取佣金</button>
           </div>
         </div>
       </div>
@@ -118,10 +148,7 @@ const MyPromotion = ({ recommendDetailData, updateRecommendDetail }: MyPromotion
           <div className={styles.myPromotion__copyCode} data-text={'复制'}>
             专属分享连接:{' '}
             {recommendDetailData?.url ? recommendDetailData?.url?.substring(0, 44) + '...' : 'www.example.com'}
-            <span
-              className={styles.myPromotion__copyBtn}
-              onClick={() => copyToClipboard(recommendDetailData?.url ? recommendDetailData?.url : 'www.example.com')}
-            >
+            <span className={styles.myPromotion__copyBtn} onClick={handleCopyURLCode}>
               复制
             </span>
           </div>
