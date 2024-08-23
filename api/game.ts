@@ -111,6 +111,18 @@ export const getRecommendDetail = async () => {
   return response.data;
 };
 
+export const receiveRecommendReward = async () => {
+  const response = await request<RootResponse<[]>>({
+    endpoint: API_ENDPOINT.RECEIVE_RECOMMEND_REWARD,
+    route: APP_ROUTE.PLATFORM,
+    tags: API_ENDPOINT.RECEIVE_RECOMMEND_REWARD,
+    body: {},
+  });
+
+  if (response.code === 200) return response;
+  else return { code: response.code, msg: response.msg };
+};
+
 export const getWashCodeLogs = async ({ pageNum = 1, pageSize = 50 }: { pageNum: number; pageSize: number }) => {
   const body = {
     pageNum,
