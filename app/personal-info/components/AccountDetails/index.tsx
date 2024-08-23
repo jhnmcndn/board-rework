@@ -1,11 +1,13 @@
 'use client';
 
 import { getFundDetails } from '@/api/platform';
+import { refetch } from '@/api/refetch';
 import Dropdown from '@/components/Dropdown';
 import { usePersonalInfoStore } from '@/components/Providers/PersonalInfoStoreProvider';
 import Table from '@/components/Table';
 import { TFundDetails, TradeTypes } from '@/types/app';
-import { FC, useState } from 'react';
+import { API_ENDPOINT } from '@/types/enums';
+import { FC, useEffect, useState } from 'react';
 import styles from './index.module.scss';
 
 const AccountDetails: FC<
@@ -21,14 +23,18 @@ const AccountDetails: FC<
   const filter = usePersonalInfoStore((s) => s.betting.filter);
   const filterDefaultValue = filter === 'today' ? '今天' : filter === 'yesterday' ? '昨天' : '一个月';
 
-  const fetchData = async () => {
-    const res = await getFundDetails({
-      enumMoney: enumMoney || '全部交易状态',
-      enumReqTime: filter,
-    });
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getFundDetails({
+        enumMoney: enumMoney || '全部交易状态',
+        enumReqTime: filter,
+      });
 
-    setFundDetails(res);
-  };
+      if (res) setFundDetails(res);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -51,7 +57,7 @@ const AccountDetails: FC<
         withHeader={{ headers }}
         withPullToRefresh={{
           isPullable: true,
-          onRefresh: fetchData,
+          onRefresh: () => refetch(API_ENDPOINT.FUND_DETAILS),
         }}
       />
     </div>
