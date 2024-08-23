@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev-8801": "node ./scripts/8801/index.js && next dev",
+    "dev-8801": "node ./scripts/8801/index.js && next dev -p 8000",
     "dev-8802": "node ./scripts/8802/index.js && next dev",
     "dev-8803": "node ./scripts/8803/index.js && next dev",
     "build-8801": "node ./scripts/8801/index.js && next build",
@@ -26,6 +26,7 @@
     "react-dom": "^18",
     "react-draggable": "^4.4.6",
     "react-html-parser": "^2.0.2",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-select": "^5.8.0",
     "react-simple-pull-to-refresh": "^1.3.3",
     "react-svga": "^0.1.6",
