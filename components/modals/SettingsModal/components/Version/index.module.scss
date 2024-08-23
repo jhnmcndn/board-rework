@@ -5,6 +5,8 @@
   gap: 0.1rem;
   flex-direction: column;
   margin-top: 0.3rem;
+  color: var(--setting-password-label);
+  font-weight: 500;
 
   .container {
     @include flex-xy(space-around, center);

@@ -57,6 +57,7 @@
         white-space: nowrap;
         flex-direction: row;
         align-items: center;
+        color: var(--setting-password-label);
 
         img {
           height: 0.15rem;
@@ -75,6 +76,7 @@
         display: flex;
         margin-left: 0.54rem;
         align-items: center;
+        color: var(--setting-password-label);
 
         img {
           margin-left: 0.15rem;

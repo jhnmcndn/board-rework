@@ -1,11 +1,10 @@
 import { getAccountInfo } from '@/api/game';
 import { getBindCardList } from '@/api/pay';
-import { getAccountNow, getActivityInfos, getActivityTypes } from '@/api/platform';
+import { getAccountNow, getActivityTypes } from '@/api/platform';
 import { defaultInitData } from '@/constants/defaultReturnData';
 import {
   AccountInfo,
   AccountNow,
-  ActivityInfos,
   ActivityTypes,
   BankList,
   BindCardList,
@@ -47,6 +46,12 @@ export const bindCardListState = {
   specialBankInfoMap: undefined,
 } satisfies BindCardList;
 
+export const activityTypeState: ActivityTypes = {
+  activityList: undefined,
+  id: undefined,
+  name: undefined,
+};
+
 type AccountState = {
   init: Init;
   accountInfo: AccountInfo;
@@ -58,9 +63,8 @@ type AccountState = {
   bankList: BankList[];
   withdrawRecordList: WithdrawRechargeDetail[];
   codeFlowList: CodeFlowList[];
-  activityTypes: ActivityTypes[];
-  activityInfos: ActivityInfos[];
   payTypeList: PayTypeList[];
+  activityTypes: ActivityTypes[];
 };
 
 type AccountActions = {
@@ -76,13 +80,12 @@ type AccountActions = {
   setCodeFlowList: (codeFlowList: CodeFlowList[]) => void;
   setPayTypeList: (payTypeList: PayTypeList[]) => void;
   fetchBindCardList: () => void;
-  fetchActivityTypes: () => void;
-  fetchActivityInfos: (activityType: number) => void;
 };
 
 export type AccountApiCalls = {
   fetchAccountInfo: () => void;
   fetchAccountNow: () => void;
+  fetchActivityType: () => void;
 };
 
 export type AccountStore = AccountState & AccountActions & AccountApiCalls;
@@ -101,9 +104,8 @@ export const createAccountStore = () =>
         bankList: [],
         withdrawRecordList: [],
         codeFlowList: [],
-        activityTypes: [],
-        activityInfos: [],
         payTypeList: [],
+        activityTypes: [],
         setInit: (init) => set(() => ({ init: { ...init } })),
         setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
         setTheme: (theme) => set(() => ({ theme })),
@@ -130,19 +132,12 @@ export const createAccountStore = () =>
           if (!bindCardList || 'message' in bindCardList) return set(() => ({ bindCardList: bindCardListState }));
           return set(() => ({ bindCardList }));
         },
-        fetchActivityTypes: async () => {
+        fetchActivityType: async () => {
           const activityTypes = await getActivityTypes();
           if (!activityTypes || 'message' in activityTypes) {
-            return set(() => ({ activityTypes: [] }));
+            return set(() => ({ activityTypes: [activityTypeState] }));
           }
           return set(() => ({ activityTypes }));
-        },
-        fetchActivityInfos: async (activityType) => {
-          const activityInfos = await getActivityInfos(activityType);
-          if (!activityInfos || 'message' in activityInfos) {
-            return set(() => ({ activityInfos: [] }));
-          }
-          return set(() => ({ activityInfos }));
         },
       }),
       {

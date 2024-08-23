@@ -6,7 +6,6 @@ import { COOKIE_MAX_AGE } from '@/constants/misc';
 import {
   AccountInfo,
   AccountNow,
-  ActivityInfos,
   ActivityTypes,
   CodeFlowList,
   CustomerService,
@@ -185,16 +184,17 @@ export const getActivityTypes = async () => {
     tags: API_ENDPOINT.ACTIVITY_TYPES,
   });
 
+  if (!data.data || 'message' in data.data) return [] satisfies ActivityTypes[];
   return data.data;
 };
 
-export const getActivityInfos = async (activityType: number) => {
-  const data = await request<RootResponse<ActivityInfos[]>>({
-    route: APP_ROUTE.PLATFORM,
-    endpoint: API_ENDPOINT.ACTIVITY_INFOS,
-    tags: API_ENDPOINT.ACTIVITY_INFOS,
-    body: { activityType },
-  });
-  if (!data.data || 'message' in data.data) return [] satisfies ActivityInfos[];
-  return data.data;
-};
+// export const getActivityInfos = async (activityType: number) => {
+//   const data = await request<RootResponse<ActivityInfos[]>>({
+//     route: APP_ROUTE.PLATFORM,
+//     endpoint: API_ENDPOINT.ACTIVITY_INFOS,
+//     tags: API_ENDPOINT.ACTIVITY_INFOS,
+//     body: { activityType },
+//   });
+//   if (!data.data || 'message' in data.data) return [] satisfies ActivityInfos[];
+//   return data.data;
+// };

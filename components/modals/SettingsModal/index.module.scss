@@ -17,7 +17,7 @@
     border-radius: 0 0 0.04rem 0.04rem;
     z-index: 0;
     background: #1f1e1b;
-    border: 2px solid #8d7c4f;
+    border: var(--setting-border-content) solid 1px;
 
     .sidebarContainer {
       @include flex-xy(space-between, center);
@@ -63,7 +63,7 @@
           }
 
           &.sidebarItem {
-            background: var(--sidebar-modal-active-bg) center / 100% 100% no-repeat;
+            background: var(--setting-modal-active-bg) center / 100% 100% no-repeat;
             color: white;
             font-weight: 700;
 
@@ -94,6 +94,7 @@
       width: 100%;
       padding: 0.1rem;
       color: white;
+      background: var(--setting-bg-content);
     }
   }
 }

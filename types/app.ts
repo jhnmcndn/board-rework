@@ -329,9 +329,9 @@ export type ActivityList = {
 };
 
 export type ActivityTypes = {
-  activityList: ActivityList[];
-  id: number;
-  name: string;
+  activityList?: ActivityList[];
+  id?: number;
+  name?: string;
 };
 
 export type ListItemProps = {
