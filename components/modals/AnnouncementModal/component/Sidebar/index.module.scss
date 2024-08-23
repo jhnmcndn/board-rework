@@ -5,7 +5,7 @@
   height: 100%;
   position: relative;
   background: var(--sidebar-modal-bg);
-  border: 0.01rem solid var(--sidebar-modal-border);
+  border-right: 0.01rem solid var(--sidebar-modal-border);
 
   ul {
     position: relative;
@@ -14,7 +14,6 @@
     list-style: none;
     font-size: 0.13rem;
     font-weight: 900;
-    top: 0.04rem;
     width: 100%;
     height: 2.45rem;
     display: flex;
@@ -41,7 +40,7 @@
       }
 
       &.active {
-        background: var(--sidebar-modal-active-bg) center / 100% 100% no-repeat;
+        background: var(--setting-modal-active-bg) center / 100% 100% no-repeat;
         color: white;
         font-weight: 700;
 

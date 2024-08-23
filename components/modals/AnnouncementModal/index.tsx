@@ -8,6 +8,7 @@ import { AnimatePresence } from 'framer-motion';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import ModalLayout from '../ModalLayout';
+import Content from './component/Content';
 import Outsidebar from './component/Outsidebar';
 import Sidebar from './component/Sidebar';
 import styles from './index.module.scss';
@@ -24,7 +25,10 @@ const AnnouncementModal: React.FC = () => {
           <div className={styles.mainAnnouncement}>
             <div className={styles.announcementContainer}>
               <HeaderModalTitle logoSrc={images.logoIcon} onClick={closeAnnouncement} />
-              <Sidebar />
+              <div className={styles.bodyContainer}>
+                <Sidebar />
+                <Content />
+              </div>
             </div>
             <Outsidebar />
           </div>

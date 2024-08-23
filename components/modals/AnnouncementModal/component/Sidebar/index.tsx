@@ -1,54 +1,53 @@
 'use client';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useModalStore from '@/store/modals';
-import React from 'react';
+import { sfx } from '@/utils/audioFile';
+import classNames from 'classnames';
+import React, { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 
 const Sidebar: React.FC = () => {
-  // const fetchActivityInfos = useAccountStore((state) => state.fetchActivityInfos);
-  const fetchActivityTypes = useAccountStore((state) => state.fetchActivityTypes);
   const { openSidebarAnnouncement } = useModalStore();
+  const activityTypes = useAccountStore((state) => state.activityTypes);
+  const fetchActivityType = useAccountStore((state) => state.fetchActivityType);
+  const setContentAnnouncement = useModalStore((state) => state.setContentAnnouncement);
+  const openContentAnnouncement = useModalStore((state) => state.openContentAnnouncement);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
-  console.log(fetchActivityTypes, 'hehehe');
+  useEffect(() => {
+    fetchActivityType();
+  }, [fetchActivityType]);
+
+  console.log(typeof activityTypes[0]?.id, 'typeof');
+
+  useEffect(() => {
+    if (activityTypes.length > 0) {
+      setSelectedIndex(0);
+      setContentAnnouncement(Number(activityTypes[0]?.id));
+    }
+  }, [activityTypes, setContentAnnouncement]);
+
+  const handleSelectedTabs = (activityId: number, index: number) => {
+    setContentAnnouncement(activityId);
+    setSelectedIndex(index);
+  };
 
   return (
     <div className={styles.sidebarContainer}>
       <ul>
-        {openSidebarAnnouncement === 0 && (
-          <li>
-            <span>lessgoo</span>
-          </li>
-        )}
-
-        {openSidebarAnnouncement === 1 && (
-          <>
-            <li>
-              <span>hello</span>
+        {openSidebarAnnouncement === 0 &&
+          activityTypes.map((activityType, index) => (
+            <li
+              key={activityType.id}
+              data-click={sfx.popAudio}
+              onClick={() => handleSelectedTabs(Number(activityType?.id), index)}
+              className={classNames({
+                [styles.active]: index === selectedIndex,
+              })}
+            >
+              <span>{activityType.name}</span>
             </li>
-            <li>
-              <span>asdfsdfsdfsdf123</span>
-            </li>
-            <li>
-              <span>asdfsdfsdfsdf123</span>
-            </li>
-          </>
-        )}
-        {openSidebarAnnouncement === 2 && (
-          <>
-            <li>
-              <span>kenneth</span>
-            </li>
-            <li>
-              <span>asdfsdfsdfsdf123</span>
-            </li>
-            <li>
-              <span>asdfsdfsdfsdf123</span>
-            </li>
-            <li>
-              <span>asdfsdfsdfsdf123</span>
-            </li>
-          </>
-        )}
+          ))}
       </ul>
     </div>
   );

@@ -1,5 +1,7 @@
+'use client';
 import AlertModal from '@/components/modals/AlertModal';
 import LoginTypesModal from '@/components/modals/LoginTypesModal';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import dynamic from 'next/dynamic';
 
 const SettingsModal = dynamic(() => import('./SettingsModal'), { ssr: false });
@@ -11,6 +13,7 @@ const BindUSDTModal = dynamic(() => import('./BindUSDTModal'), { ssr: false });
 const BindBankModal = dynamic(() => import('./BindBankModal'), { ssr: false });
 
 const ModalRoot = () => {
+  const theme = useAccountStore((state) => state.theme);
   // Only add common/global scope modals here,
   // import specific modals only on the component it is being used
 
@@ -25,7 +28,7 @@ const ModalRoot = () => {
       <VersionModal />
       <PassCodeModal />
       <AnnouncementModal />
-      <div id='modal-root' />
+      <div id='modal-root' data-theme={theme} />
     </>
   );
 };
