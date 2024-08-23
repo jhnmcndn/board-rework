@@ -1,8 +1,9 @@
 import styles from './index.module.scss';
+import { BaseSyntheticEvent } from 'react';
 
 type Props = {
   className: string;
-  onClick?: () => void;
+  onClick?: (e: BaseSyntheticEvent) => void;
   text?: any;
   type?: 'button' | 'submit' | 'reset';
   id?: any;

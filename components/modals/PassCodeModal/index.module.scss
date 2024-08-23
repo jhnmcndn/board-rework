@@ -1,6 +1,5 @@
 .wrapper {
-  //width: 3.55rem;
-  width: 4rem;
+  width: 3.55rem;
 
   .passCodeContainer {
     @include flex-xy;
@@ -23,9 +22,8 @@
       gap: 0.28rem;
       width: auto;
 
-      > input[type='text'] {
-        //width: 0.5rem;
-        width: 0.75rem;
+      > input[type='password'] {
+        width: 0.5rem;
         font-size: 0.18rem;
         background: transparent;
         border: none;
