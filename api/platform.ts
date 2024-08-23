@@ -8,6 +8,7 @@ import {
   AccountNow,
   ActivityInfos,
   ActivityTypes,
+  BoxAccount,
   CodeFlowList,
   CustomerService,
   FundDetailsPayload,
@@ -207,10 +208,20 @@ export const getActivityInfos = async (activityType: number) => {
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.ACTIVITY_INFOS,
     tags: API_ENDPOINT.ACTIVITY_INFOS,
-    body: { activityType },
+    body: { id: activityType },
   });
   if (!data.data || 'message' in data.data) return [] satisfies ActivityInfos[];
   return data.data;
+};
+
+export const boxAccount = async (boxPass: string) => {
+  const data = await request<RootResponse<BoxAccount>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.BOX_ACCOUNT,
+    tags: API_ENDPOINT.BOX_ACCOUNT,
+    body: { boxPass },
+  });
+  return data;
 };
 
 export const getTradeTypes = async () => {

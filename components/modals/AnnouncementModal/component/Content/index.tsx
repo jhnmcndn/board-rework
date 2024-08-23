@@ -1,29 +1,46 @@
-import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import { getActivityInfos } from '@/api/platform';
 import useModalStore from '@/store/modals';
-import React from 'react';
+import { ActivityListState } from '@/types/app';
+import React, { useEffect, useState } from 'react';
+import ImageAccordion from './ImageAccordion'; // Corrected the import name
 import styles from './index.module.scss';
 
 const Content: React.FC = () => {
-  const activityTypes = useAccountStore((state) => state.activityTypes);
   const openContentAnnouncement = useModalStore((state) => state.openContentAnnouncement);
+  const [activityList, setActivityList] = useState<ActivityListState | null>(null);
+  const [switchTab, setSwitchTab] = useState<boolean>(false);
 
-  // console.log(
-  //   activityTypes?.map((item) => item.id === openContentAnnouncement),
-  //   'asdasd123123',
-  // );
+  const handleSwitch = () => {
+    setSwitchTab((prev) => !prev);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getActivityInfos(openContentAnnouncement);
+      const result = { id: openContentAnnouncement, list: data };
+      setActivityList(result);
+    };
+    fetchData();
+  }, [openContentAnnouncement]);
+
   return (
-    <>
-      <div className={styles.contentAnnoucement}>
-        {openContentAnnouncement === activityTypes?.id &&
-          activityTypes.map((item) =>
-            item.activityList?.map((items, index) => (
-              <ul key={index} className={styles.contentItem}>
-                <iframe src={items?.url} title='Activity' />
-              </ul>
-            )),
-          )}
-      </div>
-    </>
+    <div className={styles.contentAnnoucement}>
+      {openContentAnnouncement === activityList?.id && (
+        <ul>
+          {activityList?.list.map((item, index) => (
+            <li key={index}>
+              <ImageAccordion
+                switched={switchTab}
+                handleSwitch={handleSwitch}
+                icon={item.icon ?? ''}
+                content={item.content ?? ''}
+                url={item.url}
+              />
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 };
 
