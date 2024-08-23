@@ -408,3 +408,24 @@ export type WashCodeRate = {
   name: string;
   washCodeDescList: WashCodeDesc[];
 };
+
+export type TradeTypes = {
+  type: number;
+  des: string;
+  name: string;
+};
+
+export type TFundDetails = {
+  createTime: string;
+  des: string;
+  pay: number;
+  income: number;
+  total: number;
+  totalBefore: number;
+  type: number;
+};
+
+export type FundDetailsPayload = {
+  enumMoney: string;
+  enumReqTime: string;
+};

@@ -2,8 +2,9 @@
 
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import Sidebar from '@/components/Sidebar';
-import { GameCategoryList, VIPGiftInfo } from '@/types/app';
+import { GameCategoryList, TradeTypes, VIPGiftInfo } from '@/types/app';
 import { FC, useState } from 'react';
+import AccountDetails from '../AccountDetails';
 import Betting from '../Betting';
 import Privilege from '../Privilege';
 import VipDetails from '../VipDetails';
@@ -13,8 +14,9 @@ const MainContent: FC<
   Readonly<{
     vipGiftInfo: VIPGiftInfo;
     gameCategoryList: GameCategoryList[];
+    tradeTypes: TradeTypes[];
   }>
-> = ({ vipGiftInfo, gameCategoryList }) => {
+> = ({ vipGiftInfo, gameCategoryList, tradeTypes }) => {
   const theme = useAccountStore((s) => s.theme);
   const sidebarItems = ['VIP特权', 'VIP详情', '投注记录', '安全中心', '账户明细', '游戏余额'];
   const [activeSidebarItem, setActiveSidebarItem] = useState(0);
@@ -30,6 +32,7 @@ const MainContent: FC<
           {activeSidebarItem === 0 && <Privilege theme={theme} vipGiftInfo={vipGiftInfo} />}
           {activeSidebarItem === 1 && <VipDetails vipGiftInfo={vipGiftInfo} />}
           {activeSidebarItem === 2 && <Betting gameCategoryList={gameCategoryList} />}
+          {activeSidebarItem === 4 && <AccountDetails tradeTypes={tradeTypes} />}
         </div>
       </section>
     </main>
