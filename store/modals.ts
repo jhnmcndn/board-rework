@@ -36,6 +36,9 @@ interface ModalStore {
   isPassCodeOpen: boolean;
   openPassCode: () => void;
   closePassCode: () => void;
+  isCommissionOpen: boolean;
+  openCommission: () => void;
+  closeCommission: () => void;
   openSidebarAnnouncement: number;
   setSidebarAnnouncement: (openSidebarAnnouncement: number) => void;
   openContentAnnouncement: number;
@@ -55,6 +58,7 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   isWithdrawSuccessOpen: false,
   isVersionOpen: false,
   isPassCodeOpen: false,
+  isCommissionOpen: false,
   openSidebarAnnouncement: 0,
   openContentAnnouncement: 0,
   openAlert: (content) => {
@@ -77,6 +81,8 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   closeVersion: () => set((state) => ({ ...state, isVersionOpen: false })),
   openPassCode: () => set((state) => ({ ...state, isPassCodeOpen: true })),
   closePassCode: () => set((state) => ({ ...state, isPassCodeOpen: false })),
+  openCommission: () => set((state) => ({ ...state, isCommissionOpen: true })),
+  closeCommission: () => set((state) => ({ ...state, isCommissionOpen: false })),
   setSidebarAnnouncement: (openSidebarAnnouncement) => set(() => ({ openSidebarAnnouncement })),
   setContentAnnouncement: (openContentAnnouncement) => set(() => ({ openContentAnnouncement })),
 }));

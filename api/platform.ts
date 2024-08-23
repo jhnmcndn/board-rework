@@ -6,9 +6,12 @@ import { COOKIE_MAX_AGE } from '@/constants/misc';
 import {
   AccountInfo,
   AccountNow,
+  ActivityInfos,
   ActivityTypes,
+  BoxAccount,
   CodeFlowList,
   CustomerService,
+  FundDetailsPayload,
   Init,
   LoginDevicePayload,
   MessageCommonProblems,
@@ -18,6 +21,8 @@ import {
   ReceiveVipGiftParams,
   ResetPassword,
   RootResponse,
+  TFundDetails,
+  TradeTypes,
   VIPGiftInfo,
   WithToken,
 } from '@/types/app';
@@ -198,3 +203,44 @@ export const getActivityTypes = async () => {
 //   if (!data.data || 'message' in data.data) return [] satisfies ActivityInfos[];
 //   return data.data;
 // };
+export const getActivityInfos = async (activityType: number) => {
+  const data = await request<RootResponse<ActivityInfos[]>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.ACTIVITY_INFOS,
+    tags: API_ENDPOINT.ACTIVITY_INFOS,
+    body: { id: activityType },
+  });
+  if (!data.data || 'message' in data.data) return [] satisfies ActivityInfos[];
+  return data.data;
+};
+
+export const boxAccount = async (boxPass: string) => {
+  const data = await request<RootResponse<BoxAccount>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.BOX_ACCOUNT,
+    tags: API_ENDPOINT.BOX_ACCOUNT,
+    body: { boxPass },
+  });
+  return data;
+};
+
+export const getTradeTypes = async () => {
+  const data = await request<RootResponse<TradeTypes[]>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.TRADE_TYPES,
+    tags: API_ENDPOINT.TRADE_TYPES,
+  });
+  if (!data.data || 'message' in data.data) return [] satisfies TradeTypes[];
+  return data.data;
+};
+
+export const getFundDetails = async ({ enumMoney, enumReqTime }: FundDetailsPayload) => {
+  const data = await request<RootResponse<TFundDetails[]>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.FUND_DETAILS,
+    tags: API_ENDPOINT.FUND_DETAILS,
+    body: { enumMoney, enumReqTime },
+  });
+  if (!data.data || 'message' in data.data) return [] satisfies TFundDetails[];
+  return data.data;
+};

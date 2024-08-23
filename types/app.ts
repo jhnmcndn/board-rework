@@ -305,15 +305,20 @@ export type RspGameTypeWashCode = {
 };
 
 export type ActivityInfos = {
+  id?: number;
+  icon?: string;
+  title?: string;
+  createTime?: string;
+  content?: string;
+  effect?: boolean;
+  type?: number;
+  url?: any;
+  typeId?: number;
+};
+
+export type ActivityListState = {
   id: number;
-  icon: string;
-  title: string;
-  createTime: string;
-  content: string;
-  effect: boolean;
-  type: number;
-  url: any;
-  typeId: number;
+  list: ActivityInfos[];
 };
 
 export type ActivityList = {
@@ -407,4 +412,30 @@ export type WashCodeRate = {
   id: number;
   name: string;
   washCodeDescList: WashCodeDesc[];
+};
+
+export type BoxAccount = {
+  accountNow: number;
+  boxAccount: number;
+};
+
+export type TradeTypes = {
+  type: number;
+  des: string;
+  name: string;
+};
+
+export type TFundDetails = {
+  createTime: string;
+  des: string;
+  pay: number;
+  income: number;
+  total: number;
+  totalBefore: number;
+  type: number;
+};
+
+export type FundDetailsPayload = {
+  enumMoney: string;
+  enumReqTime: string;
 };

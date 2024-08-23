@@ -33,9 +33,8 @@ export const HomePage: HomePageComponent = ({
 }) => {
   const setMessageOnSites = useMessageStore((state) => state.setMessageOnSites);
   const { theme, setInit, setBoxPassIsSet } = useAccountStore((state) => state);
-  const { activeSideBarItem, setGameInfos, setAnnounceText, setSideBar, setActiveSideBarItem } = useGameStore(
-    (state) => state,
-  );
+  const { activeSideBarItem, setGameInfos, setAnnounceText, setSideBar, setActiveSideBarItem, gameInfos } =
+    useGameStore((state) => state);
 
   useEffect(() => {
     setInit(init);
@@ -46,10 +45,14 @@ export const HomePage: HomePageComponent = ({
 
     if (gameTypesData && !('message' in gameTypesData) && gameTypesData.rspGameTypes) {
       setSideBar(gameTypesData.rspGameTypes.filter((item) => item.id !== 6));
-      // setActiveSideBarItem(gameTypesData.rspGameTypes.length > 0 ? gameTypesData?.rspGameTypes[0] : activeSideBarItem);
+      setActiveSideBarItem(
+        activeSideBarItem.id === 0 && gameTypesData.rspGameTypes.length > 0
+          ? gameTypesData?.rspGameTypes[0]
+          : activeSideBarItem,
+      );
     }
 
-    if (gameInfosData && !('message' in gameInfosData)) {
+    if (gameInfosData && !('message' in gameInfosData) && gameInfos.length === 0) {
       setGameInfos(gameInfosData || []);
     }
 

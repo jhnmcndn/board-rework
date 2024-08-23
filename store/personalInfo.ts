@@ -5,12 +5,14 @@ export type PersonalInfoState = {
   betting: {
     activeTab: number;
     filter: string;
+    enumMoney: string | null;
   };
 };
 
 export type PersonalInfoAction = {
   setBettingActiveTab: (activeTab: number) => void;
   setBettingFilter: (filter: string) => void;
+  setTradeTypes: (enumMoney: string) => void;
 };
 
 export type PersonalInfoStore = PersonalInfoState & PersonalInfoAction;
@@ -22,6 +24,7 @@ export const createPersonalInfoStore = () =>
         betting: {
           activeTab: 0,
           filter: 'today',
+          enumMoney: null,
         },
         setBettingActiveTab: (activeTab) =>
           set((state) => ({
@@ -36,6 +39,14 @@ export const createPersonalInfoStore = () =>
             betting: {
               ...state.betting,
               filter: dateFilter,
+            },
+          }));
+        },
+        setTradeTypes: (enumMoney) => {
+          return set((state) => ({
+            betting: {
+              ...state.betting,
+              enumMoney,
             },
           }));
         },
