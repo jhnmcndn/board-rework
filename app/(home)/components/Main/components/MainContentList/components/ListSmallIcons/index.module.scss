@@ -23,8 +23,8 @@
       justify-content: flex-start;
       align-items: center;
       gap: 0.15rem;
-      width: auto;
-      height: 48%;
+      width: fit-content;
+      height: 50%;
       position: relative;
 
       .iconHolder {
@@ -65,6 +65,13 @@
       .isMaintenance {
         pointer-events: none;
       }
+    }
+
+    .firstRow {
+      padding: 0 0 1%;
+    }
+    .secondRow {
+      padding: 1% 0 0;
     }
   }
 }
