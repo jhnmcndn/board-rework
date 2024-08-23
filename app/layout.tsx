@@ -5,6 +5,7 @@ import { GlobalProvider } from '@/components/Providers';
 import { serverConfig } from '@/server';
 import '@/styles/main.scss';
 import type { Metadata } from 'next';
+import ThemeProvider from '@/components/ThemeProvider';
 
 export const metadata: Metadata = {
   title: serverConfig.title,
@@ -28,10 +29,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='zh'>
+    <html lang='zh' id='root'>
       <link rel='manifest' href={`/assets/${serverConfig.server}/manifest.json`} />
       <body>
         <GlobalProvider>
+          <ThemeProvider />
           {children}
           <Loading />
           <ModalRoot />
