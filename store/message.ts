@@ -20,7 +20,15 @@ export const createMessageStore = () =>
       (set) => ({
         messageOnSites: initialMessageOnSites,
         setMessageOnSites: (messageOnSites) =>
-          set((state) => ({ messageOnSites: [...state.messageOnSites, ...messageOnSites] })),
+          set((state) => {
+            const filteredMessageOnSites = messageOnSites.toSorted((a, b) => {
+              if (a.createTime && b.createTime) {
+                return a.createTime > b.createTime ? 1 : -1;
+              }
+              return -1;
+            });
+            return { ...state, messageOnSites: [...filteredMessageOnSites] };
+          }),
       }),
       {
         name: 'message-store',

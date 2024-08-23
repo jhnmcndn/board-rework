@@ -57,19 +57,7 @@ export const HomePage: HomePageComponent = ({
     }
 
     if (messageOnSites && !('message' in messageOnSites) && messageOnSites.length > 0) {
-      setMessageOnSites(
-        messageOnSites
-          .toSorted((a, b) => {
-            if (a.createTime && b.createTime) {
-              return a.createTime > b.createTime ? 1 : -1;
-            }
-            return -1;
-          })
-          .map((item) => ({
-            ...item,
-            isRead: false,
-          })),
-      );
+      setMessageOnSites(messageOnSites);
     }
 
     if (getBoxPassIsOpen && typeof getBoxPassIsOpen === 'boolean') {
