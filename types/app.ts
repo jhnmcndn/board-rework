@@ -439,3 +439,9 @@ export type FundDetailsPayload = {
   enumMoney: string;
   enumReqTime: string;
 };
+
+export type TGameBalance = {
+  money: number;
+  platformId: number;
+  platformName: string;
+};

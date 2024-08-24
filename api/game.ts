@@ -6,6 +6,7 @@ import {
   GetGameTypes,
   RootResponse,
   RspGameInfo,
+  TGameBalance,
   TWashCodeLogs,
   WashCodeDetail,
   WashCodeRate,
@@ -162,4 +163,24 @@ export const getWashCodeRateList = async () => {
   });
   if (!response.data || 'message' in response.data) return [];
   return response.data;
+};
+
+export const getGameBalance = async () => {
+  const response = await request<RootResponse<TGameBalance[]>>({
+    endpoint: API_ENDPOINT.GAME_BALANCE,
+    route: APP_ROUTE.GAME,
+    tags: API_ENDPOINT.GAME_BALANCE,
+  });
+  if (!response.data || 'message' in response.data) return [];
+  return response.data;
+};
+
+export const gameWithdrawal = async ({ id }: { id: number }) => {
+  const response = await request<RootResponse<{ balance: number }>>({
+    endpoint: API_ENDPOINT.GAME_WITHDRAWAL,
+    route: APP_ROUTE.GAME,
+    tags: API_ENDPOINT.GAME_WITHDRAWAL,
+    body: { id },
+  });
+  return response;
 };

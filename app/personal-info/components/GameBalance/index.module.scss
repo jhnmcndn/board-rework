@@ -1,0 +1,56 @@
+.container {
+  width: 100%;
+  height: 100%;
+
+  :global {
+    .lds-ellipsis div {
+      height: toRem(1.5);
+      width: toRem(1.5);
+      background-color: var(--vip-header);
+    }
+
+    .ptr__pull-down {
+      .ptr__pull-down--pull-more {
+        display: none;
+      }
+    }
+  }
+}
+
+.itemContainer {
+  display: grid;
+  grid-template-columns: 3fr 1fr 0.6fr;
+  align-items: center;
+  justify-items: end;
+  padding: toRem(1.8);
+  background-color: var(--vip-balance-bg);
+  margin-block: toRem(1.5);
+  height: toRem(9);
+  border-radius: toRem(2);
+
+  div:first-child {
+    color: white;
+    font-size: toRem(2.7);
+    justify-self: start;
+  }
+
+  div:nth-child(2) {
+    color: var(--vip-balance-amount);
+    font-size: toRem(2.7);
+  }
+
+  div:last-child {
+    color: var(--vip-btn-text);
+    text-align: center;
+    display: grid;
+    place-content: center;
+    background: url('../../../../assets/commons/button1.png') center / 100% 100% no-repeat;
+    width: toRem(12);
+    height: toRem(4);
+    font-size: toRem(2);
+    font-weight: 400;
+    line-height: toRem(2);
+    margin-top: toRem(0.3);
+    padding-bottom: toRem(0.35);
+  }
+}
