@@ -6,8 +6,11 @@ import promote from '@/assets/blackGold/header/promote.png';
 import task from '@/assets/blackGold/header/task.png';
 import guestLoginBtn from '@/assets/blackGold/loginModal/guestLoginBtn.png';
 import guestNoticeBtn from '@/assets/blackGold/loginModal/guestNoticeBtn.png';
+import hidePassword from '@/assets/blackGold/loginModal/hidePassIcon.png';
 import loginClose from '@/assets/blackGold/loginModal/loginClose.png';
 import loginRegisterBtn from '@/assets/blackGold/loginModal/loginRegisterBtn.png';
+import showPassword from '@/assets/blackGold/loginModal/showPassIcon.png';
+import supportIcon from '@/assets/blackGold/loginModal/supportIcon.png';
 import sidebarTitle from '@/assets/blackGold/sidebar/sidebarTitle.png';
 import fallback from '@/assets/commons/fallBacks/onErrorImg.png';
 import loading from '@/assets/commons/fallBacks/squareLoad2.gif';
@@ -43,6 +46,9 @@ export default function useImages() {
     task,
     hasSound,
     noSound,
+    hidePassword,
+    showPassword,
+    supportIcon,
     arrowDown: require(`@/assets/${theme}/fragments/arrowDown.png`),
     audio: require(`@/assets/${theme}/main/audioIcon.png`),
     backBtn: require(`@/assets/${theme}/header/backBtn.png`),

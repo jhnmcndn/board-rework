@@ -14,12 +14,12 @@ import { AnimatePresence } from 'framer-motion';
 import ModalLayout from '../ModalLayout';
 import styles from './index.module.scss';
 
-// const LoginTypesModal = ({ setIsShowUserAuth }) => {
-const LoginTypesModal = () => {
+// const LoginOptionsModal = ({ setIsShowUserAuth }) => {
+const LoginOptionsModal = () => {
   const isMounted = useIsMounted();
   const { login } = useLogin();
   const { images } = useImages();
-  const { openAlert, isLoginOptionsOpen, closeLoginOptions } = useModalStore();
+  const { openAlert, isLoginOptionsOpen, closeLoginOptions, openLoginOrRegister } = useModalStore();
   const { captchaId, actionSwitch } = useAccountStore((state) => state.init);
   const isCaptchaEnabled = actionSwitch === '1' ? true : false;
   const [isCaptchaOpen, setIsCaptchaOpen] = useState(false);
@@ -64,7 +64,7 @@ const LoginTypesModal = () => {
                 height={79}
                 width={228}
                 quality={100}
-                // onClick={() => setIsShowUserAuth(true)}
+                onClick={() => openLoginOrRegister()}
               />
               <Image
                 src={images.guestLoginBtn}
@@ -98,4 +98,4 @@ const LoginTypesModal = () => {
   return createPortal(modalContent, element);
 };
 
-export default LoginTypesModal;
+export default LoginOptionsModal;

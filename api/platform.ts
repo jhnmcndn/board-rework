@@ -100,7 +100,6 @@ export const customerService = async () => {
     endpoint: API_ENDPOINT.CUSTOMER_SERVICE,
     tags: API_ENDPOINT.CUSTOMER_SERVICE,
   });
-  console.log(data);
   if (!data.data || 'message' in data.data) return [] satisfies CustomerService[];
   return data.data;
 };

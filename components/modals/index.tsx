@@ -1,11 +1,12 @@
 'use client';
 import AlertModal from '@/components/modals/AlertModal';
-import LoginTypesModal from '@/components/modals/LoginTypesModal';
+import LoginTypesModal from '@/components/modals/LoginOptionsModal';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import dynamic from 'next/dynamic';
 
 const SettingsModal = dynamic(() => import('./SettingsModal'), { ssr: false });
 const VersionModal = dynamic(() => import('./VersionModal'), { ssr: false });
+const RegisterAndLoginModal = dynamic(() => import('./LoginOrRegisterModal'), { ssr: false });
 const AnnouncementModal = dynamic(() => import('./AnnouncementModal'), { ssr: false });
 const SuccessWithdrawModal = dynamic(() => import('./SuccessWithdrawModal'), { ssr: false });
 const VaultPassCodeModal = dynamic(() => import('./VaultPassCodeModal'), { ssr: false });
@@ -22,6 +23,7 @@ const ModalRoot = () => {
     <>
       <AlertModal />
       <LoginTypesModal />
+      <RegisterAndLoginModal />
       <SettingsModal />
       <BindBankModal />
       <BindUSDTModal />

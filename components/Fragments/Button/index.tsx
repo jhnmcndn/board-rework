@@ -1,18 +1,15 @@
+import { ComponentPropsWithoutRef } from 'react';
 import styles from './index.module.scss';
-import { BaseSyntheticEvent } from 'react';
 
-type Props = {
-  className: string;
-  onClick?: (e: BaseSyntheticEvent) => void;
+type ButtonProps = ComponentPropsWithoutRef<'button'> & {
   text?: any;
-  type?: 'button' | 'submit' | 'reset';
-  id?: any;
+  className?: string;
 };
 
-const Button = ({ text, className, onClick, type, id }: Props) => {
+const Button = ({ text, className, ...props }: ButtonProps) => {
   return (
-    // Please pass a classname for this in order to modify margins and dimensions
-    <button id={id} type={type} onClick={onClick} className={`${styles.buttonDesignTwo} ${className}`}>
+    // Please pass a className for this in order to modify margins and dimensions
+    <button className={`${styles.buttonDesignTwo} ${className}`} {...props}>
       <span>{text}</span>
     </button>
   );

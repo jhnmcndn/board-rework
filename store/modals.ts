@@ -10,11 +10,14 @@ interface AlertContent {
 interface ModalStore {
   content: AlertContent;
   isAlertOpen: boolean;
-  isLoginOptionsOpen: boolean;
   openAlert: (newContent: AlertContent) => void;
-  openLoginOptions: () => void;
   closeAlert: () => void;
+  isLoginOptionsOpen: boolean;
+  openLoginOptions: () => void;
   closeLoginOptions: () => void;
+  isLoginOrRegisterOpen: boolean;
+  openLoginOrRegister: () => void;
+  closeLoginOrRegister: () => void;
   isAnnouncementOpen: boolean;
   openAnnouncement: () => void;
   closeAnnouncement: () => void;
@@ -51,6 +54,7 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   isAlertOpen: false,
   isLoginOptionsOpen: false,
   content: {},
+  isLoginOrRegisterOpen: false,
   isAnnouncementOpen: false,
   isSettingsOpen: false,
   isBindBankOpen: false,
@@ -67,6 +71,8 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   closeAlert: () => set((state) => ({ ...state, isAlertOpen: false, content: {} })),
   openLoginOptions: () => set((state) => ({ ...state, isLoginOptionsOpen: true })),
   closeLoginOptions: () => set((state) => ({ ...state, isLoginOptionsOpen: false })),
+  openLoginOrRegister: () => set((state) => ({ ...state, isLoginOrRegisterOpen: true })),
+  closeLoginOrRegister: () => set((state) => ({ ...state, isLoginOrRegisterOpen: false })),
   openAnnouncement: () => set((state) => ({ ...state, isAnnouncementOpen: true })),
   closeAnnouncement: () => set((state) => ({ ...state, isAnnouncementOpen: false })),
   openSettings: () => set((state) => ({ ...state, isSettingsOpen: true })),
