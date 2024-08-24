@@ -192,23 +192,22 @@ export const getActivityTypes = async () => {
   if (!data.data || 'message' in data.data) return [] satisfies ActivityTypes[];
   return data.data;
 };
-
-// export const getActivityInfos = async (activityType: number) => {
-//   const data = await request<RootResponse<ActivityInfos[]>>({
-//     route: APP_ROUTE.PLATFORM,
-//     endpoint: API_ENDPOINT.ACTIVITY_INFOS,
-//     tags: API_ENDPOINT.ACTIVITY_INFOS,
-//     body: { activityType },
-//   });
-//   if (!data.data || 'message' in data.data) return [] satisfies ActivityInfos[];
-//   return data.data;
-// };
 export const getActivityInfos = async (activityType: number) => {
   const data = await request<RootResponse<ActivityInfos[]>>({
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.ACTIVITY_INFOS,
     tags: API_ENDPOINT.ACTIVITY_INFOS,
     body: { id: activityType },
+  });
+  if (!data.data || 'message' in data.data) return [] satisfies ActivityInfos[];
+  return data.data;
+};
+
+export const getActivityQuestTypes = async () => {
+  const data = await request<RootResponse<ActivityInfos[]>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.ACTIVITY_QUEST_TYPES,
+    tags: API_ENDPOINT.ACTIVITY_QUEST_TYPES,
   });
   if (!data.data || 'message' in data.data) return [] satisfies ActivityInfos[];
   return data.data;

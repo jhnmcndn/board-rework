@@ -9,7 +9,7 @@ type LoginMethod = 'device' | 'user-pass' | 'captcha';
 const useLogin = () => {
   const phoneModel = getDeviceInfo();
   const deviceId = generateMachineCode();
-  const { openAlert, closeLoginOptions } = useModalStore();
+  const { openAlert, closeLoginOptions, setSidebarAnnouncement, openAnnouncement } = useModalStore();
   const inviterCode = getFromLocalStorage('channelCode');
   const { setAccountInfo, setAccountNow } = useAccountStore((state) => state);
   const validate = null;
@@ -22,6 +22,8 @@ const useLogin = () => {
         // setShowBindWithdrawModal(true);
         setAccountInfo(res);
         closeLoginOptions();
+        openAnnouncement();
+        setSidebarAnnouncement(2);
         setAccountNow({ balance: res.accountNow });
         res.token && localStorage.setItem('token', res.token);
       } else {
