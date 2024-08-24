@@ -1,6 +1,6 @@
 import { HeaderProps } from '@/types/app';
 import Image from 'next/image';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import styles from './index.module.scss';
 
 const TextTitle: FC<Required<Pick<HeaderProps, 'title'>>> = ({ title }) => {

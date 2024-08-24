@@ -1,11 +1,11 @@
 import { getActivityInfos } from '@/api/platform';
 import useModalStore from '@/store/modals';
 import { ActivityListState } from '@/types/app';
-import React, { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import ImageAccordion from './ImageAccordion';
 import styles from './index.module.scss';
 
-const Content: React.FC = () => {
+const Content: FC = () => {
   const { openSidebarAnnouncement, openContentAnnouncement } = useModalStore();
   const [activityList, setActivityList] = useState<ActivityListState | null>(null);
 

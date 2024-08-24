@@ -7,8 +7,6 @@ import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { FC, useEffect, useRef, useState } from 'react';
-import 'swiper/css';
-import 'swiper/css/grid';
 import styles from './index.module.scss';
 
 const ListSmallIcons: FC<ListIconProps> = ({ searchFieldData, setSearchFieldData }) => {

@@ -4,11 +4,12 @@ import withdrawSvga from '@/public/assets/svgas/withdraw.svga';
 import { sfx } from '@/utils/audioFile';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
+import { FC } from 'react';
 import styles from './index.module.scss';
 
 const CSVGA = dynamic(() => import('@/app/(home)/components/Footer/components/CSVGA/'), { ssr: false });
 
-const RightNavigation: React.FC = () => {
+const RightNavigation: FC = () => {
   const { push } = useRouter();
   const { authCheck } = useAuthCheck();
 

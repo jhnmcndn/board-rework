@@ -1,12 +1,13 @@
 'use client';
+
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useModalStore from '@/store/modals';
 import { sfx } from '@/utils/audioFile';
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styles from './index.module.scss';
 
-const Sidebar: React.FC = () => {
+const Sidebar: FC = () => {
   const { openSidebarAnnouncement } = useModalStore();
   const activityTypes = useAccountStore((state) => state.activityTypes);
   const fetchActivityType = useAccountStore((state) => state.fetchActivityType);

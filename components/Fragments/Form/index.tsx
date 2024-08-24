@@ -1,6 +1,7 @@
+import Button from '@/components/Fragments/Button';
+import { ChangeEvent, FC, FormEvent } from 'react';
 import Select from 'react-select';
 import styles from './index.module.scss';
-import Button from '@/components/Fragments/Button';
 
 type BaseFormField = {
   type: 'input' | 'select';
@@ -10,7 +11,7 @@ type BaseFormField = {
 type InputField = BaseFormField & {
   type: 'input';
   placeholder?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   options?: never;
   defaultValue?: never;
@@ -34,8 +35,8 @@ type FormComponentProps = {
   onSubmit: () => Promise<void>;
 };
 
-const Form: React.FC<FormComponentProps> = ({ fields, onSubmit }) => {
-  const handleSubmit = async (event: React.FormEvent) => {
+const Form: FC<FormComponentProps> = ({ fields, onSubmit }) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     await onSubmit();
   };

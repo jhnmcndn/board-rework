@@ -1,19 +1,19 @@
 import ImgWithFallback from '@/components/ImgWithFallback';
 import useAuthCheck from '@/hooks/useAuthCheck';
 import useImages from '@/hooks/useImages';
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import styles from './index.module.scss';
 
 type ImageAccordionProps = {
   url: string | undefined;
-  // handleSwitch: () => void;
   icon: string;
   switched?: boolean;
   content: string;
+  // handleSwitch: () => void;
 };
 
-const ImageAccordion: React.FC<ImageAccordionProps> = ({ url, icon, content }) => {
+const ImageAccordion: FC<ImageAccordionProps> = ({ url, icon, content }) => {
   const { authCheck } = useAuthCheck();
   const { images } = useImages();
   const [expand, setExpand] = useState<boolean>(false);

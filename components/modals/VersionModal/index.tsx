@@ -5,12 +5,12 @@ import useIsMounted from '@/hooks/useIsMounted';
 import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import React from 'react';
+import { FC } from 'react';
 import { createPortal } from 'react-dom';
 import ModalLayout from '../ModalLayout';
 import styles from './index.module.scss';
 
-const VersionModal: React.FC = () => {
+const VersionModal: FC = () => {
   const { closeVersion, isVersionOpen } = useModalStore();
   const init = useAccountStore((state) => state.init);
   const isMounted = useIsMounted();

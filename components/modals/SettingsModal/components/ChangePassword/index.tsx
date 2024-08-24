@@ -2,7 +2,7 @@ import { resetPassword } from '@/api/platform';
 import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
 import { PasswordsState } from '@/types/app';
-import { useCallback, useState } from 'react';
+import { ChangeEvent, FC, FormEvent, useCallback, useState } from 'react';
 import styles from './index.module.scss';
 import PasswordInput from './PasswordInput';
 
@@ -15,12 +15,12 @@ const initialPasswordsState: PasswordsState = {
   showConfirmPassword: false,
 };
 
-const ChangePassword: React.FC = () => {
+const ChangePassword: FC = () => {
   const { openAlert } = useModalStore();
   const { images } = useImages();
   const [passwords, setPasswords] = useState<PasswordsState>(initialPasswordsState);
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setPasswords((prev) => ({
       ...prev,
@@ -35,7 +35,7 @@ const ChangePassword: React.FC = () => {
     }));
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const { oldPassword, newPassword, confirmPassword } = passwords;
