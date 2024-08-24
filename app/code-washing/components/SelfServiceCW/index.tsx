@@ -1,5 +1,6 @@
 import { getWashCodeDetail } from '@/api/game';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
+import useFetchGame from '@/hooks/useFetchGame';
 import { WashCodeDetail } from '@/types/app';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
@@ -8,6 +9,7 @@ import styles from './index.module.scss';
 import TotalReceived from './TotalReceived';
 
 const SelfServiceCW = () => {
+  const { handleChange } = useFetchGame();
   const [washCode, setWashCode] = useState<WashCodeDetail>();
   const sideBar = useGameStore((state) => state.sideBar);
   const setActiveSideBarItem = useGameStore((state) => state.setActiveSideBarItem);
@@ -16,7 +18,10 @@ const SelfServiceCW = () => {
   const updateWashCode = (newWashCode: WashCodeDetail) => setWashCode(newWashCode);
   const handleRedirect = (gameTypeId: number) => {
     const item = sideBar.find((item) => item.id === gameTypeId);
-    if (item) setActiveSideBarItem(item);
+    if (item) {
+      setActiveSideBarItem(item);
+      handleChange(item);
+    }
     push('/');
   };
 
