@@ -1,7 +1,7 @@
 import { getWashCodeDetail } from '@/api/game';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import useFetchGame from '@/hooks/useFetchGame';
-import { WashCodeDetail } from '@/types/app';
+import { RspGameTypeWashCode, WashCodeDetail } from '@/types/app';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import CodeWashList from './CodeWashList';
@@ -26,9 +26,11 @@ const SelfServiceCW = () => {
     push('/');
   };
 
+  const filterData = (code: RspGameTypeWashCode) => code.gameTypeId !== 6 && code;
+
   const codeWashList = useMemo(
     () =>
-      washCode?.rspGameTypeWashCodes.map((code) => ({
+      washCode?.rspGameTypeWashCodes.filter(filterData).map((code) => ({
         0: code.gameTypeName,
         1: code.washCodeAmount,
         2: code.washCodeRate,
