@@ -45,6 +45,7 @@ const Sidebar: React.FC = () => {
               <span>{activityType.name}</span>
             </li>
           ))}
+        {/* {openSidebarAnnouncement === 1 && selected} */}
       </ul>
     </div>
   );

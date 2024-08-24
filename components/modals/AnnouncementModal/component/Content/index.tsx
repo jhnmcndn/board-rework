@@ -2,7 +2,7 @@ import { getActivityInfos } from '@/api/platform';
 import useModalStore from '@/store/modals';
 import { ActivityListState } from '@/types/app';
 import React, { useEffect, useState } from 'react';
-import ImageAccordion from './ImageAccordion'; // Corrected the import name
+import ImageAccordion from './ImageAccordion';
 import styles from './index.module.scss';
 
 const Content: React.FC = () => {
@@ -21,22 +21,24 @@ const Content: React.FC = () => {
   console.log();
   return (
     <div className={styles.contentAnnoucement}>
-      {openSidebarAnnouncement === 0 &&
-        (openContentAnnouncement === activityList?.id && (
-            <ul>
-              {activityList?.list.map((item, index) => (
-                <li key={index}>
-                  <ImageAccordion
-                    icon={item?.icon as string}
-                    content={item?.content as string}
-                    url={item.url}
-                  />
-                </li>
-              ))}
-            </ul>
-          ),
-        )
-      }
+      {openSidebarAnnouncement === 0 && openContentAnnouncement === activityList?.id && (
+        <ul>
+          {activityList?.list.map((item, index) => (
+            <li key={index}>
+              <ImageAccordion icon={item?.icon as string} content={item?.content as string} url={item.url} />
+            </li>
+          ))}
+        </ul>
+      )}
+      {/* {openSidebarAnnouncement === 1 && openContentAnnouncement === activityList?.id && (
+        <ul>
+          {activityList?.list.map((item, index) => (
+            <li key={index}>
+              <ImageAccordion icon={item?.icon as string} content={item?.content as string} url={item.url} />
+            </li>
+          ))}
+        </ul>
+      )} */}
     </div>
   );
 };
