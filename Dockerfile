@@ -1,5 +1,7 @@
 FROM node:18-alpine AS builder
 
+ENV NODE_OPTIONS="--max_old_space_size=4096"
+
 WORKDIR /build
 
 COPY package*.json ./
@@ -17,8 +19,6 @@ FROM alpine:latest
 RUN apk add --no-cache nodejs npm && npm install -g serve
 
 WORKDIR /build
-
-COPY --from=builder /build/build /build/build
 
 EXPOSE 3000
 
