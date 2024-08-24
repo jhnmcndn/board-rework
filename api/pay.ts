@@ -1,12 +1,5 @@
 import { request } from '@/api';
-import {
-  BankList,
-  BindCardList,
-  PayTypeList,
-  RootResponse,
-  WithdrawBankBody,
-  WithdrawRechargeDetail,
-} from '@/types/app';
+import { BankList, BindCardList, PayTypeList, RootResponse, WithdrawRechargeDetail } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 
 export const getBindCardList = async () => {
@@ -28,17 +21,16 @@ export const getBankList = async () => {
 };
 
 export const setBindCard = async (realName: string, bankAccount: string, bankAddress: string, bankId: number) => {
-  const body = {
-    realName,
-    bankAccount,
-    bankAddress,
-    bankId,
-  };
   const data = await request<Pick<RootResponse<null>, 'code' | 'msg'>>({
     route: APP_ROUTE.PAY,
     endpoint: API_ENDPOINT.BIND_CARD,
     tags: API_ENDPOINT.BIND_CARD,
-    body,
+    body: {
+      realName,
+      bankAccount,
+      bankAddress,
+      bankId,
+    },
   });
   const { code, msg } = data;
   return { code, msg };
@@ -67,13 +59,16 @@ export const getWithdrawRechargeDetail = async ({
   return data.data;
 };
 
-export const withdrawBank = async ({ memberCardId, withdrawMoney, withdrawalPass }: WithdrawBankBody) => {
-  const body = { memberCardId: memberCardId, withdrawMoney: withdrawMoney, withdrawalPass: withdrawalPass };
+export const withdrawBank = async (memberCardId: number, withdrawMoney: number, withdrawalPass: string) => {
   const data = await request<Pick<RootResponse<null>, 'code' | 'msg'>>({
     route: APP_ROUTE.PAY,
     endpoint: API_ENDPOINT.WITHDRAW_BANK,
     tags: API_ENDPOINT.WITHDRAW_BANK,
-    body,
+    body: {
+      memberCardId,
+      withdrawMoney,
+      withdrawalPass,
+    },
   });
   const { code, msg } = data;
   return { code, msg };

@@ -14,14 +14,14 @@ import { createPortal } from 'react-dom';
 import styles from './index.module.scss';
 
 const BindBankModal = () => {
-  const isMounted = useIsMounted();
-  const bankList = useAccountStore((state) => state.bankList);
   const fetchBindCardList = useAccountStore((state) => state.fetchBindCardList);
+  const bankList = useAccountStore((state) => state.bankList);
+  const { openAlert, closeBindBank, isBindBankOpen } = useModalStore();
   const [bindRealName, setBindRealName] = useState('');
   const [bindBankAddress, setBindBankAddress] = useState('');
   const [bindBankAccount, setBindBankAccount] = useState('');
   const [bindBankId, setBindBankId] = useState(139);
-  const { openAlert, closeBindBank, isBindBankOpen } = useModalStore();
+  const isMounted = useIsMounted();
 
   const bankOptions = bankList.map((item) => ({
     value: item.id,
