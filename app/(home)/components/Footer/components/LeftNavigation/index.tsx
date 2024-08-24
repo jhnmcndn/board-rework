@@ -1,5 +1,5 @@
 import { useRouter } from 'next-nprogress-bar';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import MoreModal from '@/components/modals/MoreModal';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
@@ -12,7 +12,7 @@ import { sfx } from '@/utils/audioFile';
 import styles from './index.module.scss';
 import ListContainer from './ListContainer';
 
-const LeftNavigation: React.FC = () => {
+const LeftNavigation: FC = () => {
   const { push } = useRouter();
   const { images } = useImages();
   const { authCheck } = useAuthCheck();

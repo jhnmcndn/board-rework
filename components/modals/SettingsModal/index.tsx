@@ -7,7 +7,7 @@ import { ListItemProps } from '@/types/app';
 import { sfx } from '@/utils/audioFile';
 import classNames from 'classnames';
 import { AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { createPortal } from 'react-dom';
 import ModalLayout from '../ModalLayout';
 import ChangePassword from './components/ChangePassword';
@@ -17,7 +17,7 @@ import PersonalInfo from './components/PersonalInfo';
 import Version from './components/Version';
 import styles from './index.module.scss';
 
-const SettingsModal: React.FC = () => {
+const SettingsModal: FC = () => {
   const [selectedId, setSelectedId] = useState<number>(0);
   const { closeSettings, isSettingsOpen } = useModalStore();
   const isMounted = useIsMounted();

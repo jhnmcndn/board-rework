@@ -1,10 +1,10 @@
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import useImages from '@/hooks/useImages';
 import Image from 'next/image';
-import React, { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent, FC, useEffect } from 'react';
 import styles from './index.module.scss';
 
-const MusicComponent: React.FC = () => {
+const MusicComponent: FC = () => {
   const { gameVolume, setGameVolume } = useGameStore((state) => state);
   const { images } = useImages();
 

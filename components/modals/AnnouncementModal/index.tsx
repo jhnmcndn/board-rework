@@ -5,7 +5,7 @@ import useImages from '@/hooks/useImages';
 import useIsMounted from '@/hooks/useIsMounted';
 import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
-import React from 'react';
+import { FC } from 'react';
 import { createPortal } from 'react-dom';
 import ModalLayout from '../ModalLayout';
 import Content from './component/Content';
@@ -13,7 +13,7 @@ import Outsidebar from './component/Outsidebar';
 import Sidebar from './component/Sidebar';
 import styles from './index.module.scss';
 
-const AnnouncementModal: React.FC = () => {
+const AnnouncementModal: FC = () => {
   const isMounted = useIsMounted();
   const { images } = useImages();
   const { isAnnouncementOpen, closeAnnouncement } = useModalStore();

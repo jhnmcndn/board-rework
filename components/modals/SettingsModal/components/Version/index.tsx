@@ -2,9 +2,10 @@ import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useModalStore from '@/store/modals';
 import { VersionRowProps } from '@/types/app';
 import { copyToClipboard } from '@/utils/helpers';
+import { FC } from 'react';
 import styles from './index.module.scss';
 
-const VersionRow: React.FC<VersionRowProps> = ({ label, value, buttonLabel, onButtonClick }) => (
+const VersionRow: FC<VersionRowProps> = ({ label, value, buttonLabel, onButtonClick }) => (
   <div className={styles.container}>
     <div className={styles.row}>
       <span className={styles.label}>{label}</span>
@@ -14,7 +15,7 @@ const VersionRow: React.FC<VersionRowProps> = ({ label, value, buttonLabel, onBu
   </div>
 );
 
-const Version: React.FC = () => {
+const Version: FC = () => {
   const init = useAccountStore((state) => state.init);
   const { openAlert, openVersion } = useModalStore();
   const linkUrl = 'https://yb3f68.com/chat/text/chat_1UdkUk.html';
