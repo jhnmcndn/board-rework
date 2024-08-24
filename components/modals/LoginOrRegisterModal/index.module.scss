@@ -1,0 +1,135 @@
+.registerLogin {
+  @include flex-xy;
+  background: var(--setting-bg-content);
+  position: relative;
+  flex-direction: column;
+  font-size: 0.135rem;
+  border-radius: 0.075rem;
+  border: 0.01rem solid #8d7c4f;
+  height: 3.48rem;
+  width: 5.71rem;
+  max-height: 75vh;
+  max-width: calc(75vh * 1.64);
+  overflow: hidden;
+}
+
+.header {
+  @include flex-xy;
+  position: relative;
+  background: var(--setting-bg-header-modal) center / 100% 100% no-repeat;
+  display: flex;
+  height: 16.5%;
+  width: 100%;
+  color: #511a00;
+  font-weight: 800;
+  overflow: hidden;
+
+  &__activeTabBg {
+    border-radius: 10rem;
+    position: absolute;
+    width: 1.9rem;
+    height: 0.3rem;
+    left: 50%;
+    background: linear-gradient(to top, #facf6b, #fbeeb1);
+  }
+
+  &__activeTabBg::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    padding: 0.01rem;
+    border-radius: 15rem;
+    background: var(--var-gradient);
+    -webkit-mask:
+      linear-gradient(rgb(255, 255, 255) 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  > div {
+    text-align: center;
+    width: 1.85rem;
+    padding: 0.08rem;
+    z-index: 2;
+  }
+}
+
+.bodyContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex: 1;
+  position: relative;
+  height: 83.5%;
+  padding: 0.185rem;
+}
+
+.body {
+  width: 6rem;
+  max-width: 100%;
+  height: 100%;
+  position: relative;
+
+  button {
+    width: 4.25rem;
+    max-width: 100%;
+    height: 0.25rem;
+    max-height: 100%;
+    background: linear-gradient(180deg, #ffe800, #e38c00);
+    border-bottom: 0.01rem solid #fff;
+    border-radius: 15rem;
+    color: #651d00;
+    font-weight: 600;
+    font-size: 0.125rem;
+    padding: 0 0.08rem;
+  }
+
+  &__footer {
+    // position: absolute;
+    // display: flex;
+    // align-items: center;
+    color: #fff;
+    font-weight: 700;
+    // justify-content: space-between;
+    // bottom: 0;
+
+    // image {
+    //   width: 20%;
+    //   height: auto;
+    //   align-self: center;
+    // }
+
+    span {
+      color: #f9c423;
+    }
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+  padding: 0 0.45rem;
+  margin-bottom: 0.08rem;
+
+  &__input {
+    width: 4.25rem;
+    max-width: 100%;
+    height: 15%;
+    // max-height: 100%;
+    background: #1f1e1b;
+    border: 0.02rem solid #8d7c4f;
+    border-radius: 15rem;
+    color: #fff;
+    font-size: 0.125rem;
+    padding: 0.06rem;
+    margin: auto;
+    overflow: hidden;
+    outline: none;
+  }
+}
