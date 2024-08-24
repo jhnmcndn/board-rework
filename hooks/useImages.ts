@@ -86,6 +86,7 @@ export default function useImages() {
     vipNextLevel: require(`@/assets/commons/vipLevels/vip${nextVipLevel}.png`),
     //Announcement
     logoIcon: require(`@/assets/${serverConfig.server}/modal_logo.png`),
+    helpIcon: require(`@/assets/${theme}/announcementModal/helpIcon.png`),
     //Promotion
     promoOneIcon: require(`@/assets/commons/icons/promotionIcons/OneIcon.png`),
     promoTwoIcon: require(`@/assets/commons/icons/promotionIcons/TwoIcon.png`),

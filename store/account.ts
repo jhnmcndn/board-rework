@@ -1,10 +1,11 @@
 import { getAccountInfo } from '@/api/game';
 import { getBindCardList } from '@/api/pay';
-import { getAccountNow, getActivityTypes } from '@/api/platform';
+import { getAccountNow, getActivityQuestTypes, getActivityTypes } from '@/api/platform';
 import { defaultInitData } from '@/constants/defaultReturnData';
 import {
   AccountInfo,
   AccountNow,
+  ActivityQuestSectionTypes,
   ActivityTypes,
   BankList,
   BindCardList,
@@ -52,6 +53,12 @@ export const activityTypeState: ActivityTypes = {
   name: undefined,
 };
 
+export const activityQuestSectionState = {
+  activityList: undefined,
+  id: undefined,
+  name: undefined,
+} satisfies ActivityQuestSectionTypes;
+
 type AccountState = {
   init: Init;
   accountInfo: AccountInfo;
@@ -68,6 +75,7 @@ type AccountState = {
   activityTypes: ActivityTypes[];
   selectedBank: number;
   withdrawAmount: number;
+  activityQuestSection: ActivityQuestSectionTypes[];
 };
 
 type AccountActions = {
@@ -92,6 +100,7 @@ export type AccountApiCalls = {
   fetchAccountInfo: () => void;
   fetchAccountNow: () => void;
   fetchActivityType: () => void;
+  fetchActivityQuestSection: () => void;
 };
 
 export type AccountStore = AccountState & AccountActions & AccountApiCalls;
@@ -115,6 +124,7 @@ export const createAccountStore = () =>
         activityTypes: [activityTypeState],
         selectedBank: 0,
         withdrawAmount: 0,
+        activityQuestSection: [activityQuestSectionState],
         setInit: (init) => set(() => ({ init: { ...init } })),
         setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
         setTheme: (theme) => set(() => ({ theme })),
@@ -150,6 +160,13 @@ export const createAccountStore = () =>
             return set(() => ({ activityTypes: [activityTypeState] }));
           }
           return set(() => ({ activityTypes }));
+        },
+        fetchActivityQuestSection: async () => {
+          const activityQuestSection = await getActivityQuestTypes();
+          if (!activityQuestSection || 'message' in activityQuestSection) {
+            return set(() => ({ activityQuestSection: [activityQuestSectionState] }));
+          }
+          return set(() => ({ activityQuestSection }));
         },
       }),
       {

@@ -7,6 +7,8 @@ import {
   AccountInfo,
   AccountNow,
   ActivityInfos,
+  ActivityQuestList,
+  ActivityQuestSectionTypes,
   ActivityTypes,
   BoxAccount,
   CodeFlowList,
@@ -203,12 +205,23 @@ export const getActivityInfos = async (activityType: number) => {
 };
 
 export const getActivityQuestTypes = async () => {
-  const data = await request<RootResponse<ActivityInfos[]>>({
+  const data = await request<RootResponse<ActivityQuestSectionTypes[]>>({
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.ACTIVITY_QUEST_TYPES,
     tags: API_ENDPOINT.ACTIVITY_QUEST_TYPES,
   });
-  if (!data.data || 'message' in data.data) return [] satisfies ActivityInfos[];
+  if (!data.data || 'message' in data.data) return [] satisfies ActivityQuestSectionTypes[];
+  return data.data;
+};
+
+export const getActivityQuestInfos = async (activityQuestInfos: number) => {
+  const data = await request<RootResponse<ActivityQuestList[]>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.ACTIVITY_QUEST_INFOS,
+    tags: API_ENDPOINT.ACTIVITY_QUEST_INFOS,
+    body: { id: activityQuestInfos },
+  });
+  if (!data.data || 'message' in data.data) return [] satisfies ActivityQuestList[];
   return data.data;
 };
 

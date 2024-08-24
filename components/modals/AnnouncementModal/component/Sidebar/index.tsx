@@ -9,14 +9,16 @@ import styles from './index.module.scss';
 
 const Sidebar: FC = () => {
   const { openSidebarAnnouncement } = useModalStore();
-  const activityTypes = useAccountStore((state) => state.activityTypes);
-  const fetchActivityType = useAccountStore((state) => state.fetchActivityType);
+  const { activityTypes, activityQuestSection, fetchActivityQuestSection, fetchActivityType } = useAccountStore(
+    (state) => state,
+  );
   const setContentAnnouncement = useModalStore((state) => state.setContentAnnouncement);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
   useEffect(() => {
     fetchActivityType();
-  }, [fetchActivityType]);
+    fetchActivityQuestSection();
+  }, [openSidebarAnnouncement]);
 
   useEffect(() => {
     if (activityTypes.length > 0) {
@@ -46,7 +48,32 @@ const Sidebar: FC = () => {
               <span>{activityType.name}</span>
             </li>
           ))}
-        {/* {openSidebarAnnouncement === 1 && selected} */}
+        {openSidebarAnnouncement === 1 &&
+          activityQuestSection.map((activitySection, index) => (
+            <li
+              key={activitySection.id}
+              data-click={sfx.popAudio}
+              onClick={() => handleSelectedTabs(Number(activitySection?.id), index)}
+              className={classNames({
+                [styles.active]: index === selectedIndex,
+              })}
+            >
+              <span>{activitySection.name}</span>
+            </li>
+          ))}
+        {/* {openSidebarAnnouncement === 2 &&
+          messageOnSites.map((messageOnSites, index) => (
+            <li
+              key={messageOnSites.id}
+              data-click={sfx.popAudio}
+              onClick={() => handleSelectedTabs(Number(messageOnSites?.id), index)}
+              className={classNames({
+                [styles.active]: index === selectedIndex,
+              })}
+            >
+              <span>{messageOnSites.title}</span>
+            </li>
+          ))} */}
       </ul>
     </div>
   );
