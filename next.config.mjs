@@ -4,7 +4,7 @@ const nextConfig = {
   reactStrictMode: false,
   sassOptions: {
     includePaths: ['./styles'],
-    additionalData: `@import "./styles/_fonts.scss", "./styles/_helpers.scss", "./styles/_sizes.scss";`,
+    additionalData: `@import "./styles/_helpers.scss";`,
   },
   webpack: (config) => {
     // Add file loader for audio files
