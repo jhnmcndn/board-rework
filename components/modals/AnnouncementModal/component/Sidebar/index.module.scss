@@ -6,6 +6,7 @@
   position: relative;
   background: var(--sidebar-modal-bg);
   border-right: 0.01rem solid var(--sidebar-modal-border);
+  overflow: auto;
 
   ul {
     position: relative;
