@@ -52,6 +52,17 @@
           -webkit-text-fill-color: transparent;
         }
       }
+      &::after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        background: var(--sidebar-modal-divider);
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
     }
   }
 }

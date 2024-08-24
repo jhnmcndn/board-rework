@@ -339,6 +339,25 @@ export type ActivityTypes = {
   name?: string;
 };
 
+export interface ActivityQuestSectionTypes {
+  activityList?: ActivityQuestList[];
+  id?: number;
+  name?: string;
+}
+
+export interface ActivityQuestList {
+  id: number;
+  icon: string;
+  title: string;
+  content: string;
+  target: number;
+  reward: number;
+  curNum: number;
+  status: number;
+  gameTypeId: number;
+  typeId: any;
+}
+
 export type ListItemProps = {
   id: number;
   title: string;
