@@ -12,13 +12,14 @@ const SelfServiceCW = () => {
   const { handleChange } = useFetchGame();
   const [washCode, setWashCode] = useState<WashCodeDetail>();
   const sideBar = useGameStore((state) => state.sideBar);
-  const setActiveSideBarItem = useGameStore((state) => state.setActiveSideBarItem);
+  const { setActiveSideBarItem, setShowPlatform } = useGameStore((state) => state);
   const { push } = useRouter();
 
   const updateWashCode = (newWashCode: WashCodeDetail) => setWashCode(newWashCode);
   const handleRedirect = (gameTypeId: number) => {
     const item = sideBar.find((item) => item.id === gameTypeId);
     if (item) {
+      setShowPlatform(false);
       setActiveSideBarItem(item);
       handleChange(item);
     }
