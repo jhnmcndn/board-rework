@@ -6,13 +6,8 @@ import ImageAccordion from './ImageAccordion'; // Corrected the import name
 import styles from './index.module.scss';
 
 const Content: React.FC = () => {
-  const openContentAnnouncement = useModalStore((state) => state.openContentAnnouncement);
+  const { openSidebarAnnouncement, openContentAnnouncement } = useModalStore();
   const [activityList, setActivityList] = useState<ActivityListState | null>(null);
-  const [switchTab, setSwitchTab] = useState<boolean>(false);
-
-  const handleSwitch = () => {
-    setSwitchTab((prev) => !prev);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,23 +18,25 @@ const Content: React.FC = () => {
     fetchData();
   }, [openContentAnnouncement]);
 
+  console.log();
   return (
     <div className={styles.contentAnnoucement}>
-      {openContentAnnouncement === activityList?.id && (
-        <ul>
-          {activityList?.list.map((item, index) => (
-            <li key={index}>
-              <ImageAccordion
-                switched={switchTab}
-                handleSwitch={handleSwitch}
-                icon={item.icon ?? ''}
-                content={item.content ?? ''}
-                url={item.url}
-              />
-            </li>
-          ))}
-        </ul>
-      )}
+      {openSidebarAnnouncement === 0 &&
+        (openContentAnnouncement === activityList?.id && (
+            <ul>
+              {activityList?.list.map((item, index) => (
+                <li key={index}>
+                  <ImageAccordion
+                    icon={item?.icon as string}
+                    content={item?.content as string}
+                    url={item.url}
+                  />
+                </li>
+              ))}
+            </ul>
+          ),
+        )
+      }
     </div>
   );
 };
