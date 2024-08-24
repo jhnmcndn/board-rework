@@ -58,6 +58,7 @@ type AccountState = {
   theme: THEME;
   accountNow: AccountNow;
   boxPassIsSet: boolean;
+  withdrawPassIsSet: boolean;
   bindCardList: BindCardList;
   withdrawActiveTab: number;
   bankList: BankList[];
@@ -65,6 +66,8 @@ type AccountState = {
   codeFlowList: CodeFlowList[];
   payTypeList: PayTypeList[];
   activityTypes: ActivityTypes[];
+  selectedBank: number;
+  withdrawAmount: number;
 };
 
 type AccountActions = {
@@ -73,12 +76,15 @@ type AccountActions = {
   setTheme: (theme: THEME) => void;
   setAccountNow: (accountNow: Partial<AccountNow>) => void;
   setBoxPassIsSet: (boxPassIsSet: boolean) => void;
+  setWithdrawPassIsSet: (withdrawPassIsSet: boolean) => void;
   setBindCardList: (bindCardList: BindCardList) => void;
   setWithdrawRecordList: (withdrawRecordList: WithdrawRechargeDetail[]) => void;
   setWithdrawActiveTab: (index: number) => void;
   setBankList: (bankList: BankList[]) => void;
   setCodeFlowList: (codeFlowList: CodeFlowList[]) => void;
   setPayTypeList: (payTypeList: PayTypeList[]) => void;
+  setSelectedBank: (selectedBank: number | undefined) => void;
+  setWithdrawAmount: (withdrawAmount: number | undefined) => void;
   fetchBindCardList: () => void;
 };
 
@@ -99,6 +105,7 @@ export const createAccountStore = () =>
         theme: THEME.BLACK_GOLD,
         accountNow: accountNowState,
         boxPassIsSet: false,
+        withdrawPassIsSet: false,
         bindCardList: bindCardListState,
         withdrawActiveTab: 0,
         bankList: [],
@@ -106,17 +113,22 @@ export const createAccountStore = () =>
         codeFlowList: [],
         payTypeList: [],
         activityTypes: [activityTypeState],
+        selectedBank: 0,
+        withdrawAmount: 0,
         setInit: (init) => set(() => ({ init: { ...init } })),
         setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
         setTheme: (theme) => set(() => ({ theme })),
         setAccountNow: (accountNow) => set(() => ({ accountNow: { ...accountNow } })),
         setBoxPassIsSet: (boxPassIsSet) => set(() => ({ boxPassIsSet })),
+        setWithdrawPassIsSet: (withdrawPassIsSet) => set(() => ({ withdrawPassIsSet })),
         setBindCardList: (bindCardList) => set(() => ({ bindCardList })),
         setWithdrawRecordList: (withdrawRecordList) => set(() => ({ withdrawRecordList })),
         setWithdrawActiveTab: (index) => set(() => ({ withdrawActiveTab: index })),
         setBankList: (bankList) => set(() => ({ bankList })),
         setCodeFlowList: (codeFlowList) => set(() => ({ codeFlowList })),
         setPayTypeList: (payTypeList) => set(() => ({ payTypeList })),
+        setSelectedBank: (selectedBank) => set(() => ({ selectedBank })),
+        setWithdrawAmount: (withdrawAmount) => set(() => ({ withdrawAmount })),
         fetchAccountInfo: async () => {
           const accountInfo = await getAccountInfo();
           if (!accountInfo || 'message' in accountInfo) return set(() => ({ accountInfo: accountInfoState }));

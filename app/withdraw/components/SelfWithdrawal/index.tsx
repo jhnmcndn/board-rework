@@ -13,10 +13,11 @@ const SelfWithdrawal = () => {
   const theme = useAccountStore((state) => state.theme);
   const bindCardList = useAccountStore((state) => state.bindCardList);
   const userBalance = useAccountStore((state) => state.accountNow.balance);
-  const [amountToWithdraw, setAmountToWithdraw] = useState('');
+  const setSelectedBank = useAccountStore((state) => state.setSelectedBank);
+  const setWithdrawAmount = useAccountStore((state) => state.setWithdrawAmount);
+  const withdrawAmount = useAccountStore((state) => state.withdrawAmount);
   const [selectedCard, setSelectedCard] = useState<MemberCardList | null>(null);
-  const [showSafeBox, setShowSafeBox] = useState(false);
-  const { openBindBank, openBindUSDT } = useModalStore();
+  const { openBindBank, openBindUSDT, openPassCode, openAlert } = useModalStore();
 
   useEffect(() => {
     if (bindCardList?.memberCardList && bindCardList.memberCardList.length > 0) {
@@ -24,16 +25,19 @@ const SelfWithdrawal = () => {
     }
   }, [bindCardList]);
 
-  const handleWithdraw = () => {
-    setShowSafeBox(true);
-    if (!amountToWithdraw) {
-      alert('请输入正确金额');
-      return;
-    }
+  useEffect(() => {
+    setSelectedBank(selectedCard?.id);
+  }, [selectedCard]);
 
-    if (!selectedCard) {
-      alert('请选择提现卡');
+  const handleWithdraw = () => {
+    if (!withdrawAmount) {
+      openAlert({ body: '请输入正确金额' });
       return;
+    } else if (!selectedCard) {
+      openAlert({ body: '请选择提现卡' });
+      return;
+    } else {
+      openPassCode();
     }
   };
 
@@ -51,9 +55,11 @@ const SelfWithdrawal = () => {
               !['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Delete', 'Backspace'].includes(e.key) &&
               e.preventDefault()
             }
-            value={amountToWithdraw}
             maxLength={10}
-            onChange={(e) => setAmountToWithdraw(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              setWithdrawAmount(value ? Number(value) : undefined);
+            }}
           />
           <div className={styles.userBalWrapper}>
             <span>当前打码量可提现金额: {userBalance || 0}</span>
@@ -77,6 +83,7 @@ const SelfWithdrawal = () => {
                   })}
                   onClick={() => {
                     setSelectedCard(item);
+                    setSelectedBank(selectedCard?.id);
                   }}
                 >
                   <div className={styles.bankDetails}>
