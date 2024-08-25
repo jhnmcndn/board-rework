@@ -1,19 +1,19 @@
 'use client';
 
+import { setWithdrawPass, withdrawBank } from '@/api/pay';
+import { boxAccount, setBoxPass } from '@/api/platform';
 import Button from '@/components/Fragments/Button';
 import HeaderModalTitle from '@/components/HeaderModalTitle';
 import ModalLayout from '@/components/modals/ModalLayout';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useIsMounted from '@/hooks/useIsMounted';
 import useModalStore from '@/store/modals';
 import classnames from 'classnames';
-import { AnimatePresence } from 'framer-motion';
-import { createPortal } from 'react-dom';
-import { BaseSyntheticEvent, useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
-import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
-import { boxAccount, setBoxPass } from '@/api/platform';
 import CryptoJS from 'crypto-js';
-import { setWithdrawPass, withdrawBank } from '@/api/pay';
+import { AnimatePresence } from 'framer-motion';
+import { usePathname, useRouter } from 'next/navigation';
+import { BaseSyntheticEvent, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import styles from './index.module.scss';
 
 const VaultPassCodeModal = () => {
@@ -163,7 +163,7 @@ const VaultPassCodeModal = () => {
                 {btnValues.flat().map((item) => {
                   return (
                     <Button
-                      id={item}
+                      id={`${item}`}
                       key={item}
                       className={classnames({
                         [styles.button]: true,

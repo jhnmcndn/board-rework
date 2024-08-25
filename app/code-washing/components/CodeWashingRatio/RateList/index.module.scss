@@ -11,10 +11,15 @@
     text-align: center;
     font-weight: bold;
     position: relative;
+    cursor: pointer;
 
     span:first-child {
       position: relative;
       z-index: 1;
+
+      &.activeNav {
+        color: #511a00;
+      }
     }
 
     .active {

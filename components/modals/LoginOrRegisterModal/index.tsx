@@ -19,9 +19,13 @@ const LoginOrRegisterModal: FC = () => {
   const { isLoginOrRegisterOpen, closeLoginOrRegister, closeLoginOptions } = useModalStore();
   const isLogin = activeTab === 'login';
 
-  const handleRedirect = () => {
+  const closeLoginModals = () => {
     closeLoginOrRegister();
     closeLoginOptions();
+  };
+
+  const handleRequestVerification = () => {
+    console.log('REQUEST VERIFICATION');
   };
 
   const handelLoginMobile = (e: any) => {
@@ -40,7 +44,7 @@ const LoginOrRegisterModal: FC = () => {
   const modalContent = (
     <AnimatePresence>
       {isLoginOrRegisterOpen && (
-        <ModalLayout closeOnOutsideClick onClose={closeLoginOrRegister} backdrop={0.8}>
+        <ModalLayout closeOnOutsideClick onClose={closeLoginOrRegister} backdrop={0.2}>
           <div className={styles.registerLogin}>
             <div className={styles.header}>
               <motion.div
@@ -51,7 +55,7 @@ const LoginOrRegisterModal: FC = () => {
               <div onClick={switchToRegister}>手机号注册</div>
             </div>
 
-            <div className={styles.bodyContainer}>
+            <div className={styles.animateContainer}>
               <motion.div
                 key='login'
                 initial={{ x: 0, opacity: 0, display: 'none' }}
@@ -60,7 +64,7 @@ const LoginOrRegisterModal: FC = () => {
                   opacity: isLogin ? 1 : 0,
                   display: isLogin ? 'block' : 'none',
                 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.5, display: { duration: 0 } }}
                 className={styles.body}
               >
                 <form onSubmit={handelLoginMobile} className={styles.form}>
@@ -69,6 +73,7 @@ const LoginOrRegisterModal: FC = () => {
                     placeholder='请输入6-15位数字或字母'
                     maxLength={15}
                     className={styles.form__input}
+                    containerClassName={styles.form__inputContainer}
                   />
                   <Input
                     label='password'
@@ -77,30 +82,35 @@ const LoginOrRegisterModal: FC = () => {
                     type='password'
                     passwordToggle
                     className={styles.form__input}
+                    containerClassName={styles.form__inputContainer}
                   />
-                  <button type='submit'>确认登录</button>
-                  <button onClick={switchToRegister}>注册</button>
+                  <button className={styles.form__button} type='submit'>
+                    确认登录
+                  </button>
+                  <button className={styles.form__button} type='button' onClick={switchToRegister}>
+                    注册
+                  </button>
                 </form>
                 <div className={styles.body__footer}>
-                  <Link href='/customer-service' onClick={handleRedirect}>
+                  <Link href='/customer-service' onClick={closeLoginModals}>
                     <Image src={images.supportIcon} height={22} width={22} alt='Support' />
                     有问题？找在线客服
                   </Link>
                   <div>
-                    当前版本 <span>{process.env.NEXT_PUBLIC_APP_VERSION}</span>
+                    当前版本<span>{process.env.NEXT_PUBLIC_APP_VERSION}</span>
                   </div>
                 </div>
               </motion.div>
 
               <motion.div
                 key='register'
-                initial={{ x: 0, opacity: 0, display: 'block' }}
+                initial={{ x: 0, opacity: 0, display: 'none' }}
                 animate={{
                   x: isLogin ? '20%' : '0%',
                   opacity: isLogin ? 0 : 1,
                   display: isLogin ? 'none' : 'block',
                 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.5, display: { duration: 0 } }}
                 className={styles.body}
               >
                 <form onSubmit={handelRegisterMobile} className={styles.form}>
@@ -109,6 +119,7 @@ const LoginOrRegisterModal: FC = () => {
                     placeholder='请输入您的手机号'
                     maxLength={15}
                     className={styles.form__input}
+                    containerClassName={styles.form__inputContainer}
                   />
                   <Input
                     label='register-password'
@@ -117,6 +128,7 @@ const LoginOrRegisterModal: FC = () => {
                     type='password'
                     passwordToggle
                     className={styles.form__input}
+                    containerClassName={styles.form__inputContainer}
                   />
                   <Input
                     label='confirm-password'
@@ -125,14 +137,19 @@ const LoginOrRegisterModal: FC = () => {
                     type='password'
                     passwordToggle
                     className={styles.form__input}
+                    containerClassName={styles.form__inputContainer}
                   />
                   <Input
-                    label='validate-username'
+                    label='verification-code'
                     placeholder='请输入验证码'
                     maxLength={15}
                     className={styles.form__input}
+                    containerClassName={styles.form__inputContainer}
+                    onRequestVerification={handleRequestVerification}
                   />
-                  <button type='submit'>确认注册</button>
+                  <button className={styles.form__button} type='submit'>
+                    确认注册
+                  </button>
                 </form>
                 <div className={styles.body__footer}>
                   <div>

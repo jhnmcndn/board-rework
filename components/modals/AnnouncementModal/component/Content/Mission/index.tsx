@@ -2,10 +2,10 @@ import { getActivityQuestInfos } from '@/api/platform';
 import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
 import { ActivityQuestList } from '@/types/app';
-import React, { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styles from './index.module.scss';
 
-const Mission: React.FC = () => {
+const Mission: FC = () => {
   const { openContentAnnouncement } = useModalStore();
   const { images } = useImages();
   const [questInfos, setQuestInfos] = useState<ActivityQuestList[] | null>(null);
@@ -21,11 +21,7 @@ const Mission: React.FC = () => {
   return (
     <>
       <div className={styles.missionContainer}>
-        {questInfos?.map((item, index) => (
-          <ul style={{ border: '1px solid red' }}>
-            <li key={index}></li>
-          </ul>
-        ))}
+        <ul style={{ border: '1px solid red' }}>{questInfos?.map((item, index) => <li key={index}></li>)}</ul>
       </div>
     </>
   );
