@@ -76,7 +76,9 @@ const Item = <T extends BaseItem>({ index, name, activeTab, item, onSetActive }:
   return (
     <motion.li onClick={handleItemClick}>
       <span className={activeTab === index ? styles.activeNav : ''}>{name}</span>
-      {activeTab === index && <motion.span className={styles.active} layoutId='item-active' />}
+      {activeTab === index && (
+        <motion.span className={styles.active} layoutId='item-active' transition={{ type: 'spring', duration: 0.5 }} />
+      )}
     </motion.li>
   );
 };
