@@ -7,19 +7,27 @@ import WashCodeList from './WashCodeList';
 
 const CodeWashingRatio = () => {
   const [codeRateList, setCodeRateList] = useState<WashCodeRate[]>();
+  const [activeTab, setActiveTab] = useState<number>(0);
+  const handleSetActive = (index: number) => setActiveTab(index);
+
+  const fetchWashCodeRateList = async () => {
+    const washingRates = await getWashCodeRateList();
+    if (!!washingRates) setCodeRateList(washingRates);
+  };
 
   useEffect(() => {
-    const fetchWashCodeRateList = async () => {
-      const washingRates = await getWashCodeRateList();
-      if (!!washingRates) setCodeRateList(washingRates);
-    };
     fetchWashCodeRateList();
   }, []);
 
   return (
     <div className={styles.wrapper}>
-      <RateList list={codeRateList || []} />
-      <WashCodeList list={codeRateList || []} />
+      <RateList list={codeRateList || []} activeTab={activeTab} onSetActive={handleSetActive} />
+      <WashCodeList
+        list={codeRateList || []}
+        activeTab={activeTab}
+        onRefresh={fetchWashCodeRateList}
+        onSetActive={handleSetActive}
+      />
     </div>
   );
 };
