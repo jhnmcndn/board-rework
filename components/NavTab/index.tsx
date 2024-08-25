@@ -100,6 +100,6 @@ const Item = <T extends BaseItem>({ index, activeTab, item, onSetActive }: NavIt
     </motion.li>
   );
 };
-Item.displayName = 'RateItem';
+Item.displayName = 'NavTabItem';
 
 export default NavTab;
