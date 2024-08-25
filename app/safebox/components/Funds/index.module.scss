@@ -67,9 +67,13 @@
   background: var(--vip-balance-bg);
   display: flex;
   flex-direction: column;
-  height: 100%;
 
   div:first-child {
+    background: var(--transfer-amount);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     padding-block-end: 0.15rem;
     font-size: 0.2rem;
   }
@@ -128,9 +132,6 @@
     background: var(--vip-btn-bg);
     width: 1rem;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 0.2rem;
     color: white;
     align-self: center;

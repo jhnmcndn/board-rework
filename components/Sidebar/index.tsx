@@ -20,7 +20,7 @@ const Sidebar: SidebarComponent = ({ sidebarItems, activeSidebarItem, setActiveS
       initial={{ x: -100 }}
       animate={{ x: 0 }}
       transition={{ duration: 0.3 }}
-      className={classNames(styles.sidebarWrapper, 'safeboxContainer')}
+      className={styles.sidebarWrapper}
     >
       {sidebarItems.map((item, index) => (
         <div
