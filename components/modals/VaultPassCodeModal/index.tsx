@@ -71,7 +71,7 @@ const VaultPassCodeModal = () => {
       return;
     }
 
-    if (pathname.includes('withdraw')) {
+    if (pathname?.includes('withdraw')) {
       await handleWithdrawPass();
     } else {
       await handleBoxPass();

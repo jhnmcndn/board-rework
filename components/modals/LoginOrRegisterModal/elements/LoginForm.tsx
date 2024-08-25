@@ -1,8 +1,8 @@
 import Input from '@/components/Input';
 import { loginPhoneSchema } from '@/constants/validateSchema';
+import useAuthActions from '@/hooks/useAuthActions';
 import useValidate from '@/hooks/useFormValidate';
 import useImages from '@/hooks/useImages';
-import useLogin from '@/hooks/useLogin';
 import useModalStore from '@/store/modals';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,7 +14,7 @@ type LoginFormProps = {
 };
 
 const LoginForm: FC<LoginFormProps> = ({ switchToRegister }) => {
-  const { login } = useLogin();
+  const { login } = useAuthActions();
   const { images } = useImages();
   const { openAlert } = useModalStore();
   const { closeLoginOrRegister, closeLoginOptions } = useModalStore();

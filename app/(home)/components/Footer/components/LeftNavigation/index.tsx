@@ -4,7 +4,7 @@ import { FC, useEffect, useState } from 'react';
 import MoreModal from '@/components/modals/MoreModal';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useMessageStore } from '@/components/Providers/MessageStoreProvider';
-import useAuthCheck from '@/hooks/useAuthCheck';
+import useAuthActions from '@/hooks/useAuthActions';
 import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
 import { MessageOnSites } from '@/types/app';
@@ -15,7 +15,7 @@ import ListContainer from './ListContainer';
 const LeftNavigation: FC = () => {
   const { push } = useRouter();
   const { images } = useImages();
-  const { authCheck } = useAuthCheck();
+  const { authCheck } = useAuthActions();
   const [showMoreModal, setShowMoreModal] = useState(false);
   const accountInfo = useAccountStore((state) => state.accountInfo);
   const messageOnSites = useMessageStore((state) => state.messageOnSites);

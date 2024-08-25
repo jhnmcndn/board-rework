@@ -1,7 +1,7 @@
 'use client';
 
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
-import useAuthCheck from '@/hooks/useAuthCheck';
+import useAuthActions from '@/hooks/useAuthActions';
 import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
 import { sfx } from '@/utils/audioFile';
@@ -13,7 +13,7 @@ import styles from './index.module.scss';
 const VipPart = () => {
   const { push } = useRouter();
   const { images } = useImages();
-  const { authCheck } = useAuthCheck();
+  const { authCheck } = useAuthActions();
   const { openLoginOptions } = useModalStore();
   const accountInfo = useAccountStore((state) => state.accountInfo);
   const codeTotal = accountInfo.codeTotal || 0;

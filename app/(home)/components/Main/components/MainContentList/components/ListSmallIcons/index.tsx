@@ -1,7 +1,7 @@
 import MemoizedIconHolder from '@/components/MemoizedIconHolder';
 import NoData from '@/components/NoData';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
-import useAuthCheck from '@/hooks/useAuthCheck';
+import useAuthActions from '@/hooks/useAuthActions';
 import { ListIconProps, RspGameInfo } from '@/types/app';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
@@ -11,12 +11,12 @@ import styles from './index.module.scss';
 
 const ListSmallIcons: FC<ListIconProps> = ({ searchFieldData, setSearchFieldData }) => {
   const router = useRouter();
+  const { authCheck } = useAuthActions();
   const rowsContainerRef = useRef<HTMLDivElement | null>(null);
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [filteredData, setFilteredData] = useState<RspGameInfo[] | undefined>();
   const { gameInfos, activeSideBarItem, isGamesLoading } = useGameStore((state) => state);
-  const { authCheck } = useAuthCheck();
 
   useEffect(() => {
     const timeout = setTimeout(() => {

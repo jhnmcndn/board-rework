@@ -6,9 +6,9 @@ import { createPortal } from 'react-dom';
 // import { loginDevice } from '@/api/game/gamelist';
 // import NECaptchaComponent from 'src/commons/Captcha/NECaptchaComponent';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import useAuthActions from '@/hooks/useAuthActions';
 import useImages from '@/hooks/useImages';
 import useIsMounted from '@/hooks/useIsMounted';
-import useLogin from '@/hooks/useLogin';
 import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
 import ModalLayout from '../ModalLayout';
@@ -17,7 +17,7 @@ import styles from './index.module.scss';
 // const LoginOptionsModal = ({ setIsShowUserAuth }) => {
 const LoginOptionsModal = () => {
   const isMounted = useIsMounted();
-  const { login } = useLogin();
+  const { login } = useAuthActions();
   const { images } = useImages();
   const { openAlert, isLoginOptionsOpen, closeLoginOptions, openLoginOrRegister } = useModalStore();
   const { captchaId, actionSwitch } = useAccountStore((state) => state.init);

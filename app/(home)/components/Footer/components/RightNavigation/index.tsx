@@ -1,4 +1,4 @@
-import useAuthCheck from '@/hooks/useAuthCheck';
+import useAuthActions from '@/hooks/useAuthActions';
 import rechargeSvga from '@/public/assets/svgas/recharge.svga';
 import withdrawSvga from '@/public/assets/svgas/withdraw.svga';
 import { sfx } from '@/utils/audioFile';
@@ -11,7 +11,7 @@ const CSVGA = dynamic(() => import('@/app/(home)/components/Footer/components/CS
 
 const RightNavigation: FC = () => {
   const { push } = useRouter();
-  const { authCheck } = useAuthCheck();
+  const { authCheck } = useAuthActions();
 
   return (
     <div className={styles.rightNavigation}>
