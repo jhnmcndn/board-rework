@@ -52,6 +52,14 @@ export type LoginDevicePayload = {
   validate: string | null;
 };
 
+export type LoginPhonePayload = {
+  mobile: string;
+  passwd: string;
+  deviceId: string;
+  ip: string;
+  validate: string | null;
+};
+
 export type AccountInfo = {
   token?: string;
   id?: string;

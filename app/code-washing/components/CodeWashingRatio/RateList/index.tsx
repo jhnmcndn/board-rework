@@ -1,39 +1,36 @@
 import { WashCodeRate } from '@/types/app';
 import { motion } from 'framer-motion';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import styles from './index.module.scss';
 
 type RateListProps = {
   list: Omit<WashCodeRate, 'washCodeDescList'>[];
+  activeTab: number;
+  onSetActive: (index: number) => void;
 };
 
-type RateItemProp = Omit<WashCodeRate, 'washCodeDescList'> & {
-  active: number;
-  onSetActive: (id: number) => void;
-};
-
-const RateList: FC<RateListProps> = ({ list = [] }) => {
-  const [active, setActive] = useState<number>(0);
-  const handleSetActive = (id: number) => setActive(id);
-
-  useEffect(() => {
-    if (list.length > 0) setActive(list[0].id);
-  }, [list]);
+const RateList: FC<RateListProps> = ({ list = [], activeTab, onSetActive }) => {
+  const handleSetActive = (index: number) => onSetActive(index);
 
   return (
     <motion.ul className={styles.rateList}>
-      {list.map((item) => (
-        <Item key={item.id} {...item} active={active} onSetActive={handleSetActive} />
+      {list.map((item, index) => (
+        <Item key={item.id} {...item} activeTab={activeTab} index={index} onSetActive={handleSetActive} />
       ))}
     </motion.ul>
   );
 };
 
-const Item: FC<RateItemProp> = ({ id, name, active, onSetActive }) => {
+type RateItemProps = Omit<WashCodeRate, 'washCodeDescList'> & {
+  activeTab: number;
+  index: number;
+  onSetActive: (index: number) => void;
+};
+const Item: FC<RateItemProps> = ({ index, name, activeTab, onSetActive }) => {
   return (
-    <motion.li onClick={() => onSetActive(id)}>
-      <span>{name}</span>
-      {active === id && <motion.span className={styles.active} layoutId='item-active' />}
+    <motion.li onClick={() => onSetActive(index)}>
+      <span className={activeTab === index ? styles.activeNav : ''}>{name}</span>
+      {activeTab === index && <motion.span className={styles.active} layoutId='item-active' />}
     </motion.li>
   );
 };

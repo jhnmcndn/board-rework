@@ -3,13 +3,9 @@
 }
 
 .input {
-  position: relative;
-  font-weight: 600;
-
   &__field {
     width: 100%;
-    padding: 8px 5px 8px 15px;
-    border-radius: 3px;
+    height: 100%;
     cursor: text;
 
     &:focus {
@@ -22,11 +18,26 @@
     }
   }
 
-  &__revealPassword {
+  &__toggleMask {
     position: absolute;
     inset: 0;
     margin: auto 2.5% auto auto;
     width: 0.175rem;
     height: auto;
+  }
+
+  &__codeVerification {
+    position: absolute;
+    inset: 0;
+    margin: auto 2.5% auto auto;
+    width: 25%;
+    height: 70%;
+    background: linear-gradient(180deg, #ffe800, #e38c00);
+    border: none;
+    border-radius: 10rem;
+    color: #651d00;
+    font-weight: 600;
+    font-size: clamp(0.1rem, 0.115rem, 21.5px);
+    padding: 0 1.5%;
   }
 }
