@@ -38,7 +38,7 @@ const TableBody: FC<
           {Object.keys(data).map((d, idx) => (
             <div
               key={idx}
-              className={classNames(styles.item, {
+              className={classNames(styles.item, 'tableItem', {
                 [styles.withBorder]: withBorder,
               })}
             >

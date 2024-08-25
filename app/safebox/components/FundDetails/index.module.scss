@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+  height: 100%;
+
+  :global {
+    .tableItem:first-child {
+      color: white;
+    }
+
+    .tableItem:nth-child(2),
+    .tableItem:nth-child(3) {
+      background: var(--safebox-table-item);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .lds-ellipsis div {
+      height: toRem(1.5);
+      width: toRem(1.5);
+      background-color: var(--vip-header);
+    }
+
+    .ptr__pull-down {
+      .ptr__pull-down--pull-more {
+        display: none;
+      }
+    }
+  }
+}
