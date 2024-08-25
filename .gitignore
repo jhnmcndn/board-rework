@@ -42,3 +42,6 @@ server.ts
 
 # folders
 /public/assets/svgas
+
+# lockfile
+bun.lockb

@@ -295,6 +295,7 @@ export type ListContainerProps = {
   onClick?: () => void;
   icon: string;
   text: string;
+  notif?: string | number;
 };
 
 export type WashCodeDetail = {
