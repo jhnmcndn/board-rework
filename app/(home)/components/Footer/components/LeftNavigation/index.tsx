@@ -3,7 +3,6 @@ import { FC, useEffect, useState } from 'react';
 
 import MoreModal from '@/components/modals/MoreModal';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
-import { useMessageStore } from '@/components/Providers/MessageStoreProvider';
 import useAuthActions from '@/hooks/useAuthActions';
 import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
@@ -18,17 +17,17 @@ const LeftNavigation: FC = () => {
   const { authCheck } = useAuthActions();
   const [showMoreModal, setShowMoreModal] = useState(false);
   const accountInfo = useAccountStore((state) => state.accountInfo);
-  const messageOnSites = useMessageStore((state) => state.messageOnSites);
   const { openAnnouncement, setSidebarAnnouncement } = useModalStore();
   const isLoggedIn = Boolean(accountInfo.id);
 
   const [unreadMsgs, setUnreadMsgs] = useState<MessageOnSites[]>([]);
 
   useEffect(() => {
-    if (messageOnSites?.length > 0) {
-      setUnreadMsgs(messageOnSites.filter((mail) => !mail.isRead));
+    const existingMessages = JSON.parse(localStorage.getItem('existing-messages') || '[]');
+    if (existingMessages.length > 0) {
+      setUnreadMsgs(existingMessages.filter((mail: MessageOnSites) => !mail.isRead));
     }
-  }, [messageOnSites]);
+  }, []);
 
   const handleNavigation = (route: string) => {
     authCheck(() => push(route));
@@ -59,15 +58,13 @@ const LeftNavigation: FC = () => {
           icon={images.gift}
           text='活动'
         />
-        <div>
-          {(!isLoggedIn || unreadMsgs.length > 0) && <center className='alertIcon' />}
-          <ListContainer
-            dataClick={sfx.messageAudio}
-            icon={images.message}
-            text='消息'
-            onClick={() => handleNavigation('/mailbox')}
-          />
-        </div>
+        <ListContainer
+          notif={unreadMsgs.length}
+          dataClick={sfx.messageAudio}
+          icon={images.message}
+          text='消息'
+          onClick={() => handleNavigation('/mailbox')}
+        />
 
         <ListContainer
           dataClick={sfx.popAudio}

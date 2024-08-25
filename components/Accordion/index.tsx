@@ -28,6 +28,7 @@ const Accordion: AccordionComponent = ({ message, delay, background, img, dropdo
     setExpand((prev) => !prev);
     if (message.id && messageOnSites.length > 0) {
       setMessageOnSites(messageOnSites.map((mail) => (mail.id === message.id ? { ...mail, isRead: true } : mail)));
+      expand && localStorage.setItem('existing-messages', JSON.stringify(messageOnSites));
     }
   };
 
