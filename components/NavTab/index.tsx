@@ -66,7 +66,6 @@ const NavTab = <T extends BaseItem>({
             index={index}
             onSetActive={handleSetActive}
             item={item}
-            name={item.name}
           />
         ))}
       </motion.ul>
@@ -76,14 +75,12 @@ const NavTab = <T extends BaseItem>({
 
 type NavItemProps<T extends BaseItem> = Omit<NavTabProps<T>, 'list' | 'styles'> & {
   index: number;
-  name: string;
-  activeTab: number;
 };
-const Item = <T extends BaseItem>({ index, name, activeTab, item, onSetActive }: NavItemProps<T> & { item: T }) => {
+const Item = <T extends BaseItem>({ index, activeTab, item, onSetActive }: NavItemProps<T> & { item: T }) => {
   const handleItemClick = () => onSetActive?.(index, item);
   return (
     <motion.li onClick={handleItemClick} id={`navTabItem-${index}`}>
-      <span className={activeTab === index ? styles.activeNav : ''}>{name}</span>
+      <span className={activeTab === index ? styles.activeNav : ''}>{item.name}</span>
       {activeTab === index && (
         <motion.span className={styles.active} layoutId='item-active' transition={{ type: 'spring', duration: 0.5 }} />
       )}
