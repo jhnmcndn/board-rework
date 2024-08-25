@@ -39,6 +39,14 @@ const NavTab = <T extends BaseItem>({
       setConstraint((prev) => ({ ...prev, left: -(scrollWidth - clientWidth) }));
     };
     scroll();
+
+    setTimeout(
+      () =>
+        document.getElementById(`navTabItem-${active}`)?.scrollIntoView({
+          behavior: 'smooth',
+        }),
+      500,
+    );
   }, []);
 
   return (
@@ -74,7 +82,7 @@ type NavItemProps<T extends BaseItem> = Omit<NavTabProps<T>, 'list' | 'styles'> 
 const Item = <T extends BaseItem>({ index, name, activeTab, item, onSetActive }: NavItemProps<T> & { item: T }) => {
   const handleItemClick = () => onSetActive?.(index, item);
   return (
-    <motion.li onClick={handleItemClick}>
+    <motion.li onClick={handleItemClick} id={`navTabItem-${index}`}>
       <span className={activeTab === index ? styles.activeNav : ''}>{name}</span>
       {activeTab === index && (
         <motion.span className={styles.active} layoutId='item-active' transition={{ type: 'spring', duration: 0.5 }} />
