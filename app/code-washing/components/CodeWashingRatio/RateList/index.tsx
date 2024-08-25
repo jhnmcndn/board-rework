@@ -9,12 +9,6 @@ type RateListProps = {
   onSetActive: (index: number) => void;
 };
 
-type RateItemProps = Omit<WashCodeRate, 'washCodeDescList'> & {
-  activeTab: number;
-  index: number;
-  onSetActive: (index: number) => void;
-};
-
 const RateList: FC<RateListProps> = ({ list = [], activeTab, onSetActive }) => {
   const handleSetActive = (index: number) => onSetActive(index);
 
@@ -27,6 +21,11 @@ const RateList: FC<RateListProps> = ({ list = [], activeTab, onSetActive }) => {
   );
 };
 
+type RateItemProps = Omit<WashCodeRate, 'washCodeDescList'> & {
+  activeTab: number;
+  index: number;
+  onSetActive: (index: number) => void;
+};
 const Item: FC<RateItemProps> = ({ index, name, activeTab, onSetActive }) => {
   return (
     <motion.li onClick={() => onSetActive(index)}>
