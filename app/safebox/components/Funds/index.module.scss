@@ -99,6 +99,7 @@
       border-radius: 999px;
       border: none;
       padding-inline-start: 0.25rem;
+      padding-inline-end: 0.1rem;
       width: 85%;
       height: 0.3rem;
       font-size: 0.15rem;
@@ -124,7 +125,8 @@
   }
 
   .submitBtn {
-    margin-top: 0.5rem;
+    margin-top: 0.7rem;
+    margin-bottom: 0.5rem;
     background: var(--vip-btn-bg);
     width: 1rem;
     text-align: center;

@@ -55,7 +55,7 @@ const Funds: FC<FundProps> = ({ type, boxAccount: res }) => {
           <motion.div whileTap={{ scale: 0.95 }}>最大金额</motion.div>
         </div>
         <motion.div className={styles.submitBtn} whileTap={{ scale: 0.95 }}>
-          转入
+          {type === 'transfer' ? '转入' : '转出'}
         </motion.div>
       </div>
     </div>
