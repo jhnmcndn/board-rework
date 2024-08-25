@@ -39,14 +39,6 @@ const NavTab = <T extends BaseItem>({
       setConstraint((prev) => ({ ...prev, left: -(scrollWidth - clientWidth) }));
     };
     scroll();
-
-    setTimeout(
-      () =>
-        document.getElementById(`navTabItem-${active}`)?.scrollIntoView({
-          behavior: 'smooth',
-        }),
-      500,
-    );
   }, []);
 
   return (
@@ -61,7 +53,7 @@ const NavTab = <T extends BaseItem>({
       >
         {list.map((item, index) => (
           <Item
-            key={item.id ? item.id : index}
+            key={item.id ?? index}
             activeTab={activeFromProps ?? active}
             index={index}
             onSetActive={handleSetActive}
