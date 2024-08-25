@@ -2,11 +2,11 @@ import useImages from '@/hooks/useImages';
 import classNames from 'classnames';
 import Image from 'next/image';
 import type { ChangeEvent, ClipboardEvent, ComponentPropsWithoutRef } from 'react';
-import { forwardRef, useState } from 'react';
+import { forwardRef, useId, useState } from 'react';
 import styles from './index.module.scss';
 
 type InputProps = ComponentPropsWithoutRef<'input'> & {
-  label: string;
+  label?: string;
   error?: string;
   className?: string;
   containerClassName?: string;
@@ -28,7 +28,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     errorClassName,
     disablePasted = false,
     passwordToggle = false,
-    // codeVerification = false,
     type = 'text',
     number = false,
     defaultValidate = true,
@@ -37,8 +36,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   },
   ref,
 ) {
-  const [inputValue, setInputValue] = useState<string>('');
+  const id = useId();
   const { images } = useImages();
+  const inputLabel = label || `input-${id}`;
+  const [inputValue, setInputValue] = useState<string>('');
   const [passwordType, setPasswordType] = useState<'password' | 'text'>('password');
   const toggleImage = passwordType === 'password' ? images.hidePassword : images.showPassword;
 
@@ -64,8 +65,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   return (
     <div className={classNames(styles.container, containerClassName)}>
       <input
-        id={label}
-        name={label}
+        id={inputLabel}
+        name={inputLabel}
         type={type === 'password' ? passwordType : type}
         className={classNames(styles.input__field, className, {
           [styles['input__field--error']]: defaultValidate && error,
