@@ -1,5 +1,9 @@
 import Input from '@/components/Input';
-import { FC } from 'react';
+import { registerPhoneSchema } from '@/constants/validateSchema';
+import useValidate from '@/hooks/useFormValidate';
+import useRegisterPhone from '@/hooks/useRegisterPhone';
+import useModalStore from '@/store/modals';
+import { FC, useEffect } from 'react';
 import styles from '../index.module.scss';
 
 type RegisterFormProps = {
@@ -7,43 +11,66 @@ type RegisterFormProps = {
 };
 
 const RegisterForm: FC<RegisterFormProps> = ({ switchToLogin }) => {
-  const handleRequestVerification = () => {
-    console.log('REQUEST VERIFICATION');
+  const { openAlert } = useModalStore();
+  const { requestVerifyCode, registerPhone } = useRegisterPhone();
+  const defaultValues = { phoneNumber: '', password: '', confirmPassword: '', verifyCode: '' };
+  const { values, errors, handleSubmit, reset, registerField } = useValidate({
+    defaultValues,
+    schema: registerPhoneSchema,
+  });
+
+  useEffect(() => {
+    const errorInstance =
+      errors('phoneNumber') || errors('password') || errors('confirmPassword') || errors('verifyCode');
+    if (errorInstance) {
+      openAlert({ body: errorInstance });
+    }
+  }, [errors]);
+
+  const handleRequestVerify = () => {
+    requestVerifyCode(values('phoneNumber'));
   };
 
-  const handelRegisterMobile = (e: any) => {
-    e.preventDefault();
-    console.log('REGISTER SUBMITTED');
+  const tryRegisterPhone = async () => {
+    const res = await registerPhone({
+      phone: values('phoneNumber'),
+      password: values('password'),
+      verifyCode: values('verifyCode'),
+    });
+    if (res) {
+      reset();
+      switchToLogin();
+    }
   };
 
   const inputClassNames = { className: styles.form__input, containerClassName: styles.form__inputContainer };
 
   return (
     <>
-      <form onSubmit={handelRegisterMobile} className={styles.form}>
-        <Input label='register-username' placeholder='请输入您的手机号' maxLength={15} {...inputClassNames} />
+      <form onSubmit={handleSubmit(tryRegisterPhone)} className={styles.form}>
+        <Input placeholder='请输入您的手机号' maxLength={15} {...inputClassNames} {...registerField('phoneNumber')} />
         <Input
-          label='register-password'
           placeholder='请输入密码'
           maxLength={16}
           type='password'
           passwordToggle
           {...inputClassNames}
+          {...registerField('password')}
         />
         <Input
-          label='confirm-password'
           placeholder='请再次输入密码'
           maxLength={16}
           type='password'
           passwordToggle
           {...inputClassNames}
+          {...registerField('confirmPassword')}
         />
         <Input
-          label='verification-code'
           placeholder='请输入验证码'
-          maxLength={15}
+          maxLength={6}
           {...inputClassNames}
-          onRequestVerification={handleRequestVerification}
+          {...registerField('verifyCode')}
+          onRequestVerification={handleRequestVerify}
         />
         <button className={styles.form__button} type='submit'>
           确认注册
