@@ -1,34 +1,38 @@
 import useImages from '@/hooks/useImages';
 import classNames from 'classnames';
 import Image from 'next/image';
-import type { ChangeEvent, ClipboardEvent, ComponentPropsWithoutRef, HTMLInputTypeAttribute } from 'react';
+import type { ChangeEvent, ClipboardEvent, ComponentPropsWithoutRef } from 'react';
 import { forwardRef, useState } from 'react';
 import styles from './index.module.scss';
 
-export interface InputProps extends ComponentPropsWithoutRef<'input'> {
+type InputProps = ComponentPropsWithoutRef<'input'> & {
   label: string;
   error?: string;
+  className?: string;
+  containerClassName?: string;
+  errorClassName?: string;
   disablePasted?: boolean;
   passwordToggle?: boolean;
-  number?: boolean;
   defaultValidate?: boolean;
-  inputClassName?: string;
-  errorClassName?: string;
-  type?: Extract<HTMLInputTypeAttribute, 'text' | 'password' | 'number' | 'email'>;
-}
+  onRequestVerification?: () => void;
+  number?: boolean;
+};
 
 const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   {
     label,
     value,
     error,
-    inputClassName,
+    className,
+    containerClassName,
     errorClassName,
     disablePasted = false,
     passwordToggle = false,
+    // codeVerification = false,
     type = 'text',
     number = false,
     defaultValidate = true,
+    onRequestVerification,
     ...rest
   },
   ref,
@@ -58,12 +62,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   };
 
   return (
-    <div className={styles.container}>
+    <div className={classNames(styles.container, containerClassName)}>
       <input
         id={label}
         name={label}
         type={type === 'password' ? passwordType : type}
-        className={classNames(styles.input__field, inputClassName, {
+        className={classNames(styles.input__field, className, {
           [styles['input__field--error']]: defaultValidate && error,
         })}
         onPaste={handlePasted}
@@ -80,9 +84,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           width={22}
           height={19}
           alt='show'
-          className={styles.input__revealPassword}
+          className={styles.input__toggleMask}
           onClick={handleShowPassword}
         />
+      )}
+      {onRequestVerification && (
+        <button type='button' className={styles.input__codeVerification} onClick={onRequestVerification}>
+          获取验证码
+        </button>
       )}
     </div>
   );
