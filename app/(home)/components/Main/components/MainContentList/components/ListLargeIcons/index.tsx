@@ -3,7 +3,7 @@ import MemoizedIconHolder from '@/components/MemoizedIconHolder';
 import NoData from '@/components/NoData';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
-import useAuthCheck from '@/hooks/useAuthCheck';
+import useAuthActions from '@/hooks/useAuthActions';
 import useImages from '@/hooks/useImages';
 import { GameInfoGroup, ListIconProps, RspGameInfo } from '@/types/app';
 import classNames from 'classnames';
@@ -19,7 +19,7 @@ type CombinedGameInfo = RspGameInfo & GameInfoGroup;
 const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData, setSearchFieldData }) => {
   const router = useRouter();
   const { images } = useImages();
-  const { authCheck } = useAuthCheck();
+  const { authCheck } = useAuthActions();
   const rowsContainerRef = useRef<HTMLDivElement | null>(null);
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
   const [isDragging, setIsDragging] = useState(false);

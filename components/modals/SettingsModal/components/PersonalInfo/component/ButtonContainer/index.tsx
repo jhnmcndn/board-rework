@@ -1,40 +1,14 @@
-import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
-import useModalStore from '@/store/modals';
+import useAuthActions from '@/hooks/useAuthActions';
+import { FC } from 'react';
 import styles from './index.module.scss';
 
-const ButtonContainer: React.FC = () => {
-  const empty = {
-    token: undefined,
-    id: undefined,
-    nickName: undefined,
-    vip: 1,
-    headImg: undefined,
-    accountNow: undefined,
-    accountCharge: undefined,
-    codeNow: undefined,
-    codeWill: undefined,
-    codeTotal: 0,
-    nextLevelIntegral: 0,
-    status: undefined,
-    inviterCode: undefined,
-    registerType: undefined,
-    phone: undefined,
-    newAccount: undefined,
-  };
-  const { setAccountInfo } = useAccountStore((state) => state);
-  const { openLoginOptions, closeSettings } = useModalStore();
+const ButtonContainer: FC = () => {
+  const { logout } = useAuthActions();
+
   return (
     <div className={styles.buttonContainer}>
       <div className={styles.infoBtn}>
-        <div
-          className={styles.logoutBtn}
-          onClick={() => {
-            // handleLogoutButton()
-            openLoginOptions();
-            closeSettings();
-            setAccountInfo(empty);
-          }}
-        >
+        <div className={styles.logoutBtn} onClick={logout}>
           账号切换
         </div>
       </div>

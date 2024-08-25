@@ -1,7 +1,7 @@
 import { getAccountInfo } from '@/api/game';
 import { getBindCardList } from '@/api/pay';
 import { getAccountNow, getActivityQuestTypes, getActivityTypes } from '@/api/platform';
-import { defaultInitData } from '@/constants/defaultReturnData';
+import { defaultInitData } from '@/constants/defaultData';
 import {
   AccountInfo,
   AccountNow,
