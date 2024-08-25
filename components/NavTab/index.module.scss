@@ -1,13 +1,20 @@
-.tabList {
-  background-color: #1a1a1a;
-  display: flex;
+.wrapper {
   width: 100%;
+  overflow-x: auto;
+  background-color: #1a1a1a;
   border-radius: 1rem;
-  overflow: hidden;
+  margin-bottom: 0.1rem;
+}
+
+.tabList {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
 
   li {
     width: 100%;
-    padding: 0.1rem 0.15rem;
+    padding: 0.065rem 0.15rem;
     text-align: center;
     font-weight: bold;
     position: relative;
