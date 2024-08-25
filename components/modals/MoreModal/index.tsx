@@ -1,7 +1,7 @@
 'use client';
 
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
-import useAuthCheck from '@/hooks/useAuthCheck';
+import useAuthActions from '@/hooks/useAuthActions';
 import useClickOutSide from '@/hooks/useClickOutside';
 import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
@@ -21,7 +21,7 @@ type MoreModalComponent = FC<Readonly<MoreModalComponentProps>>;
 const MoreModal: MoreModalComponent = ({ setOpenAnnounceModal, setSafeBoxModal, setShowMore }) => {
   const { push } = useRouter();
   const { images } = useImages();
-  const { authCheck } = useAuthCheck();
+  const { authCheck } = useAuthActions();
   const { theme } = useAccountStore((state) => state);
   const moreOptionsRef = useRef<HTMLDivElement>(null);
   const clickOutSide = useClickOutSide(moreOptionsRef);

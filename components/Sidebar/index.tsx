@@ -14,13 +14,13 @@ export type SidebarComponentProps = {
 
 export type SidebarComponent = FC<Readonly<SidebarComponentProps>>;
 
-const Sidebar: SidebarComponent = ({ sidebarItems, activeSidebarItem, setActiveSidebarItem }) => {
+const Sidebar: SidebarComponent = ({ sidebarItems, activeSidebarItem, setActiveSidebarItem, ...props }) => {
   return (
     <motion.div
       initial={{ x: -100 }}
       animate={{ x: 0 }}
       transition={{ duration: 0.3 }}
-      className={styles.sidebarWrapper}
+      className={classNames(styles.sidebarWrapper, 'safeboxContainer')}
     >
       {sidebarItems.map((item, index) => (
         <div

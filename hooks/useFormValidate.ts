@@ -7,7 +7,6 @@ import type { ZodType } from 'zod';
 interface IUseValidate<TForm extends FieldValues> {
   defaultValues: DefaultValues<TForm>;
   schema?: ZodType<TForm>;
-  // schema?: Schema;
   // delayError?: number;
 }
 

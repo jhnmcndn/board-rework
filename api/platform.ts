@@ -1,7 +1,7 @@
 'use server';
 
 import { request } from '@/api';
-import { defaultInitData } from '@/constants/defaultReturnData';
+import { defaultInitData } from '@/constants/defaultData';
 import { COOKIE_MAX_AGE } from '@/constants/misc';
 import {
   AccountInfo,
@@ -11,6 +11,7 @@ import {
   ActivityQuestSectionTypes,
   ActivityTypes,
   BoxAccount,
+  BoxAccountResponse,
   CodeFlowList,
   CustomerService,
   FundDetailsPayload,
@@ -22,6 +23,7 @@ import {
   MessageOnSites,
   ReceiveVipGift,
   ReceiveVipGiftParams,
+  RegisterPhonePayload,
   ResetPassword,
   RootResponse,
   TFundDetails,
@@ -51,6 +53,28 @@ export const loginPhoneNumber = async (payload: LoginPhonePayload) => {
     tags: API_ENDPOINT.LOGIN,
   });
   if (data.data && 'token' in data.data) cookies().set('token', `${data.data.token}`, { maxAge: COOKIE_MAX_AGE });
+  return data;
+};
+
+// TODO add Response Type for requestPhoneVerify and registerPhoneNumber
+
+export const requestPhoneVerify = async (payload: { phone: string }) => {
+  const data = await request<RootResponse<any>>({
+    body: payload,
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.SEND_SMS_VERIFY_CODE,
+    tags: API_ENDPOINT.SEND_SMS_VERIFY_CODE,
+  });
+  return data;
+};
+
+export const registerPhoneNumber = async (payload: RegisterPhonePayload) => {
+  const data = await request<RootResponse<any>>({
+    body: payload,
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.REGISTER,
+    tags: API_ENDPOINT.REGISTER,
+  });
   return data;
 };
 
@@ -257,13 +281,24 @@ export const getTradeTypes = async () => {
   return data.data;
 };
 
-export const getFundDetails = async ({ enumMoney, enumReqTime }: FundDetailsPayload) => {
+export const getFundDetails = async ({ enumMoney, enumReqTime, pageSize }: FundDetailsPayload) => {
   const data = await request<RootResponse<TFundDetails[]>>({
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.FUND_DETAILS,
     tags: API_ENDPOINT.FUND_DETAILS,
-    body: { enumMoney, enumReqTime },
+    body: { enumMoney, enumReqTime, pageSize },
   });
   if (!data.data || 'message' in data.data) return [] satisfies TFundDetails[];
+  return data.data;
+};
+
+export const getBoxAccount = async ({ boxPass }: { boxPass: string }) => {
+  const data = await request<RootResponse<BoxAccountResponse>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.BOX_ACCOUNT,
+    tags: API_ENDPOINT.BOX_ACCOUNT,
+    body: { boxPass },
+  });
+  if (!data.data || 'message' in data.data) return { accountNow: 1234, boxAccount: 4567 } satisfies BoxAccountResponse;
   return data.data;
 };

@@ -1,21 +1,36 @@
 import { getIp } from '@/api';
 import { loginDevice, loginPhoneNumber } from '@/api/platform';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import { defaultAccountInfo } from '@/constants/defaultData';
 import useModalStore from '@/store/modals';
 import { AccountInfo, ErrorData, RootResponse } from '@/types/app';
-import { generateDeviceId, getDeviceInfo, getFromLocalStorage } from '@/utils/helpers';
+import { getDeviceId, getDeviceInfo, getFromLocalStorage } from '@/utils/helpers';
 
 type LoginMethod = 'device' | 'phone' | 'user-pass' | 'captcha';
 type LoginPayload = { id: string; password: string };
 
-const useLogin = () => {
+const useAuthActions = () => {
+  const deviceId = getDeviceId();
   const phoneModel = getDeviceInfo();
-  const deviceId = generateDeviceId();
-  const { openAlert, closeLoginOptions, closeLoginOrRegister, setSidebarAnnouncement, openAnnouncement } =
-    useModalStore();
+  const token = getFromLocalStorage('token');
   const inviterCode = getFromLocalStorage('channelCode');
-  const { setAccountInfo, setAccountNow } = useAccountStore((state) => state);
+  const { setAccountInfo, setAccountNow, accountInfo } = useAccountStore((state) => state);
+  const isLoggedIn = !!accountInfo.id && !!token;
   const validate = null;
+  const {
+    openAlert,
+    openLoginOptions,
+    closeLoginOptions,
+    closeLoginOrRegister,
+    closeSettings,
+    setSidebarAnnouncement,
+    openAnnouncement,
+  } = useModalStore();
+
+  const authCheck = (callback: () => void) => {
+    if (isLoggedIn) callback();
+    else openLoginOptions();
+  };
 
   const login = async (loginMethod: LoginMethod = 'device', data?: LoginPayload) => {
     const ip = await getIp();
@@ -46,7 +61,15 @@ const useLogin = () => {
     }
   };
 
-  return { login };
+  const logout = () => {
+    // TODO add reset for other store data
+    setAccountInfo(defaultAccountInfo);
+    localStorage.removeItem('token');
+    closeSettings();
+    openLoginOptions();
+  };
+
+  return { isLoggedIn, authCheck, login, logout };
 };
 
-export default useLogin;
+export default useAuthActions;

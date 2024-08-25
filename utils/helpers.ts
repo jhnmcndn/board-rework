@@ -67,7 +67,7 @@ export const setToLocalStorage = (key: string, value: string) => {
   else return localStorage.setItem(key, value);
 };
 
-export const generateDeviceId = () => {
+export const getDeviceId = () => {
   let deviceId = getFromLocalStorage('deviceId');
   if (!deviceId) {
     var d = new Date().getTime();
