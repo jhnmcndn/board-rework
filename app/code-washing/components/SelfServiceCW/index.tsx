@@ -43,19 +43,21 @@ const SelfServiceCW = () => {
       })),
     [washCode],
   );
+
   const total = codeWashList?.reduce((total, code) => total + code[3], 0) || 0;
 
+  const fetchWashCodeDetails = async () => {
+    const codeWash = await getWashCodeDetail();
+    if (codeWash.rspGameTypeWashCodes) setWashCode(codeWash);
+  };
+
   useEffect(() => {
-    const fetchWashCodeDetails = async () => {
-      const codeWash = await getWashCodeDetail();
-      if (codeWash.rspGameTypeWashCodes) setWashCode(codeWash);
-    };
     fetchWashCodeDetails();
   }, []);
 
   return (
     <div className={styles.wrapper} style={{ height: codeWashList?.length ? 'auto' : '100%' }}>
-      <CodeWashList list={codeWashList} />
+      <CodeWashList list={codeWashList} onRefresh={fetchWashCodeDetails} />
       <TotalReceived total={total} listLength={codeWashList?.length || 0} updateWashCode={updateWashCode} />
     </div>
   );

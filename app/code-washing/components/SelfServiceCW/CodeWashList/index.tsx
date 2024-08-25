@@ -4,9 +4,10 @@ import styles from './index.module.scss';
 
 type CodeWashListProps = {
   list: any;
+  onRefresh: () => Promise<void>;
 };
 
-const CodeWashList: FC<CodeWashListProps> = ({ list }) => {
+const CodeWashList: FC<CodeWashListProps> = ({ list, onRefresh }) => {
   const headers = ['游戏类型', '打码总额', '洗码比例', '洗码金额', ''];
 
   return (
@@ -16,7 +17,7 @@ const CodeWashList: FC<CodeWashListProps> = ({ list }) => {
         content={list || []}
         withPullToRefresh={{
           isPullable: true,
-          onRefresh: async () => await console.log('自助派彩刷新'),
+          onRefresh: onRefresh,
         }}
       />
     </div>
