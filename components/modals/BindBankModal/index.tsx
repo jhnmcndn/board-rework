@@ -73,17 +73,17 @@ const BindBankModal = () => {
       openAlert({ body: '请输入开户地址' });
     } else if (bindBankAccount?.length < 16) {
       openAlert({ body: '请输入超过16个银行卡号' });
-    }
-
-    const { code, msg } = await setBindCard(bindRealName, bindBankAccount, bindBankAddress, bindBankId);
-    if (code === 200) {
-      fetchBindCardList();
-      openAlert({ body: msg });
-      setTimeout(() => {
-        closeBindBank();
-      }, 500);
-    } else if (code === 500) {
-      openAlert({ body: msg });
+    } else {
+      const { code, msg } = await setBindCard(bindRealName, bindBankAccount, bindBankAddress, bindBankId);
+      if (code === 200) {
+        fetchBindCardList();
+        openAlert({ body: msg });
+        setTimeout(() => {
+          closeBindBank();
+        }, 500);
+      } else if (code === 500) {
+        openAlert({ body: msg });
+      }
     }
   };
 
