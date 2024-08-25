@@ -16,6 +16,7 @@ import {
   FundDetailsPayload,
   Init,
   LoginDevicePayload,
+  LoginPhonePayload,
   MessageCommonProblems,
   MessageHomeNotice,
   MessageOnSites,
@@ -39,7 +40,18 @@ export const loginDevice = async (payload: LoginDevicePayload) => {
     tags: API_ENDPOINT.LOGIN_DEVICE,
   });
   if (data.data && 'token' in data.data) cookies().set('token', `${data.data.token}`, { maxAge: COOKIE_MAX_AGE });
-  return data.data;
+  return data;
+};
+
+export const loginPhoneNumber = async (payload: LoginPhonePayload) => {
+  const data = await request<RootResponse<AccountInfo>>({
+    body: payload,
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.LOGIN,
+    tags: API_ENDPOINT.LOGIN,
+  });
+  if (data.data && 'token' in data.data) cookies().set('token', `${data.data.token}`, { maxAge: COOKIE_MAX_AGE });
+  return data;
 };
 
 export const getAccountNow = async () => {
