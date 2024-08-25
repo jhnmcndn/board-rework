@@ -9,7 +9,6 @@
     height: 0.3rem;
     width: 100%;
 
-
     input {
       width: 2.8rem;
       height: 100%;
@@ -49,12 +48,13 @@
       padding: 0;
 
       .css-hlgwow {
-        display: block;
+        display: flex;
         height: 100%;
-        padding: 0;
+        padding: 0 0 0 2.5%;
         box-shadow: none;
+        align-items: center;
 
-        .css-1dimb5e-singleValue {
+        .css-1dimb5e-singleValue span {
           display: flex;
           align-items: center;
         }
@@ -65,10 +65,15 @@
       }
 
       .css-1wy0on6 {
-        display: block;
+        display: flex;
         height: 100%;
-        padding: 0;
+        padding: 0 2.5% 0;
         box-shadow: none;
+        align-items: center;
+
+        .css-1u9des2-indicatorSeparator {
+          width: 0;
+        }
       }
     }
 
