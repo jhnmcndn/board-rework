@@ -1,5 +1,5 @@
 import ImgWithFallback from '@/components/ImgWithFallback';
-import useAuthCheck from '@/hooks/useAuthCheck';
+import useAuthActions from '@/hooks/useAuthActions';
 import useImages from '@/hooks/useImages';
 import { FC, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
@@ -14,8 +14,8 @@ type ImageAccordionProps = {
 };
 
 const ImageAccordion: FC<ImageAccordionProps> = ({ url, icon, content }) => {
-  const { authCheck } = useAuthCheck();
   const { images } = useImages();
+  const { authCheck } = useAuthActions();
   const [expand, setExpand] = useState<boolean>(false);
 
   const handleExpand = () => {
