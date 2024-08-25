@@ -3,6 +3,7 @@ import { FC, useEffect, useState } from 'react';
 
 import MoreModal from '@/components/modals/MoreModal';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import { useMessageStore } from '@/components/Providers/MessageStoreProvider';
 import useAuthActions from '@/hooks/useAuthActions';
 import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
@@ -16,18 +17,21 @@ const LeftNavigation: FC = () => {
   const { images } = useImages();
   const { authCheck } = useAuthActions();
   const [showMoreModal, setShowMoreModal] = useState(false);
-  const accountInfo = useAccountStore((state) => state.accountInfo);
   const { openAnnouncement, setSidebarAnnouncement } = useModalStore();
-  const isLoggedIn = Boolean(accountInfo.id);
+  const { messageOnSites } = useMessageStore((state) => state);
+  const accountInfo = useAccountStore((state) => state.accountInfo);
 
   const [unreadMsgs, setUnreadMsgs] = useState<MessageOnSites[]>([]);
 
   useEffect(() => {
-    const existingMessages = JSON.parse(localStorage.getItem('existing-messages') || '[]');
+    let existingMessages: MessageOnSites[] = messageOnSites;
     if (existingMessages.length > 0) {
       setUnreadMsgs(existingMessages.filter((mail: MessageOnSites) => !mail.isRead));
+    } else if (JSON.parse(localStorage.getItem('existing-messages')!)) {
+      existingMessages = JSON.parse(localStorage.getItem('existing-messages')!);
+      setUnreadMsgs(existingMessages.filter((mail: MessageOnSites) => !mail.isRead));
     }
-  }, []);
+  }, [messageOnSites]);
 
   const handleNavigation = (route: string) => {
     authCheck(() => push(route));
@@ -59,7 +63,7 @@ const LeftNavigation: FC = () => {
           text='活动'
         />
         <ListContainer
-          notif={unreadMsgs.length}
+          notif={accountInfo.id !== undefined ? unreadMsgs.length : 0}
           dataClick={sfx.messageAudio}
           icon={images.message}
           text='消息'

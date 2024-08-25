@@ -23,7 +23,7 @@
   }
 
   &:nth-child(4) {
-    &::after {
+    &[data-notif]:not([data-notif='0'])::after {
       content: attr(data-notif);
       position: relative;
       font-size: 0.08rem;
