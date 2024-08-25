@@ -30,33 +30,10 @@ const GameBalanceItem: FC<Readonly<{ gameBalance: TGameBalance }>> = ({ gameBala
 };
 
 const GameBalance: FC<Readonly<{ gameBalance: TGameBalance[] }>> = ({ gameBalance }) => {
-  const testData = [
-    {
-      money: 0,
-      platformId: 1,
-      platformName: '开元棋牌',
-    },
-    {
-      money: 0.0,
-      platformId: 8,
-      platformName: 'AG电子',
-    },
-    {
-      money: 0,
-      platformId: 30,
-      platformName: 'JDB电子',
-    },
-    {
-      money: 0.0,
-      platformId: 9,
-      platformName: 'MG电子',
-    },
-  ];
-  console.log(gameBalance);
   return (
     <div className={styles.container}>
       <PullToRefresh onRefresh={async () => refetch(API_ENDPOINT.GAME_BALANCE)}>
-        <div>{testData?.map((i) => <GameBalanceItem key={i.platformId} gameBalance={i} />)}</div>
+        <div>{gameBalance?.map((i) => <GameBalanceItem key={i.platformId} gameBalance={i} />)}</div>
       </PullToRefresh>
     </div>
   );
