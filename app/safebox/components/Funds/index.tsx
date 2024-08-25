@@ -1,12 +1,16 @@
+'use client';
+
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { BoxAccountResponse } from '@/types/app';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import styles from './index.module.scss';
 
 type FundProps = { type: 'withdraw' | 'transfer'; boxAccount: BoxAccountResponse };
 
 const Funds: FC<FundProps> = ({ type, boxAccount: res }) => {
+  const [val, setVal] = useState('');
   const theme = useAccountStore((state) => state.theme);
   const { accountNow, boxAccount } = res ?? {};
 
@@ -47,10 +51,12 @@ const Funds: FC<FundProps> = ({ type, boxAccount: res }) => {
       <div className={styles.inputContainer}>
         <div>转出金额</div>
         <div>
-          <input type='text' placeholder='请输入转出金额' />
-          <div>最大金额</div>
+          <input type='text' placeholder='请输入转出金额' value={val} onChange={(e) => setVal(e.target.value)} />
+          <motion.div whileTap={{ scale: 0.95 }}>最大金额</motion.div>
         </div>
-        <div className={styles.submitBtn}>转入</div>
+        <motion.div className={styles.submitBtn} whileTap={{ scale: 0.95 }}>
+          {type === 'transfer' ? '转入' : '转出'}
+        </motion.div>
       </div>
     </div>
   );

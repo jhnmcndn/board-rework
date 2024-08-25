@@ -25,11 +25,11 @@ const MainContent: FC<
         activeSidebarItem={activeSidebarItem}
         setActiveSidebarItem={setActiveSidebarItem}
       />
-      <div className={styles.content} data-theme={theme}>
+      <section className={styles.wrapper}>
         {activeSidebarItem === 0 && <Funds type='transfer' boxAccount={boxAccount} />}
         {activeSidebarItem === 1 && <Funds type='withdraw' boxAccount={boxAccount} />}
         {activeSidebarItem === 2 && <FundDetails fundDetails={fundDetails} />}
-      </div>
+      </section>
     </main>
   );
 };
