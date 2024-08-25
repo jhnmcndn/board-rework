@@ -8,10 +8,10 @@ const SafeBox = async () => {
     getFundDetails({ enumMoney: 'today', enumReqTime: 'SAFE_BOX', pageSize: 50 }),
   ]);
   return (
-    <div>
+    <>
       <OtherHeader headerTitle='保险箱' showPurse />
       <MainContent boxAccount={boxAccount} fundDetails={fundDetails} />
-    </div>
+    </>
   );
 };
 
