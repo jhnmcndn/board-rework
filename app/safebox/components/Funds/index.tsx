@@ -46,9 +46,11 @@ const Funds: FC<FundProps> = ({ type, boxAccount: res }) => {
       </div>
       <div className={styles.inputContainer}>
         <div>转出金额</div>
-        <input type='text' placeholder='请输入转出金额' />
-        <div>最大金额</div>
-        <div>转入</div>
+        <div>
+          <input type='text' placeholder='请输入转出金额' />
+          <div>最大金额</div>
+        </div>
+        <div className={styles.submitBtn}>转入</div>
       </div>
     </div>
   );

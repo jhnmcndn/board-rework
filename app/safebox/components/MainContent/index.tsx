@@ -18,7 +18,6 @@ const MainContent: FC<
   const sidebarItems = ['资金转入', '资金取出', '互转明细'];
   const [activeSidebarItem, setActiveSidebarItem] = useState(0);
 
-  console.log(boxAccount);
   return (
     <main className={styles.container}>
       <Sidebar
