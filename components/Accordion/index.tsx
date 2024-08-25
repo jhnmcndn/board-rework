@@ -5,7 +5,7 @@ import { MessageOnSites } from '@/types/app';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useMessageStore } from '../Providers/MessageStoreProvider';
 import styles from './index.module.scss';
 
@@ -28,9 +28,12 @@ const Accordion: AccordionComponent = ({ message, delay, background, img, dropdo
     setExpand((prev) => !prev);
     if (message.id && messageOnSites.length > 0) {
       setMessageOnSites(messageOnSites.map((mail) => (mail.id === message.id ? { ...mail, isRead: true } : mail)));
-      expand && localStorage.setItem('existing-messages', JSON.stringify(messageOnSites));
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem('existing-messages', JSON.stringify(messageOnSites));
+  }, [messageOnSites]);
 
   return (
     <motion.div
