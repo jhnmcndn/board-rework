@@ -7,7 +7,7 @@ type RateListProps = {
   list: Omit<WashCodeRate, 'washCodeDescList'>[];
 };
 
-type RateItemProp = Omit<WashCodeRate, 'washCodeDescList'> & {
+type RateItemProps = Omit<WashCodeRate, 'washCodeDescList'> & {
   active: number;
   onSetActive: (id: number) => void;
 };
@@ -29,7 +29,7 @@ const RateList: FC<RateListProps> = ({ list = [] }) => {
   );
 };
 
-const Item: FC<RateItemProp> = ({ id, name, active, onSetActive }) => {
+const Item: FC<RateItemProps> = ({ id, name, active, onSetActive }) => {
   return (
     <motion.li onClick={() => onSetActive(id)}>
       <span>{name}</span>

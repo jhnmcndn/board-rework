@@ -1,7 +1,9 @@
 import { getWashCodeRateList } from '@/api/game';
 import { WashCodeRate } from '@/types/app';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import styles from './index.module.scss';
 import RateList from './RateList';
+import WashCodeList from './WashCodeList';
 
 const CodeWashingRatio = () => {
   const [codeRateList, setCodeRateList] = useState<WashCodeRate[]>();
@@ -15,9 +17,10 @@ const CodeWashingRatio = () => {
   }, []);
 
   return (
-    <Fragment>
+    <div className={styles.wrapper}>
       <RateList list={codeRateList || []} />
-    </Fragment>
+      <WashCodeList list={codeRateList || []} />
+    </div>
   );
 };
 
