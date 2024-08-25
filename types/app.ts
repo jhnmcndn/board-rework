@@ -60,6 +60,16 @@ export type LoginPhonePayload = {
   validate: string | null;
 };
 
+export type RegisterPhonePayload = {
+  mobile: string;
+  passwd: string;
+  code: string;
+  inviterCode: string;
+  deviceId: string;
+  ip: string;
+  phoneModel: string | null;
+};
+
 export type AccountInfo = {
   token?: string;
   id?: string;
@@ -285,6 +295,7 @@ export type ListContainerProps = {
   onClick?: () => void;
   icon: string;
   text: string;
+  notif?: string | number;
 };
 
 export type WashCodeDetail = {
