@@ -81,10 +81,10 @@
     &::after {
       content: "¥";
       position: absolute;
-      top: 0.05rem;
-      left: 0.08rem;
+      top: 0.06rem;
+      left: 0.1rem;
       color: rgba(0, 0, 0, 0.5);
-      font-size: 0.15rem;
+      font-size: 0.17rem;
     }
 
     span {
@@ -98,10 +98,11 @@
     input {
       border-radius: 999px;
       border: none;
-      padding-inline-start: 0.2rem;
+      padding-inline-start: 0.25rem;
       width: 85%;
       height: 0.3rem;
       font-size: 0.15rem;
+      outline: none;
     }
 
     div:last-child {
