@@ -24,6 +24,7 @@ const NavTab = <T extends BaseItem>({
   const [active, setActive] = useState(activeFromProps ?? 0);
   const [constraint, setConstraint] = useState({ left: 0, right: 0 });
   const [isDragging, setIsDragging] = useState(false);
+  const [defaultX, setDefaultX] = useState(0);
 
   const handleSetActive = (index: number, data?: T) => {
     if (activeFromProps === index || isDragging) return;
@@ -41,8 +42,26 @@ const NavTab = <T extends BaseItem>({
     scroll();
   }, []);
 
+  useEffect(() => {
+    const wrapper = document.querySelector('#navTabWrapper');
+    const activeNav = document.querySelector(`#navTabItem-${active}`);
+
+    if (wrapper && activeNav) {
+      const wrapperRect = wrapper.getBoundingClientRect();
+      const activeNavRect = activeNav.getBoundingClientRect();
+
+      const isOutOfView = activeNavRect.left < wrapperRect.left || activeNavRect.right > wrapperRect.right;
+
+      if (isOutOfView) {
+        const offset = activeNavRect.left - wrapperRect.left;
+        const newDefaultX = -offset + 160;
+        setDefaultX(newDefaultX);
+      }
+    }
+  }, []);
+
   return (
-    <div className={styles.wrapper} style={customStyle}>
+    <div className={styles.wrapper} id='navTabWrapper' style={customStyle}>
       <motion.ul
         drag='x'
         ref={navRef}
@@ -50,6 +69,8 @@ const NavTab = <T extends BaseItem>({
         dragConstraints={constraint}
         onDragEnd={() => setIsDragging(false)}
         onDragStart={() => setIsDragging(true)}
+        animate={{ x: defaultX }}
+        transition={{ duration: 1.5, type: 'spring' }}
       >
         {list.map((item, index) => (
           <Item
