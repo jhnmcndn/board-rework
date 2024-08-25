@@ -14,14 +14,19 @@ type NavTabProps<T extends BaseItem> = {
   onSetActive?: (index: number, data?: T) => void;
 };
 
-const NavTab = <T extends BaseItem>({ list = [], activeTab, styles: customStyle, onSetActive }: NavTabProps<T>) => {
+const NavTab = <T extends BaseItem>({
+  list = [],
+  activeTab: activeFromProps,
+  styles: customStyle,
+  onSetActive,
+}: NavTabProps<T>) => {
   const navRef = useRef<HTMLUListElement>(null);
-  const [active, setActive] = useState(activeTab ?? 0);
+  const [active, setActive] = useState(activeFromProps ?? 0);
   const [constraint, setConstraint] = useState({ left: 0, right: 0 });
   const [isDragging, setIsDragging] = useState(false);
 
   const handleSetActive = (index: number, data?: T) => {
-    if (activeTab === index || isDragging) return;
+    if (activeFromProps === index || isDragging) return;
     setActive(index);
     onSetActive?.(index, data);
   };
@@ -49,7 +54,7 @@ const NavTab = <T extends BaseItem>({ list = [], activeTab, styles: customStyle,
         {list.map((item, index) => (
           <Item
             key={item.id ? item.id : index}
-            activeTab={active}
+            activeTab={activeFromProps ?? active}
             index={index}
             onSetActive={handleSetActive}
             item={item}
@@ -67,10 +72,7 @@ type NavItemProps<T extends BaseItem> = Omit<NavTabProps<T>, 'list' | 'styles'> 
   activeTab: number;
 };
 const Item = <T extends BaseItem>({ index, name, activeTab, item, onSetActive }: NavItemProps<T> & { item: T }) => {
-  const handleItemClick = () => {
-    onSetActive?.(index, item);
-  };
-
+  const handleItemClick = () => onSetActive?.(index, item);
   return (
     <motion.li onClick={handleItemClick}>
       <span className={activeTab === index ? styles.activeNav : ''}>{name}</span>
