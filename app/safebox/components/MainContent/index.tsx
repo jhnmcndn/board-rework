@@ -25,11 +25,13 @@ const MainContent: FC<
         activeSidebarItem={activeSidebarItem}
         setActiveSidebarItem={setActiveSidebarItem}
       />
-      <div className={styles.content} data-theme={theme}>
-        {activeSidebarItem === 0 && <Funds type='transfer' boxAccount={boxAccount} />}
-        {activeSidebarItem === 1 && <Funds type='withdraw' boxAccount={boxAccount} />}
-        {activeSidebarItem === 2 && <FundDetails fundDetails={fundDetails} />}
-      </div>
+      <section className={styles.wrapper}>
+        <div className={styles.content} data-theme={theme}>
+          {activeSidebarItem === 0 && <Funds type='transfer' boxAccount={boxAccount} />}
+          {activeSidebarItem === 1 && <Funds type='withdraw' boxAccount={boxAccount} />}
+          {activeSidebarItem === 2 && <FundDetails fundDetails={fundDetails} />}
+        </div>
+      </section>
     </main>
   );
 };

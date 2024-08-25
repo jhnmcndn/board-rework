@@ -67,9 +67,9 @@
   background: var(--vip-balance-bg);
   display: flex;
   flex-direction: column;
+  height: 100%;
 
   div:first-child {
-    grid-area: 1 / 1 / 2 / 13;
     padding-block-end: 0.15rem;
     font-size: 0.2rem;
   }
