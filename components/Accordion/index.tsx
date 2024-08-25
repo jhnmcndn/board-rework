@@ -11,7 +11,6 @@ import styles from './index.module.scss';
 
 export type AccordionComponentProps = {
   message: MessageOnSites;
-  createdAt?: string;
   delay: number;
   background?: string;
   img?: string;
@@ -20,7 +19,7 @@ export type AccordionComponentProps = {
 
 export type AccordionComponent = FC<Readonly<AccordionComponentProps>>;
 
-const Accordion: AccordionComponent = ({ message, createdAt, delay, background, img, dropdownImg }) => {
+const Accordion: AccordionComponent = ({ message, delay, background, img, dropdownImg }) => {
   const [expand, setExpand] = useState(false);
   const theme = useAccountStore((state) => state.theme);
   const { messageOnSites, setMessageOnSites } = useMessageStore((state) => state);
@@ -56,9 +55,9 @@ const Accordion: AccordionComponent = ({ message, createdAt, delay, background, 
           )}
           <div className={styles.headerTitle}>
             <div className={styles.title}>{message.title}</div>
-            {createdAt && (
+            {message.createTime && (
               <div className={styles.timeWrapper}>
-                <span>{createdAt}</span>
+                <span>{message.createTime}</span>
               </div>
             )}
           </div>
