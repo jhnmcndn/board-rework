@@ -1,0 +1,81 @@
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.header {
+  background: var(--safebox-fund-header);
+  border-top-left-radius: 0.15rem;
+  border-top-right-radius: 0.15rem;
+  display: flex;
+  justify-content: space-around;
+  padding-block: 0.3rem;
+  align-items: center;
+}
+
+.iconContainer,
+.middle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconContainer {
+  gap: 0.02rem;
+
+  img {
+    width: 0.35rem;
+    margin-block-end: 0.05rem;
+    height: auto;
+  }
+
+  span {
+    color: white;
+    font-size: 0.15rem;
+    line-height: 0.15rem;
+  }
+
+  span:last-child {
+    background: var(--transfer-amount);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+}
+
+.middle {
+  background-color: var(--record-roundedTabs-color);
+  border-radius: 9999px;
+  width: 0.5rem;
+  height: 0.5rem;
+
+  img {
+    width: 0.2rem;
+    height: auto;
+
+  }
+}
+
+.inputContainer {
+  background: var(--vip-balance-bg);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0rem;
+  grid-row-gap: 0rem;
+
+  div:first-child {
+    grid-area: 1 / 1 / 2 / 13;
+  }
+
+  input {
+    grid-area: 2 / 1 / 3 / 9;
+  }
+
+  div:nth-child(2) {
+    background-color: red;
+  }
+}

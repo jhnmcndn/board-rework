@@ -1,0 +1,17 @@
+.container {
+  font-size: 0.15rem;
+  display: flex;
+
+  .content {
+    width: 100%;
+    height: 100%;
+    padding: 0.2rem;
+    background: var(--withdrawSelf-user-balance);
+  }
+
+  :global {
+    .safeboxContainer {
+      height: 100dvh;
+    }
+  }
+}
