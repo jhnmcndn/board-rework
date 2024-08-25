@@ -122,12 +122,17 @@ ul {
 @media screen and (orientation: landscape) {
   body {
     width: stretch !important;
-    width: -moz-available !important; /* WebKit-based browsers will ignore this. */
-    width: -webkit-fill-available !important; /* Mozilla-based browsers will ignore this. */
+    width: -moz-available !important;
+    /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available !important;
+    /* Mozilla-based browsers will ignore this. */
     height: stretch !important;
-    height: -moz-available !important; /* WebKit-based browsers will ignore this. */
-    height: -webkit-fill-available !important; /* Mozilla-based browsers will ignore this. */
+    height: -moz-available !important;
+    /* WebKit-based browsers will ignore this. */
+    height: -webkit-fill-available !important;
+    /* Mozilla-based browsers will ignore this. */
   }
+
   #root {
     height: 100%;
     width: 100%;
@@ -211,17 +216,23 @@ ul {
 .thirdPartGameIframe {
   transform: translateZ(0);
   width: stretch !important;
-  width: -moz-available !important; /* WebKit-based browsers will ignore this. */
-  width: -webkit-fill-available !important; /* Mozilla-based browsers will ignore this. */
+  width: -moz-available !important;
+  /* WebKit-based browsers will ignore this. */
+  width: -webkit-fill-available !important;
+  /* Mozilla-based browsers will ignore this. */
   height: stretch !important;
-  height: -moz-available !important; /* WebKit-based browsers will ignore this. */
-  height: -webkit-fill-available !important; /* Mozilla-based browsers will ignore this. */
+  height: -moz-available !important;
+  /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available !important;
+  /* Mozilla-based browsers will ignore this. */
 }
 
 .thirdPartGameIframeContainer {
   width: stretch !important;
-  width: -moz-available !important; /* WebKit-based browsers will ignore this. */
-  width: -webkit-fill-available !important; /* Mozilla-based browsers will ignore this. */
+  width: -moz-available !important;
+  /* WebKit-based browsers will ignore this. */
+  width: -webkit-fill-available !important;
+  /* Mozilla-based browsers will ignore this. */
 }
 
 .loading {
@@ -233,7 +244,7 @@ ul {
   top: 0;
   z-index: 10;
 
-  > div {
+  >div {
     height: 100% !important;
   }
 }

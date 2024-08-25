@@ -1,7 +1,7 @@
 'use client';
 
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
-import useAuthCheck from '@/hooks/useAuthCheck';
+import useAuthActions from '@/hooks/useAuthActions';
 import useImages from '@/hooks/useImages';
 import classNames from 'classnames';
 import Image from 'next/image';
@@ -22,7 +22,7 @@ export type CoinPurseComponent = FC<Readonly<CoinPurseProps>>;
 const CoinPurse: CoinPurseComponent = (props) => {
   const { position, top, left, iColor, betLog, inputBg, noShuffle } = props;
   const { images } = useImages();
-  const { authCheck, isLoggedIn } = useAuthCheck();
+  const { authCheck, isLoggedIn } = useAuthActions();
   const [animateSpin, setAnimateSpin] = useState(false);
   const { fetchAccountNow, accountNow } = useAccountStore((state) => state);
 

@@ -1,7 +1,7 @@
 'use server';
 
 import { request } from '@/api';
-import { defaultInitData } from '@/constants/defaultReturnData';
+import { defaultInitData } from '@/constants/defaultData';
 import { COOKIE_MAX_AGE } from '@/constants/misc';
 import {
   AccountInfo,
@@ -11,6 +11,7 @@ import {
   ActivityQuestSectionTypes,
   ActivityTypes,
   BoxAccount,
+  BoxAccountResponse,
   CodeFlowList,
   CustomerService,
   FundDetailsPayload,
@@ -257,13 +258,24 @@ export const getTradeTypes = async () => {
   return data.data;
 };
 
-export const getFundDetails = async ({ enumMoney, enumReqTime }: FundDetailsPayload) => {
+export const getFundDetails = async ({ enumMoney, enumReqTime, pageSize }: FundDetailsPayload) => {
   const data = await request<RootResponse<TFundDetails[]>>({
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.FUND_DETAILS,
     tags: API_ENDPOINT.FUND_DETAILS,
-    body: { enumMoney, enumReqTime },
+    body: { enumMoney, enumReqTime, pageSize },
   });
   if (!data.data || 'message' in data.data) return [] satisfies TFundDetails[];
+  return data.data;
+};
+
+export const getBoxAccount = async ({ boxPass }: { boxPass: string }) => {
+  const data = await request<RootResponse<BoxAccountResponse>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.BOX_ACCOUNT,
+    tags: API_ENDPOINT.BOX_ACCOUNT,
+    body: { boxPass },
+  });
+  if (!data.data || 'message' in data.data) return { accountNow: 1234, boxAccount: 4567 } satisfies BoxAccountResponse;
   return data.data;
 };

@@ -465,10 +465,16 @@ export type TFundDetails = {
 export type FundDetailsPayload = {
   enumMoney: string;
   enumReqTime: string;
+  pageSize?: number;
 };
 
 export type TGameBalance = {
   money: number;
   platformId: number;
   platformName: string;
+};
+
+export type BoxAccountResponse = {
+  accountNow?: number;
+  boxAccount?: number;
 };
