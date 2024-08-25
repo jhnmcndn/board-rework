@@ -1,6 +1,7 @@
-const SafeBox = () => {
+import Safebox from '../../components/Safebox/index';
 
-  return <div>Safe Box</div>;
+const SafeBox = () => {
+  return <Safebox />;
 };
 
 export default SafeBox;
