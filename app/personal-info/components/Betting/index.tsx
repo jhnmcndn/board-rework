@@ -17,7 +17,7 @@ const Betting: FC<
   const [gameDataList, setGameDataList] = useState([]);
   const setBettingActiveTab = usePersonalInfoStore((s) => s.setBettingActiveTab);
   const setBettingFilter = usePersonalInfoStore((s) => s.setBettingFilter);
-  const activeTab = usePersonalInfoStore((s) => s.betting.activeTab) ?? 0;
+  const activeTab = usePersonalInfoStore((s) => s.betting.activeTab);
   const filter = usePersonalInfoStore((s) => s.betting.filter);
   const filterOptions = ['今天', '昨天', '一个月'];
   const filterDefaultValue = filter === 'today' ? '今天' : filter === 'yesterday' ? '昨天' : '一个月';
