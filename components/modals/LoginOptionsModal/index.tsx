@@ -1,20 +1,17 @@
 'use client';
 
-import Image from 'next/image';
-import { useState } from 'react';
-import { createPortal } from 'react-dom';
-// import { loginDevice } from '@/api/game/gamelist';
-// import NECaptchaComponent from 'src/commons/Captcha/NECaptchaComponent';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useAuthActions from '@/hooks/useAuthActions';
 import useImages from '@/hooks/useImages';
 import useIsMounted from '@/hooks/useIsMounted';
 import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import ModalLayout from '../ModalLayout';
 import styles from './index.module.scss';
 
-// const LoginOptionsModal = ({ setIsShowUserAuth }) => {
 const LoginOptionsModal = () => {
   const isMounted = useIsMounted();
   const { login } = useAuthActions();
@@ -25,11 +22,11 @@ const LoginOptionsModal = () => {
   const [isCaptchaOpen, setIsCaptchaOpen] = useState(false);
 
   // const handleCaptchaSuccess = (data) => {
-  //   getGuestLoginInfo(data);
+  //   login(data);
   // };
 
   // const handleCaptchaFailure = (err) => {
-  //   openAlert({body: `NECaptcha verification failed:"  ${err}` })
+  //   openAlert({ body: `NECaptcha verification failed:"  ${err}` });
   // };
 
   const modalContent = (
@@ -48,14 +45,14 @@ const LoginOptionsModal = () => {
             />
 
             {/* {isCaptchaOpen && isCaptchaEnabled && (
-          <NECaptchaComponent
-            onSuccess={handleCaptchaSuccess}
-            onFailure={handleCaptchaFailure}
-            captchaId={captchaId}
-            isCaptchaOpen={isCaptchaOpen}
-            setIsCaptchaOpen={setIsCaptchaOpen}
-          />
-        )} */}
+              <NECaptchaComponent
+                onSuccess={handleCaptchaSuccess}
+                onFailure={handleCaptchaFailure}
+                captchaId={captchaId}
+                isCaptchaOpen={isCaptchaOpen}
+                setIsCaptchaOpen={setIsCaptchaOpen}
+              />
+            )} */}
 
             <div className={styles.loginTypes__buttonsContainer}>
               <Image

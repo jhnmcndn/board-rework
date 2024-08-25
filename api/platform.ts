@@ -22,6 +22,7 @@ import {
   MessageOnSites,
   ReceiveVipGift,
   ReceiveVipGiftParams,
+  RegisterPhonePayload,
   ResetPassword,
   RootResponse,
   TFundDetails,
@@ -51,6 +52,28 @@ export const loginPhoneNumber = async (payload: LoginPhonePayload) => {
     tags: API_ENDPOINT.LOGIN,
   });
   if (data.data && 'token' in data.data) cookies().set('token', `${data.data.token}`, { maxAge: COOKIE_MAX_AGE });
+  return data;
+};
+
+// TODO add Response Type for requestPhoneVerify and registerPhoneNumber
+
+export const requestPhoneVerify = async (payload: { phone: string }) => {
+  const data = await request<RootResponse<any>>({
+    body: payload,
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.SEND_SMS_VERIFY_CODE,
+    tags: API_ENDPOINT.SEND_SMS_VERIFY_CODE,
+  });
+  return data;
+};
+
+export const registerPhoneNumber = async (payload: RegisterPhonePayload) => {
+  const data = await request<RootResponse<any>>({
+    body: payload,
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.REGISTER,
+    tags: API_ENDPOINT.REGISTER,
+  });
   return data;
 };
 

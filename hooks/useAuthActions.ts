@@ -4,14 +4,14 @@ import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { defaultAccountInfo } from '@/constants/defaultData';
 import useModalStore from '@/store/modals';
 import { AccountInfo, ErrorData, RootResponse } from '@/types/app';
-import { generateDeviceId, getDeviceInfo, getFromLocalStorage } from '@/utils/helpers';
+import { getDeviceId, getDeviceInfo, getFromLocalStorage } from '@/utils/helpers';
 
 type LoginMethod = 'device' | 'phone' | 'user-pass' | 'captcha';
 type LoginPayload = { id: string; password: string };
 
 const useAuthActions = () => {
+  const deviceId = getDeviceId();
   const phoneModel = getDeviceInfo();
-  const deviceId = generateDeviceId();
   const token = getFromLocalStorage('token');
   const inviterCode = getFromLocalStorage('channelCode');
   const { setAccountInfo, setAccountNow, accountInfo } = useAccountStore((state) => state);
@@ -62,6 +62,7 @@ const useAuthActions = () => {
   };
 
   const logout = () => {
+    // TODO add reset for other store data
     setAccountInfo(defaultAccountInfo);
     localStorage.removeItem('token');
     closeSettings();
