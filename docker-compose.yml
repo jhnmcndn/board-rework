@@ -1,5 +1,6 @@
 services:
   web:
+    image: board-game-rework-${ENVIRONMENT}
     build:
       context: .
       dockerfile: Dockerfile

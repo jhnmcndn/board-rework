@@ -10,7 +10,7 @@
     "build-8801": "node ./scripts/8801/index.js && next build",
     "build-8802": "node ./scripts/8802/index.js && next build",
     "build-8803": "node ./scripts/8803/index.js && next build",
-    "start": "next start -p 8000",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
