@@ -1,14 +1,16 @@
 'use client';
+
 import AlertModal from '@/components/modals/AlertModal';
-import LoginTypesModal from '@/components/modals/LoginTypesModal';
+import LoginOptionsModal from '@/components/modals/LoginOptionsModal';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import dynamic from 'next/dynamic';
 
 const SettingsModal = dynamic(() => import('./SettingsModal'), { ssr: false });
 const VersionModal = dynamic(() => import('./VersionModal'), { ssr: false });
+const LoginOrRegisterModal = dynamic(() => import('./LoginOrRegisterModal'), { ssr: false });
 const AnnouncementModal = dynamic(() => import('./AnnouncementModal'), { ssr: false });
-// const SuccessWithdrawModal = dynamic(() => import('./SuccessWithdrawModal'), { ssr: false });
-const PassCodeModal = dynamic(() => import('./PassCodeModal'), { ssr: false });
+const SuccessWithdrawModal = dynamic(() => import('./SuccessWithdrawModal'), { ssr: false });
+const VaultPassCodeModal = dynamic(() => import('./VaultPassCodeModal'), { ssr: false });
 const CommissionModal = dynamic(() => import('./CommissionModal'), { ssr: false });
 const BindUSDTModal = dynamic(() => import('./BindUSDTModal'), { ssr: false });
 const BindBankModal = dynamic(() => import('./BindBankModal'), { ssr: false });
@@ -21,13 +23,14 @@ const ModalRoot = () => {
   return (
     <>
       <AlertModal />
-      <LoginTypesModal />
+      <LoginOptionsModal />
+      <LoginOrRegisterModal />
       <SettingsModal />
       <BindBankModal />
       <BindUSDTModal />
-      {/* <SuccessWithdrawModal /> */}
+      <SuccessWithdrawModal />
       <VersionModal />
-      <PassCodeModal />
+      <VaultPassCodeModal />
       <AnnouncementModal />
       <CommissionModal />
       <div id='modal-root' data-theme={theme} />

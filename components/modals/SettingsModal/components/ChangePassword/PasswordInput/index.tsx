@@ -1,9 +1,9 @@
 import { PasswordProps } from '@/types/app';
 import Image from 'next/image';
-import React from 'react';
+import { FC } from 'react';
 import styles from './index.module.scss';
 
-const PasswordInput: React.FC<PasswordProps> = ({
+const PasswordInput: FC<PasswordProps> = ({
   label,
   value,
   type,

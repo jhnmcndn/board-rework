@@ -1,18 +1,14 @@
 import { getActivityInfos } from '@/api/platform';
 import useModalStore from '@/store/modals';
 import { ActivityListState } from '@/types/app';
-import React, { useEffect, useState } from 'react';
-import ImageAccordion from './ImageAccordion'; // Corrected the import name
+import { FC, useEffect, useState } from 'react';
+import ImageAccordion from './ImageAccordion';
 import styles from './index.module.scss';
+import Mission from './Mission';
 
-const Content: React.FC = () => {
-  const openContentAnnouncement = useModalStore((state) => state.openContentAnnouncement);
+const Content: FC = () => {
+  const { openSidebarAnnouncement, openContentAnnouncement } = useModalStore();
   const [activityList, setActivityList] = useState<ActivityListState | null>(null);
-  const [switchTab, setSwitchTab] = useState<boolean>(false);
-
-  const handleSwitch = () => {
-    setSwitchTab((prev) => !prev);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,21 +21,16 @@ const Content: React.FC = () => {
 
   return (
     <div className={styles.contentAnnoucement}>
-      {openContentAnnouncement === activityList?.id && (
+      {openSidebarAnnouncement === 0 && openContentAnnouncement === activityList?.id && (
         <ul>
           {activityList?.list.map((item, index) => (
             <li key={index}>
-              <ImageAccordion
-                switched={switchTab}
-                handleSwitch={handleSwitch}
-                icon={item.icon ?? ''}
-                content={item.content ?? ''}
-                url={item.url}
-              />
+              <ImageAccordion icon={item?.icon as string} content={item?.content as string} url={item.url} />
             </li>
           ))}
         </ul>
       )}
+      {openSidebarAnnouncement === 1 && <Mission />}
     </div>
   );
 };

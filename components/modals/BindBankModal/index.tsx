@@ -14,14 +14,14 @@ import { createPortal } from 'react-dom';
 import styles from './index.module.scss';
 
 const BindBankModal = () => {
-  const isMounted = useIsMounted();
-  const bankList = useAccountStore((state) => state.bankList);
   const fetchBindCardList = useAccountStore((state) => state.fetchBindCardList);
+  const bankList = useAccountStore((state) => state.bankList);
+  const { openAlert, closeBindBank, isBindBankOpen } = useModalStore();
   const [bindRealName, setBindRealName] = useState('');
   const [bindBankAddress, setBindBankAddress] = useState('');
   const [bindBankAccount, setBindBankAccount] = useState('');
   const [bindBankId, setBindBankId] = useState(139);
-  const { openAlert, closeBindBank, isBindBankOpen } = useModalStore();
+  const isMounted = useIsMounted();
 
   const bankOptions = bankList.map((item) => ({
     value: item.id,
@@ -73,17 +73,17 @@ const BindBankModal = () => {
       openAlert({ body: '请输入开户地址' });
     } else if (bindBankAccount?.length < 16) {
       openAlert({ body: '请输入超过16个银行卡号' });
-    }
-
-    const { code, msg } = await setBindCard(bindRealName, bindBankAccount, bindBankAddress, bindBankId);
-    if (code === 200) {
-      fetchBindCardList();
-      openAlert({ body: msg });
-      setTimeout(() => {
-        closeBindBank();
-      }, 500);
-    } else if (code === 500) {
-      openAlert({ body: msg });
+    } else {
+      const { code, msg } = await setBindCard(bindRealName, bindBankAccount, bindBankAddress, bindBankId);
+      if (code === 200) {
+        fetchBindCardList();
+        openAlert({ body: msg });
+        setTimeout(() => {
+          closeBindBank();
+        }, 500);
+      } else if (code === 500) {
+        openAlert({ body: msg });
+      }
     }
   };
 

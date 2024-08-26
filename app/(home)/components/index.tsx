@@ -31,7 +31,7 @@ export const HomePage: HomePageComponent = ({
   messageOnSites,
   getBoxPassIsOpen,
 }) => {
-  const setMessageOnSites = useMessageStore((state) => state.setMessageOnSites);
+  const { setMessageOnSites } = useMessageStore((state) => state);
   const { theme, setInit, setBoxPassIsSet } = useAccountStore((state) => state);
   const { activeSideBarItem, setGameInfos, setAnnounceText, setSideBar, setActiveSideBarItem, gameInfos } =
     useGameStore((state) => state);
@@ -57,19 +57,27 @@ export const HomePage: HomePageComponent = ({
     }
 
     if (messageOnSites && !('message' in messageOnSites) && messageOnSites.length > 0) {
-      setMessageOnSites(
-        messageOnSites
-          .toSorted((a, b) => {
-            if (a.createTime && b.createTime) {
-              return a.createTime > b.createTime ? 1 : -1;
-            }
-            return -1;
-          })
-          .map((item) => ({
-            ...item,
-            isRead: false,
-          })),
-      );
+      const updatedMessageOnSites = messageOnSites.map((message) => ({
+        ...message,
+        isRead: message.isRead ?? false,
+      }));
+      setMessageOnSites(updatedMessageOnSites);
+    }
+
+    if (localStorage.getItem('existing-messages')) {
+      const existingMessages: MessageOnSites[] = JSON.parse(localStorage.getItem('existing-messages') || '[]');
+      if (messageOnSites && !('message' in messageOnSites) && messageOnSites.length > existingMessages.length) {
+        const mergedArray = messageOnSites.map((item1) => {
+          const foundItem = existingMessages.find((item2) => item2.id === item1.id);
+          return {
+            ...item1,
+            isRead: foundItem ? foundItem.isRead : false,
+          };
+        });
+        setMessageOnSites(mergedArray);
+      } else {
+        setMessageOnSites(existingMessages);
+      }
     }
 
     if (getBoxPassIsOpen && typeof getBoxPassIsOpen === 'boolean') {

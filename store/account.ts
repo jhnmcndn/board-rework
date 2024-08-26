@@ -1,10 +1,11 @@
 import { getAccountInfo } from '@/api/game';
 import { getBindCardList } from '@/api/pay';
-import { getAccountNow, getActivityTypes } from '@/api/platform';
-import { defaultInitData } from '@/constants/defaultReturnData';
+import { getAccountNow, getActivityQuestTypes, getActivityTypes } from '@/api/platform';
+import { defaultInitData } from '@/constants/defaultData';
 import {
   AccountInfo,
   AccountNow,
+  ActivityQuestSectionTypes,
   ActivityTypes,
   BankList,
   BindCardList,
@@ -52,12 +53,19 @@ export const activityTypeState: ActivityTypes = {
   name: undefined,
 };
 
+export const activityQuestSectionState = {
+  activityList: undefined,
+  id: undefined,
+  name: undefined,
+} satisfies ActivityQuestSectionTypes;
+
 type AccountState = {
   init: Init;
   accountInfo: AccountInfo;
   theme: THEME;
   accountNow: AccountNow;
   boxPassIsSet: boolean;
+  withdrawPassIsSet: boolean;
   bindCardList: BindCardList;
   withdrawActiveTab: number;
   bankList: BankList[];
@@ -65,6 +73,9 @@ type AccountState = {
   codeFlowList: CodeFlowList[];
   payTypeList: PayTypeList[];
   activityTypes: ActivityTypes[];
+  selectedBank: number;
+  withdrawAmount: number;
+  activityQuestSection: ActivityQuestSectionTypes[];
 };
 
 type AccountActions = {
@@ -73,12 +84,15 @@ type AccountActions = {
   setTheme: (theme: THEME) => void;
   setAccountNow: (accountNow: Partial<AccountNow>) => void;
   setBoxPassIsSet: (boxPassIsSet: boolean) => void;
+  setWithdrawPassIsSet: (withdrawPassIsSet: boolean) => void;
   setBindCardList: (bindCardList: BindCardList) => void;
   setWithdrawRecordList: (withdrawRecordList: WithdrawRechargeDetail[]) => void;
   setWithdrawActiveTab: (index: number) => void;
   setBankList: (bankList: BankList[]) => void;
   setCodeFlowList: (codeFlowList: CodeFlowList[]) => void;
   setPayTypeList: (payTypeList: PayTypeList[]) => void;
+  setSelectedBank: (selectedBank: number | undefined) => void;
+  setWithdrawAmount: (withdrawAmount: number | undefined) => void;
   fetchBindCardList: () => void;
 };
 
@@ -86,6 +100,7 @@ export type AccountApiCalls = {
   fetchAccountInfo: () => void;
   fetchAccountNow: () => void;
   fetchActivityType: () => void;
+  fetchActivityQuestSection: () => void;
 };
 
 export type AccountStore = AccountState & AccountActions & AccountApiCalls;
@@ -99,6 +114,7 @@ export const createAccountStore = () =>
         theme: THEME.BLACK_GOLD,
         accountNow: accountNowState,
         boxPassIsSet: false,
+        withdrawPassIsSet: false,
         bindCardList: bindCardListState,
         withdrawActiveTab: 0,
         bankList: [],
@@ -106,17 +122,23 @@ export const createAccountStore = () =>
         codeFlowList: [],
         payTypeList: [],
         activityTypes: [activityTypeState],
+        selectedBank: 0,
+        withdrawAmount: 0,
+        activityQuestSection: [activityQuestSectionState],
         setInit: (init) => set(() => ({ init: { ...init } })),
         setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
         setTheme: (theme) => set(() => ({ theme })),
         setAccountNow: (accountNow) => set(() => ({ accountNow: { ...accountNow } })),
         setBoxPassIsSet: (boxPassIsSet) => set(() => ({ boxPassIsSet })),
+        setWithdrawPassIsSet: (withdrawPassIsSet) => set(() => ({ withdrawPassIsSet })),
         setBindCardList: (bindCardList) => set(() => ({ bindCardList })),
         setWithdrawRecordList: (withdrawRecordList) => set(() => ({ withdrawRecordList })),
         setWithdrawActiveTab: (index) => set(() => ({ withdrawActiveTab: index })),
         setBankList: (bankList) => set(() => ({ bankList })),
         setCodeFlowList: (codeFlowList) => set(() => ({ codeFlowList })),
         setPayTypeList: (payTypeList) => set(() => ({ payTypeList })),
+        setSelectedBank: (selectedBank) => set(() => ({ selectedBank })),
+        setWithdrawAmount: (withdrawAmount) => set(() => ({ withdrawAmount })),
         fetchAccountInfo: async () => {
           const accountInfo = await getAccountInfo();
           if (!accountInfo || 'message' in accountInfo) return set(() => ({ accountInfo: accountInfoState }));
@@ -138,6 +160,13 @@ export const createAccountStore = () =>
             return set(() => ({ activityTypes: [activityTypeState] }));
           }
           return set(() => ({ activityTypes }));
+        },
+        fetchActivityQuestSection: async () => {
+          const activityQuestSection = await getActivityQuestTypes();
+          if (!activityQuestSection || 'message' in activityQuestSection) {
+            return set(() => ({ activityQuestSection: [activityQuestSectionState] }));
+          }
+          return set(() => ({ activityQuestSection }));
         },
       }),
       {

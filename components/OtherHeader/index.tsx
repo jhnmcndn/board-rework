@@ -28,12 +28,12 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
   const [isDraggable, setIsDraggable] = useState(false);
   const theme = useAccountStore((state) => state.theme);
   const accountBalance = useAccountStore((state) => state.accountNow.balance);
-  const isRechargePage = pathname.toLowerCase().includes('recharge');
-  const isWebviewPage = pathname.toLowerCase().includes('webview');
-  const isSharePage = pathname.toLowerCase().includes('share');
-  const isGamePage = pathname.toLowerCase().includes('games');
+  const isRechargePage = pathname?.toLowerCase().includes('recharge');
+  const isWebviewPage = pathname?.toLowerCase().includes('webview');
+  const isSharePage = pathname?.toLowerCase().includes('share');
+  const isGamePage = pathname?.toLowerCase().includes('games');
 
-  const rechargeTitle = pathname.includes('rechargeHistory') ? '充值记录' : '充值';
+  const rechargeTitle = pathname?.includes('rechargeHistory') ? '充值记录' : '充值';
 
   // NOTE: Modify this line after creating the music store
   // const turnBgMusicOn = useMusicStore((state) => state.turnBgMusicOn)
@@ -111,7 +111,7 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
           )}
         </div>
 
-        {isRechargePage && !pathname.includes('rechargeHistory') && (
+        {isRechargePage && !pathname?.includes('rechargeHistory') && (
           <div
             data-click={sfx.popAudio}
             className={styles.historyRecordBtn}

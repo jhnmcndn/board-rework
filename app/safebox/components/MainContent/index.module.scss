@@ -1,0 +1,12 @@
+.container {
+  height: 100%;
+  display: flex;
+  user-select: none;
+  background: var(--withdrawSelf-user-balance);
+
+  .wrapper {
+    width: 100%;
+    padding: 0.1rem;
+    overflow-y: auto;
+  }
+}

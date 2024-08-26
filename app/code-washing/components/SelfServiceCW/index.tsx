@@ -1,6 +1,7 @@
 import { getWashCodeDetail } from '@/api/game';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
-import { WashCodeDetail } from '@/types/app';
+import useFetchGame from '@/hooks/useFetchGame';
+import { RspGameTypeWashCode, WashCodeDetail } from '@/types/app';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import CodeWashList from './CodeWashList';
@@ -8,21 +9,28 @@ import styles from './index.module.scss';
 import TotalReceived from './TotalReceived';
 
 const SelfServiceCW = () => {
+  const { handleChange } = useFetchGame();
   const [washCode, setWashCode] = useState<WashCodeDetail>();
   const sideBar = useGameStore((state) => state.sideBar);
-  const setActiveSideBarItem = useGameStore((state) => state.setActiveSideBarItem);
+  const { setActiveSideBarItem, setShowPlatform } = useGameStore((state) => state);
   const { push } = useRouter();
 
   const updateWashCode = (newWashCode: WashCodeDetail) => setWashCode(newWashCode);
   const handleRedirect = (gameTypeId: number) => {
     const item = sideBar.find((item) => item.id === gameTypeId);
-    if (item) setActiveSideBarItem(item);
+    if (item) {
+      setShowPlatform(false);
+      setActiveSideBarItem(item);
+      handleChange(item);
+    }
     push('/');
   };
 
+  const filterData = (code: RspGameTypeWashCode) => code.gameTypeId !== 6 && code;
+
   const codeWashList = useMemo(
     () =>
-      washCode?.rspGameTypeWashCodes.map((code) => ({
+      washCode?.rspGameTypeWashCodes.filter(filterData).map((code) => ({
         0: code.gameTypeName,
         1: code.washCodeAmount,
         2: code.washCodeRate,
@@ -35,19 +43,21 @@ const SelfServiceCW = () => {
       })),
     [washCode],
   );
+
   const total = codeWashList?.reduce((total, code) => total + code[3], 0) || 0;
 
+  const fetchWashCodeDetails = async () => {
+    const codeWash = await getWashCodeDetail();
+    if (codeWash.rspGameTypeWashCodes) setWashCode(codeWash);
+  };
+
   useEffect(() => {
-    const fetchWashCodeDetails = async () => {
-      const codeWash = await getWashCodeDetail();
-      if (codeWash.rspGameTypeWashCodes) setWashCode(codeWash);
-    };
     fetchWashCodeDetails();
   }, []);
 
   return (
     <div className={styles.wrapper} style={{ height: codeWashList?.length ? 'auto' : '100%' }}>
-      <CodeWashList list={codeWashList} />
+      <CodeWashList list={codeWashList} onRefresh={fetchWashCodeDetails} />
       <TotalReceived total={total} listLength={codeWashList?.length || 0} updateWashCode={updateWashCode} />
     </div>
   );

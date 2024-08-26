@@ -14,7 +14,7 @@ export type SidebarComponentProps = {
 
 export type SidebarComponent = FC<Readonly<SidebarComponentProps>>;
 
-const Sidebar: SidebarComponent = ({ sidebarItems, activeSidebarItem, setActiveSidebarItem }) => {
+const Sidebar: SidebarComponent = ({ sidebarItems, activeSidebarItem, setActiveSidebarItem, ...props }) => {
   return (
     <motion.div
       initial={{ x: -100 }}

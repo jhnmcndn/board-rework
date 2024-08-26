@@ -4,24 +4,27 @@ import Accordion from '@/components/Accordion';
 import NoData from '@/components/NoData';
 import { useMessageStore } from '@/components/Providers/MessageStoreProvider';
 import useImages from '@/hooks/useImages';
+import { MessageOnSites } from '@/types/app';
 
 const MailList = () => {
   const { images } = useImages();
-  const messageOnSites = useMessageStore((state) => state.messageOnSites);
+  const messageOnSites: MessageOnSites[] = useMessageStore((state) => state.messageOnSites);
 
-  return messageOnSites.length > 0 ? (
-    messageOnSites
-      .toSorted((a, b) => {
-        if (a.createTime && b.createTime) return a.createTime > b.createTime ? 1 : -1;
-        return -1;
-      })
-      .map((mail, index) => (
-        <div key={index}>
-          <Accordion title={mail.title || ''} content={mail.content || ''} delay={index} img={images.envelope} />
-        </div>
-      ))
-  ) : (
-    <NoData />
+  return (
+    <>
+      {messageOnSites.length === 0 && <NoData />}
+      {messageOnSites.length > 0 &&
+        messageOnSites
+          .toSorted((a, b) => {
+            if (a.createTime && b.createTime) return a.createTime > b.createTime ? 1 : -1;
+            return -1;
+          })
+          .map((mail, index) => (
+            <div key={index} style={index > 0 ? { marginTop: '0.1rem' } : {}}>
+              <Accordion message={mail} delay={index} img={images.envelope} />
+            </div>
+          ))}
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import useAuthCheck from '@/hooks/useAuthCheck';
+import useAuthActions from '@/hooks/useAuthActions';
 import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
 import { sfx } from '@/utils/audioFile';
@@ -9,8 +9,8 @@ import styles from './index.module.scss';
 const HeaderButtons = () => {
   const { push } = useRouter();
   const { images } = useImages();
-  const { authCheck } = useAuthCheck();
-  const { openSettings } = useModalStore();
+  const { authCheck } = useAuthActions();
+  const { openSettings, setSidebarAnnouncement, openAnnouncement } = useModalStore();
 
   const handleSetting = () => {
     authCheck(() => openSettings());
@@ -38,7 +38,12 @@ const HeaderButtons = () => {
           alt='Task'
           width={110}
           height={110}
-          onClick={() => authCheck(() => console.log('// TODO OPEN TASKS MODAL'))}
+          onClick={() =>
+            authCheck(() => {
+              openAnnouncement();
+              setSidebarAnnouncement(1);
+            })
+          }
         />
         <div data-click={sfx.popAudio} className={styles.settingContainer} onClick={handleSetting}>
           <Image src={images.settings} alt='Settings' width={55} height={55} />

@@ -6,6 +6,7 @@
   position: relative;
   background: var(--sidebar-modal-bg);
   border-right: 0.01rem solid var(--sidebar-modal-border);
+  overflow: auto;
 
   ul {
     position: relative;
@@ -50,6 +51,17 @@
           background-clip: text;
           -webkit-text-fill-color: transparent;
         }
+      }
+      &::after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        background: var(--sidebar-modal-divider);
+        background-repeat: no-repeat;
+        background-size: contain;
       }
     }
   }

@@ -52,6 +52,24 @@ export type LoginDevicePayload = {
   validate: string | null;
 };
 
+export type LoginPhonePayload = {
+  mobile: string;
+  passwd: string;
+  deviceId: string;
+  ip: string;
+  validate: string | null;
+};
+
+export type RegisterPhonePayload = {
+  mobile: string;
+  passwd: string;
+  code: string;
+  inviterCode: string;
+  deviceId: string;
+  ip: string;
+  phoneModel: string | null;
+};
+
 export type AccountInfo = {
   token?: string;
   id?: string;
@@ -277,6 +295,7 @@ export type ListContainerProps = {
   onClick?: () => void;
   icon: string;
   text: string;
+  notif?: string | number;
 };
 
 export type WashCodeDetail = {
@@ -338,6 +357,25 @@ export type ActivityTypes = {
   id?: number;
   name?: string;
 };
+
+export interface ActivityQuestSectionTypes {
+  activityList?: ActivityQuestList[];
+  id?: number;
+  name?: string;
+}
+
+export interface ActivityQuestList {
+  id: number;
+  icon: string;
+  title: string;
+  content: string;
+  target: number;
+  reward: number;
+  curNum: number;
+  status: number;
+  gameTypeId: number;
+  typeId: any;
+}
 
 export type ListItemProps = {
   id: number;
@@ -438,4 +476,16 @@ export type TFundDetails = {
 export type FundDetailsPayload = {
   enumMoney: string;
   enumReqTime: string;
+  pageSize?: number;
+};
+
+export type TGameBalance = {
+  money: number;
+  platformId: number;
+  platformName: string;
+};
+
+export type BoxAccountResponse = {
+  accountNow?: number;
+  boxAccount?: number;
 };

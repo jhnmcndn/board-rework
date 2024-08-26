@@ -1,10 +1,10 @@
 import { useRouter } from 'next-nprogress-bar';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import MoreModal from '@/components/modals/MoreModal';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useMessageStore } from '@/components/Providers/MessageStoreProvider';
-import useAuthCheck from '@/hooks/useAuthCheck';
+import useAuthActions from '@/hooks/useAuthActions';
 import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
 import { MessageOnSites } from '@/types/app';
@@ -12,21 +12,24 @@ import { sfx } from '@/utils/audioFile';
 import styles from './index.module.scss';
 import ListContainer from './ListContainer';
 
-const LeftNavigation: React.FC = () => {
+const LeftNavigation: FC = () => {
   const { push } = useRouter();
   const { images } = useImages();
-  const { authCheck } = useAuthCheck();
+  const { authCheck } = useAuthActions();
   const [showMoreModal, setShowMoreModal] = useState(false);
-  const accountInfo = useAccountStore((state) => state.accountInfo);
-  const messageOnSites = useMessageStore((state) => state.messageOnSites);
   const { openAnnouncement, setSidebarAnnouncement } = useModalStore();
-  const isLoggedIn = Boolean(accountInfo.id);
+  const { messageOnSites } = useMessageStore((state) => state);
+  const accountInfo = useAccountStore((state) => state.accountInfo);
 
   const [unreadMsgs, setUnreadMsgs] = useState<MessageOnSites[]>([]);
 
   useEffect(() => {
-    if (messageOnSites?.length > 0) {
-      setUnreadMsgs(messageOnSites.filter((mail) => !mail.isRead));
+    let existingMessages: MessageOnSites[] = messageOnSites;
+    if (existingMessages.length > 0) {
+      setUnreadMsgs(existingMessages.filter((mail: MessageOnSites) => !mail.isRead));
+    } else if (JSON.parse(localStorage.getItem('existing-messages')!)) {
+      existingMessages = JSON.parse(localStorage.getItem('existing-messages')!);
+      setUnreadMsgs(existingMessages.filter((mail: MessageOnSites) => !mail.isRead));
     }
   }, [messageOnSites]);
 
@@ -59,15 +62,13 @@ const LeftNavigation: React.FC = () => {
           icon={images.gift}
           text='活动'
         />
-        <div>
-          {(!isLoggedIn || unreadMsgs.length > 0) && <center className='alertIcon' />}
-          <ListContainer
-            dataClick={sfx.messageAudio}
-            icon={images.message}
-            text='消息'
-            onClick={() => handleNavigation('/mailbox')}
-          />
-        </div>
+        <ListContainer
+          notif={accountInfo.id !== undefined ? unreadMsgs.length : 0}
+          dataClick={sfx.messageAudio}
+          icon={images.message}
+          text='消息'
+          onClick={() => handleNavigation('/mailbox')}
+        />
 
         <ListContainer
           dataClick={sfx.popAudio}

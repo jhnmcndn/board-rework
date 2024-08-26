@@ -1,38 +1,39 @@
 'use client';
 
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import { MessageOnSites } from '@/types/app';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { FC, ReactElement, useMemo, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useMessageStore } from '../Providers/MessageStoreProvider';
 import styles from './index.module.scss';
 
 export type AccordionComponentProps = {
-  title: string;
-  content: ReactElement[] | string;
-  createdAt?: string;
+  message: MessageOnSites;
   delay: number;
   background?: string;
-  id?: number;
   img?: string;
   dropdownImg?: string;
 };
 
 export type AccordionComponent = FC<Readonly<AccordionComponentProps>>;
 
-const Accordion: AccordionComponent = ({ title, content, createdAt, delay, background, id, img, dropdownImg }) => {
+const Accordion: AccordionComponent = ({ message, delay, background, img, dropdownImg }) => {
   const [expand, setExpand] = useState(false);
   const theme = useAccountStore((state) => state.theme);
   const { messageOnSites, setMessageOnSites } = useMessageStore((state) => state);
-  const currentMessage = useMemo(() => messageOnSites.find((message) => message.id === id), [id]);
 
   const handleExpand = () => {
     setExpand((prev) => !prev);
-    if (id && messageOnSites.length > 0) {
-      setMessageOnSites(messageOnSites.map((mail) => (mail.id === id ? { ...mail, isRead: true } : mail)));
+    if (message.id && messageOnSites.length > 0) {
+      setMessageOnSites(messageOnSites.map((mail) => (mail.id === message.id ? { ...mail, isRead: true } : mail)));
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem('existing-messages', JSON.stringify(messageOnSites));
+  }, [messageOnSites]);
 
   return (
     <motion.div
@@ -52,15 +53,15 @@ const Accordion: AccordionComponent = ({ title, content, createdAt, delay, backg
         >
           {img && (
             <div className={styles.imageHolder}>
-              <div className={styles.redCircle} style={{ opacity: currentMessage?.isRead ? 0 : 1 }} />
+              <div className={styles.redCircle} style={{ opacity: message?.isRead ? 0 : 1 }} />
               <Image src={img} alt='Accordion image' />
             </div>
           )}
           <div className={styles.headerTitle}>
-            <div className={styles.title}>{title}</div>
-            {createdAt && (
+            <div className={styles.title}>{message.title}</div>
+            {message.createTime && (
               <div className={styles.timeWrapper}>
-                <span>{createdAt}</span>
+                <span>{message.createTime}</span>
               </div>
             )}
           </div>
@@ -86,7 +87,7 @@ const Accordion: AccordionComponent = ({ title, content, createdAt, delay, backg
             duration: 0.5,
           }}
         >
-          <div className={styles.message}>{content}</div>
+          <div className={styles.message}>{message.content}</div>
         </motion.div>
       </div>
     </motion.div>

@@ -57,7 +57,7 @@ export const MODAL_CONTENT_ANIMATION = {
   },
 };
 
-export const getFromLocalStorage = (key: string, defaultValue: string = '') => {
+export const getFromLocalStorage = (key: string, defaultValue: any = '') => {
   if (typeof localStorage === 'undefined') return defaultValue;
   else return localStorage.getItem(key) || defaultValue;
 };
@@ -67,18 +67,18 @@ export const setToLocalStorage = (key: string, value: string) => {
   else return localStorage.setItem(key, value);
 };
 
-export const generateMachineCode = () => {
-  let machineId = getFromLocalStorage('machineId');
-  if (!machineId) {
+export const getDeviceId = () => {
+  let deviceId = getFromLocalStorage('deviceId');
+  if (!deviceId) {
     var d = new Date().getTime();
-    machineId = 'xxxxxxyxxyxxxyy'.replace(/[xy]/g, function (c) {
+    deviceId = 'xxxxxxyxxyxxxyy'.replace(/[xy]/g, function (c) {
       var r = (d + Math.random() * 15) % 15 | 0;
       d = Math.floor(d / 15);
       return (c === 'x' ? r : (r & 0x3) | 0x8).toString(15);
     });
-    setToLocalStorage('machineId', machineId);
+    setToLocalStorage('deviceId', deviceId);
   }
-  return machineId;
+  return deviceId;
 };
 
 export const moneyFormat = (money: number) => {
