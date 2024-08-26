@@ -1,6 +1,6 @@
 services:
   web:
-    image: ${ENVIRONMENT}-H5
+    image: ${ENVIRONMENT}-h5(rework)
     build:
       context: .
       dockerfile: Dockerfile
