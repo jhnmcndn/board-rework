@@ -58,7 +58,7 @@
     span {
       @include flex-xy;
       width: 0.85rem;
-      color: var(--record-dropdownLabel-color);
+      // color: var(--record-dropdownLabel-color);
     }
   }
 }
