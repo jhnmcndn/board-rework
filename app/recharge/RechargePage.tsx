@@ -4,12 +4,10 @@ import RechargeSidebar from '@/app/recharge/elements/RechargeSidebar';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { ErrorData, PayTypeList } from '@/types/app';
 import { FC, useEffect, useState } from 'react';
-import Alipay from './elements/Alipay';
 import DirectDeposit from './elements/DirectDeposit';
-import QQPay from './elements/QQPay';
+import ThirdPartyDeposit from './elements/ThirdPartyDeposit';
 import USDT from './elements/USDT';
 import VIPPay from './elements/VIPPay';
-import WeChat from './elements/WeChat';
 import styles from './index.module.scss';
 
 export type RechargePageComponent = FC<
@@ -35,9 +33,9 @@ const RechargePage: RechargePageComponent = ({ payTypeList }) => {
       <div className={styles.recharge__content}>
         {activeSidebarItem === 0 && <DirectDeposit />}
         {activeSidebarItem === 1 && <VIPPay />}
-        {activeSidebarItem === 2 && <Alipay />}
-        {activeSidebarItem === 3 && <QQPay />}
-        {activeSidebarItem === 4 && <WeChat />}
+        {activeSidebarItem === 2 && <ThirdPartyDeposit type='AliPay' />}
+        {activeSidebarItem === 3 && <ThirdPartyDeposit type='QQPay' />}
+        {activeSidebarItem === 4 && <ThirdPartyDeposit type='WeChat' />}
         {activeSidebarItem === 5 && <USDT />}
       </div>
     </>
