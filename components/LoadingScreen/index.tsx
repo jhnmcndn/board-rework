@@ -1,4 +1,6 @@
 'use client';
+
+import { APP_VERSION } from '@/constants/app';
 import { serverConfig } from '@/server';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -57,9 +59,7 @@ const LoadingScreen = () => {
           </div>
         </div>
         <div className={styles.loadingScreen__version}>
-          <p className={styles[`loadingScreen__text${serverConfig.server}`]}>
-            当前版本: V {process.env.NEXT_PUBLIC_APP_VERSION}
-          </p>
+          <p className={styles[`loadingScreen__text${serverConfig.server}`]}>当前版本: V {APP_VERSION}</p>
         </div>
       </div>
     </div>

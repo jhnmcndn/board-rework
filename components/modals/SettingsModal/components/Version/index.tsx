@@ -1,4 +1,5 @@
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import { APP_VERSION } from '@/constants/app';
 import useModalStore from '@/store/modals';
 import { VersionRowProps } from '@/types/app';
 import { copyToClipboard } from '@/utils/helpers';
@@ -19,7 +20,7 @@ const Version: FC = () => {
   const init = useAccountStore((state) => state.init);
   const { openAlert, openVersion } = useModalStore();
   const linkUrl = 'https://yb3f68.com/chat/text/chat_1UdkUk.html';
-  const version = `V ${process.env.NEXT_PUBLIC_APP_VERSION}`;
+  const version = `V ${APP_VERSION}`;
 
   const getUrl = () => {
     copyToClipboard(init.webUrl);

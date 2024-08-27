@@ -1,4 +1,5 @@
 import Input from '@/components/Input';
+import { APP_VERSION } from '@/constants/app';
 import { loginPhoneSchema } from '@/constants/validateSchema';
 import useAuthActions from '@/hooks/useAuthActions';
 import useValidate from '@/hooks/useFormValidate';
@@ -73,7 +74,7 @@ const LoginForm: FC<LoginFormProps> = ({ switchToRegister }) => {
           有问题？找在线客服
         </Link>
         <div>
-          当前版本<span>{process.env.NEXT_PUBLIC_APP_VERSION}</span>
+          当前版本<span>{APP_VERSION}</span>
         </div>
       </div>
     </>
