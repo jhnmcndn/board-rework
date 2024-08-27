@@ -49,10 +49,14 @@ const Funds: FC<FundProps> = ({ type, boxAccount: res }) => {
         </div>
       </div>
       <div className={styles.inputContainer}>
-        <div>转出金额</div>
-        <div>
-          <input type='text' placeholder='请输入转出金额' value={val} onChange={(e) => setVal(e.target.value)} />
-          <motion.div whileTap={{ scale: 0.95 }}>最大金额</motion.div>
+        <div className={styles.textContainer}>
+          <div className={styles.header}>转出金额</div>
+          <div className={styles.maxContainer}>
+            <input type='text' placeholder='请输入转出金额' value={val} onChange={(e) => setVal(e.target.value)} />
+            <motion.div className={styles.maxBtn} whileTap={{ scale: 0.95 }}>
+              最大金额
+            </motion.div>
+          </div>
         </div>
         <motion.div className={styles.submitBtn} whileTap={{ scale: 0.95 }}>
           {type === 'transfer' ? '转入' : '转出'}
