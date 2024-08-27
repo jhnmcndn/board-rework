@@ -56,14 +56,20 @@ const CoinPurse: CoinPurseComponent = (props) => {
           </div>
         )}
       </div>
+
       {!noShuffle && (
-        <div className={classNames(styles.shuffles, { shuffleSpin: animateSpin })}>
+        <div className={classNames(styles.shuffles, { [styles.spin]: animateSpin })}>
           <Image
             src={images.reload}
             alt='Reload'
             width={70}
             height={70}
-            onClick={() => authCheck(() => fetchAccountNow())}
+            onClick={() =>
+              authCheck(() => {
+                fetchAccountNow();
+                setAnimateSpin(true);
+              })
+            }
           />
         </div>
       )}

@@ -33,7 +33,7 @@ const Betting: FC<
   useEffect(() => {
     const fetchInitialGameList = async () => {
       const gameDataList = await getGameDataList({
-        gameCategory: modifiedGameCategoryList[activeTab].name,
+        gameCategory: modifiedGameCategoryList[activeTab]?.name,
         enumReqTime: filter,
       });
       setGameDataList(gameDataList);
