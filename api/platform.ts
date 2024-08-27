@@ -1,8 +1,8 @@
 'use server';
 
 import { request } from '@/api';
+import { COOKIE_MAX_AGE } from '@/constants/app';
 import { defaultInitData } from '@/constants/defaultData';
-import { COOKIE_MAX_AGE } from '@/constants/misc';
 import {
   AccountInfo,
   AccountNow,
@@ -10,6 +10,7 @@ import {
   ActivityQuestList,
   ActivityQuestSectionTypes,
   ActivityTypes,
+  BindPhonePayload,
   BoxAccount,
   BoxAccountResponse,
   CodeFlowList,
@@ -301,4 +302,25 @@ export const getBoxAccount = async ({ boxPass }: { boxPass: string }) => {
   });
   if (!data.data || 'message' in data.data) return { accountNow: 1234, boxAccount: 4567 } satisfies BoxAccountResponse;
   return data.data;
+};
+export const requestOTP = async (phoneNumber: string) => {
+  const data = await request<RootResponse<any[]>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.SEND_SMS_VERIFY_CODE,
+    tags: API_ENDPOINT.SEND_SMS_VERIFY_CODE,
+    body: { phoneNumber },
+  });
+  return data;
+};
+
+export const bindPhone = async ({ mobile, passwd, code }: BindPhonePayload) => {
+  const data = await request<RootResponse<any[]>>({
+    route: APP_ROUTE.PLATFORM,
+    endpoint: API_ENDPOINT.SEND_SMS_VERIFY_CODE,
+    tags: API_ENDPOINT.SEND_SMS_VERIFY_CODE,
+    body: { mobile, passwd, code },
+  });
+  console.log('payload', { mobile, passwd, code });
+  console.log('return', data);
+  return data.msg;
 };

@@ -489,3 +489,9 @@ export type BoxAccountResponse = {
   accountNow?: number;
   boxAccount?: number;
 };
+
+export type BindPhonePayload = {
+  mobile: string;
+  passwd: string;
+  code: string;
+};
