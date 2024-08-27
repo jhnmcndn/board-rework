@@ -1,3 +1,7 @@
+.container {
+  height: 100%;
+}
+
 .header {
   background: var(--safebox-fund-header);
   border-top-left-radius: 0.15rem;
@@ -18,6 +22,7 @@
 
 .iconContainer {
   gap: 0.02rem;
+  height: 0.7rem;
 
   img {
     width: 0.35rem;
@@ -62,30 +67,27 @@
   background: var(--vip-balance-bg);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 1.7rem);
 
-  div:first-child {
-    background: var(--transfer-amount);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    padding-block-end: 0.15rem;
-    font-size: 0.2rem;
+  .textContainer {
+    display: flex;
+    flex-direction: column;
   }
 
-  div:nth-child(2) {
+  .header {
+    background: var(--transfer-amount);
+    background-clip: text;
+    padding-block-end: 0.15rem;
+    font-size: 0.2rem;
+    align-self: self-start;
+  }
+
+  .maxContainer {
     display: flex;
     position: relative;
     align-items: center;
 
-    &::after {
-      content: "¥";
-      position: absolute;
-      top: 0.06rem;
-      left: 0.1rem;
-      color: rgba(0, 0, 0, 0.5);
-      font-size: 0.17rem;
-    }
 
     span {
       position: absolute;
@@ -104,35 +106,44 @@
       height: 0.3rem;
       font-size: 0.15rem;
       outline: none;
+      color: black !important;
+      position: relative;
+
     }
 
-    div:last-child {
+    &::after {
+      content: "¥";
+      position: absolute;
+      top: 0.06rem;
+      left: 0.1rem;
+      color: rgba(0, 0, 0, 0.5);
+      font-size: 0.17rem;
+    }
+
+    .maxBtn {
+      background: linear-gradient(180deg, #11D38A 0%, #018B57 100%);
+      width: 1rem;
+      text-align: center;
+      font-size: 0.15rem;
       color: white;
+      align-items: center;
       display: flex;
       justify-content: center;
-      align-items: center;
-      background: linear-gradient(180deg, #11D38A 0%, #018B57 100%);
-      border-radius: 999px;
+      border-radius: 9999px;
+      height: 0.3rem;
       margin-left: 0.1rem;
-      font-size: 0.15rem;
-      width: 15%;
-      height: 0.32rem;
-
-      &::after {
-        display: none;
-      }
     }
   }
 
-  .submitBtn {
-    margin-top: 0.7rem;
-    margin-bottom: 0.5rem;
-    background: var(--vip-btn-bg);
-    width: 1rem;
-    text-align: center;
-    font-size: 0.2rem;
-    color: white;
-    align-self: center;
-    border-radius: 9999px;
-  }
+}
+
+.submitBtn {
+  background: var(--vip-btn-bg);
+  width: 1rem;
+  text-align: center;
+  font-size: 0.2rem;
+  color: white;
+  align-self: center;
+  align-items: center;
+  border-radius: 9999px;
 }
