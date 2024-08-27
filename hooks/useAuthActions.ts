@@ -7,7 +7,7 @@ import { AccountInfo, ErrorData, RootResponse } from '@/types/app';
 import { getDeviceId, getDeviceInfo, getFromLocalStorage } from '@/utils/helpers';
 
 type LoginMethod = 'device' | 'phone' | 'user-pass' | 'captcha';
-type LoginPayload = { id: string; password: string };
+type LoginPayload = { validate?: string; id?: string; password?: string };
 
 const useAuthActions = () => {
   const deviceId = getDeviceId();
@@ -16,7 +16,6 @@ const useAuthActions = () => {
   const inviterCode = getFromLocalStorage('channelCode');
   const { setAccountInfo, setAccountNow, accountInfo } = useAccountStore((state) => state);
   const isLoggedIn = !!accountInfo.id && !!token;
-  const validate = null;
   const {
     openAlert,
     openLoginOptions,
@@ -34,6 +33,7 @@ const useAuthActions = () => {
 
   const login = async (loginMethod: LoginMethod = 'device', data?: LoginPayload) => {
     const ip = await getIp();
+    const validate = data?.validate || null;
     const defaultError = { msg: '网络错误' }; // Network Error
     let res: Partial<RootResponse<ErrorData>> | RootResponse<AccountInfo> = defaultError;
 

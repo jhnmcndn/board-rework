@@ -1,5 +1,6 @@
 'use client';
 
+import NECaptcha from '@/components/NECaptcha';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useAuthActions from '@/hooks/useAuthActions';
 import useImages from '@/hooks/useImages';
@@ -13,21 +14,13 @@ import ModalLayout from '../ModalLayout';
 import styles from './index.module.scss';
 
 const LoginOptionsModal = () => {
+  const { images } = useImages();
   const isMounted = useIsMounted();
   const { login } = useAuthActions();
-  const { images } = useImages();
   const { openAlert, isLoginOptionsOpen, closeLoginOptions, openLoginOrRegister } = useModalStore();
   const { captchaId, actionSwitch } = useAccountStore((state) => state.init);
   const isCaptchaEnabled = actionSwitch === '1' ? true : false;
   const [isCaptchaOpen, setIsCaptchaOpen] = useState(false);
-
-  // const handleCaptchaSuccess = (data) => {
-  //   login(data);
-  // };
-
-  // const handleCaptchaFailure = (err) => {
-  //   openAlert({ body: `NECaptcha verification failed:"  ${err}` });
-  // };
 
   const modalContent = (
     <AnimatePresence>
@@ -44,15 +37,14 @@ const LoginOptionsModal = () => {
               onClick={() => closeLoginOptions()}
             />
 
-            {/* {isCaptchaOpen && isCaptchaEnabled && (
-              <NECaptchaComponent
-                onSuccess={handleCaptchaSuccess}
-                onFailure={handleCaptchaFailure}
+            {isCaptchaOpen && (
+              <NECaptcha
                 captchaId={captchaId}
                 isCaptchaOpen={isCaptchaOpen}
                 setIsCaptchaOpen={setIsCaptchaOpen}
+                onSuccess={(validate) => login('device', { validate })}
               />
-            )} */}
+            )}
 
             <div className={styles.loginTypes__buttonsContainer}>
               <Image

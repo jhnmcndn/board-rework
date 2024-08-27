@@ -1,4 +1,6 @@
 import Input from '@/components/Input';
+import NECaptcha from '@/components/NECaptcha';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { APP_VERSION } from '@/constants/app';
 import { loginPhoneSchema } from '@/constants/validateSchema';
 import useAuthActions from '@/hooks/useAuthActions';
@@ -7,7 +9,7 @@ import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styles from '../index.module.scss';
 
 type LoginFormProps = {
@@ -15,10 +17,13 @@ type LoginFormProps = {
 };
 
 const LoginForm: FC<LoginFormProps> = ({ switchToRegister }) => {
-  const { login } = useAuthActions();
   const { images } = useImages();
+  const { login } = useAuthActions();
   const { openAlert } = useModalStore();
+  const [isCaptchaOpen, setIsCaptchaOpen] = useState(false);
   const { closeLoginOrRegister, closeLoginOptions } = useModalStore();
+  const { captchaId, actionSwitch } = useAccountStore((state) => state.init);
+  const isCaptchaEnabled = actionSwitch === '1' ? true : false;
   const defaultValues = { phoneNumber: '', password: '' };
   const { values, errors, handleSubmit, reset, registerField } = useValidate({
     defaultValues,
@@ -37,16 +42,29 @@ const LoginForm: FC<LoginFormProps> = ({ switchToRegister }) => {
     closeLoginOptions();
   };
 
-  const loginPhone = async () => {
-    const res = await login('phone', { id: values('phoneNumber'), password: values('password') });
-    if (res) reset();
+  const loginPhone = async (validate?: string) => {
+    const success = await login('phone', { id: values('phoneNumber'), password: values('password'), validate });
+    if (success) reset();
+  };
+
+  const tryLoginPhone = () => {
+    if (isCaptchaEnabled) setIsCaptchaOpen(true);
+    else loginPhone();
   };
 
   const inputClassNames = { className: styles.form__input, containerClassName: styles.form__inputContainer };
 
   return (
     <>
-      <form onSubmit={handleSubmit(loginPhone)} className={styles.form}>
+      {isCaptchaOpen && (
+        <NECaptcha
+          captchaId={captchaId}
+          isCaptchaOpen={isCaptchaOpen}
+          setIsCaptchaOpen={setIsCaptchaOpen}
+          onSuccess={(validate) => loginPhone(validate)}
+        />
+      )}
+      <form onSubmit={handleSubmit(tryLoginPhone)} className={styles.form}>
         <Input
           placeholder='请输入6-15位数字或字母'
           maxLength={15}
