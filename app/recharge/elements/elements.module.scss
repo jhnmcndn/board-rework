@@ -1,0 +1,46 @@
+.deposit {
+  position: relative;
+  border-radius: 0.03rem;
+  font-size: 0.1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+  margin: 0.15rem;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    width: auto;
+    height: 0.25rem;
+    font-weight: 700;
+    font-size: 0.12rem;
+    padding: 0 0.3rem;
+    border-radius: 0.03rem 0.03rem 0 0;
+    background: url('~/assets/commons/activeHeaderBg.webp') center / 100% 100% no-repeat;
+  }
+
+  &__content {
+    @include flex-xy;
+    width: 100%;
+    padding: 0.15rem;
+    height: max-content;
+    background: #222;
+  }
+
+  &__button {
+    @include flex-xy;
+    background-position: 50%;
+    border-radius: 0.2rem;
+    border: none;
+    color: #511a00;
+    font-size: 0.12rem;
+    font-weight: 700;
+    height: 0.35rem;
+    text-align: center;
+    width: 1.2rem;
+    background: url('~/assets/commons/button.png') center / 100% 100% no-repeat;
+  }
+}
