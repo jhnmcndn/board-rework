@@ -28,5 +28,13 @@
         display: none;
       }
     }
+
+    :global {
+      .ptr__pull-down--pull-more {
+        p {
+          display: none !important;
+        }
+      }
+    }
   }
 }
