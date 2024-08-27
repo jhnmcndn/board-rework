@@ -22,6 +22,7 @@ body {
   padding: 0;
   margin: 0;
   touch-action: manipulation;
+  scrollbar-width: none;
 }
 
 a {
@@ -57,10 +58,6 @@ ul {
 
 ::-webkit-scrollbar-thumb {
   display: none;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
 }
 
 :root {
@@ -106,6 +103,13 @@ ul {
   &[data-theme='whiteGold'] {
     background-color: #dadce7;
   }
+}
+
+#onroot {
+  height: 100vh;
+  height: 100dvh;
+  width: 100vw;
+  width: 100dvw;
 }
 
 @media screen and (orientation: portrait) {
@@ -244,7 +248,7 @@ ul {
   top: 0;
   z-index: 10;
 
-  >div {
+  > div {
     height: 100% !important;
   }
 }
