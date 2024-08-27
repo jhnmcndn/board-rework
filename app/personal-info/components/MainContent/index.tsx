@@ -8,6 +8,7 @@ import AccountDetails from '../AccountDetails';
 import Betting from '../Betting';
 import GameBalance from '../GameBalance';
 import Privilege from '../Privilege';
+import SecurityCenter from '../SecurityCenter';
 import VipDetails from '../VipDetails';
 import styles from './index.module.scss';
 
@@ -34,6 +35,7 @@ const MainContent: FC<
           {activeSidebarItem === 0 && <Privilege theme={theme} vipGiftInfo={vipGiftInfo} />}
           {activeSidebarItem === 1 && <VipDetails vipGiftInfo={vipGiftInfo} />}
           {activeSidebarItem === 2 && <Betting gameCategoryList={gameCategoryList} />}
+          {activeSidebarItem === 3 && <SecurityCenter />}
           {activeSidebarItem === 4 && <AccountDetails tradeTypes={tradeTypes} />}
           {activeSidebarItem === 5 && <GameBalance gameBalance={gameBalance} />}
         </div>

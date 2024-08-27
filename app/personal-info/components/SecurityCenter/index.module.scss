@@ -1,0 +1,137 @@
+.container {
+  background-color: var(--security-panel-bg);
+  width: 100%;
+  max-height: 100%;
+  border-radius: 0.15rem;
+
+  .header {
+    display: flex;
+    justify-content: flex-start;
+
+    span {
+      display: block;
+      width: max-content;
+      background: var(--security-title-bg);
+      font-size: 0.17rem;
+      padding: 0.1rem 0.2rem;
+      font-weight: 700;
+      border-top-left-radius: 0.2rem;
+    }
+
+    .line {
+      flex: 1;
+      border-bottom: 0.01rem solid var(--security-header-border);
+    }
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0.2rem;
+    width: 100%;
+
+    .inputGroup {
+      width: 80%;
+
+      &:not(:last-child) {
+        margin-bottom: 0.1rem;
+      }
+
+      input {
+        -webkit-appearance: none;
+        outline: none;
+        width: 100%;
+        border-radius: 0.2rem;
+        padding: 0.05rem 0.1rem;
+        font-size: 0.17rem;
+        border: 1px solid transparent;
+        color: #fff;
+        background: var(--security-input-bg);
+
+        &:focus {
+          border: 1px solid #fff;
+        }
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+        }
+
+        &::placeholder {
+          color: var(--security-input-placeholder);
+        }
+
+        &[type=number] {
+          -moz-appearance: textfield;
+        }
+      }
+
+      &.passwordInput {
+        position: relative;
+
+        input {
+          padding-right: 0.5rem;
+        }
+
+        .showPassword {
+          position: absolute;
+          right: 0.08rem;
+          top: 53%;
+          transform: translateY(-50%);
+
+          img {
+            width: 0.2rem;
+            height: 0.25rem;
+            object-fit: contain;
+          }
+        }
+      }
+
+      &.withButtonInput {
+        position: relative;
+
+        input {
+          padding-right: 0.5rem;
+        }
+
+        .inputButton {
+          appearance: none;
+          outline: none;
+          -webkit-appearance: none;
+          border: none;
+          position: absolute;
+          right: 0.08rem;
+          top: 50%;
+          transform: translateY(-50%);
+          border-radius: 0.1rem;
+          padding: 0.04rem 0.07rem;
+          color: var(--security-highlight-text);
+          background: var(--security-button-bg);
+        }
+
+      }
+    }
+
+    .note {
+      font-size: 0.12rem;
+      color: var(--vip-header);
+    }
+
+    .bindButton {
+      color: var(--security-highlight-text);
+      background: url(~/assets/commons/button.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      margin-top: 0.2rem;
+      height: 0.33rem;
+      width: 1rem;
+    }
+  }
+
+}
