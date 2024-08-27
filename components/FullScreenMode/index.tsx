@@ -1,9 +1,9 @@
 'use client';
 
+import { isHuaweiBrowser } from '@/utils/helpers';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
-import { isHuaweiBrowser } from '@/utils/helpers';
 
 const FullScreenWindow = ({ children }: { children: React.ReactNode }) => {
   const params = useSearchParams();
@@ -57,7 +57,7 @@ const FullScreenWindow = ({ children }: { children: React.ReactNode }) => {
   );
 
   return (
-    <div id='onroot'>
+    <>
       {isAndroid && !isXiaomi ? (
         <FullScreen handle={handle} onChange={handleChange}>
           {children}
@@ -65,7 +65,7 @@ const FullScreenWindow = ({ children }: { children: React.ReactNode }) => {
       ) : (
         <> {children} </>
       )}
-    </div>
+    </>
   );
 };
 

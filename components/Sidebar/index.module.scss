@@ -10,6 +10,7 @@
     @include flex-xy;
     height: 0.54rem;
     width: 100%;
+    cursor: pointer;
     .text {
       background: var(--common-text-unactive);
       -webkit-background-clip: text;
