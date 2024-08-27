@@ -19,7 +19,6 @@ const SecurityCenter = () => {
   });
 
   const handleSendSms = async () => {
-    debugger;
     if (!formData.mobile) {
       openAlert({ body: '请输入手机号码' });
       return;
