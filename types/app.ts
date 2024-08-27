@@ -1,5 +1,5 @@
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
-import { Dispatch, ReactNode, SetStateAction } from 'react';
+import { Dispatch, JSXElementConstructor, ReactElement, ReactNode, SetStateAction } from 'react';
 
 export type ServerConfig = {
   agent: string;
@@ -142,7 +142,7 @@ export type ActiveSideBarItem = {
 export type MessageOnSites = {
   id?: number;
   title?: string;
-  content?: string;
+  content?: string | ReactElement<any, string | JSXElementConstructor<any>>[];
   createTime?: string;
   isRead?: boolean;
 };
