@@ -18,6 +18,11 @@ export const getDeviceInfo = () => {
   return null;
 };
 
+export const isHuaweiBrowser = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return userAgent.includes('huaweibrowser');
+};
+
 export const copyToClipboard = (text: string) => window.navigator.clipboard.writeText(text);
 
 export const MODAL_BG_ANIMATION = {
