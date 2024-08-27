@@ -33,7 +33,7 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
   const isSharePage = pathname?.toLowerCase().includes('share');
   const isGamePage = pathname?.toLowerCase().includes('games');
 
-  const rechargeTitle = pathname?.includes('rechargeHistory') ? '充值记录' : '充值';
+  const rechargeTitle = pathname?.includes('recharge-history') ? '充值记录' : '充值';
 
   // NOTE: Modify this line after creating the music store
   // const turnBgMusicOn = useMusicStore((state) => state.turnBgMusicOn)
@@ -111,11 +111,11 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
           )}
         </div>
 
-        {isRechargePage && !pathname?.includes('rechargeHistory') && (
+        {isRechargePage && !pathname?.includes('recharge-history') && (
           <div
             data-click={sfx.popAudio}
             className={styles.historyRecordBtn}
-            onClick={() => router.push('/recharge/rechargeHistory')}
+            onClick={() => router.push('/recharge/recharge-history')}
           >
             <Image
               src={images.historyRecord}

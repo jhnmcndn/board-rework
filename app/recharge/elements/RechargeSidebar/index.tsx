@@ -1,8 +1,8 @@
-import { Dispatch, SetStateAction } from 'react';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import classNames from 'classnames';
+import { Dispatch, SetStateAction } from 'react';
 import styles from './index.module.scss';
 
 export type Props = {
@@ -18,8 +18,8 @@ const RechargeSidebar = ({ setActiveSidebarItem, activeSidebarItem }: Props) => 
         return (
           <li
             key={item.id}
-            className={classNames(styles.item, { [styles.activeItem]: item.id === activeSidebarItem })}
-            onClick={() => setActiveSidebarItem(item.id)}
+            className={classNames(styles.item, { [styles.activeItem]: index === activeSidebarItem })}
+            onClick={() => setActiveSidebarItem(index)}
           >
             <div className={styles.imageHolder}>
               <Image className={styles.image} src={item.iconUrl} alt={item.name} width={200} height={200} />
