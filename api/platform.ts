@@ -1,8 +1,8 @@
 'use server';
 
 import { request } from '@/api';
+import { COOKIE_MAX_AGE } from '@/constants/app';
 import { defaultInitData } from '@/constants/defaultData';
-import { COOKIE_MAX_AGE } from '@/constants/misc';
 import {
   AccountInfo,
   AccountNow,

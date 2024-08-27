@@ -32,12 +32,12 @@ const RegisterForm: FC<RegisterFormProps> = ({ switchToLogin }) => {
   };
 
   const tryRegisterPhone = async () => {
-    const res = await registerPhone({
+    const success = await registerPhone({
       phone: values('phoneNumber'),
       password: values('password'),
       verifyCode: values('verifyCode'),
     });
-    if (res) {
+    if (success) {
       reset();
       switchToLogin();
     }
