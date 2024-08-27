@@ -1,5 +1,4 @@
 const RechargeHistory = () => {
-
   return <div>Recharge History</div>;
 };
 

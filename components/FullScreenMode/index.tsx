@@ -57,7 +57,7 @@ const FullScreenWindow = ({ children }: { children: React.ReactNode }) => {
   );
 
   return (
-    <>
+    <div id='onroot'>
       {isAndroid && !isXiaomi ? (
         <FullScreen handle={handle} onChange={handleChange}>
           {children}
@@ -65,7 +65,7 @@ const FullScreenWindow = ({ children }: { children: React.ReactNode }) => {
       ) : (
         <> {children} </>
       )}
-    </>
+    </div>
   );
 };
 
