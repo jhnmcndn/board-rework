@@ -4,6 +4,7 @@ import { refetch } from '@/api/refetch';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import useFetchGame from '@/hooks/useFetchGame';
 import useImages from '@/hooks/useImages';
+import { RspGameType } from '@/types/app';
 import { API_ENDPOINT } from '@/types/enums';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
@@ -17,6 +18,18 @@ const SideBar = () => {
   const { handleChange } = useFetchGame();
   const containerRef = useRef<HTMLDivElement>(null);
   const { sideBar, activeSideBarItem, isGamesLoading } = useGameStore((state) => state);
+
+  const handleClick = (item: RspGameType, index: number) => {
+    handleChange(item);
+    if (!containerRef.current) return;
+
+    if (index > 2) {
+      containerRef.current.scrollBy({ top: 300, behavior: 'smooth' });
+    }
+    if (index < 2) {
+      containerRef.current.scrollBy({ top: -300, behavior: 'smooth' });
+    }
+  };
 
   const handleRefresh = async () => {
     await refetch(API_ENDPOINT.GAME_TYPES);
@@ -45,7 +58,7 @@ const SideBar = () => {
                   className={classNames(styles.sideBarItemContainer, {
                     [styles.disabled]: item.id === activeSideBarItem.id || isGamesLoading,
                   })}
-                  onClick={() => handleChange(item)}
+                  onClick={() => handleClick(item, index)}
                 >
                   <Image height={1} width={434} className={styles.divider} src={images.divider} alt='divider' />
                   <div
