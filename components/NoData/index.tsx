@@ -3,6 +3,7 @@
 import useImages from '@/hooks/useImages';
 import classnames from 'classnames';
 import Image from 'next/image';
+import { memo } from 'react';
 import styles from './index.module.scss';
 
 type Props = {
@@ -20,4 +21,4 @@ const NoData = ({ className }: Props) => {
   );
 };
 
-export default NoData;
+export default memo(NoData);
