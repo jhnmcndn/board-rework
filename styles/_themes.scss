@@ -96,6 +96,7 @@
   --safebox-fund-header: #2c2c2c;
   --main-background: #000000;
   --main-bg: url('../assets/blackGold/main/main.webp');
+  --accordion-body-color: #435689;
 
 
   &[data-theme='brownGold'] {
@@ -407,6 +408,7 @@
     --safebox-fund-header: #0ca0e9;
     --main-background: #dff4ff;
     --main-bg: url('../assets/skyBlue/main/main.webp');
+    --accordion-body-color: #fff;
   }
 
   &[data-theme='darkBlue'] {
@@ -491,6 +493,7 @@
     --safebox-fund-header: linear-gradient(to right, #4d6296, #29334b);
     --main-background: #d7e8f0;
     --main-bg: url('../assets/darkBlue/main/main.webp');
+    --accordion-body-color: #fff;
   }
 
   &[data-theme='redGold'] {

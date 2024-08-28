@@ -1,5 +1,5 @@
 'use client';
-
+import styles from '@/app/mailbox/index.module.scss';
 import Accordion from '@/components/Accordion';
 import NoData from '@/components/NoData';
 import { useMessageStore } from '@/components/Providers/MessageStoreProvider';
@@ -20,7 +20,7 @@ const MailList = () => {
             return -1;
           })
           .map((mail, index) => (
-            <div key={index} style={index > 0 ? { marginTop: '0.1rem' } : {}}>
+            <div key={index} className={styles.mailItem}>
               <Accordion message={mail} delay={index} img={images.envelope} />
             </div>
           ))}
