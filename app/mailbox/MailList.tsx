@@ -24,11 +24,7 @@ const MailList = () => {
   return (
     <Fragment>
       {sortedMessages.map((mail, index) => (
-<<<<<<< HEAD
         <div key={mail.id} style={index > 0 ? { marginTop: '0.1rem' } : {}}>
-=======
-        <div key={index}>
->>>>>>> be1448d3cb8ed62ffcee73472526d6952fe80245
           <Accordion message={mail} delay={index} img={envelope} />
         </div>
       ))}
