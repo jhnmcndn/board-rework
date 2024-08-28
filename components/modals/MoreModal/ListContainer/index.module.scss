@@ -2,6 +2,7 @@
   @include flex-xy;
   flex-direction: column;
   width: 30%;
+  cursor: pointer;
 
   > img {
     height: 50%;

@@ -26,7 +26,7 @@ const Accordion: AccordionComponent = ({ message, delay, background, img, dropdo
 
   const handleExpand = () => {
     setExpand((prev) => !prev);
-    if (message.id && messageOnSites.length > 0) {
+    if (message.id && messageOnSites.length > 0 && !message.isRead) {
       setMessageOnSites(messageOnSites.map((mail) => (mail.id === message.id ? { ...mail, isRead: true } : mail)));
     }
   };
