@@ -8,6 +8,7 @@ import classnames from 'classnames';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
+import Button from '@/components/Fragments/Button';
 
 const SelfWithdrawal = () => {
   const theme = useAccountStore((state) => state.theme);
@@ -102,30 +103,29 @@ const SelfWithdrawal = () => {
           </ul>
         )}
         <div className={styles.addCardsCont}>
-          <div
-            data-click={sfx.popAudio}
-            className={styles.addCard}
-            onClick={() => {
-              openBindBank();
-            }}
-          >
-            <Image src={require(`@/assets/${theme}/fragments/plusVector.png`)} width={50} height={50} alt='Add Bank' />
+          <div data-click={sfx.popAudio} className={styles.addCard}>
+            <Image
+              src={require(`@/assets/${theme}/fragments/plusVector.png`)}
+              width={50}
+              height={50}
+              alt='Add Bank'
+              onClick={() => {
+                openBindBank();
+              }}
+            />
             <span>绑定银行卡</span>
           </div>
           {Object.entries(bindCardList?.specialBankInfoMap ?? {}).map(([key, value], index) => {
             return (
-              <div
-                key={index}
-                className={styles.addCard}
-                onClick={() => {
-                  openBindUSDT();
-                }}
-              >
+              <div key={index} className={styles.addCard}>
                 <Image
                   src={require(`@/assets/${theme}/fragments/plusVector.png`)}
                   width={50}
                   height={50}
                   alt='Add Bank'
+                  onClick={() => {
+                    openBindUSDT();
+                  }}
                 />
                 <span>{key}</span>
               </div>
@@ -142,9 +142,12 @@ const SelfWithdrawal = () => {
               <span className={styles.hardCodeNaDigit}>0.00</span>
             </div>
           </div>
-          <div data-click={sfx.popAudio} className={styles.withdrawButton} onClick={handleWithdraw}>
-            <span>立即提现</span>
-          </div>
+          <Button
+            data-click={sfx.popAudio}
+            className={styles.withdrawButton}
+            onClick={handleWithdraw}
+            text='立即提现'
+          />
         </div>
       </section>
     </div>

@@ -4,9 +4,9 @@ import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 import { refetch } from '@/api/refetch';
 import Image from 'next/image';
-import styles from './index.module.scss';
 import { API_ENDPOINT } from '@/types/enums';
 import useModalStore from '@/store/modals';
+import styles from './index.module.scss';
 
 type ListItem = {
   text: string;
@@ -58,7 +58,7 @@ const BindCards = () => {
             );
           })}
           {listItems.map((item, index) => (
-            <li key={index} className={styles.cardList} onClick={item.onClick}>
+            <li key={index} className={`${styles.cardList} ${styles.canClick}`} onClick={item.onClick}>
               <div className={styles.bankDetails}>
                 <Image
                   src={require(`@/assets/${theme}/fragments/plusVector.png`)}
