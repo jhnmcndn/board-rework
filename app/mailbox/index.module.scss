@@ -44,3 +44,8 @@
     }
   }
 }
+.mailItem {
+  &:not(:first-child) {
+    margin-top: 0.05rem;
+  }
+}

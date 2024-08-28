@@ -20,9 +20,11 @@ const LoginOrRegisterModal: FC = () => {
   const switchToRegister = () => setActiveTab('register');
 
   const commonMotionProps = {
-    initial: { x: 0, opacity: 0, display: 'none' },
-    transition: { duration: 0.5, display: { duration: 0 } },
-    className: styles.body,
+    transition: {
+      type: 'spring',
+      duration: 0.5,
+      bounce: 0.2,
+    },
   };
 
   const modalContent = (
@@ -42,24 +44,20 @@ const LoginOrRegisterModal: FC = () => {
             <div className={styles.animateContainer}>
               <motion.div
                 key='login'
-                animate={{
-                  x: isLogin ? '0%' : '-20%',
-                  opacity: isLogin ? 1 : 0,
-                  display: isLogin ? 'block' : 'none',
-                }}
+                initial={{ x: '-110%' }}
+                animate={{ x: isLogin ? '0' : '-110%' }}
                 {...commonMotionProps}
+                className={styles.body}
               >
                 <LoginForm switchToRegister={switchToRegister} />
               </motion.div>
 
               <motion.div
                 key='register'
-                animate={{
-                  x: isLogin ? '20%' : '0%',
-                  opacity: isLogin ? 0 : 1,
-                  display: isLogin ? 'none' : 'block',
-                }}
+                initial={{ x: '110%', opacity: 1 }}
+                animate={{ x: !isLogin ? '0' : '110%' }}
                 {...commonMotionProps}
+                className={styles.body}
               >
                 <RegisterForm switchToLogin={switchToLogin} />
               </motion.div>
