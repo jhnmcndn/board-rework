@@ -4,9 +4,10 @@ import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 import { refetch } from '@/api/refetch';
 import Image from 'next/image';
-import styles from './index.module.scss';
 import { API_ENDPOINT } from '@/types/enums';
 import useModalStore from '@/store/modals';
+import useImages from '@/hooks/useImages';
+import styles from './index.module.scss';
 
 type ListItem = {
   text: string;
@@ -17,6 +18,7 @@ const BindCards = () => {
   const theme = useAccountStore((state) => state.theme);
   const bindCardList = useAccountStore((state) => state.bindCardList);
   const { openBindBank, openBindUSDT } = useModalStore();
+  const { images } = useImages();
 
   const listItems: ListItem[] = [
     {
@@ -58,24 +60,12 @@ const BindCards = () => {
             );
           })}
           {listItems.map((item, index) => (
-            <li key={index} className={styles.cardList} onClick={item.onClick}>
+            <li key={index} className={`${styles.cardList} ${styles.canClick}`} onClick={item.onClick}>
               <div className={styles.bankDetails}>
-                <Image
-                  src={require(`@/assets/${theme}/fragments/plusVector.png`)}
-                  className={styles.leftIcons}
-                  width={50}
-                  height={50}
-                  alt='Add'
-                />
+                <Image src={images.plusSign} className={styles.leftIcons} width={50} height={50} alt='Add' />
                 <span className={styles.text}>{item.text}</span>
               </div>
-              <Image
-                src={require(`@/assets/${theme}/fragments/arrowVector.png`)}
-                className={styles.arrowIcon}
-                width={26}
-                height={50}
-                alt='Arrow'
-              />
+              <Image src={images.arrowSign} className={styles.arrowIcon} width={26} height={50} alt='Arrow' />
             </li>
           ))}
         </ul>
