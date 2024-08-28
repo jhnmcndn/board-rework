@@ -1,0 +1,11 @@
+.backBtnContainer {
+  @include flex-xy;
+  height: 100%;
+  cursor: pointer;
+  width: 0.8rem;
+
+  img {
+    width: 0.3rem;
+    height: auto;
+  }
+}
