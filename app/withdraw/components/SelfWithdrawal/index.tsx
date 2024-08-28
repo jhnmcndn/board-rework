@@ -7,8 +7,9 @@ import { sfx } from '@/utils/audioFile';
 import classnames from 'classnames';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import styles from './index.module.scss';
 import Button from '@/components/Fragments/Button';
+import useImages from '@/hooks/useImages';
+import styles from './index.module.scss';
 
 const SelfWithdrawal = () => {
   const theme = useAccountStore((state) => state.theme);
@@ -19,6 +20,7 @@ const SelfWithdrawal = () => {
   const withdrawAmount = useAccountStore((state) => state.withdrawAmount);
   const [selectedCard, setSelectedCard] = useState<MemberCardList | null>(null);
   const { openBindBank, openBindUSDT, openPassCode, openAlert } = useModalStore();
+  const { images } = useImages();
 
   useEffect(() => {
     if (bindCardList?.memberCardList && bindCardList.memberCardList.length > 0) {
@@ -105,7 +107,7 @@ const SelfWithdrawal = () => {
         <div className={styles.addCardsCont}>
           <div data-click={sfx.popAudio} className={styles.addCard}>
             <Image
-              src={require(`@/assets/${theme}/fragments/plusVector.png`)}
+              src={images.plusSign}
               width={50}
               height={50}
               alt='Add Bank'
@@ -119,7 +121,7 @@ const SelfWithdrawal = () => {
             return (
               <div key={index} className={styles.addCard}>
                 <Image
-                  src={require(`@/assets/${theme}/fragments/plusVector.png`)}
+                  src={images.plusSign}
                   width={50}
                   height={50}
                   alt='Add Bank'

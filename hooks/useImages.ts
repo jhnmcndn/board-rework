@@ -68,6 +68,7 @@ export default function useImages() {
     searchClear: require(`@/assets/blackGold/main/searchClear.png`),
     settings: require(`@/assets/${theme}/header/setting.png`),
     shareIcon: require(`@/assets/${theme}/header/shareIcon.png`),
+    plusSign: require(`@/assets/${theme}/fragments/plusVector.png`),
     // Footer
     support: require(`@/assets/${theme}/footer/iconSupport.png`),
     chip: require(`@/assets/${theme}/footer/iconChip.png`),
