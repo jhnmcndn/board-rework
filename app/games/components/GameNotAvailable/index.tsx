@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 const GameNotAvailable = () => {
   const openAlert = useModalStore((s) => s.openAlert);
   useEffect(() => {
-    openAlert({ body: 'Game is currently unavailable. Please try again later.' });
+    openAlert({ body: '游戏当前不可用，请稍后再试.' });
   }, []);
   return redirect('/');
 };
