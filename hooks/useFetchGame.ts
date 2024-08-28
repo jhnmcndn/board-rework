@@ -14,12 +14,10 @@ const useFetchGame = () => {
   } = useGameStore((state) => state);
 
   const fetchGameInfoGroup = async (id: number) => {
-    setIsGamesLoading(true);
     const response = await getGameInfoGroup(id);
     if (response && !('message' in response)) {
       setGameInfoGroup(response);
     }
-    setIsGamesLoading(false);
   };
 
   const fetchGameInfo = async (params: { id: number; pid: number }, item?: RspGameType) => {
@@ -34,14 +32,15 @@ const useFetchGame = () => {
     }
     setIsGamesLoading(false);
   };
-
   const handleChange = (item: RspGameType) => {
-    if (item.type === 4 || item.type === 3) {
-      fetchGameInfoGroup(item.id || 0);
-    }
     if (item.type === 2) {
       setShowPlatform(false);
     }
+
+    if (item.type === 4 || item.type === 3) {
+      fetchGameInfoGroup(item.id || 0);
+    }
+
     fetchGameInfo({ id: item.id || 0, pid: -1 }, item);
     setActiveSideBarItem(item);
   };
