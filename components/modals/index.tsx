@@ -14,6 +14,7 @@ const VaultPassCodeModal = dynamic(() => import('./VaultPassCodeModal'), { ssr: 
 const CommissionModal = dynamic(() => import('./CommissionModal'), { ssr: false });
 const BindUSDTModal = dynamic(() => import('./BindUSDTModal'), { ssr: false });
 const BindBankModal = dynamic(() => import('./BindBankModal'), { ssr: false });
+const ShareModal = dynamic(() => import('./ShareModal'), { ssr: false });
 
 const ModalRoot = () => {
   const theme = useAccountStore((state) => state.theme);
@@ -33,6 +34,7 @@ const ModalRoot = () => {
       <VaultPassCodeModal />
       <AnnouncementModal />
       <CommissionModal />
+      <ShareModal />
       <div id='modal-root' data-theme={theme} />
     </>
   );

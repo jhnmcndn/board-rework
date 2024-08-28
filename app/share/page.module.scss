@@ -1,0 +1,44 @@
+.shareQRCode {
+  width: 100%;
+  height: calc(100vh - 0.4rem);
+  background-color: #000;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  gap: 0.1rem;
+
+  &__qrCodeScanner {
+    @include flex-xy;
+    width: 1.8rem;
+    border: 0.04rem solid white;
+    background: white;
+    height: 1.8rem;
+    padding: 0.1rem;
+    margin-top: 0.9rem;
+  }
+
+  &__qrCodeBtn {
+    background: url('../../assets/commons/qrShareBtn.png') no-repeat center;
+    background-size: cover;
+    width: 4.4rem;
+    height: 0.7rem;
+    @include flex-xy;
+
+    justify-content: flex-start;
+
+    span {
+      margin-left: 0.2rem;
+      font-size: 0.27rem;
+      font-weight: 700;
+      line-height: 0.5;
+      color: #fff;
+    }
+  }
+}
