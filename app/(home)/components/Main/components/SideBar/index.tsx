@@ -24,6 +24,8 @@ const SideBarTitle = memo(() => {
   );
 });
 
+SideBarTitle.displayName = 'SideBarTitle';
+
 const SideBar = () => {
   const { images } = useImages();
   const { handleChange } = useFetchGame();

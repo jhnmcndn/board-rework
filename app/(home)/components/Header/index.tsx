@@ -18,3 +18,5 @@ export const Header = memo(() => {
     </motion.div>
   );
 });
+
+Header.displayName = 'Header';
