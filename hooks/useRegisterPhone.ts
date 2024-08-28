@@ -15,17 +15,17 @@ const useRegisterPhone = () => {
 
   const requestVerifyCode = async (phoneNumber: string) => {
     if (phoneNumber === '') {
-      openAlert({ body: '请输入手机号码' });
+      openAlert('请输入手机号码');
     } else {
       const verifyRes = await requestPhoneVerify({ phone: phoneNumber });
       if (verifyRes && verifyRes.code === 200) {
         if (verifyRes.data && !('message' in verifyRes.data)) {
-          openAlert({ body: verifyRes?.data?.msg });
+          openAlert(verifyRes?.data?.msg);
         } else {
-          openAlert({ body: verifyRes?.data?.message });
+          openAlert(verifyRes?.data?.message);
         }
       } else {
-        openAlert({ body: verifyRes?.msg });
+        openAlert(verifyRes?.msg);
       }
     }
   };
@@ -45,13 +45,13 @@ const useRegisterPhone = () => {
 
     if (res && res.code === 200) {
       if (res.data && !('message' in res.data)) {
-        openAlert({ body: res?.data?.msg });
+        openAlert(res?.data?.msg);
         return true;
       } else {
-        openAlert({ body: res?.data?.message });
+        openAlert(res?.data?.message);
       }
     } else {
-      openAlert({ body: res?.msg });
+      openAlert(res?.msg);
     }
   };
 

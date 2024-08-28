@@ -26,7 +26,7 @@ const Giftbox: FC<
   const fetchAccountNow = useAccountStore((s) => s.fetchAccountNow);
   const handleReceiveGift = async ({ type }: { type: number }) => {
     const response = await receiveVipGift({ type });
-    openAlert({ body: response.message });
+    openAlert(response.message);
     refetch(API_ENDPOINT.VIP_GIFT_INFO);
     fetchAccountNow();
   };

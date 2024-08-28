@@ -43,20 +43,20 @@ const MyPromotion = ({ recommendDetailData, updateRecommendDetail }: MyPromotion
 
   const handleGetCommission = async () => {
     if (recommendDetailData?.canSion === 0) {
-      openAlert({ notify: '暂无可领取的佣金' });
+      openAlert('暂无可领取的佣金');
       return;
     }
 
     try {
       const res = await receiveRecommendReward();
-      openAlert({ notify: res?.code === 200 ? '操作成功' : res.msg });
+      openAlert(res?.code === 200 ? '操作成功' : res.msg);
     } catch (err: any) {
-      openAlert({ notify: err.msg });
+      openAlert(err.msg);
     }
   };
 
   const handleCopyURLCode = () => {
-    openAlert({ notify: channelCodeURL });
+    openAlert(channelCodeURL);
     copyToClipboard(channelCodeURL);
   };
 

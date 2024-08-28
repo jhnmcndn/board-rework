@@ -24,12 +24,12 @@ const Version: FC = () => {
 
   const getUrl = () => {
     copyToClipboard(init.webUrl);
-    openAlert({ body: init.webUrl });
+    openAlert(init.webUrl);
   };
 
   const getLinkUrl = () => {
     copyToClipboard(linkUrl);
-    openAlert({ body: linkUrl });
+    openAlert(linkUrl);
   };
 
   return (

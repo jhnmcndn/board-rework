@@ -1,16 +1,9 @@
 import { create } from 'zustand';
 
-interface AlertContent {
-  body?: string | React.ReactNode;
-  link?: string;
-  notify?: string;
-  onClose?: () => void;
-}
-
 interface ModalStore {
-  content: AlertContent;
+  alertContent: string;
   isAlertOpen: boolean;
-  openAlert: (newContent: AlertContent) => void;
+  openAlert: (newContent: string | undefined) => void;
   closeAlert: () => void;
   isShareOpen: boolean;
   isLoginOptionsOpen: boolean;
@@ -56,7 +49,7 @@ export type ModalStoreActions = {};
 const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   isAlertOpen: false,
   isLoginOptionsOpen: false,
-  content: {},
+  alertContent: '',
   isLoginOrRegisterOpen: false,
   isAnnouncementOpen: false,
   isSettingsOpen: false,
@@ -69,10 +62,10 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   isShareOpen: false,
   openSidebarAnnouncement: 0,
   openContentAnnouncement: 0,
-  openAlert: (content) => {
-    set((state) => ({ ...state, isAlertOpen: true, content: { ...content } }));
+  openAlert: (alertContent?) => {
+    set((state) => ({ ...state, isAlertOpen: true, alertContent: alertContent || '出了点问题' }));
   },
-  closeAlert: () => set((state) => ({ ...state, isAlertOpen: false, content: {} })),
+  closeAlert: () => set((state) => ({ ...state, isAlertOpen: false, alertContent: '' })),
   openLoginOptions: () => set((state) => ({ ...state, isLoginOptionsOpen: true })),
   closeLoginOptions: () => set((state) => ({ ...state, isLoginOptionsOpen: false })),
   openLoginOrRegister: () => set((state) => ({ ...state, isLoginOrRegisterOpen: true })),

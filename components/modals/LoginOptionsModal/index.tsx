@@ -72,7 +72,7 @@ const LoginOptionsModal = () => {
                 height={79}
                 width={228}
                 quality={100}
-                onClick={() => openAlert({ body: '没有发现其他域名' })}
+                onClick={() => openAlert('没有发现其他域名')}
               />
             </div>
           </div>

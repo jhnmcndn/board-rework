@@ -33,7 +33,7 @@ const LoginForm: FC<LoginFormProps> = ({ switchToRegister }) => {
   useEffect(() => {
     const errorInstance = errors('phoneNumber') || errors('password');
     if (errorInstance) {
-      openAlert({ body: errorInstance });
+      openAlert(errorInstance);
     }
   }, [errors]);
 

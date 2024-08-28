@@ -2,12 +2,12 @@
 
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useModalStore from '@/store/modals';
+import { MemberCardList } from '@/types/app';
 import { sfx } from '@/utils/audioFile';
 import classnames from 'classnames';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
-import { MemberCardList } from '@/types/app';
 
 const SelfWithdrawal = () => {
   const theme = useAccountStore((state) => state.theme);
@@ -31,10 +31,10 @@ const SelfWithdrawal = () => {
 
   const handleWithdraw = () => {
     if (!withdrawAmount) {
-      openAlert({ body: '请输入正确金额' });
+      openAlert('请输入正确金额');
       return;
     } else if (!selectedCard) {
-      openAlert({ body: '请选择提现卡' });
+      openAlert('请选择提现卡');
       return;
     } else {
       openPassCode();
