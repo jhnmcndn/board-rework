@@ -144,7 +144,29 @@ ul {
   top: 0;
   z-index: 10;
 
-  >div {
+  > div {
     height: 100% !important;
+  }
+}
+
+.fullscreen {
+  height: 100%;
+  width: 100%;
+}
+
+@media screen and (orientation: portrait) {
+  html,
+  body {
+    font-size: 22.2vw;
+  }
+
+  #onroot {
+    transform: rotate(-90deg);
+    transform-origin: bottom right;
+    position: absolute;
+    top: -100vw;
+    right: 0;
+    height: 100dvw;
+    width: 100dvh;
   }
 }
