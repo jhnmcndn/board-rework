@@ -16,7 +16,7 @@ const WithdrawRecord = () => {
 
   const copyToClipboard = (text: string, msg: string) => {
     navigator.clipboard.writeText(text).then(() => {
-      openAlert({ body: msg });
+      openAlert(msg);
     });
   };
 

@@ -54,10 +54,10 @@ const useAuthActions = () => {
         closeLoginOptions();
         return true;
       } else {
-        openAlert({ body: res?.data?.message });
+        openAlert(res?.data?.message);
       }
     } else {
-      openAlert({ body: res?.msg });
+      openAlert(res?.msg);
     }
   };
 

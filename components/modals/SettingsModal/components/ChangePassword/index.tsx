@@ -41,22 +41,22 @@ const ChangePassword: FC = () => {
     const { oldPassword, newPassword, confirmPassword } = passwords;
 
     if (newPassword !== confirmPassword) {
-      openAlert({ body: '新密码与确认密码不匹配' });
+      openAlert('新密码与确认密码不匹配');
       return;
     }
 
     if (newPassword.length < 8) {
-      openAlert({ body: '由8-16位数字加字母组成' });
+      openAlert('由8-16位数字加字母组成');
       return;
     }
 
     try {
       const data = await resetPassword({ oldPasswd: oldPassword, newPasswd: newPassword });
-      openAlert({ body: data.msg });
+      openAlert(data.msg);
 
       setPasswords(initialPasswordsState);
     } catch (error) {
-      openAlert({ body: 'Error' });
+      openAlert('错误');
     }
   };
 
