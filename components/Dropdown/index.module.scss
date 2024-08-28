@@ -29,32 +29,37 @@
     height: auto;
   }
 
-  div {
+  .dropdownWrapper {
     position: absolute;
+    width: 100%;
     top: calc(100% + 0.01rem);
     left: 0;
-    width: 100%;
-    background: #222222;
-    padding: 0.025rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.01rem;
-    box-shadow: 0.625rem 0.625rem 2.813rem 0 rgba(0, 0, 0, 0.75);
+    overflow: hidden;
 
-    li {
-      list-style: none;
+    .dropdownContent {
       width: 100%;
-      display: grid;
-      place-content: center;
-      padding: 0.02rem;
+      background: #222222;
+      padding: 0.025rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.01rem;
+      box-shadow: 0.625rem 0.625rem 2.813rem 0 rgba(0, 0, 0, 0.75);
 
-      &:hover {
-        background: rgb(44, 44, 44);
-      }
+      li {
+        list-style: none;
+        width: 100%;
+        display: grid;
+        place-content: center;
+        padding: 0.02rem;
 
-      &.highlight {
-        background: rgb(64, 64, 64);
+        &:hover {
+          background: rgb(44, 44, 44);
+        }
+
+        &.highlight {
+          background: rgb(64, 64, 64);
+        }
       }
     }
   }
