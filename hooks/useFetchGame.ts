@@ -25,24 +25,21 @@ const useFetchGame = () => {
     if (item && item.type === 3 && showPlatform) {
       newParams = { id: params.id, pid: activePlatform.id || -1 };
     }
-    setIsGamesLoading(true);
     const response = await getGameInfos(newParams);
     if (response && !('message' in response)) {
       setGameInfos(response);
     }
-    setIsGamesLoading(false);
   };
-  const handleChange = (item: RspGameType) => {
-    if (item.type === 2) {
-      setShowPlatform(false);
-    }
+  const handleChange = async (item: RspGameType) => {
+    setIsGamesLoading(true);
 
-    if (item.type === 4 || item.type === 3) {
-      fetchGameInfoGroup(item.id || 0);
-    }
+    if (item.type === 2) setShowPlatform(false);
+    if (item.type === 4 || item.type === 3) await fetchGameInfoGroup(item.id || 0);
 
-    fetchGameInfo({ id: item.id || 0, pid: -1 }, item);
+    await fetchGameInfo({ id: item.id || 0, pid: -1 }, item);
+
     setActiveSideBarItem(item);
+    setIsGamesLoading(false);
   };
 
   return { fetchGameInfoGroup, fetchGameInfo, handleChange };
