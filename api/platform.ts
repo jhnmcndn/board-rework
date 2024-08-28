@@ -320,7 +320,5 @@ export const bindPhone = async ({ mobile, passwd, code }: BindPhonePayload) => {
     tags: API_ENDPOINT.SEND_SMS_VERIFY_CODE,
     body: { mobile, passwd, code },
   });
-  console.log('payload', { mobile, passwd, code });
-  console.log('return', data);
   return data.msg;
 };
