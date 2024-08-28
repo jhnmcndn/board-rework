@@ -98,7 +98,7 @@
   --main-background: #000000;
   --main-bg: url('../assets/blackGold/main/main.webp');
   --accordion-header: #2c2c2c;
-
+  --var-gradient: linear-gradient(to top, #ffeda7, #dec18c);
 
   &[data-theme='brownGold'] {
     --balance-bg-header: #875b32;
@@ -412,7 +412,6 @@
     --main-background: #dff4ff;
     --main-bg: url('../assets/skyBlue/main/main.webp');
     --accordion-header: #0ca0e9;
-
   }
 
   &[data-theme='darkBlue'] {
