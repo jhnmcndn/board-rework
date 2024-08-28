@@ -17,6 +17,10 @@
       border-radius: 0.1rem;
       padding: 0.12rem;
       width: 100%;
+      
+      &.canClick {
+        cursor: pointer;
+      }
 
       .bankDetails {
         @include flex-xy;

@@ -22,6 +22,10 @@ body {
   margin: 0;
   touch-action: manipulation;
   scrollbar-width: none;
+  user-select: none;
+  -webkit-user-select: none; /* For Safari */
+  -ms-user-select: none; /* For Internet Explorer/Edge */
+  -moz-user-select: none; /* For Firefox */
 }
 
 a {
