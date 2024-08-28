@@ -9,9 +9,20 @@ import { API_ENDPOINT } from '@/types/enums';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useRef } from 'react';
+import { memo, useRef } from 'react';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 import styles from './index.module.scss';
+
+const SideBarTitle = memo(() => {
+  const {
+    images: { sidebarTitle },
+  } = useImages();
+  return (
+    <div className={styles.title}>
+      <Image src={sidebarTitle} alt='Sidebar title' />
+    </div>
+  );
+});
 
 const SideBar = () => {
   const { images } = useImages();
@@ -42,10 +53,7 @@ const SideBar = () => {
       transition={{ duration: 0.2 }}
       className={styles.sidebarWrapper}
     >
-      <div className={styles.title}>
-        <Image src={images.sidebarTitle} alt='Sidebar title' />
-      </div>
-
+      <SideBarTitle />
       <div className={styles.list}>
         <PullToRefresh onRefresh={handleRefresh} pullingContent={''}>
           <div ref={containerRef} className={styles.sidebarSwiper}>
