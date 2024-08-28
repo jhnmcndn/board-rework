@@ -1,5 +1,8 @@
+'use client';
+
 import { gameWithdrawal } from '@/api/game';
 import { refetch } from '@/api/refetch';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useModalStore from '@/store/modals';
 import { TGameBalance } from '@/types/app';
 import { API_ENDPOINT } from '@/types/enums';
@@ -10,6 +13,7 @@ import styles from './index.module.scss';
 
 const GameBalanceItem: FC<Readonly<{ gameBalance: TGameBalance }>> = ({ gameBalance }) => {
   const { openAlert } = useModalStore();
+  const fetchAccountNow = useAccountStore((s) => s.fetchAccountNow);
   return (
     <div className={styles.itemContainer}>
       <div>{gameBalance?.platformName}</div>
@@ -18,8 +22,8 @@ const GameBalanceItem: FC<Readonly<{ gameBalance: TGameBalance }>> = ({ gameBala
         whileTap={{ scale: 0.95 }}
         onClick={async () => {
           const { msg } = await gameWithdrawal({ id: gameBalance?.platformId });
-
           openAlert({ notify: msg });
+          fetchAccountNow();
           refetch(API_ENDPOINT.GAME_BALANCE);
         }}
       >

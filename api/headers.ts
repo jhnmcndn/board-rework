@@ -10,5 +10,5 @@ export const headers = async () =>
     agent: serverConfig.agent,
     version: APP_VERSION,
     'Content-Type': 'application/json;charset=UTF-8',
-    token: cookies().get('token')?.value || '',
+    token: cookies().get(`${serverConfig.domain}-token`)?.value || '',
   }) satisfies HeadersInit;

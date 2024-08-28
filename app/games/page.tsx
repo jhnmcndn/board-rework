@@ -2,10 +2,9 @@ import { request } from '@/api';
 import { RootResponse } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 import { JoinGameParams } from '@/types/fns';
-import { getToken } from '@/utils/getToken';
-import { redirect } from 'next/navigation';
 import { FC } from 'react';
 import Games from './Games';
+import GameNotAvailable from './components/GameNotAvailable';
 
 type Props = {
   searchParams: {
@@ -20,9 +19,6 @@ const GamesPage: FC<Props> = async ({ searchParams }) => {
       endpoint: API_ENDPOINT.JOIN_GAME,
       body: { id },
       tags: API_ENDPOINT.JOIN_GAME,
-      otherHeaders: {
-        token: getToken() || '',
-      },
     });
     return response.data;
   };
@@ -31,7 +27,7 @@ const GamesPage: FC<Props> = async ({ searchParams }) => {
 
   if (typeof gameUrl === 'string') return <Games gameUrl={gameUrl} />;
 
-  redirect('/');
+  return <GameNotAvailable />;
 };
 
 export default GamesPage;
