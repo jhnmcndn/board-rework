@@ -117,32 +117,8 @@ ul {
   background-position: left 1.62rem bottom 0;
   background-size: calc(100% - 1.62rem) 100%;
   position: relative;
+  background-image: var(--main-bg);
 
-  &[data-theme='blackGold'] {
-    background-image: url('../assets/blackGold/main/main.webp');
-  }
-
-  // &[data-theme='brownGold'] {
-  //   background-image: url('../assets/brownGold/main/main.webp');
-  // }
-  // &[data-theme='yellowWhite'] {
-  //   background-image: url('../assets/yellowWhite/main/main.webp');
-  // }
-  // &[data-theme='greenYellow'] {
-  //   background-image: url('../assets/greenYellow/main/main.webp');
-  // }
-  // &[data-theme='skyBlue'] {
-  //   background-image: url('../assets/skyBlue/main/main.webp');
-  // }
-  // &[data-theme='darkBlue'] {
-  //   background-image: url('../assets/darkBlue/main/main.webp');
-  // }
-  // &[data-theme='redGold'] {
-  //   background-image: url('../assets/redGold/main/main.webp');
-  // }
-  // &[data-theme='whiteGold'] {
-  //   background-image: url('../assets/whiteGold/main/main.webp');
-  // }
   height: 100%;
   width: 100%;
   display: flex;
