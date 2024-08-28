@@ -44,6 +44,7 @@ const LeftNavigation: FC = () => {
           setShowMore={setShowMoreModal}
           setOpenAnnounceModal={() => {
             setShowMoreModal(false);
+            openAnnouncement();
           }}
           setSafeBoxModal={() => {
             setShowMoreModal(false);
