@@ -1,6 +1,5 @@
 'use client';
 
-import CoinPurse from '@/components/CoinPurse';
 import styles from '@/components/OtherHeader/index.module.scss';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useImages from '@/hooks/useImages';
@@ -11,6 +10,8 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 import Draggable from 'react-draggable';
+import BackButton from './components/BackButton';
+import CoinPurseHeader from './components/CoinPurse';
 
 export type OtherHeaderProps = {
   headerTitle?: string;
@@ -92,10 +93,7 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className={styles.backBtnContainer} data-click={sfx.popAudio} onClick={() => router.back()}>
-        <Image src={images.backBtn} alt='Back' width={72} height={69} className={styles.backBtn} />
-      </div>
-
+      <BackButton />
       <div
         className={classNames(styles.titleContainer, {
           [styles.isWebview]: isWebview,
@@ -128,12 +126,7 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
           </div>
         )}
       </div>
-
-      {showPurse && (
-        <div className={styles.coinPurseContainer}>
-          <CoinPurse />
-        </div>
-      )}
+      <CoinPurseHeader showPurse={showPurse || false} />
     </motion.div>
   );
 };
