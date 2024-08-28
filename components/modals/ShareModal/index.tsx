@@ -22,7 +22,7 @@ const ShareModal = () => {
   }, [isShareOpen]);
 
   const handleCopyURLCode = () => {
-    openAlert({ notify: shareUrl });
+    openAlert(shareUrl);
     copyToClipboard(shareUrl);
   };
 
