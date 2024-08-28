@@ -12,7 +12,16 @@ const BackButton = () => {
   } = useImages();
 
   return (
-    <div className={styles.backBtnContainer} data-click={sfx.popAudio} onClick={() => back()}>
+    <div
+      className={styles.backBtnContainer}
+      data-click={sfx.popAudio}
+      onClick={() => {
+        back();
+        if (localStorage.getItem('share')) {
+          localStorage.removeItem('share');
+        }
+      }}
+    >
       <Image src={backBtn} alt='Back' width={72} height={69} className={styles.backBtn} />
     </div>
   );

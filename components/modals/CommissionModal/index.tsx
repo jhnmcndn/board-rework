@@ -1,16 +1,32 @@
 'use client';
 
+import { getRecommendDesc } from '@/api/game';
 import HeaderModalTitle from '@/components/HeaderModalTitle';
 import ModalLayout from '@/components/modals/ModalLayout';
 import useIsMounted from '@/hooks/useIsMounted';
 import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './index.module.scss';
+
+type TCommissionTableData = {
+  id: string;
+  bill: number;
+  level: number;
+  name: string;
+};
 
 const CommissionModal = () => {
   const isMounted = useIsMounted();
   const { closeCommission, isCommissionOpen } = useModalStore();
+  const [commissionTableData, setCommissionTableData] = useState<Array<TCommissionTableData>>([]);
+
+  useEffect(() => {
+    getRecommendDesc().then((res) => {
+      setCommissionTableData(res);
+    });
+  }, []);
 
   const modalContent = (
     <AnimatePresence>
@@ -27,22 +43,19 @@ const CommissionModal = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className={styles.commissionModal__tableFirstRow}>
-                    <td>
-                      <span className={styles['commissionModal--agentTextColor']}>1级代理</span>
-                    </td>
-                    <td>
-                      <span>0.0030</span>
-                    </td>
-                  </tr>
-                  <tr className={styles.commissionModal__tableSecondRow}>
-                    <td>
-                      <span className={styles['commissionModal--agentTextColor']}>2级代理</span>
-                    </td>
-                    <td>
-                      <span>0.0010</span>
-                    </td>
-                  </tr>
+                  {commissionTableData.map((item) => (
+                    <tr key={item.id} className={styles.commissionModal__tableFirstRow}>
+                      <td>
+                        <span className={styles['commissionModal--agentTextColor']}>
+                          {item.level}
+                          {item.name}
+                        </span>
+                      </td>
+                      <td>
+                        <span>{item.bill}</span>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
               <div className={styles.commissionModal__btnContainer}>

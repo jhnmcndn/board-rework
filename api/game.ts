@@ -114,6 +114,17 @@ export const getRecommendDetail = async () => {
   return response.data;
 };
 
+export const getRecommendDesc = async () => {
+  const response = await request<RootResponse<[]>>({
+    endpoint: API_ENDPOINT.RECOMMEND_DESC,
+    route: APP_ROUTE.PLATFORM,
+    tags: API_ENDPOINT.RECOMMEND_DESC,
+    body: {},
+  });
+  if (!response.data || 'message' in response.data) return [];
+  return response.data;
+};
+
 export const receiveRecommendReward = async () => {
   const response = await request<RootResponse<[]>>({
     endpoint: API_ENDPOINT.RECEIVE_RECOMMEND_REWARD,

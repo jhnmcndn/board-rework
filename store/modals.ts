@@ -12,6 +12,7 @@ interface ModalStore {
   isAlertOpen: boolean;
   openAlert: (newContent: AlertContent) => void;
   closeAlert: () => void;
+  isShareOpen: boolean;
   isLoginOptionsOpen: boolean;
   openLoginOptions: () => void;
   closeLoginOptions: () => void;
@@ -42,6 +43,8 @@ interface ModalStore {
   isCommissionOpen: boolean;
   openCommission: () => void;
   closeCommission: () => void;
+  openShare: () => void;
+  closeShare: () => void;
   openSidebarAnnouncement: number;
   setSidebarAnnouncement: (openSidebarAnnouncement: number) => void;
   openContentAnnouncement: number;
@@ -63,6 +66,7 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   isVersionOpen: false,
   isPassCodeOpen: false,
   isCommissionOpen: false,
+  isShareOpen: false,
   openSidebarAnnouncement: 0,
   openContentAnnouncement: 0,
   openAlert: (content) => {
@@ -89,6 +93,8 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   closePassCode: () => set((state) => ({ ...state, isPassCodeOpen: false })),
   openCommission: () => set((state) => ({ ...state, isCommissionOpen: true })),
   closeCommission: () => set((state) => ({ ...state, isCommissionOpen: false })),
+  openShare: () => set((state) => ({ ...state, isShareOpen: true })),
+  closeShare: () => set((state) => ({ ...state, isShareOpen: false })),
   setSidebarAnnouncement: (openSidebarAnnouncement) => set(() => ({ openSidebarAnnouncement })),
   setContentAnnouncement: (openContentAnnouncement) => set(() => ({ openContentAnnouncement })),
 }));
