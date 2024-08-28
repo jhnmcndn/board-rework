@@ -6,6 +6,7 @@ import {
   PayTypeList,
   RootResponse,
   ThirdPartyRechargePayload,
+  UsdtRechargeList,
   WithdrawRechargeDetail,
 } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
@@ -120,4 +121,14 @@ export const requestThirdPartyRecharge = async ({ channelId, amount, ip }: Third
     tags: API_ENDPOINT.ONLINE_RECHARGE,
   });
   return data;
+};
+
+export const getRechargeUsdtList = async () => {
+  const data = await request<RootResponse<UsdtRechargeList[]>>({
+    route: APP_ROUTE.PAY,
+    endpoint: API_ENDPOINT.RECHARGE_USDT_LIST,
+    tags: API_ENDPOINT.RECHARGE_USDT_LIST,
+  });
+  console.log('DATA', data);
+  return data.data;
 };

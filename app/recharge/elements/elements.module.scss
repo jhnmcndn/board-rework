@@ -1,3 +1,10 @@
+%rechargeBody {
+  width: 100%;
+  padding: 0.15rem;
+  height: max-content;
+  background: #222;
+}
+
 .deposit {
   position: relative;
   border-radius: 0.03rem;
@@ -35,11 +42,8 @@
 
   &__content {
     @include flex-xy;
+    @extend %rechargeBody;
     flex-direction: column;
-    width: 100%;
-    padding: 0.15rem;
-    height: max-content;
-    background: #222;
   }
 
   &__amountSelection {
@@ -63,6 +67,27 @@
       border: #dec18c solid 0.004rem;
       background: linear-gradient(180deg, #f49e97, #fa6653);
     }
+  }
+
+  &__usdtContent {
+    @extend %rechargeBody;
+    display: grid;
+    grid-template-columns: 55% 45%;
+  }
+
+  &__usdtForm {
+    @include flex-xy;
+  }
+
+  &__usdtInstructions {
+    padding: 0.12rem;
+    color: #757575;
+    border-radius: 0.05rem;
+    background: #000;
+  }
+
+  &__instruction {
+    margin: 0.15rem 0;
   }
 
   &__button {

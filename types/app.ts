@@ -457,6 +457,16 @@ export type PayChannelList = {
   string: string | null;
 };
 
+export type UsdtRechargeList = {
+  id: number;
+  channelName: string;
+  chainName: string;
+  rechargeAddress: string;
+  exchangeRate: string;
+  discountBill: number;
+  discountBillStr: string;
+};
+
 export type WashCodeDesc = {
   beat: string;
   codeInterval: string;
