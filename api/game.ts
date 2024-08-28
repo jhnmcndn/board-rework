@@ -1,3 +1,5 @@
+'use server';
+
 import { request } from '@/api';
 import {
   AccountInfo,
