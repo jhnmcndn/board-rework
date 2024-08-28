@@ -51,7 +51,7 @@ const NECaptcha: FC<NECaptchaProps> = ({ onSuccess, captchaId, isCaptchaOpen, se
             },
           },
           onVerify: (err: CaptchaError, data: CaptchaData) => {
-            if (err) openAlert({ body: err.name });
+            if (err) openAlert(err.name);
             else onSuccess(data.validate);
           },
         },

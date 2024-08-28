@@ -9,7 +9,7 @@ import { createPortal } from 'react-dom';
 import styles from './index.module.scss';
 
 export default function AlertContainer() {
-  const { content, isAlertOpen, closeAlert } = useModalStore();
+  const { alertContent, isAlertOpen, closeAlert } = useModalStore();
   const alertIcon = require(`@/public/assets/${serverConfig.server}/favicon.ico`);
   const isMounted = useIsMounted();
 
@@ -20,8 +20,7 @@ export default function AlertContainer() {
           <div className={styles.alert__imageContainer}>
             <Image src={alertIcon} alt='alert' className={styles.alert__icon} />
           </div>
-          {content.body && <span className={styles.alert__message}>{content.body}</span>}
-          {content.notify && <span className={styles.alert__message}>{content.notify}</span>}
+          {alertContent && <span className={styles.alert__message}>{alertContent}</span>}
         </div>
       </div>
     </ModalLayout>

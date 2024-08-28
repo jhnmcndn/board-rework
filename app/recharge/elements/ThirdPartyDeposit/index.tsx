@@ -40,7 +40,7 @@ const ThirdPartyDeposit: FC<ThirdPartyDepositProps> = ({ option }) => {
     const ip = await getIp();
     const { code, data, msg } = await requestThirdPartyRecharge({ channelId: activeChannel, amount, ip });
     if (code === 200 && typeof data === 'string') window.open(data, '_blank');
-    else openAlert({ body: msg || '充值失败，请重试或修改金额' });
+    else openAlert(msg || '充值失败，请重试或修改金额');
   };
 
   return (
@@ -75,7 +75,7 @@ const ThirdPartyDeposit: FC<ThirdPartyDepositProps> = ({ option }) => {
         <button
           className={styles.deposit__button}
           onClick={() => {
-            if (amount === '0') openAlert({ body: '请输入正确金额' });
+            if (amount === '0') openAlert('请输入正确金额');
             else if (activeChannel !== 0) handleThirdPartyRecharge();
           }}
         >

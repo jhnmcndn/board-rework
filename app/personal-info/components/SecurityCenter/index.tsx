@@ -20,16 +20,16 @@ const SecurityCenter = () => {
 
   const handleSendSms = async () => {
     if (!formData.mobile) {
-      openAlert({ body: '请输入手机号码' });
+      openAlert('请输入手机号码');
       return;
     }
     if (count === 0) {
       const res = await requestOTP(formData.mobile);
       if (res?.code === 200) {
-        openAlert({ body: res?.msg });
+        openAlert(res?.msg);
         setCounter(60);
       } else {
-        openAlert({ body: res?.msg });
+        openAlert(res?.msg);
       }
     }
   };
@@ -50,16 +50,16 @@ const SecurityCenter = () => {
 
   const handleBind = () => {
     if (!formData.mobile) {
-      openAlert({ body: '请输入中国大陆手机号' });
+      openAlert('请输入中国大陆手机号');
       return;
     }
     if (formData?.passwd.length < 6) {
-      openAlert({ body: '请输入6-16位数字与字母的组合' });
+      openAlert('请输入6-16位数字与字母的组合');
       return;
     }
 
     if (formData.code.length < 6) {
-      openAlert({ body: '请输入6位数字的验证码' });
+      openAlert('请输入6位数字的验证码');
       return;
     }
 
