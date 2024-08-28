@@ -71,38 +71,7 @@ ul {
   overflow: hidden;
   position: relative;
   transition: all ease-in-out 500ms !important;
-
-  &[data-theme='blackGold'] {
-    background-color: #000000;
-  }
-
-  &[data-theme='brownGold'] {
-    background-color: #ededed;
-  }
-
-  &[data-theme='yellowWhite'] {
-    background-color: #ebedf1;
-  }
-
-  &[data-theme='greenYellow'] {
-    background-color: #d6eae4;
-  }
-
-  &[data-theme='skyBlue'] {
-    background-color: #dff4ff;
-  }
-
-  &[data-theme='darkBlue'] {
-    background-color: #d7e8f0;
-  }
-
-  &[data-theme='redGold'] {
-    background-color: #c9bebe;
-  }
-
-  &[data-theme='whiteGold'] {
-    background-color: #dadce7;
-  }
+  background-color: var(--main-background);
 }
 
 #onroot {
@@ -238,7 +207,7 @@ ul {
   top: 0;
   z-index: 10;
 
-  > div {
+  >div {
     height: 100% !important;
   }
 }
