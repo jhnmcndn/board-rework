@@ -86,7 +86,7 @@ export const HomePage: HomePageComponent = ({
   }, [init, messageHomeNoticesData, gameTypesData, gameInfosData, messageOnSites, getBoxPassIsOpen]);
 
   return (
-    <div className='mainColor' data-theme={theme} id='root'>
+    <div className='mainColor'>
       <Header />
       <Main />
       <Footer />
