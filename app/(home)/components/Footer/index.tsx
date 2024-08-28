@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { memo } from 'react';
 import LeftNavigation from './components/LeftNavigation';
 import RightNavigation from './components/RightNavigation';
 import styles from './index.module.scss';
@@ -42,4 +43,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default memo(Footer);
