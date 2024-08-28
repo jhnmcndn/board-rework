@@ -2,6 +2,7 @@
 
 import { gameWithdrawal } from '@/api/game';
 import { refetch } from '@/api/refetch';
+import NoData from '@/components/NoData';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useModalStore from '@/store/modals';
 import { TGameBalance } from '@/types/app';
@@ -34,6 +35,7 @@ const GameBalanceItem: FC<Readonly<{ gameBalance: TGameBalance }>> = ({ gameBala
 };
 
 const GameBalance: FC<Readonly<{ gameBalance: TGameBalance[] }>> = ({ gameBalance }) => {
+  if (!gameBalance.length) return <NoData />;
   return (
     <div className={styles.container}>
       <PullToRefresh onRefresh={async () => refetch(API_ENDPOINT.GAME_BALANCE)}>
