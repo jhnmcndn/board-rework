@@ -14,12 +14,12 @@ const RechargeSidebar = ({ setActiveSidebarItem, activeSidebarItem }: Props) => 
   const payTypeList = useAccountStore((state) => state.payTypeList);
   return (
     <motion.ul initial={{ x: -100 }} animate={{ x: 0 }} transition={{ duration: 0.3 }} className={styles.listContainer}>
-      {payTypeList.map((item, index) => {
+      {payTypeList.map((item) => {
         return (
           <li
             key={item.id}
-            className={classNames(styles.item, { [styles.activeItem]: index === activeSidebarItem })}
-            onClick={() => setActiveSidebarItem(index)}
+            className={classNames(styles.item, { [styles.activeItem]: item.id === activeSidebarItem })}
+            onClick={() => setActiveSidebarItem(item.id)}
           >
             <div className={styles.imageHolder}>
               <Image className={styles.image} src={item.iconUrl} alt={item.name} width={200} height={200} />

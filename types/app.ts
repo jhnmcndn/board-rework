@@ -70,6 +70,12 @@ export type RegisterPhonePayload = {
   phoneModel: string | null;
 };
 
+export type ThirdPartyRechargePayload = {
+  channelId: number;
+  amount: string;
+  ip: string;
+};
+
 export type AccountInfo = {
   token?: string;
   id?: string;
@@ -438,6 +444,17 @@ export type PayTypeList = {
   tex3: string;
   tex4: string;
   tex5: string;
+};
+
+export type PayChannelList = {
+  id: number;
+  name: string;
+  rechargeMin: number | null;
+  rechargeMax: number | null;
+  quickAmount: string;
+  openLevelMin: number | null;
+  openLevelMax: number | null;
+  string: string | null;
 };
 
 export type WashCodeDesc = {
