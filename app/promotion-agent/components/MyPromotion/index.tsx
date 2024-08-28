@@ -4,8 +4,8 @@ import useModalStore from '@/store/modals';
 import { copyToClipboard } from '@/utils/helpers';
 import classnames from 'classnames';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useMemo, useState } from 'react';
 import styles from './index.module.scss';
 
 type RecommendDetailData = {
@@ -26,38 +26,54 @@ type MyPromotionProps = {
 };
 
 const MyPromotion = ({ recommendDetailData, updateRecommendDetail }: MyPromotionProps) => {
-  const { images } = useImages();
   const router = useRouter();
+  const { images } = useImages();
+  const pathname = usePathname();
   const [channelCode, setChannelCode] = useState('1001');
-  const { openCommission, openAlert, closeAlert } = useModalStore();
-  const channelCodeURL = recommendDetailData?.url ? recommendDetailData?.url : 'www.example.com';
+  const { openCommission, openAlert } = useModalStore();
+  const channelCodeURL = useMemo(() => recommendDetailData?.url || 'www.example.com', [recommendDetailData?.url]);
 
   useEffect(() => {
-    if (localStorage.getItem('channelCode')) {
-      setChannelCode(localStorage.getItem('channelCode')!);
+    const storedChannelCode = localStorage.getItem('channelCode');
+    if (storedChannelCode) {
+      setChannelCode(storedChannelCode);
     }
+    updateRecommendDetail();
   }, []);
 
-  const handleGetCommission = () => {
-    if (recommendDetailData?.canSion !== 0) {
-      receiveRecommendReward()
-        .then((res) => {
-          if (res?.code === 200) {
-            openAlert({ notify: '操作成功' });
-          } else {
-            openAlert({ notify: res.msg });
-          }
-        })
-        .catch((err) => openAlert({ notify: err.msg }));
-    } else {
-      openAlert({ notify: '暂无可领取的佣金' });
+  const handleGetCommission = async () => {
+    if (recommendDetailData?.canSion === 0) {
+      openAlert('暂无可领取的佣金');
+      return;
+    }
+
+    try {
+      const res = await receiveRecommendReward();
+      openAlert(res?.code === 200 ? '操作成功' : res.msg);
+    } catch (err: any) {
+      openAlert(err.msg);
     }
   };
 
   const handleCopyURLCode = () => {
-    openAlert({ notify: channelCodeURL });
+    openAlert(channelCodeURL);
     copyToClipboard(channelCodeURL);
   };
+
+  const handleShareClick = (): void => {
+    router.push('/share');
+    localStorage.setItem('share', 'qrCode');
+  };
+
+  const renderInputContainer = (icon: any, label: string, value: number | undefined) => (
+    <div className={styles.myPromotion__inputContainer}>
+      <span>
+        <Image src={icon} alt={`${label} icon`} width={22} height={22} />
+        {label}
+      </span>
+      <input type='text' value={parseFloat(`${value || 0}`).toFixed(2)} readOnly />
+    </div>
+  );
 
   return (
     <div className={styles.myPromotion}>
@@ -72,56 +88,10 @@ const MyPromotion = ({ recommendDetailData, updateRecommendDetail }: MyPromotion
         </div>
         <div className={styles.myPromotion__mainContent}>
           <div className={styles.myPromotion__gridInput}>
-            <div className={styles.myPromotion__inputContainer}>
-              <span>
-                <Image src={images.promoOneIcon} alt='promo one icon' width={22} height={22} />
-                今日佣金
-              </span>
-              <input
-                type='text'
-                value={parseFloat(
-                  recommendDetailData?.todaySion ? `${recommendDetailData?.todaySion}` : '0.00',
-                ).toFixed(2)}
-                readOnly
-              />
-            </div>
-            <div className={styles.myPromotion__inputContainer}>
-              <span>
-                <Image src={images.promoThreeIcon} alt='promo one icon' width={22} height={22} />
-                昨日佣金
-              </span>
-              <input
-                type='text'
-                value={parseFloat(
-                  recommendDetailData?.yesterdaySion ? `${recommendDetailData?.yesterdaySion}` : '0.00',
-                ).toFixed(2)}
-                readOnly
-              />
-            </div>
-            <div className={styles.myPromotion__inputContainer}>
-              <span>
-                <Image src={images.promoTwoIcon} alt='promo one icon' width={22} height={22} />
-                历史总佣金
-              </span>
-              <input
-                type='text'
-                value={parseFloat(
-                  recommendDetailData?.historySion ? `${recommendDetailData?.historySion}` : '0.00',
-                ).toFixed(2)}
-                readOnly
-              />
-            </div>
-            <div className={styles.myPromotion__inputContainer}>
-              <span>
-                <Image src={images.promoFourIcon} alt='promo one icon' width={22} height={22} />
-                可提取佣金
-              </span>
-              <input
-                type='text'
-                value={parseFloat(recommendDetailData?.canSion ? `${recommendDetailData?.canSion}` : '0.00').toFixed(2)}
-                readOnly
-              />
-            </div>
+            {renderInputContainer(images.promoOneIcon, '今日佣金', recommendDetailData?.todaySion)}
+            {renderInputContainer(images.promoThreeIcon, '昨日佣金', recommendDetailData?.yesterdaySion)}
+            {renderInputContainer(images.promoTwoIcon, '历史总佣金', recommendDetailData?.historySion)}
+            {renderInputContainer(images.promoFourIcon, '可提取佣金', recommendDetailData?.canSion)}
           </div>
           <div className={styles.myPromotion__receiveCommissionBtn}>
             <button onClick={handleGetCommission}>领取佣金</button>
@@ -144,7 +114,7 @@ const MyPromotion = ({ recommendDetailData, updateRecommendDetail }: MyPromotion
           </div>
         </div>
         <div className={styles.myPromotion__shareQRCode}>
-          <button onClick={() => router.push('/share')}>分享二维码</button>
+          <button onClick={handleShareClick}>分享二维码</button>
           <div className={styles.myPromotion__copyCode} data-text={'复制'}>
             专属分享连接:{' '}
             {recommendDetailData?.url ? recommendDetailData?.url?.substring(0, 44) + '...' : 'www.example.com'}

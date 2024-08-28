@@ -1,5 +1,13 @@
 import { request } from '@/api';
-import { BankList, BindCardList, PayTypeList, RootResponse, WithdrawRechargeDetail } from '@/types/app';
+import {
+  BankList,
+  BindCardList,
+  PayChannelList,
+  PayTypeList,
+  RootResponse,
+  ThirdPartyRechargePayload,
+  WithdrawRechargeDetail,
+} from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
 
 export const getBindCardList = async () => {
@@ -92,4 +100,24 @@ export const getPayTypeList = async () => {
     tags: API_ENDPOINT.PAY_TYPE_LIST,
   });
   return data.data;
+};
+
+export const getPayChannelList = async (typeId: number) => {
+  const data = await request<RootResponse<PayChannelList[]>>({
+    body: { typeId },
+    route: APP_ROUTE.PAY,
+    endpoint: API_ENDPOINT.PAY_CHANNEL_LIST,
+    tags: API_ENDPOINT.PAY_CHANNEL_LIST,
+  });
+  return data.data;
+};
+
+export const requestThirdPartyRecharge = async ({ channelId, amount, ip }: ThirdPartyRechargePayload) => {
+  const data = await request<RootResponse<string>>({
+    body: { channelId, money: amount, realIp: ip },
+    route: APP_ROUTE.PAY,
+    endpoint: API_ENDPOINT.ONLINE_RECHARGE,
+    tags: API_ENDPOINT.ONLINE_RECHARGE,
+  });
+  return data;
 };

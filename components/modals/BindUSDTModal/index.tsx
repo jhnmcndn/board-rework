@@ -45,21 +45,21 @@ const BindUSDTModal = () => {
 
   const handleSubmit = async () => {
     if (!realName) {
-      openAlert({ body: '请输入您的姓名' });
+      openAlert('请输入您的姓名');
     } else if (!usdtAddress) {
-      openAlert({ body: '请输入您的 USDT 地址' });
+      openAlert('请输入您的 USDT 地址');
     } else if (usdtAddress.length < 16) {
-      openAlert({ body: '请输入正确的 USDT 地址' });
+      openAlert('请输入正确的 USDT 地址');
     } else {
       const { code, msg } = await setBindCard(realName, usdtAddress, 'USDT-TRC20', 139);
       if (code === 200) {
         fetchBindCardList();
-        openAlert({ body: msg });
+        openAlert(msg);
         setTimeout(() => {
           closeBindUSDT();
         }, 500);
       } else if (code === 500) {
-        openAlert({ body: msg });
+        openAlert(msg);
       }
     }
   };

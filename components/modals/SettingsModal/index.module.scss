@@ -2,8 +2,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 3.1rem;
-  width: 5.1rem;
+  aspect-ratio: 16/9;
+  height: 95vh;
+  height: 95dvh;
+  max-height: 3.1rem;
   z-index: 3;
 
   .contentModal {
@@ -51,6 +53,7 @@
           height: 100%;
           padding: 0.05rem 0;
           white-space: nowrap;
+          cursor: pointer;
 
           span {
             display: flex;

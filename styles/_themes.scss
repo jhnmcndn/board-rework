@@ -92,12 +92,15 @@
   --setting-modal-active-bg: url('../assets/blackGold/sidebar/vipActive.png');
   --announcement-sidetab-active: url('../assets/blackGold/announcementModal/activeTab.png');
   --announcement-sidetab-inactive: url('../assets/blackGold/announcementModal/inactiveTab.png');
+  --home-bg-main: url('../assets/blackGold/main/main.webp');
   --safebox-table-item: linear-gradient(180deg, #ffffff, #f9c423 70.71%);
   --safebox-fund-header: #2c2c2c;
   --main-background: #000000;
   --main-bg: url('../assets/blackGold/main/main.webp');
   --accordion-body-color: #435689;
 
+  --accordion-header: #2c2c2c;
+  --var-gradient: linear-gradient(to top, #ffeda7, #dec18c);
 
   &[data-theme='brownGold'] {
     --balance-bg-header: #875b32;
@@ -153,7 +156,7 @@
     //   --home-title-sidebar: url('../assets/brownGold/main/sidebarTitle.png');
     //   --home-bg-active: url('../assets/brownGold/main/sb_active_item.png');
     //   --home-bg-search: url('../assets/brownGold/main/search-bg.png');
-    //   --header-bg-inner: url('../assets/brownGold/header/header_bg.png');
+    --header-bg-inner: url('../assets/brownGold/header/header_bg.png');
     //   --sidebar-bg-active: url('../assets/brownGold/Sidebar/btn-vipactive.png');
     --setting-close: url('../assets/brownGold/headerModal/closeBtn.png');
     --setting-modal-active-bg: url('../assets/brownGold/sidebar/vipActive.png');
@@ -165,6 +168,7 @@
     --safebox-fund-header: #c4a994;
     --main-background: #ededed;
     --main-bg: url('../assets/brownGold/main/main.webp');
+    --accordion-header: #c4a994;
   }
 
   &[data-theme='yellowWhite'] {
@@ -239,18 +243,18 @@
     //   --home-title-sidebar: url('../assets/yellowWhite/main/sidebarTitle.png');
     //   --home-bg-active: url('../assets/yellowWhite/main/sb_active_item.png');
     //   --home-bg-search: url('../assets/yellowWhite/main/search-bg.png');
-    //   --header-bg-inner: url('../assets/yellowWhite/header/header_bg.png');
+    --header-bg-inner: url('../assets/yellowWhite/header/header_bg.png');
     //   --sidebar-bg-active: url('../assets/yellowWhite/Sidebar/btn-vipactive.png');
     --setting-close: url('../assets/yellowWhite/headerModal/closeBtn.png');
     --setting-bg-header-modal: url('../assets/yellowWhite/headerModal/headerTitleBg.png');
     --setting-modal-active-bg: url('../assets/yellowWhite/sidebar/vipActive.png');
-
     --announcement-sidetab-active: url('../assets/yellowWhite/announcementModal/activeTab.png');
     --announcement-sidetab-inactive: url('../assets/yellowWhite/announcementModal/inactiveTab.png');
     --safebox-table-item: linear-gradient(180deg, #ffffff, #f9c423 70.71%);
     --safebox-fund-header: #0a0a0a;
     --main-background: #ebedf1;
     --main-bg: url('../assets/yellowWhite/main/main.webp');
+    --accordion-header: #0a0a0a;
   }
 
   &[data-theme='greenYellow'] {
@@ -321,7 +325,7 @@
     //   --home-title-sidebar: url('../assets/greenYellow/main/sidebarTitle.png');
     //   --home-bg-active: url('../assets/greenYellow/main/sb_active_item.png');
     //   --home-bg-search: url('../assets/greenYellow/main/search-bg.png');
-    //   --header-bg-inner: url('../assets/greenYellow/header/header_bg.png');
+    --header-bg-inner: url('../assets/greenYellow/header/header_bg.png');
     //   --sidebar-bg-active: url('../assets/greenYellow/Sidebar/btn-vipactive.png');
     --setting-close: url('../assets/greenYellow/headerModal/closeBtn.png');
     --setting-bg-header-modal: url('../assets/greenYellow/headerModal/headerTitleBg.png');
@@ -332,6 +336,7 @@
     --safebox-fund-header: #0e9473;
     --main-background: #d6eae4;
     --main-bg: url('../assets/greenYellow/main/main.webp');
+    --accordion-header: #0e9473;
   }
 
   &[data-theme='skyBlue'] {
@@ -397,7 +402,7 @@
     //   --home-title-sidebar: url('../assets/skyBlue/main/sidebarTitle.png');
     //   --home-bg-active: url('../assets/skyBlue/main/sb_active_item.png');
     //   --home-bg-search: url('../assets/skyBlue/main/search-bg.png');
-    //   --header-bg-inner: url('../assets/skyBlue/header/header_bg.png');
+    --header-bg-inner: url('../assets/skyBlue/header/header_bg.png');
     //   --sidebar-bg-active: url('../assets/skyBlue/Sidebar/btn-vipactive.png');
     --setting-close: url('../assets/skyBlue/headerModal/closeBtn.png');
     --setting-bg-header-modal: url('../assets/skyBlue/headerModal/headerTitleBg.png');
@@ -409,6 +414,7 @@
     --main-background: #dff4ff;
     --main-bg: url('../assets/skyBlue/main/main.webp');
     --accordion-body-color: #fff;
+    --accordion-header: #0ca0e9;
   }
 
   &[data-theme='darkBlue'] {
@@ -482,7 +488,7 @@
     // --home-title-sidebar: url('../assets/darkBlue/main/sidebarTitle.png');
     // --home-bg-active: url('../assets/darkBlue/main/sb_active_item.png');
     // --home-bg-search: url('../assets/darkBlue/main/search-bg.png');
-    // --header-bg-inner: url('../assets/darkBlue/header/header_bg.png');
+    --header-bg-inner: url('../assets/darkBlue/header/header_bg.png');
     // --sidebar-bg-active: url('../assets/darkBlue/Sidebar/btn-vipactive.png');
     --setting-close: url('../assets/darkBlue/headerModal/closeBtn.png');
     --setting-bg-header-modal: url('../assets/darkBlue/headerModal/headerTitleBg.png');
@@ -494,6 +500,7 @@
     --main-background: #d7e8f0;
     --main-bg: url('../assets/darkBlue/main/main.webp');
     --accordion-body-color: #fff;
+    --accordion-header: linear-gradient(270deg, #29334b 0%, #4d6296 100%);
   }
 
   &[data-theme='redGold'] {
@@ -547,7 +554,7 @@
     // --home-title-sidebar: url('../assets/redGold/main/sidebarTitle.png');
     // --home-bg-active: url('../assets/redGold/main/sb_active_item.png');
     // --home-bg-search: url('../assets/redGold/main/search-bg.png');
-    // --header-bg-inner: url('../assets/redGold/header/header_bg.png');
+    --header-bg-inner: url('../assets/redGold/header/header_bg.png');
     // --sidebar-bg-active: url('../assets/redGold/Sidebar/btn-vipactive.png');
     --setting-close: url('../assets/redGold/headerModal/closeBtn.png');
     --setting-bg-header-modal: url('../assets/redGold/headerModal/headerTitleBg.png');
@@ -558,6 +565,7 @@
     --safebox-fund-header: linear-gradient(to right, #af0100, #ff6b00);
     --main-background: #c9bebe;
     --main-bg: url('../assets/redGold/main/main.webp');
+    --accordion-header: linear-gradient(270deg, #771818 0%, #af0100 100%);
   }
 
   &[data-theme='whiteGold'] {
@@ -626,7 +634,7 @@
     // --home-title-sidebar: url('../assets/whiteGold/main/sidebarTitle.png');
     // --home-bg-active: url('../assets/whiteGold/main/sb_active_item.png');
     // --home-bg-search: url('../assets/whiteGold/main/search-bg.png');
-    // --header-bg-inner: url('../assets/whiteGold/header/header_bg.png');
+    --header-bg-inner: url('../assets/whiteGold/header/header_bg.png');
     // --sidebar-bg-active: url('../assets/whiteGold/Sidebar/btn-vipactive.png');
     --setting-close: url('../assets/whiteGold/headerModal/closeBtn.png');
     --setting-bg-header-modal: url('../assets/whiteGold/headerModal/headerTitleBg.png');
@@ -637,5 +645,6 @@
     --safebox-fund-header: linear-gradient(to right, #d5a93d, #fff2c5);
     --main-background: #dadce7;
     --main-bg: url('../assets/whiteGold/main/main.webp');
+    --accordion-header: #e9cb7b;
   }
 }

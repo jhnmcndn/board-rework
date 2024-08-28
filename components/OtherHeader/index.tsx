@@ -1,6 +1,5 @@
 'use client';
 
-import CoinPurse from '@/components/CoinPurse';
 import styles from '@/components/OtherHeader/index.module.scss';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useImages from '@/hooks/useImages';
@@ -11,6 +10,8 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 import Draggable from 'react-draggable';
+import BackButton from './components/BackButton';
+import CoinPurseHeader from './components/CoinPurse';
 
 export type OtherHeaderProps = {
   headerTitle?: string;
@@ -24,14 +25,13 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
   const pathname = usePathname();
   const { images } = useImages();
   const [started, setStarted] = useState(false);
-  const [hasData, setHasData] = useState(false);
+  const [_hasData, setHasData] = useState(false);
   const [isDraggable, setIsDraggable] = useState(false);
   const theme = useAccountStore((state) => state.theme);
-  const accountBalance = useAccountStore((state) => state.accountNow.balance);
   const isRechargePage = pathname?.toLowerCase().includes('recharge');
   const isWebviewPage = pathname?.toLowerCase().includes('webview');
-  const isSharePage = pathname?.toLowerCase().includes('share');
   const isGamePage = pathname?.toLowerCase().includes('games');
+  const isPromotionPage = pathname?.toLowerCase().includes('promotion-agent');
 
   const rechargeTitle = pathname?.includes('recharge-history') ? '充值记录' : '充值';
 
@@ -64,7 +64,10 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
     setTimeout(() => setStarted(false), 50);
   };
 
-  const handleShareBtnClick = () => router.push('/share');
+  const handleShareBtnClick = () => {
+    router.push('/share');
+    localStorage.setItem('share', 'icon');
+  };
 
   if (isDraggable)
     return (
@@ -92,10 +95,7 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className={styles.backBtnContainer} data-click={sfx.popAudio} onClick={() => router.back()}>
-        <Image src={images.backBtn} alt='Back' width={72} height={69} className={styles.backBtn} />
-      </div>
-
+      <BackButton />
       <div
         className={classNames(styles.titleContainer, {
           [styles.isWebview]: isWebview,
@@ -103,7 +103,7 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
       >
         <div className={styles.headerTitle}>
           <span>{headerTitle || rechargeTitle}</span>
-          {headerTitle === '推广代理' && (
+          {isPromotionPage && (
             <div className={styles.historyRecordBtn} onClick={handleShareBtnClick}>
               <Image src={images.shareIcon} alt='Share Icon' width={38} height={54} className={styles.shareIcon} />
               <span className={styles.text}>推广攻略 &gt;</span>
@@ -128,12 +128,7 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
           </div>
         )}
       </div>
-
-      {showPurse && (
-        <div className={styles.coinPurseContainer}>
-          <CoinPurse />
-        </div>
-      )}
+      <CoinPurseHeader showPurse={showPurse || false} />
     </motion.div>
   );
 };

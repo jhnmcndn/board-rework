@@ -23,7 +23,7 @@ const RegisterForm: FC<RegisterFormProps> = ({ switchToLogin }) => {
     const errorInstance =
       errors('phoneNumber') || errors('password') || errors('confirmPassword') || errors('verifyCode');
     if (errorInstance) {
-      openAlert({ body: errorInstance });
+      openAlert(errorInstance);
     }
   }, [errors]);
 

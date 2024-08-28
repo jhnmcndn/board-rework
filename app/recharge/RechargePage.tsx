@@ -2,6 +2,7 @@
 
 import RechargeSidebar from '@/app/recharge/elements/RechargeSidebar';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import { RECHARGE_OPTION } from '@/constants/enums';
 import { ErrorData, PayTypeList } from '@/types/app';
 import { FC, useEffect, useState } from 'react';
 import DirectDeposit from './elements/DirectDeposit';
@@ -18,8 +19,7 @@ export type RechargePageComponent = FC<
 
 const RechargePage: RechargePageComponent = ({ payTypeList }) => {
   const { setPayTypeList } = useAccountStore((state) => state);
-  const [activeSidebarItem, setActiveSidebarItem] = useState(0);
-  const payTypeListSide = useAccountStore((state) => state.payTypeList);
+  const [activeSidebar, setActiveSidebar] = useState(RECHARGE_OPTION.DIRECT);
 
   useEffect(() => {
     if (payTypeList && !('message' in payTypeList)) {
@@ -27,17 +27,23 @@ const RechargePage: RechargePageComponent = ({ payTypeList }) => {
     }
   }, [payTypeList]);
 
+  const renderRechargeProcess = () => {
+    switch (activeSidebar) {
+      case RECHARGE_OPTION.DIRECT:
+        return <DirectDeposit />;
+      case RECHARGE_OPTION.USDT:
+        return <USDT />;
+      case RECHARGE_OPTION.VIP_PAY:
+        return <VIPPay />;
+      default:
+        return <ThirdPartyDeposit option={activeSidebar} />;
+    }
+  };
+
   return (
     <>
-      <RechargeSidebar activeSidebarItem={activeSidebarItem} setActiveSidebarItem={setActiveSidebarItem} />
-      <div className={styles.recharge__content}>
-        {activeSidebarItem === 0 && <DirectDeposit />}
-        {activeSidebarItem === 1 && <VIPPay />}
-        {activeSidebarItem === 2 && <ThirdPartyDeposit type='AliPay' />}
-        {activeSidebarItem === 3 && <ThirdPartyDeposit type='QQPay' />}
-        {activeSidebarItem === 4 && <ThirdPartyDeposit type='WeChat' />}
-        {activeSidebarItem === 5 && <USDT />}
-      </div>
+      <RechargeSidebar activeSidebarItem={activeSidebar} setActiveSidebarItem={setActiveSidebar} />
+      <div className={styles.recharge__content}>{renderRechargeProcess()}</div>
     </>
   );
 };

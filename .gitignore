@@ -45,3 +45,4 @@ server.ts
 
 # lockfile
 bun.lockb
+package-lock.json

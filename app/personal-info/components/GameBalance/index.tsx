@@ -23,7 +23,7 @@ const GameBalanceItem: FC<Readonly<{ gameBalance: TGameBalance }>> = ({ gameBala
         whileTap={{ scale: 0.95 }}
         onClick={async () => {
           const { msg } = await gameWithdrawal({ id: gameBalance?.platformId });
-          openAlert({ notify: msg });
+          openAlert(msg);
           fetchAccountNow();
           refetch(API_ENDPOINT.GAME_BALANCE);
         }}

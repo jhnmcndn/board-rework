@@ -67,7 +67,7 @@ const VaultPassCodeModal = () => {
 
   const handleConfirm = async () => {
     if (input.length !== 4) {
-      openAlert({ body: '请输入密码' });
+      openAlert('请输入密码');
       return;
     }
 
@@ -84,14 +84,14 @@ const VaultPassCodeModal = () => {
     if (!withdrawPassIsSet) {
       const { code, msg } = await setWithdrawPass(input);
       if (code !== 200) {
-        openAlert({ body: msg });
+        openAlert(msg);
       } else {
         setWithdrawPassIsSet(true);
       }
     } else {
       const { code, msg } = await withdrawBank(selectedBank, withdrawAmount, input);
       if (code !== 200) {
-        openAlert({ body: msg });
+        openAlert(msg);
       } else {
         openWithdrawSuccess();
       }
@@ -103,14 +103,14 @@ const VaultPassCodeModal = () => {
     if (!boxPassIsSet) {
       const { msg, code } = await setBoxPass(input);
       if (code !== 200) {
-        openAlert({ body: msg });
+        openAlert(msg);
       } else {
         setBoxPassIsSet(true);
       }
     } else {
       const { code, msg } = await boxAccount(input);
       if (code !== 200) {
-        openAlert({ body: msg });
+        openAlert(msg);
       } else {
         const encryptedPass = CryptoJS.AES.encrypt(input, 'secret-key').toString();
         sessionStorage.setItem('pass', encryptedPass);

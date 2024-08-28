@@ -1,17 +1,11 @@
 import { create } from 'zustand';
 
-interface AlertContent {
-  body?: string | React.ReactNode;
-  link?: string;
-  notify?: string;
-  onClose?: () => void;
-}
-
 interface ModalStore {
-  content: AlertContent;
+  alertContent: string;
   isAlertOpen: boolean;
-  openAlert: (newContent: AlertContent) => void;
+  openAlert: (newContent: string | undefined) => void;
   closeAlert: () => void;
+  isShareOpen: boolean;
   isLoginOptionsOpen: boolean;
   openLoginOptions: () => void;
   closeLoginOptions: () => void;
@@ -42,6 +36,8 @@ interface ModalStore {
   isCommissionOpen: boolean;
   openCommission: () => void;
   closeCommission: () => void;
+  openShare: () => void;
+  closeShare: () => void;
   openSidebarAnnouncement: number;
   setSidebarAnnouncement: (openSidebarAnnouncement: number) => void;
   openContentAnnouncement: number;
@@ -53,7 +49,7 @@ export type ModalStoreActions = {};
 const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   isAlertOpen: false,
   isLoginOptionsOpen: false,
-  content: {},
+  alertContent: '',
   isLoginOrRegisterOpen: false,
   isAnnouncementOpen: false,
   isSettingsOpen: false,
@@ -63,12 +59,13 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   isVersionOpen: false,
   isPassCodeOpen: false,
   isCommissionOpen: false,
+  isShareOpen: false,
   openSidebarAnnouncement: 0,
   openContentAnnouncement: 0,
-  openAlert: (content) => {
-    set((state) => ({ ...state, isAlertOpen: true, content: { ...content } }));
+  openAlert: (alertContent?) => {
+    set((state) => ({ ...state, isAlertOpen: true, alertContent: alertContent || '出了点问题' }));
   },
-  closeAlert: () => set((state) => ({ ...state, isAlertOpen: false, content: {} })),
+  closeAlert: () => set((state) => ({ ...state, isAlertOpen: false, alertContent: '' })),
   openLoginOptions: () => set((state) => ({ ...state, isLoginOptionsOpen: true })),
   closeLoginOptions: () => set((state) => ({ ...state, isLoginOptionsOpen: false })),
   openLoginOrRegister: () => set((state) => ({ ...state, isLoginOrRegisterOpen: true })),
@@ -89,6 +86,8 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   closePassCode: () => set((state) => ({ ...state, isPassCodeOpen: false })),
   openCommission: () => set((state) => ({ ...state, isCommissionOpen: true })),
   closeCommission: () => set((state) => ({ ...state, isCommissionOpen: false })),
+  openShare: () => set((state) => ({ ...state, isShareOpen: true })),
+  closeShare: () => set((state) => ({ ...state, isShareOpen: false })),
   setSidebarAnnouncement: (openSidebarAnnouncement) => set(() => ({ openSidebarAnnouncement })),
   setContentAnnouncement: (openContentAnnouncement) => set(() => ({ openContentAnnouncement })),
 }));
