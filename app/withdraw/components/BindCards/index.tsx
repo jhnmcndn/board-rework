@@ -65,7 +65,7 @@ const BindCards = () => {
                 <Image src={images.plusSign} className={styles.leftIcons} width={50} height={50} alt='Add' />
                 <span className={styles.text}>{item.text}</span>
               </div>
-              <Image src={images.plusSign} className={styles.arrowIcon} width={26} height={50} alt='Arrow' />
+              <Image src={images.arrowSign} className={styles.arrowIcon} width={26} height={50} alt='Arrow' />
             </li>
           ))}
         </ul>
