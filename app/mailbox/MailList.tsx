@@ -24,7 +24,7 @@ const MailList = () => {
   return (
     <Fragment>
       {sortedMessages.map((mail, index) => (
-        <div key={index} style={index > 0 ? { marginTop: '0.1rem' } : {}}>
+        <div key={index}>
           <Accordion message={mail} delay={index} img={envelope} />
         </div>
       ))}
