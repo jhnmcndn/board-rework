@@ -10,6 +10,7 @@
   align-items: center;
   border: solid 1px white;
   font-size: 0.1rem;
+  cursor: pointer;
 }
 
 .confirmation {
@@ -51,6 +52,7 @@
         background: none;
         border-top: 1px solid #dcdcdc;
         padding: 10px 0;
+        cursor: pointer;
 
         &:nth-child(2) {
           color: red;
