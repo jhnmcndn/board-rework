@@ -46,6 +46,7 @@
       border-radius: 0.3rem;
       background: #1a1a1a;
       padding: 0;
+      cursor: pointer;
 
       .css-hlgwow {
         display: flex;
@@ -57,6 +58,7 @@
         .css-1dimb5e-singleValue span {
           display: flex;
           align-items: center;
+          color: #fff;
         }
 
         .css-19bb58m {
@@ -102,6 +104,30 @@
         height: 100%;
         padding: 0;
         box-shadow: none;
+      }
+    }
+    //Dropdown
+    .css-1nmdiq5-menu {
+      .css-qr46ko {
+        max-height: 1.48rem;
+        padding: 0;
+        div {
+          cursor: pointer;
+          span {
+            @include flex-xy(flex-start,center);
+          }
+        }
+        .css-10wo9uf-option {
+          background: #222;
+        }
+        // Dropdown-selected
+        .css-tr4s17-option {
+            background-color: #2C2C2C;
+        }
+        // Dropdown-hovered
+        .css-d7l1ni-option {
+          background-color: #2C2C2C;
+        }
       }
     }
   }
