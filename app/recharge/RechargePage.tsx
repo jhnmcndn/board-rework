@@ -18,8 +18,9 @@ export type RechargePageComponent = FC<
 >;
 
 const RechargePage: RechargePageComponent = ({ payTypeList }) => {
-  const { setPayTypeList } = useAccountStore((state) => state);
+  const { payTypeList: payTypeData, setPayTypeList } = useAccountStore((state) => state);
   const [activeSidebar, setActiveSidebar] = useState(RECHARGE_OPTION.DIRECT);
+  const usdtData = payTypeData.filter((item) => item.id === RECHARGE_OPTION.USDT)[0];
 
   useEffect(() => {
     if (payTypeList && !('message' in payTypeList)) {
@@ -32,7 +33,7 @@ const RechargePage: RechargePageComponent = ({ payTypeList }) => {
       case RECHARGE_OPTION.DIRECT:
         return <DirectDeposit />;
       case RECHARGE_OPTION.USDT:
-        return <USDT />;
+        return <USDT usdtData={usdtData} />;
       case RECHARGE_OPTION.VIP_PAY:
         return <VIPPay />;
       default:
