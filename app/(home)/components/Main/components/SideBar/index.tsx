@@ -74,7 +74,9 @@ const SideBar = () => {
                       [styles.sidebarItemActive]: item.id === activeSideBarItem.id,
                     })}
                   >
-                    <Image className={styles.icon} width={23} height={28} src={item?.icon || ''} alt='icon' />
+                    <div className={styles.iconWrapper}>
+                      <Image src={item?.icon || ''} alt='icon' quality={100} fill sizes='100vh' />
+                    </div>
                     <span>{item.name}</span>
                   </div>
 
