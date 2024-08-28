@@ -3,6 +3,7 @@
 import { request } from '@/api';
 import { COOKIE_MAX_AGE } from '@/constants/app';
 import { defaultInitData } from '@/constants/defaultData';
+import { serverConfig } from '@/server';
 import {
   AccountInfo,
   AccountNow,
@@ -42,7 +43,8 @@ export const loginDevice = async (payload: LoginDevicePayload) => {
     endpoint: API_ENDPOINT.LOGIN_DEVICE,
     tags: API_ENDPOINT.LOGIN_DEVICE,
   });
-  if (data.data && 'token' in data.data) cookies().set('token', `${data.data.token}`, { maxAge: COOKIE_MAX_AGE });
+  if (data.data && 'token' in data.data)
+    cookies().set(`${serverConfig.domain}-token`, `${data.data.token}`, { maxAge: COOKIE_MAX_AGE });
   return data;
 };
 
@@ -53,7 +55,8 @@ export const loginPhoneNumber = async (payload: LoginPhonePayload) => {
     endpoint: API_ENDPOINT.LOGIN,
     tags: API_ENDPOINT.LOGIN,
   });
-  if (data.data && 'token' in data.data) cookies().set('token', `${data.data.token}`, { maxAge: COOKIE_MAX_AGE });
+  if (data.data && 'token' in data.data)
+    cookies().set(`${serverConfig.domain}-token`, `${data.data.token}`, { maxAge: COOKIE_MAX_AGE });
   return data;
 };
 
@@ -84,9 +87,6 @@ export const getAccountNow = async () => {
     route: APP_ROUTE.PLATFORM,
     endpoint: API_ENDPOINT.ACCOUNT_NOW,
     tags: API_ENDPOINT.ACCOUNT_NOW,
-    // otherHeaders: {
-    //   token: cookies().get('token')?.value || '',
-    // },
   });
   return data.data;
 };
