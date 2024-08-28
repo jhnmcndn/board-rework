@@ -20,15 +20,14 @@ const MailList = () => {
     });
   }, [messageOnSites]);
 
+  if (sortedMessages.length === 0) return <NoData />;
   return (
     <Fragment>
-      {sortedMessages.length === 0 && <NoData />}
-      {sortedMessages.length > 0 &&
-        sortedMessages.map((mail, index) => (
-          <div key={index} style={index > 0 ? { marginTop: '0.1rem' } : {}}>
-            <Accordion message={mail} delay={index} img={envelope} />
-          </div>
-        ))}
+      {sortedMessages.map((mail, index) => (
+        <div key={index} style={index > 0 ? { marginTop: '0.1rem' } : {}}>
+          <Accordion message={mail} delay={index} img={envelope} />
+        </div>
+      ))}
     </Fragment>
   );
 };
