@@ -12,6 +12,7 @@
     height: 0.47rem;
     border-radius: 50%;
     border: 0.02rem solid transparent;
+    cursor: pointer;
 
     .avatarPhoto {
       border-radius: 50%;
@@ -62,6 +63,8 @@
         @include flex-xy(flex-end, center);
         height: 100%;
         width: 0;
+        cursor: pointer;
+
         img {
           position: relative;
           right: 0;
