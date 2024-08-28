@@ -63,7 +63,9 @@ const SecurityCenter = () => {
       return;
     }
 
-    bindPhone(formData);
+    bindPhone(formData).then((res) => {
+      openAlert(res);
+    });
   };
 
   useEffect(() => {
