@@ -10,7 +10,7 @@ const FullScreenWindow = ({ children }: { children: React.ReactNode }) => {
   const handle = useFullScreenHandle();
   const [isXiaomi, setIsXiaomi] = useState<boolean>(false);
   const [isAndroid, setIsAndroid] = useState<boolean>(false);
-  const platformName = params.get('platformName');
+  const platformName = params?.get('platformName');
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.navigator) {
