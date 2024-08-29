@@ -28,7 +28,7 @@ const TableBody: FC<
     <div className={styles.body}>
       {content.map((data, index) => (
         <div
-          className={`${styles.row} table-row`}
+          className={classNames(styles.row, 'table-row')}
           key={index}
           style={{
             display: 'grid',

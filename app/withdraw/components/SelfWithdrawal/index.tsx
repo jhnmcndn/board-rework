@@ -1,14 +1,14 @@
 'use client';
 
+import Button from '@/components/Fragments/Button';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
 import { MemberCardList } from '@/types/app';
 import { sfx } from '@/utils/audioFile';
-import classnames from 'classnames';
+import { default as classNames, default as classnames } from 'classnames';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import Button from '@/components/Fragments/Button';
-import useImages from '@/hooks/useImages';
 import styles from './index.module.scss';
 
 const SelfWithdrawal = () => {
@@ -70,7 +70,7 @@ const SelfWithdrawal = () => {
         </div>
       </section>
 
-      <section className={`${styles.panel} ${styles.secondPanel}`}>
+      <section className={classNames(styles.panel, styles.secondPanel)}>
         <div className={styles.headerWrapper}>
           <span>提现方式</span>
         </div>
@@ -136,7 +136,7 @@ const SelfWithdrawal = () => {
         </div>
       </section>
 
-      <section className={`${styles.panel} ${styles.thirdPanel}`}>
+      <section className={classnames(styles.panel, styles.thirdPanel)}>
         <div className={styles.withdrawButtonWrapper}>
           <div className={styles.left}>
             <div className={styles.details}>
