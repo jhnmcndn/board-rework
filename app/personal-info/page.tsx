@@ -11,8 +11,6 @@ const PersonalInfo = async () => {
     getGameBalance(),
   ]);
 
-  console.log(gameCategoryList);
-
   return (
     <>
       <OtherHeader headerTitle='个人中心' showPurse />
