@@ -2,10 +2,10 @@
 
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useAuthActions from '@/hooks/useAuthActions';
+import useCopyToClipBoard from '@/hooks/useCopyToClipboard';
 import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
 import { sfx } from '@/utils/audioFile';
-import { copyToClipboard } from '@/utils/helpers';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './index.module.scss';
@@ -15,6 +15,7 @@ const VipPart = () => {
   const { images } = useImages();
   const { authCheck } = useAuthActions();
   const { openLoginOptions } = useModalStore();
+  const { copyToClipboard } = useCopyToClipBoard();
   const accountInfo = useAccountStore((state) => state.accountInfo);
   const codeTotal = accountInfo.codeTotal || 0;
   const nextLevelIntegral = accountInfo.nextLevelIntegral || 0;
@@ -39,7 +40,7 @@ const VipPart = () => {
             {isLoggedIn && <span className={styles.vip}>VIP{accountInfo?.vip || ''}</span>}
           </div>
           {isLoggedIn && (
-            <div className={styles.copyIcon} onClick={() => copyToClipboard(accountInfo.id || '未登录')}>
+            <div className={styles.copyIcon} onClick={() => copyToClipboard(accountInfo.id)}>
               <Image src={images.copy} alt='Copy' width={60} height={60} />
             </div>
           )}
@@ -47,12 +48,7 @@ const VipPart = () => {
         {isLoggedIn && (
           <div className={styles.vipBar}>
             <div className={styles.vipBarBorder}>
-              <div
-                className={styles.vipBarExp}
-                style={{
-                  width: expBar ? `${expBar}%` : '0%',
-                }}
-              />
+              <div className={styles.vipBarExp} style={{ width: expBar ? `${expBar}%` : '0%' }} />
             </div>
           </div>
         )}
@@ -65,9 +61,7 @@ const VipPart = () => {
                 width={310}
                 height={80}
                 data-click={sfx.popAudio}
-                onClick={() => {
-                  openLoginOptions();
-                }}
+                onClick={() => openLoginOptions()}
               />
             </button>
           </div>

@@ -3,9 +3,9 @@
 import copyIcon from '@/assets/blackGold/header/copy.png';
 import ModalLayout from '@/components/modals/ModalLayout';
 import { shareButtons } from '@/constants/defaultData'; // Move share button config to a separate file
+import useCopyToClipBoard from '@/hooks/useCopyToClipboard';
 import useIsMounted from '@/hooks/useIsMounted';
 import useModalStore from '@/store/modals';
-import { copyToClipboard } from '@/utils/helpers';
 import { AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
@@ -14,17 +14,13 @@ import styles from './index.module.scss';
 
 const ShareModal = () => {
   const isMounted = useIsMounted();
-  const { closeShare, isShareOpen, openAlert } = useModalStore();
+  const { copyToClipboard } = useCopyToClipBoard();
+  const { closeShare, isShareOpen } = useModalStore();
   const [shareUrl, setShareUrl] = useState('www.example.com');
 
   useEffect(() => {
     setShareUrl(localStorage.getItem('shareUrl') || 'www.example.com');
   }, [isShareOpen]);
-
-  const handleCopyURLCode = () => {
-    openAlert(shareUrl);
-    copyToClipboard(shareUrl);
-  };
 
   const modalContent = useMemo(
     () => (
@@ -35,7 +31,7 @@ const ShareModal = () => {
               <div className={styles.shareModal__content}>
                 <div className={styles.shareModal__copyContainer}>
                   <input type='text' value={shareUrl} readOnly />
-                  <div className={styles.shareModal__copyBtn} onClick={handleCopyURLCode}>
+                  <div className={styles.shareModal__copyBtn} onClick={() => copyToClipboard(shareUrl)}>
                     <Image src={copyIcon} alt='copy' width={10} height={10} />
                   </div>
                 </div>
@@ -55,7 +51,7 @@ const ShareModal = () => {
         )}
       </AnimatePresence>
     ),
-    [isShareOpen, shareUrl, closeShare, handleCopyURLCode],
+    [isShareOpen, shareUrl, closeShare],
   );
 
   if (isMounted()) {

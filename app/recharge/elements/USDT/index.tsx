@@ -3,16 +3,17 @@ import Input from '@/components/Input';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { RECHARGE_OPTION } from '@/constants/enums';
 import { rechargeUsdtSchema } from '@/constants/validateSchema';
+import useCopyToClipBoard from '@/hooks/useCopyToClipboard';
 import useValidate from '@/hooks/useFormValidate';
 import useModalStore from '@/store/modals';
 import { UsdtRechargeList } from '@/types/app';
-import { copyToClipboard } from '@/utils/helpers';
 import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
 import styles from '../elements.module.scss';
 
 const USDT: FC = () => {
   const { openAlert } = useModalStore();
+  const { copyToClipboard } = useCopyToClipBoard();
   const [activeChannel, setActiveChannel] = useState(0);
   const { payTypeList } = useAccountStore((state) => state);
   const [usdtChannels, setUsdtChannelList] = useState<UsdtRechargeList[]>([]);
@@ -21,7 +22,7 @@ const USDT: FC = () => {
   const { tex1, tex2, tex3, tex4, tex5 } = usdtData;
   const defaultValues = { transactionId: '', rechargeAmount: '' };
 
-  const { values, errors, handleSubmit, reset, registerField, watch } = useValidate({
+  const { values, errors, handleSubmit, registerField, watch } = useValidate({
     defaultValues,
     schema: rechargeUsdtSchema,
   });
@@ -43,11 +44,6 @@ const USDT: FC = () => {
       setUsdtChannelList(payChannels);
       setActiveChannel(payChannels[0].id);
     }
-  };
-
-  const copyRechargeAddress = (address: string) => {
-    copyToClipboard(address);
-    openAlert(`已复制: ${address}`);
   };
 
   const handleUsdtRecharge = async () => {
@@ -93,7 +89,7 @@ const USDT: FC = () => {
                 type='text'
                 placeholder='请输入汇款姓名'
                 value={activeData?.rechargeAddress}
-                clipBoardCopy={() => copyRechargeAddress(`${activeData?.rechargeAddress}`)}
+                clipBoardCopy={() => copyToClipboard(activeData?.rechargeAddress)}
                 className={styles.deposit__input}
               />
             </div>
