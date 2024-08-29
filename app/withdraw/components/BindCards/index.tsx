@@ -1,12 +1,13 @@
 'use client';
 
-import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
-import PullToRefresh from 'react-simple-pull-to-refresh';
 import { refetch } from '@/api/refetch';
-import Image from 'next/image';
-import { API_ENDPOINT } from '@/types/enums';
-import useModalStore from '@/store/modals';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import useImages from '@/hooks/useImages';
+import useModalStore from '@/store/modals';
+import { API_ENDPOINT } from '@/types/enums';
+import classNames from 'classnames';
+import Image from 'next/image';
+import PullToRefresh from 'react-simple-pull-to-refresh';
 import styles from './index.module.scss';
 
 type ListItem = {
@@ -60,7 +61,7 @@ const BindCards = () => {
             );
           })}
           {listItems.map((item, index) => (
-            <li key={index} className={`${styles.cardList} ${styles.canClick}`} onClick={item.onClick}>
+            <li key={index} className={classNames(styles.cardList, styles.canClick)} onClick={item.onClick}>
               <div className={styles.bankDetails}>
                 <Image src={images.plusSign} className={styles.leftIcons} width={50} height={50} alt='Add' />
                 <span className={styles.text}>{item.text}</span>
