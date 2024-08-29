@@ -411,7 +411,6 @@ export type SearchFieldProps = {
 
 export type ListIconProps = {
   searchFieldData: string;
-  setSearchFieldData: Dispatch<SetStateAction<string>>;
 };
 
 export type CategoryListBarProps = {

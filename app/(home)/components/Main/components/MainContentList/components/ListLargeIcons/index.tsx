@@ -16,7 +16,7 @@ import styles from './index.module.scss';
 
 type CombinedGameInfo = RspGameInfo & GameInfoGroup;
 
-const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData, setSearchFieldData }) => {
+const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData }) => {
   const router = useRouter();
   const { images } = useImages();
   const { authCheck } = useAuthActions();
@@ -154,6 +154,10 @@ const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData, setSearchFieldData
             ref={rowsContainerRef}
             onDragStart={() => setIsDragging(true)}
             onDragEnd={() => setIsDragging(false)}
+            dragTransition={{
+              power: 0.2,
+              timeConstant: 50,
+            }}
           >
             <motion.div className={styles.firstRow}>
               {filteredData?.map((item, idx) => {
@@ -179,11 +183,7 @@ const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData, setSearchFieldData
           {data.map(
             (item, idx) =>
               item.id === activePlatform?.id && (
-                <ListSmallIcons
-                  key={item.id || '' + idx}
-                  searchFieldData={searchFieldData}
-                  setSearchFieldData={setSearchFieldData}
-                />
+                <ListSmallIcons key={item.id || '' + idx} searchFieldData={searchFieldData} />
               ),
           )}
         </>

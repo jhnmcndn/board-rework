@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { FC, useEffect, useRef, useState } from 'react';
 import styles from './index.module.scss';
 
-const ListSmallIcons: FC<ListIconProps> = ({ searchFieldData, setSearchFieldData }) => {
+const ListSmallIcons: FC<ListIconProps> = ({ searchFieldData }) => {
   const router = useRouter();
   const { authCheck } = useAuthActions();
   const rowsContainerRef = useRef<HTMLDivElement | null>(null);
