@@ -44,7 +44,8 @@ const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData }) => {
       if (rowsContainerRef.current) {
         const containerWidth = rowsContainerRef.current.scrollWidth;
         const viewportWidth = rowsContainerRef.current.clientWidth * 2;
-        setDragConstraints({ left: -(containerWidth - viewportWidth), right: 0 });
+        const leftContraint = -(containerWidth - viewportWidth);
+        setDragConstraints({ left: leftContraint < 1 ? leftContraint : 0, right: 0 });
       }
     }, 100);
 
@@ -138,13 +139,6 @@ const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData }) => {
           className={classNames(styles.listLargeWrapper, {
             [styles.listLargeType2Overlay]: activeSideBarItem.type === 2,
           })}
-          style={{
-            // overflow:
-            //   showSettings || showPleaseRotate || showLoginModal || showOtherModalComp
-            //     ? 'hidden'
-            //     : 'auto',
-            zIndex: 0,
-          }}
         >
           <motion.div
             className={styles.listLargeContainer}
@@ -156,7 +150,7 @@ const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData }) => {
             onDragEnd={() => setIsDragging(false)}
             dragTransition={{
               power: 0.2,
-              timeConstant: 50,
+              timeConstant: 30,
             }}
           >
             <motion.div className={styles.firstRow}>

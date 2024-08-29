@@ -68,12 +68,6 @@ const ListSmallIcons: FC<ListIconProps> = ({ searchFieldData }) => {
         [styles.type3Overlay]: activeSideBarItem?.type === 3,
         [styles.noDataOverlay]: filteredData?.length === 0,
       })}
-      style={{
-        // overflow:
-        //   showSettings || showPleaseRotate || showLoginModal || showOtherModalComp ? 'hidden' : 'auto',
-
-        zIndex: 0,
-      }}
     >
       {filteredData?.length === 0 && !isGamesLoading && <NoData />}
 
@@ -86,6 +80,10 @@ const ListSmallIcons: FC<ListIconProps> = ({ searchFieldData }) => {
           ref={rowsContainerRef}
           onDragStart={() => setIsDragging(true)}
           onDragEnd={() => setIsDragging(false)}
+          dragTransition={{
+            power: 0.2,
+            timeConstant: 50,
+          }}
         >
           <div className={styles.firstRow}>
             {filteredData?.map((item, idx) => {
