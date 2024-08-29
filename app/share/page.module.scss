@@ -1,12 +1,8 @@
 .shareQRCode {
+  @include flex-xy;
   width: 100%;
   height: calc(100vh - 0.4rem);
-  background-color: #000;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #000 center / 100% 100% no-repeat;
   flex-direction: column;
   position: fixed;
   bottom: 0;
