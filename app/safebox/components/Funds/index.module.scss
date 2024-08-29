@@ -106,9 +106,9 @@
       height: 0.3rem;
       font-size: 0.15rem;
       outline: none;
-      color: black !important;
+      color: var(--safebox-input-color) !important;
       position: relative;
-
+      background-color: var(--safebox-input-bg) !important;
     }
 
     &::after {
