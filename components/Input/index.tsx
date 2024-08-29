@@ -15,6 +15,7 @@ type InputProps = ComponentPropsWithoutRef<'input'> & {
   passwordToggle?: boolean;
   defaultValidate?: boolean;
   onRequestVerification?: () => void;
+  clipBoardCopy?: () => void;
   number?: boolean;
 };
 
@@ -26,12 +27,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     className,
     containerClassName,
     errorClassName,
+    readOnly,
     disablePasted = false,
     passwordToggle = false,
     type = 'text',
     number = false,
     defaultValidate = true,
     onRequestVerification,
+    clipBoardCopy,
     ...rest
   },
   ref,
@@ -42,6 +45,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const [inputValue, setInputValue] = useState<string>('');
   const [passwordType, setPasswordType] = useState<'password' | 'text'>('password');
   const toggleImage = passwordType === 'password' ? images.hidePassword : images.showPassword;
+  const buttonAction = onRequestVerification || clipBoardCopy;
 
   const handleShowPassword = () => setPasswordType((prevType) => (prevType === 'password' ? 'text' : 'password'));
 
@@ -54,8 +58,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     if (number) {
-      const sanitizedValue = newValue.replace(/\D/g, '');
-      setInputValue(sanitizedValue);
+      if (/\D/.test(newValue)) return;
+      setInputValue(newValue);
     } else {
       setInputValue(newValue);
     }
@@ -73,11 +77,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         })}
         onPaste={handlePasted}
         onFocus={onFocus}
-        readOnly
         ref={ref}
         {...rest}
         onChange={handleChange}
-        value={inputValue}
+        value={value || inputValue}
       />
       {passwordToggle && (
         <Image
@@ -89,9 +92,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           onClick={handleShowPassword}
         />
       )}
-      {onRequestVerification && (
-        <button type='button' className={styles.input__codeVerification} onClick={onRequestVerification}>
-          获取验证码
+      {buttonAction && (
+        <button type='button' className={styles.input__buttonAction} onClick={buttonAction}>
+          {onRequestVerification ? '获取验证码' : '复制'}
         </button>
       )}
     </div>

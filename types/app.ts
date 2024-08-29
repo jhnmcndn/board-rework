@@ -76,6 +76,12 @@ export type ThirdPartyRechargePayload = {
   ip: string;
 };
 
+export type UsdtRechargePayload = {
+  id: string;
+  transactionId: string;
+  rechargeNumber: string;
+};
+
 export type AccountInfo = {
   token?: string;
   id?: string;

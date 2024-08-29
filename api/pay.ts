@@ -9,6 +9,7 @@ import {
   RootResponse,
   ThirdPartyRechargePayload,
   UsdtRechargeList,
+  UsdtRechargePayload,
   WithdrawRechargeDetail,
 } from '@/types/app';
 import { API_ENDPOINT, APP_ROUTE } from '@/types/enums';
@@ -131,6 +132,15 @@ export const getRechargeUsdtList = async () => {
     endpoint: API_ENDPOINT.RECHARGE_USDT_LIST,
     tags: API_ENDPOINT.RECHARGE_USDT_LIST,
   });
-  console.log('DATA', data);
   return data.data;
+};
+
+export const rechargeUsdt = async ({ id, transactionId, rechargeNumber }: UsdtRechargePayload) => {
+  const data = await request<RootResponse<any>>({
+    body: { id, transactionId, rechargeNumber },
+    route: APP_ROUTE.PAY,
+    endpoint: API_ENDPOINT.USDT_RECHARGE,
+    tags: API_ENDPOINT.USDT_RECHARGE,
+  });
+  return data;
 };

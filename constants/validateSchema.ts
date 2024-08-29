@@ -16,3 +16,10 @@ export const registerPhoneSchema = z
     message: '密码应该匹配',
     path: ['confirmPassword'],
   });
+
+export const rechargeUsdtSchema = z.object({
+  // chainName: z.string().min(1, { message: '链名错误' }),
+  // walletAddress: z.string().min(1, { message: '钱包地址错误' }),
+  transactionId: z.string().min(1, { message: '请输入交易ID' }),
+  rechargeAmount: z.string().min(1, { message: '请输入充值USDT数量' }),
+});
