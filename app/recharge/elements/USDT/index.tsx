@@ -1,54 +1,75 @@
-import { getIp } from '@/api';
-import { getRechargeUsdtList } from '@/api/pay';
+import { getRechargeUsdtList, rechargeUsdt } from '@/api/pay';
+import Input from '@/components/Input';
+import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
+import { RECHARGE_OPTION } from '@/constants/enums';
+import { rechargeUsdtSchema } from '@/constants/validateSchema';
+import useValidate from '@/hooks/useFormValidate';
 import useModalStore from '@/store/modals';
-import { PayTypeList, UsdtRechargeList } from '@/types/app';
+import { UsdtRechargeList } from '@/types/app';
+import { copyToClipboard } from '@/utils/helpers';
 import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
 import styles from '../elements.module.scss';
 
-type USDTDepositProps = {
-  usdtData: PayTypeList;
-};
-
-const USDT: FC<USDTDepositProps> = ({ usdtData }) => {
+const USDT: FC = () => {
   const { openAlert } = useModalStore();
   const [activeChannel, setActiveChannel] = useState(0);
-  const [payChannelList, setPayChannelList] = useState<UsdtRechargeList[]>([]);
+  const { payTypeList } = useAccountStore((state) => state);
+  const [usdtChannels, setUsdtChannelList] = useState<UsdtRechargeList[]>([]);
+  const activeData = usdtChannels.find((ch) => ch.id === activeChannel);
+  const usdtData = payTypeList.filter((item) => item.id === RECHARGE_OPTION.USDT)[0];
   const { tex1, tex2, tex3, tex4, tex5 } = usdtData;
+  const defaultValues = { transactionId: '', rechargeAmount: '' };
+
+  const { values, errors, handleSubmit, reset, registerField, watch } = useValidate({
+    defaultValues,
+    schema: rechargeUsdtSchema,
+  });
 
   useEffect(() => {
     fetchUsdtList();
   }, []);
 
+  useEffect(() => {
+    const errorInstance = errors('transactionId') || errors('rechargeAmount');
+    if (errorInstance) {
+      openAlert(errorInstance);
+    }
+  }, [errors]);
+
   const fetchUsdtList = async () => {
-    const usdtChannels = await getRechargeUsdtList();
-    if (usdtChannels && !('message' in usdtChannels)) {
-      setPayChannelList(usdtChannels);
-      setActiveChannel(usdtChannels[0].id);
+    const payChannels = await getRechargeUsdtList();
+    if (payChannels && !('message' in payChannels)) {
+      setUsdtChannelList(payChannels);
+      setActiveChannel(payChannels[0].id);
     }
   };
 
-  const changePaymentChannel = (channelId: number) => {
-    setActiveChannel(channelId);
+  const copyRechargeAddress = (address: string) => {
+    copyToClipboard(address);
+    openAlert(`已复制: ${address}`);
   };
 
   const handleUsdtRecharge = async () => {
-    const ip = await getIp();
-    // const { code, data, msg } = await requestUsdtRecharge({ channelId: activeChannel, amount, ip });
-    // if (code === 200 && typeof data === 'string') window.open(data, '_blank');
-    // else openAlert(msg || '充值失败，请重试或修改金额');
+    const res = await rechargeUsdt({
+      id: `${activeChannel}`,
+      transactionId: values('transactionId'),
+      rechargeNumber: values('rechargeAmount'),
+    });
+    if (res.code === 200) openAlert(res.msg || '充值请求成功');
+    else openAlert(res.msg || '充值失败，请重试或修改金额');
   };
 
   return (
     <div className={styles.deposit}>
       <div className={styles.deposit__header}>
-        {payChannelList.map((item, idx) => (
+        {usdtChannels.map((item, idx) => (
           <span
             key={`${item.id}-${idx}`}
             className={classNames(styles.deposit__channel, {
               [styles['deposit__channel--active']]: item.id === activeChannel,
             })}
-            onClick={() => changePaymentChannel(item.id)}
+            onClick={() => setActiveChannel(item.id)}
           >
             {item.channelName || item.chainName || 'USDT'}
           </span>
@@ -56,10 +77,53 @@ const USDT: FC<USDTDepositProps> = ({ usdtData }) => {
       </div>
       <div className={styles.deposit__usdtContent}>
         <div className={styles.deposit__usdtForm}>
-          <form onSubmit={handleUsdtRecharge}></form>
-          <button type='submit' className={styles.deposit__button}>
-            <span>立即充值</span>
-          </button>
+          <form onSubmit={handleSubmit(handleUsdtRecharge)}>
+            <div>
+              <span>链名称:</span>
+              <Input
+                type='text'
+                placeholder='公司所有游戏主播即将暂停'
+                value={activeData?.chainName}
+                className={styles.deposit__input}
+              />
+            </div>
+            <div>
+              <span>汇款金额:</span>
+              <Input
+                type='text'
+                placeholder='请输入汇款姓名'
+                value={activeData?.rechargeAddress}
+                clipBoardCopy={() => copyRechargeAddress(`${activeData?.rechargeAddress}`)}
+                className={styles.deposit__input}
+              />
+            </div>
+            <div>
+              <span>交易ID:</span>
+              <Input
+                placeholder='请输入交易ID'
+                maxLength={30}
+                {...registerField('transactionId')}
+                className={styles.deposit__input}
+              />
+            </div>
+            <div>
+              <span>充值数量:</span>
+              <Input
+                number
+                placeholder='请输入充值USDT数量'
+                maxLength={20}
+                {...registerField('rechargeAmount')}
+                className={styles.deposit__input}
+              />
+            </div>
+            <span>
+              最终充值到账金额为: {(+(watch('rechargeAmount') || 0) * +(activeData?.exchangeRate || 1)).toFixed(2)} (
+              {+watch('rechargeAmount') || 0} USDT * 当前汇率 {activeData?.exchangeRate}元)
+            </span>
+            <button type='submit' className={styles.deposit__button}>
+              <span>立即充值</span>
+            </button>
+          </form>
         </div>
         <div className={styles.deposit__usdtInstructions}>
           <span>请仔细阅读充值步骤：</span>

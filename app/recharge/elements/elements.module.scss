@@ -78,6 +78,39 @@
 
   &__usdtForm {
     @include flex-xy;
+
+    > form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 0.15rem 0.25rem 0.15rem 0.15rem;
+      gap: 0.08rem 0;
+
+      > div {
+        display: grid;
+        grid-template-columns: 20% 80%;
+        align-items: center;
+
+        > span {
+          font-size: 0.13rem;
+        }
+      }
+
+      > span {
+        color: #f0cb5a;
+        font-size: 0.13rem;
+      }
+    }
+  }
+
+  &__input {
+    color: #fff;
+    caret-color: #fff;
+    border: none;
+    background-color: #1a1a1a;
+    border-radius: 0.2rem;
+    font-size: 0.12rem;
+    padding: 0.08rem 0.125rem;
   }
 
   &__usdtInstructions {
@@ -85,6 +118,7 @@
     color: #757575;
     border-radius: 0.05rem;
     background: #000;
+    height: fit-content;
   }
 
   &__instruction {
@@ -103,6 +137,7 @@
     text-align: center;
     width: 1.1rem;
     background: url('~/assets/commons/button.png') center / 100% 100% no-repeat;
+    margin: 0.125rem auto 0;
     cursor: pointer;
   }
 }
