@@ -35,8 +35,7 @@ const useFetchGame = () => {
 
     if (item.type === 2) setShowPlatform(false);
     if (item.type === 4 || item.type === 3) await fetchGameInfoGroup(item.id || 0);
-
-    await fetchGameInfo({ id: item.id || 0, pid: -1 }, item);
+    if (item.type !== 3) await fetchGameInfo({ id: item.id || 0, pid: -1 }, item);
 
     setActiveSideBarItem(item);
     setIsGamesLoading(false);
