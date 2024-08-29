@@ -62,6 +62,7 @@
     font-size: 0.12rem;
     border: #dec18c solid 0.004rem;
     background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
 
     &--active {
       border: #dec18c solid 0.004rem;
@@ -102,5 +103,6 @@
     text-align: center;
     width: 1.1rem;
     background: url('~/assets/commons/button.png') center / 100% 100% no-repeat;
+    cursor: pointer;
   }
 }
