@@ -1,7 +1,7 @@
 import { receiveRecommendReward } from '@/api/game';
+import useCopyToClipBoard from '@/hooks/useCopyToClipboard';
 import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
-import { copyToClipboard } from '@/utils/helpers';
 import classnames from 'classnames';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
@@ -29,6 +29,7 @@ const MyPromotion = ({ recommendDetailData, updateRecommendDetail }: MyPromotion
   const router = useRouter();
   const { images } = useImages();
   const pathname = usePathname();
+  const { copyToClipboard } = useCopyToClipBoard();
   const [channelCode, setChannelCode] = useState('1001');
   const { openCommission, openAlert } = useModalStore();
   const channelCodeURL = useMemo(() => recommendDetailData?.url || 'www.example.com', [recommendDetailData?.url]);
@@ -53,11 +54,6 @@ const MyPromotion = ({ recommendDetailData, updateRecommendDetail }: MyPromotion
     } catch (err: any) {
       openAlert(err.msg);
     }
-  };
-
-  const handleCopyURLCode = () => {
-    openAlert(channelCodeURL);
-    copyToClipboard(channelCodeURL);
   };
 
   const handleShareClick = (): void => {
@@ -118,7 +114,7 @@ const MyPromotion = ({ recommendDetailData, updateRecommendDetail }: MyPromotion
           <div className={styles.myPromotion__copyCode} data-text={'复制'}>
             专属分享连接:{' '}
             {recommendDetailData?.url ? recommendDetailData?.url?.substring(0, 44) + '...' : 'www.example.com'}
-            <span className={styles.myPromotion__copyBtn} onClick={handleCopyURLCode}>
+            <span className={styles.myPromotion__copyBtn} onClick={() => copyToClipboard(channelCodeURL)}>
               复制
             </span>
           </div>
