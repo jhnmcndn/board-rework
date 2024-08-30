@@ -2,11 +2,11 @@ import useImages from '@/hooks/useImages';
 import { sfx } from '@/utils/audioFile';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { memo } from 'react';
+import { FC, memo } from 'react';
 import styles from './index.module.scss';
 
-const BackButton = () => {
-  const { back } = useRouter();
+const BackButton: FC<Readonly<{ to?: string }>> = ({ to }) => {
+  const { push } = useRouter();
   const {
     images: { backBtn },
   } = useImages();
@@ -16,10 +16,11 @@ const BackButton = () => {
       className={styles.backBtnContainer}
       data-click={sfx.popAudio}
       onClick={() => {
-        back();
         if (localStorage.getItem('share')) {
           localStorage.removeItem('share');
         }
+        if (!to) return push('/');
+        return push(to);
       }}
     >
       <Image src={backBtn} alt='Back' width={72} height={69} className={styles.backBtn} />
