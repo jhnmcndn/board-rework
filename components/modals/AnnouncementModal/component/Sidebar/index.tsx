@@ -25,7 +25,11 @@ const Sidebar: FC = () => {
       setSelectedIndex(0);
       setContentAnnouncement(Number(activityTypes[0]?.id));
     }
-  }, [activityTypes, setContentAnnouncement]);
+    if (activityQuestSection.length > 0) {
+      setSelectedIndex(0);
+      setContentAnnouncement(Number(activityQuestSection[0]?.id));
+    }
+  }, [activityTypes, activityQuestSection]);
 
   const handleSelectedTabs = (activityId: number, index: number) => {
     setContentAnnouncement(activityId);

@@ -247,6 +247,7 @@ export const getActivityQuestTypes = async () => {
     endpoint: API_ENDPOINT.ACTIVITY_QUEST_TYPES,
     tags: API_ENDPOINT.ACTIVITY_QUEST_TYPES,
   });
+  console.log(data, 'getActivityQuestTypes');
   if (!data.data || 'message' in data.data) return [] satisfies ActivityQuestSectionTypes[];
   return data.data;
 };

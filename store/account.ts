@@ -47,18 +47,6 @@ export const bindCardListState = {
   specialBankInfoMap: undefined,
 } satisfies BindCardList;
 
-export const activityTypeState: ActivityTypes = {
-  activityList: undefined,
-  id: undefined,
-  name: undefined,
-};
-
-export const activityQuestSectionState = {
-  activityList: undefined,
-  id: undefined,
-  name: undefined,
-} satisfies ActivityQuestSectionTypes;
-
 type AccountState = {
   init: Init;
   accountInfo: AccountInfo;
@@ -131,10 +119,10 @@ export const createAccountStore = () =>
         withdrawRecordList: [],
         codeFlowList: [],
         payTypeList: [],
-        activityTypes: [activityTypeState],
+        activityTypes: [],
         selectedBank: 0,
         withdrawAmount: 0,
-        activityQuestSection: [activityQuestSectionState],
+        activityQuestSection: [],
         rechargeBankList: [],
         setInit: (init) => set(() => ({ init: { ...init } })),
         setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
@@ -168,14 +156,14 @@ export const createAccountStore = () =>
         fetchActivityType: async () => {
           const activityTypes = await getActivityTypes();
           if (!activityTypes || 'message' in activityTypes) {
-            return set(() => ({ activityTypes: [activityTypeState] }));
+            return set(() => ({ activityTypes: [] }));
           }
           return set(() => ({ activityTypes }));
         },
         fetchActivityQuestSection: async () => {
           const activityQuestSection = await getActivityQuestTypes();
           if (!activityQuestSection || 'message' in activityQuestSection) {
-            return set(() => ({ activityQuestSection: [activityQuestSectionState] }));
+            return set(() => ({ activityQuestSection: [] }));
           }
           return set(() => ({ activityQuestSection }));
         },
