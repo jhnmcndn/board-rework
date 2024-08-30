@@ -17,10 +17,11 @@ export type OtherHeaderProps = {
   headerTitle?: string;
   isWebview?: boolean;
   showPurse?: boolean;
+  to?: string;
 };
 export type OtherHeaderComponent = FC<Readonly<OtherHeaderProps>>;
 
-const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }) => {
+const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse, to }) => {
   const router = useRouter();
   const pathname = usePathname();
   const { images } = useImages();
@@ -95,7 +96,7 @@ const OtherHeader: OtherHeaderComponent = ({ isWebview, headerTitle, showPurse }
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <BackButton />
+      <BackButton to={to} />
       <div
         className={classNames(styles.titleContainer, {
           [styles.isWebview]: isWebview,
