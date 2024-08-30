@@ -37,7 +37,7 @@ const Share = () => {
 
   return (
     <>
-      <OtherHeader headerTitle={'推广代理'} showPurse />
+      <OtherHeader headerTitle={'推广代理'} to='/promotion-agent' showPurse />
       <div
         className={styles.shareQRCode}
         style={{
