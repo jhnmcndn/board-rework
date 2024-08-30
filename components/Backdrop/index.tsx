@@ -7,7 +7,7 @@ import styles from './index.module.scss';
 const BackdropComponent = () => <div className={styles.backdrop} />;
 
 const Backdrop = () => {
-  return createPortal(<BackdropComponent />, document.getElementById('modal-root') as HTMLDivElement);
+  return createPortal(<BackdropComponent />, document.body as HTMLDivElement);
 };
 
 export default memo(Backdrop);
