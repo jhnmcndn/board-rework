@@ -16,15 +16,7 @@ const useAuthActions = () => {
   const inviterCode = getFromLocalStorage('channelCode');
   const { setAccountInfo, setAccountNow, accountInfo } = useAccountStore((state) => state);
   const isLoggedIn = !!accountInfo.id && !!token;
-  const {
-    openAlert,
-    openLoginOptions,
-    closeLoginOptions,
-    closeLoginOrRegister,
-    closeSettings,
-    setSidebarAnnouncement,
-    openAnnouncement,
-  } = useModalStore();
+  const { openAlert, openLoginOptions, closeLoginOptions, setSidebarAnnouncement, openAnnouncement } = useModalStore();
 
   const authCheck = (callback: () => void) => {
     if (isLoggedIn) callback();
@@ -50,7 +42,6 @@ const useAuthActions = () => {
         setSidebarAnnouncement(2);
         setAccountNow({ balance: res.data.accountNow });
         res.data.token && localStorage.setItem('token', res.data.token);
-        closeLoginOrRegister();
         closeLoginOptions();
         return true;
       } else {
@@ -65,7 +56,6 @@ const useAuthActions = () => {
     // TODO add reset for other store data
     setAccountInfo(defaultAccountInfo);
     localStorage.removeItem('token');
-    closeSettings();
     openLoginOptions();
   };
 

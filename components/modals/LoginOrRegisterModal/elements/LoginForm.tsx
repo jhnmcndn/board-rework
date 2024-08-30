@@ -14,14 +14,15 @@ import styles from '../index.module.scss';
 
 type LoginFormProps = {
   switchToRegister: () => void;
+  onSuccess: () => void;
 };
 
-const LoginForm: FC<LoginFormProps> = ({ switchToRegister }) => {
+const LoginForm: FC<LoginFormProps> = ({ switchToRegister, onSuccess }) => {
   const { images } = useImages();
   const { login } = useAuthActions();
   const { openAlert } = useModalStore();
   const [isCaptchaOpen, setIsCaptchaOpen] = useState(false);
-  const { closeLoginOrRegister, closeLoginOptions } = useModalStore();
+  const { closeLoginOptions } = useModalStore();
   const { captchaId, actionSwitch } = useAccountStore((state) => state.init);
   const isCaptchaEnabled = actionSwitch === '1' ? true : false;
   const defaultValues = { phoneNumber: '', password: '' };
@@ -37,14 +38,12 @@ const LoginForm: FC<LoginFormProps> = ({ switchToRegister }) => {
     }
   }, [errors]);
 
-  const closeLoginModals = () => {
-    closeLoginOrRegister();
-    closeLoginOptions();
-  };
-
   const loginPhone = async (validate?: string) => {
     const success = await login('phone', { id: values('phoneNumber'), password: values('password'), validate });
-    if (success) reset();
+    if (success) {
+      reset();
+      onSuccess();
+    }
   };
 
   const tryLoginPhone = () => {
@@ -87,7 +86,7 @@ const LoginForm: FC<LoginFormProps> = ({ switchToRegister }) => {
         </button>
       </form>
       <div className={styles.body__footer}>
-        <Link href='/customer-service' onClick={closeLoginModals}>
+        <Link href='/customer-service' onClick={() => closeLoginOptions()}>
           <Image src={images.supportIcon} height={22} width={22} alt='Support' />
           有问题？找在线客服
         </Link>
