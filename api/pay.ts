@@ -144,3 +144,51 @@ export const rechargeUsdt = async ({ id, transactionId, rechargeNumber }: UsdtRe
   });
   return data;
 };
+
+export const rechargeBankList = async () => {
+  // Return type is currently inline since there's no data we can check from, to be updated
+  const data = await request<
+    RootResponse<
+      {
+        bankChargeLimit: string;
+        id: string;
+        discountBill: number;
+        bankName: string;
+        accountName: string;
+        bankAccount: string;
+        bankAddress: string;
+      }[]
+    >
+  >({
+    endpoint: API_ENDPOINT.RECHARGE_BANK_LIST,
+    route: APP_ROUTE.PAY,
+    tags: API_ENDPOINT.RECHARGE_BANK_LIST,
+  });
+  if (!data.data || 'message' in data.data) return [];
+  return data.data;
+};
+
+export const bankRecharge = async ({
+  rechargeMoney,
+  rechargeUserName,
+  bankBaseId,
+  ip,
+}: {
+  rechargeMoney: string;
+  rechargeUserName: string;
+  bankBaseId: string;
+  ip: string;
+}) => {
+  const data = await request<RootResponse<any>>({
+    endpoint: API_ENDPOINT.BANK_RECHARGE,
+    route: APP_ROUTE.PAY,
+    tags: API_ENDPOINT.BANK_RECHARGE,
+    body: {
+      bankBaseId,
+      ip,
+      rechargeMoney,
+      rechargeUserName,
+    },
+  });
+  return data;
+};

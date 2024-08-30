@@ -1,5 +1,5 @@
 import { getAccountInfo } from '@/api/game';
-import { getBindCardList } from '@/api/pay';
+import { getBindCardList, rechargeBankList as rechargeBankListApi } from '@/api/pay';
 import { getAccountNow, getActivityQuestTypes, getActivityTypes } from '@/api/platform';
 import { defaultInitData } from '@/constants/defaultData';
 import {
@@ -76,6 +76,15 @@ type AccountState = {
   selectedBank: number;
   withdrawAmount: number;
   activityQuestSection: ActivityQuestSectionTypes[];
+  rechargeBankList: {
+    bankChargeLimit: string;
+    id: string;
+    discountBill: number;
+    bankName: string;
+    accountName: string;
+    bankAccount: string;
+    bankAddress: string;
+  }[];
 };
 
 type AccountActions = {
@@ -101,6 +110,7 @@ export type AccountApiCalls = {
   fetchAccountNow: () => void;
   fetchActivityType: () => void;
   fetchActivityQuestSection: () => void;
+  fetchRechargeBankList: () => void;
 };
 
 export type AccountStore = AccountState & AccountActions & AccountApiCalls;
@@ -125,6 +135,7 @@ export const createAccountStore = () =>
         selectedBank: 0,
         withdrawAmount: 0,
         activityQuestSection: [activityQuestSectionState],
+        rechargeBankList: [],
         setInit: (init) => set(() => ({ init: { ...init } })),
         setAccountInfo: (accountInfo) => set(() => ({ accountInfo: { ...accountInfo } })),
         setTheme: (theme) => set(() => ({ theme })),
@@ -167,6 +178,10 @@ export const createAccountStore = () =>
             return set(() => ({ activityQuestSection: [activityQuestSectionState] }));
           }
           return set(() => ({ activityQuestSection }));
+        },
+        fetchRechargeBankList: async () => {
+          const rechargeBankList = await rechargeBankListApi();
+          return set(() => ({ rechargeBankList }));
         },
       }),
       {

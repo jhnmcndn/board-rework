@@ -1,0 +1,116 @@
+.container {
+  width: 100%;
+  font-size: 0.15rem;
+  padding: 0.1rem;
+  color: white;
+
+  .rechargeWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.1rem;
+
+    > form,
+    .rechargeBankDetails {
+      background: #222;
+      border-radius: 0.05rem;
+      padding: 0.1rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.1rem;
+
+      .input {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.1rem;
+
+        label {
+          font-weight: bold;
+        }
+
+        input {
+          flex: 1;
+          background: #111;
+          border: none;
+          outline: none;
+          height: 0.3rem;
+          border-radius: 50rem;
+          font-size: 0.15rem;
+          padding: 0.1rem;
+          caret-color: white;
+          color: white;
+        }
+      }
+
+      .submit {
+        position: relative;
+        width: 1.1rem;
+        cursor: pointer;
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        outline: none;
+        border: none;
+        border-radius: 50rem;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+
+        span {
+          position: absolute;
+          text-align: center;
+          width: 100%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -65%);
+          color: #511a00;
+          font-size: 0.1rem;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .rechargeBankDetails {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      button {
+        border: none;
+        outline: none;
+        font-size: 0.13rem;
+        width: 0.7rem;
+        height: 0.25rem;
+        border-radius: 50rem;
+        background: linear-gradient(180deg, #ffe800, #e38c00);
+        color: #511a00;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .instructions {
+    background: #222;
+    border-radius: 0.05rem;
+    padding: 0.1rem;
+    margin-top: 0.1rem;
+    color: #757575;
+    font-size: 0.113rem;
+
+    :nth-child(3) {
+      margin-top: 0.1rem;
+    }
+  }
+}
