@@ -9,7 +9,7 @@ import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
-import { createPortal } from 'react-dom';
+import LoginOrRegisterModal from '../LoginOrRegisterModal';
 import ModalLayout from '../ModalLayout';
 import styles from './index.module.scss';
 
@@ -17,14 +17,15 @@ const LoginOptionsModal = () => {
   const { images } = useImages();
   const isMounted = useIsMounted();
   const { login } = useAuthActions();
-  const { openAlert, isLoginOptionsOpen, closeLoginOptions, openLoginOrRegister } = useModalStore();
+  const [isLoginOrRegisterOpen, setIsLoginOrRegisterOpen] = useState(false);
+  const { openAlert, isLoginOptionsOpen, closeLoginOptions } = useModalStore();
   const { captchaId, actionSwitch } = useAccountStore((state) => state.init);
   const isCaptchaEnabled = actionSwitch === '1' ? true : false;
   const [isCaptchaOpen, setIsCaptchaOpen] = useState(false);
 
-  const modalContent = (
+  return (
     <AnimatePresence>
-      {isLoginOptionsOpen && (
+      {isLoginOptionsOpen && isMounted() && (
         <ModalLayout backdrop={0.6}>
           <div className={styles.loginTypes}>
             <Image
@@ -53,7 +54,7 @@ const LoginOptionsModal = () => {
                 height={79}
                 width={228}
                 quality={100}
-                onClick={() => openLoginOrRegister()}
+                onClick={() => setIsLoginOrRegisterOpen(true)}
               />
               <Image
                 src={images.guestLoginBtn}
@@ -76,15 +77,11 @@ const LoginOptionsModal = () => {
               />
             </div>
           </div>
+          <LoginOrRegisterModal show={isLoginOrRegisterOpen} setShow={setIsLoginOrRegisterOpen} />
         </ModalLayout>
       )}
     </AnimatePresence>
   );
-
-  if (!isMounted()) return;
-
-  const element = document.getElementById('modal-root') as HTMLDivElement;
-  return createPortal(modalContent, element);
 };
 
 export default LoginOptionsModal;

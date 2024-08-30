@@ -8,7 +8,6 @@ import useIsMounted from '@/hooks/useIsMounted';
 import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { createPortal } from 'react-dom';
 import styles from './index.module.scss';
 
 const SuccessWithdrawModal = () => {
@@ -16,9 +15,9 @@ const SuccessWithdrawModal = () => {
   const isMounted = useIsMounted();
   const { closeWithdrawSuccess, isWithdrawSuccessOpen } = useModalStore();
 
-  const modalContent = (
+  return (
     <AnimatePresence>
-      {isWithdrawSuccessOpen && (
+      {isWithdrawSuccessOpen && isMounted() && (
         <ModalLayout onClose={closeWithdrawSuccess} backdrop={0.8}>
           <div className={styles.modalWrapper}>
             <HeaderModalTitle title='意见反馈箱' onClick={closeWithdrawSuccess} />
@@ -41,13 +40,6 @@ const SuccessWithdrawModal = () => {
       )}
     </AnimatePresence>
   );
-
-  if (isMounted()) {
-    const element = document.getElementById('modal-root') as HTMLDivElement;
-    if (element) return createPortal(modalContent, element);
-  }
-
-  return null;
 };
 
 export default SuccessWithdrawModal;

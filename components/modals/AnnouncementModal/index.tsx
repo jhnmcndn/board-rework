@@ -6,7 +6,6 @@ import useIsMounted from '@/hooks/useIsMounted';
 import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
 import { FC } from 'react';
-import { createPortal } from 'react-dom';
 import ModalLayout from '../ModalLayout';
 import Content from './component/Content';
 import Outsidebar from './component/Outsidebar';
@@ -18,9 +17,9 @@ const AnnouncementModal: FC = () => {
   const { images } = useImages();
   const { isAnnouncementOpen, closeAnnouncement } = useModalStore();
 
-  const modalContent = (
+  return (
     <AnimatePresence>
-      {isAnnouncementOpen && (
+      {isAnnouncementOpen && isMounted() && (
         <ModalLayout closeOnOutsideClick onClose={closeAnnouncement} backdrop={0.8}>
           <div className={styles.mainAnnouncement}>
             <div className={styles.announcementContainer}>
@@ -36,13 +35,6 @@ const AnnouncementModal: FC = () => {
       )}
     </AnimatePresence>
   );
-
-  if (isMounted()) {
-    const element = document.getElementById('modal-root') as HTMLDivElement;
-    if (element) return createPortal(modalContent, element);
-  }
-
-  return null;
 };
 
 export default AnnouncementModal;

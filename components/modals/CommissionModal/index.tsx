@@ -7,7 +7,6 @@ import useIsMounted from '@/hooks/useIsMounted';
 import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
 import styles from './index.module.scss';
 
 type TCommissionTableData = {
@@ -28,9 +27,9 @@ const CommissionModal = () => {
     });
   }, []);
 
-  const modalContent = (
+  return (
     <AnimatePresence>
-      {isCommissionOpen && (
+      {isCommissionOpen && isMounted() && (
         <ModalLayout onClose={closeCommission} backdrop={0.8}>
           <div className={styles.commissionModal}>
             <HeaderModalTitle title='返佣金额列表对照' onClick={closeCommission} />
@@ -67,13 +66,6 @@ const CommissionModal = () => {
       )}
     </AnimatePresence>
   );
-
-  if (isMounted()) {
-    const element = document.getElementById('modal-root') as HTMLDivElement;
-    if (element) return createPortal(modalContent, element);
-  }
-
-  return null;
 };
 
 export default CommissionModal;

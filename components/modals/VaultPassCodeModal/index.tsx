@@ -13,7 +13,6 @@ import CryptoJS from 'crypto-js';
 import { AnimatePresence } from 'framer-motion';
 import { usePathname, useRouter } from 'next/navigation';
 import { BaseSyntheticEvent, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
 import styles from './index.module.scss';
 
 const VaultPassCodeModal = () => {
@@ -142,9 +141,9 @@ const VaultPassCodeModal = () => {
     }
   };
 
-  const modalContent = (
+  return (
     <AnimatePresence>
-      {isPassCodeOpen && (
+      {isPassCodeOpen && isMounted() && (
         <ModalLayout onClose={closePassCode} backdrop={0.8} closeOnOutsideClick>
           <div className={styles.wrapper}>
             <HeaderModalTitle title='提现密码' onClick={closePassCode} />
@@ -182,13 +181,6 @@ const VaultPassCodeModal = () => {
       )}
     </AnimatePresence>
   );
-
-  if (isMounted()) {
-    const element = document.getElementById('modal-root') as HTMLDivElement;
-    if (element) return createPortal(modalContent, element);
-  }
-
-  return null;
 };
 
 export default VaultPassCodeModal;
