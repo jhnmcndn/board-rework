@@ -1,6 +1,5 @@
 'use client';
 
-import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import Sidebar from '@/components/Sidebar';
 import { BoxAccountResponse, TFundDetails } from '@/types/app';
 import { FC, useState } from 'react';
@@ -14,7 +13,6 @@ const MainContent: FC<
     fundDetails: TFundDetails[];
   }>
 > = ({ boxAccount, fundDetails }) => {
-  const theme = useAccountStore((s) => s.theme);
   const sidebarItems = ['资金转入', '资金取出', '互转明细'];
   const [activeSidebarItem, setActiveSidebarItem] = useState(0);
 

@@ -59,6 +59,7 @@
         height: 0.22rem;
         width: 0.22rem;
         margin-left: 0.05rem;
+        z-index: 1;
 
         img {
           width: 100%;
@@ -76,6 +77,8 @@
         color: #f9d57a;
         font-weight: 300;
         white-space: nowrap;
+        position: relative;
+        z-index: 1;
       }
       &[data-theme='yellowWhite'] {
         background: #c5915a;
@@ -105,7 +108,15 @@
     }
 
     .iconHolderActive {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
       background-image: url('~/assets/blackGold/main/gametopAct.png');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
       // &[data-theme='yellowWhite'] {
       //   background-image: url('/assets/yellowWhite/main/gametopAct.png');
       //   background-size: 100%;

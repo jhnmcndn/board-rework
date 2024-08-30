@@ -2,7 +2,6 @@ import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import useFetchGame from '@/hooks/useFetchGame';
 import { CategoryListBarProps, GameInfoGroup } from '@/types/app';
-import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { FC, useEffect, useState } from 'react';
@@ -42,9 +41,7 @@ const CategoryListBar: FC<CategoryListBarProps> = ({ setActivePlatformId }) => {
               initial={{ y: '120%' }}
               animate={{ y: 0 }}
               transition={{ delay: 0.4 }}
-              className={classNames(styles.iconHolder, {
-                [styles.iconHolderActive]: activeTab === index,
-              })}
+              className={styles.iconHolder}
               onClick={() => handleOnClick(item, index)}
               data-theme={theme}
             >
@@ -59,6 +56,7 @@ const CategoryListBar: FC<CategoryListBarProps> = ({ setActivePlatformId }) => {
                 />
               </div>
               <span>{item.name} </span>
+              {activeTab === index && <motion.div layoutId='tab-active' className={styles.iconHolderActive} />}
             </motion.div>
           );
         })}
