@@ -149,7 +149,9 @@ const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData }) => {
     const coords = containerRef.style.transform.match(/^translateX\((.+)px\) translateY\((.+)px\)/);
 
     if (coords?.length) {
-      sessionStorage.setItem('bigIconTranslateX', coords[1]);
+      if (Number(coords[1]) < 0) {
+        sessionStorage.setItem('bigIconTranslateX', coords[1]);
+      }
     }
   };
 
