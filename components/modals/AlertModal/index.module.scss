@@ -4,12 +4,13 @@
     left: 0;
     right: 0;
     top: 0.5rem;
-    z-index: 20;
+    z-index: 105;
     height: auto;
     display: flex;
     opacity: 0%;
     justify-content: center;
-    animation: 4s linear alertShow;
+    pointer-events: none;
+    animation: 2.75s linear alertShow;
   }
 
   &__textContainer {
@@ -67,7 +68,11 @@
     opacity: 0;
   }
 
-  35% {
+  20% {
+    opacity: 1;
+  }
+
+  80% {
     opacity: 1;
   }
 
