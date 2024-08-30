@@ -15,8 +15,8 @@ const Outsidebar: React.FC = () => {
   ];
 
   const handleClickTab = (tabIndex: number) => {
+    if (tabIndex === 1) return authCheck(() => setSidebarAnnouncement(tabIndex));
     setSidebarAnnouncement(tabIndex);
-    if (tabIndex === 1) authCheck(() => setSidebarAnnouncement(tabIndex));
   };
 
   return (
