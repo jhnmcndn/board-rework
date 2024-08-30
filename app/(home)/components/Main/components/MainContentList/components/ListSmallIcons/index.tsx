@@ -16,7 +16,25 @@ const ListSmallIcons: FC<ListIconProps> = ({ searchFieldData }) => {
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [filteredData, setFilteredData] = useState<RspGameInfo[] | undefined>();
+  const [defaultX, setDefaultX] = useState(0);
+  const [isTransition, setIsTransition] = useState(true);
   const { gameInfos, activeSideBarItem, isGamesLoading } = useGameStore((state) => state);
+
+  useEffect(() => {
+    const smallIconTranslateX = sessionStorage.getItem('smallIconTranslateX');
+    if (smallIconTranslateX) {
+      sessionStorage.removeItem('smallIconTranslateX');
+      setTimeout(() => {
+        setDefaultX(Number(smallIconTranslateX));
+      }, 1000);
+
+      setTimeout(() => {
+        setIsTransition(false);
+      }, 2000);
+    } else {
+      setIsTransition(false);
+    }
+  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -52,8 +70,21 @@ const ListSmallIcons: FC<ListIconProps> = ({ searchFieldData }) => {
     authCheck(() => {
       if (!data_Category) {
         router.push(`/games?id=${item.id}`);
+        handleScrollIntoView();
       }
     });
+  };
+
+  const handleScrollIntoView = () => {
+    const containerRef = rowsContainerRef.current;
+    if (!containerRef) return;
+    const coords = containerRef.style.transform.match(/^translateX\((.+)px\) translateY\((.+)px\)/);
+
+    if (coords?.length) {
+      if (Number(coords[1]) < 0) {
+        sessionStorage.setItem('smallIconTranslateX', coords[1]);
+      }
+    }
   };
 
   return (
@@ -79,6 +110,11 @@ const ListSmallIcons: FC<ListIconProps> = ({ searchFieldData }) => {
             power: 0.2,
             timeConstant: 50,
             bounceDamping: 26,
+          }}
+          style={{
+            x: defaultX,
+            y: '0px', // Do not remove this
+            ...(isTransition ? { transition: '.7s' } : {}),
           }}
         >
           <div className={styles.firstRow}>
