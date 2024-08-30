@@ -139,11 +139,11 @@ const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData }) => {
       await fetchGameInfo({ id: activeSideBarItem.id || 1, pid: item.id || 1 });
       setActivePlatform(item);
       setShowPlatform(true);
-      handleDrag();
+      handleScrollIntoView();
     }
   };
 
-  const handleDrag = () => {
+  const handleScrollIntoView = () => {
     const containerRef = rowsContainerRef.current;
     if (!containerRef) return;
     const coords = containerRef.style.transform.match(/^translateX\((.+)px\) translateY\((.+)px\)/);
