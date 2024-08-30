@@ -62,10 +62,9 @@ const Form: FC<FormComponentProps> = ({ fields, onSubmit }) => {
               <label>{field.label}</label>
               <Select
                 options={field.options}
-                // classNamePrefix={styles.selectWrapper}
-                className={styles.selectWrapper}
                 onChange={field.onSelectChange}
                 defaultValue={field.defaultValue}
+                classNamePrefix={'bindCardSelect'}
               />
             </div>
           );

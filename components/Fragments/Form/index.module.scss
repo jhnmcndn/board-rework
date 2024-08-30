@@ -25,110 +25,62 @@
     &:not(:first-child) {
       margin-top: 0.1rem;
     }
+
+
+    :global {
+      .bindCardSelect__control {
+        position: relative;
+        margin: 0 !important;
+        height: 0.3rem;
+        width: 100%;
+        border-radius: 0.3rem;
+        border: none !important;
+        box-shadow: none;
+        display: flex;
+        align-items: center;
+        .bindCardSelect__value-container {
+          padding: 0 0.15rem;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          position: relative;
+          .bindCardSelect__single-value {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            > span {
+              display: flex;
+              align-items: center;
+              font-size: 0.15rem !important;
+            }
+          }
+        }
+      }
+      .bindCardSelect__indicator {
+        outline: none;
+        border: none;
+        box-shadow: none;
+        svg {
+          width: 0.25rem;
+        }
+      }
+      .bindCardSelect__indicator-separator {
+        width: 0;
+        background-color: transparent !important;
+      }
+      .bindCardSelect__option {
+        > span {
+          display: flex;
+          align-items: center;
+          font-size: 0.15rem !important;
+        }
+      }
+    }
   }
 
   .button {
     width: 0.8rem;
     height: 0.3rem;
     margin-top: 0.2rem;
-  }
-}
-
-.selectWrapper {
-  width: 2.8rem;
-  height: 100%;
-
-  :global {
-    .css-13cymwt-control {
-      border: none;
-      height: 100%;
-      min-height: 0;
-      border-radius: 0.3rem;
-      background: #1a1a1a;
-      padding: 0;
-      cursor: pointer;
-
-      .css-hlgwow {
-        display: flex;
-        height: 100%;
-        padding: 0 0 0 2.5%;
-        box-shadow: none;
-        align-items: center;
-
-        .css-1dimb5e-singleValue span {
-          display: flex;
-          align-items: center;
-          color: #fff;
-        }
-
-        .css-19bb58m {
-          display: none;
-        }
-      }
-
-      .css-1wy0on6 {
-        display: flex;
-        height: 100%;
-        padding: 0 2.5% 0;
-        box-shadow: none;
-        align-items: center;
-
-        .css-1u9des2-indicatorSeparator {
-          width: 0;
-        }
-      }
-    }
-
-    .css-t3ipsp-control {
-      min-height: 0;
-      border: none;
-      height: 100%;
-      border-radius: 0.3rem;
-      background: #1a1a1a;
-      box-shadow: none;
-      padding: 0;
-
-      .css-hlgwow {
-        display: block;
-        height: 100%;
-        padding: 0;
-        box-shadow: none;
-
-        .css-19bb58m {
-          display: none;
-        }
-      }
-
-      .css-1wy0on6 {
-        display: block;
-        height: 100%;
-        padding: 0;
-        box-shadow: none;
-      }
-    }
-    //Dropdown
-    .css-1nmdiq5-menu {
-      .css-qr46ko {
-        max-height: 1.48rem;
-        padding: 0;
-        div {
-          cursor: pointer;
-          span {
-            @include flex-xy(flex-start,center);
-          }
-        }
-        .css-10wo9uf-option {
-          background: #222;
-        }
-        // Dropdown-selected
-        .css-tr4s17-option {
-            background-color: #2C2C2C;
-        }
-        // Dropdown-hovered
-        .css-d7l1ni-option {
-          background-color: #2C2C2C;
-        }
-      }
-    }
   }
 }
