@@ -49,7 +49,7 @@ const LoginOrRegisterModal: FC<LoginOrRegisterModalProps> = ({ show, setShow }) 
                 {...commonMotionProps}
                 className={styles.body}
               >
-                <LoginForm switchToRegister={switchToRegister} />
+                <LoginForm switchToRegister={switchToRegister} onSuccess={() => setShow(false)} />
               </motion.div>
 
               <motion.div
