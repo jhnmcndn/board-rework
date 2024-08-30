@@ -15,6 +15,7 @@
     font-weight: 900;
     margin-bottom: 0.05rem;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 
     &.sideActiveTab {
       color: #511a00;
