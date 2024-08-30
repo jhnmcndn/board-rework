@@ -85,7 +85,7 @@ const SelfWithdrawal = () => {
                     [styles.selectedCard]: item?.id === selectedCard?.id,
                   })}
                   onClick={() => {
-                    setSelectedCard(item);
+                    selectedCard === item ? setSelectedCard(null) : setSelectedCard(item);
                     setSelectedBank(selectedCard?.id);
                   }}
                 >
