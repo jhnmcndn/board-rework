@@ -2,7 +2,6 @@
 
 import HeaderModalTitle from '@/components/HeaderModalTitle';
 import useIsMounted from '@/hooks/useIsMounted';
-import useModalStore from '@/store/modals';
 import { ListItemProps } from '@/types/app';
 import { sfx } from '@/utils/audioFile';
 import classNames from 'classnames';
@@ -16,9 +15,13 @@ import PersonalInfo from './components/PersonalInfo';
 import Version from './components/Version';
 import styles from './index.module.scss';
 
-const SettingsModal: FC = () => {
+type SettingsModalProps = {
+  show: boolean;
+  setShow: (val: boolean) => void;
+};
+
+const SettingsModal: FC<SettingsModalProps> = ({ show, setShow }) => {
   const [selectedId, setSelectedId] = useState<number>(0);
-  const { closeSettings, isSettingsOpen } = useModalStore();
   const isMounted = useIsMounted();
 
   const listItems: ListItemProps[] = [
@@ -31,8 +34,6 @@ const SettingsModal: FC = () => {
 
   const renderComponent = () => {
     switch (selectedId) {
-      case 0:
-        return <PersonalInfo />;
       case 1:
         return <Music />;
       case 2:
@@ -42,16 +43,16 @@ const SettingsModal: FC = () => {
       case 4:
         return <ColorSystem />;
       default:
-        return <PersonalInfo />;
+        return <PersonalInfo onLogout={() => setShow(false)} />;
     }
   };
 
   return (
     <AnimatePresence>
-      {isSettingsOpen && isMounted() && (
+      {show && isMounted() && (
         <ModalLayout backdrop={0.8}>
           <div className={styles.settingsContainer}>
-            <HeaderModalTitle title='设置' onClick={closeSettings} />
+            <HeaderModalTitle title='设置' onClick={() => setShow(false)} />
             <div className={styles.contentModal}>
               <div className={styles.sidebarContainer}>
                 <ul>
