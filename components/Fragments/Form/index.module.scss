@@ -28,6 +28,10 @@
 
 
     :global {
+      .css-b62m3t-container {
+        width: 2.8rem !important;
+        cursor: pointer !important;
+      }
       .bindCardSelect__control {
         position: relative;
         margin: 0 !important;
@@ -38,8 +42,9 @@
         box-shadow: none;
         display: flex;
         align-items: center;
+        background-color: #1a1a1a !important;
         .bindCardSelect__value-container {
-          padding: 0 0.15rem;
+          padding: 0 0.10rem;
           height: 100%;
           display: flex;
           align-items: center;
