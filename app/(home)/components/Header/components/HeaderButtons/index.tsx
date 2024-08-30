@@ -1,19 +1,22 @@
+import SettingsModal from '@/components/modals/SettingsModal';
 import useAuthActions from '@/hooks/useAuthActions';
 import useImages from '@/hooks/useImages';
 import useModalStore from '@/store/modals';
 import { sfx } from '@/utils/audioFile';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import styles from './index.module.scss';
 
 const HeaderButtons = () => {
   const { push } = useRouter();
   const { images } = useImages();
   const { authCheck } = useAuthActions();
-  const { openSettings, setSidebarAnnouncement, openAnnouncement } = useModalStore();
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const { setSidebarAnnouncement, openAnnouncement } = useModalStore();
 
   const handleSetting = () => {
-    authCheck(() => openSettings());
+    authCheck(() => setIsSettingsOpen(true));
   };
 
   return (
@@ -50,6 +53,7 @@ const HeaderButtons = () => {
           <span className={styles.settingText}>设置</span>
         </div>
       </div>
+      <SettingsModal show={isSettingsOpen} setShow={setIsSettingsOpen} />
     </>
   );
 };

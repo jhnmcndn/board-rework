@@ -1,3 +1,4 @@
+import { KeyboardEvent } from 'react';
 import {
   browserName,
   browserVersion,
@@ -94,4 +95,48 @@ export const moneyFormat = (money: number) => {
   });
 
   return formatter.format(roundedNumber);
+};
+
+export const isAllowedKey = ({ key, isMetaKey }: { key: string; isMetaKey: boolean }) => {
+  if (isMetaKey) return true;
+  const allowedKeys = [
+    '0',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    'Backspace',
+    'Meta',
+    'Control',
+    'Enter',
+    'ArrowLeft',
+    'ArrowRight',
+  ];
+  return allowedKeys.includes(key);
+};
+
+export const onlyAllowDigits = (e: KeyboardEvent<HTMLInputElement>) => {
+  if (
+    !isAllowedKey({
+      key: e.key,
+      isMetaKey: e.metaKey,
+    })
+  )
+    return e.preventDefault();
+};
+
+export const maskData = (data: string) => {
+  if (typeof data !== 'string' || data === '') return '';
+  return data
+    .split('')
+    .map((char, index) => {
+      if (index === 0) return char;
+      return '*';
+    })
+    .join('');
 };

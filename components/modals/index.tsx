@@ -5,7 +5,6 @@ import LoginOptionsModal from '@/components/modals/LoginOptionsModal';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import dynamic from 'next/dynamic';
 
-const SettingsModal = dynamic(() => import('./SettingsModal'), { ssr: false });
 const VersionModal = dynamic(() => import('./VersionModal'), { ssr: false });
 const AnnouncementModal = dynamic(() => import('./AnnouncementModal'), { ssr: false });
 const SuccessWithdrawModal = dynamic(() => import('./SuccessWithdrawModal'), { ssr: false });
@@ -18,13 +17,11 @@ const ShareModal = dynamic(() => import('./ShareModal'), { ssr: false });
 const ModalRoot = () => {
   const theme = useAccountStore((state) => state.theme);
   // Only add common/global scope modals here,
-  // import specific modals only on the component it is being used
+  // import specific modals only on the component it is being used to limit rerenders
 
   return (
     <>
-      <AlertModal />
       <LoginOptionsModal />
-      <SettingsModal />
       <BindBankModal />
       <BindUSDTModal />
       <SuccessWithdrawModal />
@@ -33,6 +30,7 @@ const ModalRoot = () => {
       <AnnouncementModal />
       <CommissionModal />
       <ShareModal />
+      <AlertModal />
     </>
   );
 };

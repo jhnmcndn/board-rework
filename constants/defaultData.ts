@@ -1,4 +1,4 @@
-import { AccountInfo, Init, RootResponse } from '@/types/app';
+import { AccountInfo, Init, PayTypeList, RootResponse } from '@/types/app';
 import {
   EmailIcon,
   EmailShareButton,
@@ -101,3 +101,25 @@ export const shareButtons = [
   { Button: RedditShareButton, Icon: RedditIcon, name: 'Reddit' },
   { Button: TumblrShareButton, Icon: TumblrIcon, name: 'Tumblr' },
 ];
+
+export const defaultPayTypeList = {
+  createBy: '',
+  createTime: '',
+  deviceType: '',
+  effect: false,
+  iconUrl: '',
+  id: 0,
+  name: '',
+  openLevelMax: 0,
+  openLevelMin: 0,
+  recommend: false,
+  sort: 0,
+  tex1: '',
+  tex2: '',
+  tex3: '',
+  tex4: '',
+  tex5: '',
+  type: 0,
+  updateBy: '',
+  updateTime: '',
+} satisfies PayTypeList;

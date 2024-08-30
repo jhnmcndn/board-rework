@@ -1,9 +1,9 @@
-import { getGameInfos } from '@/api/game';
 import MemoizedIconHolder from '@/components/MemoizedIconHolder';
 import NoData from '@/components/NoData';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import useAuthActions from '@/hooks/useAuthActions';
+import useFetchGame from '@/hooks/useFetchGame';
 import useImages from '@/hooks/useImages';
 import { GameInfoGroup, ListIconProps, RspGameInfo } from '@/types/app';
 import classNames from 'classnames';
@@ -20,11 +20,14 @@ const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData }) => {
   const router = useRouter();
   const { images } = useImages();
   const { authCheck } = useAuthActions();
+  const { fetchGameInfo } = useFetchGame();
   const rowsContainerRef = useRef<HTMLDivElement | null>(null);
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [data, setData] = useState<CombinedGameInfo[]>([]);
   const [filteredData, setFilteredData] = useState<CombinedGameInfo[] | undefined>();
+  const [defaultX, setDefaultX] = useState(0);
+  const [isTransition, setIsTransition] = useState(true);
   const theme = useAccountStore((state) => state.theme);
   const {
     activeSideBarItem,
@@ -33,11 +36,27 @@ const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData }) => {
     showPlatform,
     activePlatform,
     isGamesLoading,
-    setGameInfos,
     setShowPlatform,
     setActivePlatform,
-    setIsGamesLoading,
   } = useGameStore((state) => state);
+
+  useEffect(() => {
+    if (showPlatform) return;
+
+    const bigIconTranslateX = sessionStorage.getItem('bigIconTranslateX');
+    if (bigIconTranslateX) {
+      sessionStorage.removeItem('bigIconTranslateX');
+      setTimeout(() => {
+        setDefaultX(Number(bigIconTranslateX));
+      }, 1000);
+
+      setTimeout(() => {
+        setIsTransition(false);
+      }, 2000);
+    } else {
+      setIsTransition(false);
+    }
+  }, [showPlatform]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -77,15 +96,6 @@ const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData }) => {
     }
   }, [gameInfoGroup, gameInfos]);
 
-  const fetchGameInfo = async (params: { id: number; pid: number }) => {
-    setIsGamesLoading(true);
-    const response = await getGameInfos(params);
-    if (response && !('message' in response)) {
-      setGameInfos(response);
-    }
-    setIsGamesLoading(false);
-  };
-
   const renderPlatFormListHeader = () => {
     return (
       <div className={styles.listHeader} data-theme={theme}>
@@ -107,6 +117,8 @@ const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData }) => {
             width={200}
             height={200}
             onClick={() => {
+              setDefaultX(0);
+              setIsTransition(true);
               setShowPlatform(false);
             }}
             alt='Card Game Back'
@@ -116,7 +128,7 @@ const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData }) => {
     );
   };
 
-  const handleOnClick = (item: CombinedGameInfo) => {
+  const handleOnClick = async (item: CombinedGameInfo) => {
     if (isDragging) return;
 
     if (activeSideBarItem.type === 2) {
@@ -124,9 +136,22 @@ const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData }) => {
         router.push(`/games?id=${item.id}`);
       });
     } else {
+      await fetchGameInfo({ id: activeSideBarItem.id || 1, pid: item.id || 1 });
       setActivePlatform(item);
-      fetchGameInfo({ id: activeSideBarItem.id || 1, pid: item.id || 1 });
       setShowPlatform(true);
+    }
+    handleScrollIntoView();
+  };
+
+  const handleScrollIntoView = () => {
+    const containerRef = rowsContainerRef.current;
+    if (!containerRef) return;
+    const coords = containerRef.style.transform.match(/^translateX\((.+)px\) translateY\((.+)px\)/);
+
+    if (coords?.length) {
+      if (Number(coords[1]) < 0) {
+        sessionStorage.setItem('bigIconTranslateX', coords[1]);
+      }
     }
   };
 
@@ -142,7 +167,7 @@ const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData }) => {
         >
           <motion.div
             className={styles.listLargeContainer}
-            drag='x'
+            drag={isTransition ? false : 'x'}
             dragConstraints={dragConstraints}
             dragElastic={0.1}
             ref={rowsContainerRef}
@@ -151,6 +176,12 @@ const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData }) => {
             dragTransition={{
               power: 0.2,
               timeConstant: 30,
+              bounceDamping: 26,
+            }}
+            style={{
+              x: defaultX,
+              y: '0px', // Do not remove this
+              ...(isTransition ? { transition: '.7s' } : {}),
             }}
           >
             <motion.div className={styles.firstRow}>

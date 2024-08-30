@@ -24,7 +24,6 @@
     margin: auto 2.5% auto auto;
     width: 0.175rem;
     height: auto;
-    cursor: pointer;
   }
 
   &__buttonAction {
@@ -41,6 +40,5 @@
     font-size: clamp(0.1rem, 0.115rem, 21.5px);
     padding: 0 2.5%;
     border-bottom: 0.01rem solid #fff;
-    cursor: pointer;
   }
 }
