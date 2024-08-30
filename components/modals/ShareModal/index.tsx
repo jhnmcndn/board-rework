@@ -9,7 +9,6 @@ import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
-import { createPortal } from 'react-dom';
 import styles from './index.module.scss';
 
 const ShareModal = () => {
@@ -25,7 +24,7 @@ const ShareModal = () => {
   const modalContent = useMemo(
     () => (
       <AnimatePresence>
-        {isShareOpen && (
+        {isShareOpen && isMounted() && (
           <ModalLayout onClose={closeShare} backdrop={0.8}>
             <div className={styles.shareModal}>
               <div className={styles.shareModal__content}>
@@ -54,12 +53,7 @@ const ShareModal = () => {
     [isShareOpen, shareUrl, closeShare],
   );
 
-  if (isMounted()) {
-    const element = document.getElementById('modal-root');
-    if (element) return createPortal(modalContent, element);
-  }
-
-  return null;
+  return modalContent;
 };
 
 export default ShareModal;

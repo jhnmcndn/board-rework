@@ -10,7 +10,6 @@ import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { ChangeEvent, useMemo, useState } from 'react';
-import { createPortal } from 'react-dom';
 import styles from './index.module.scss';
 
 const BindBankModal = () => {
@@ -87,9 +86,9 @@ const BindBankModal = () => {
     }
   };
 
-  const modalContent = (
+  return (
     <AnimatePresence>
-      {isBindBankOpen && (
+      {isBindBankOpen && isMounted() && (
         <ModalLayout onClose={closeBindBank} backdrop={0.8}>
           <div className={styles.wrapper}>
             <HeaderModalTitle title='绑定银行卡' onClick={closeBindBank} />
@@ -103,13 +102,6 @@ const BindBankModal = () => {
       )}
     </AnimatePresence>
   );
-
-  if (isMounted()) {
-    const element = document.getElementById('modal-root') as HTMLDivElement;
-    if (element) return createPortal(modalContent, element);
-  }
-
-  return null;
 };
 
 export default BindBankModal;

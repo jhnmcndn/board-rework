@@ -8,7 +8,6 @@ import { sfx } from '@/utils/audioFile';
 import classNames from 'classnames';
 import { AnimatePresence } from 'framer-motion';
 import { FC, useState } from 'react';
-import { createPortal } from 'react-dom';
 import ModalLayout from '../ModalLayout';
 import ChangePassword from './components/ChangePassword';
 import ColorSystem from './components/ColorSystem';
@@ -47,9 +46,9 @@ const SettingsModal: FC = () => {
     }
   };
 
-  const modalContent = (
+  return (
     <AnimatePresence>
-      {isSettingsOpen && (
+      {isSettingsOpen && isMounted() && (
         <ModalLayout backdrop={0.8}>
           <div className={styles.settingsContainer}>
             <HeaderModalTitle title='设置' onClick={closeSettings} />
@@ -75,13 +74,6 @@ const SettingsModal: FC = () => {
       )}
     </AnimatePresence>
   );
-
-  if (isMounted()) {
-    const element = document.getElementById('modal-root') as HTMLDivElement;
-    if (element) return createPortal(modalContent, element);
-  }
-
-  return null;
 };
 
 export default SettingsModal;

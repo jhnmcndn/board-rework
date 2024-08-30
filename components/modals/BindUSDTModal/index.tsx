@@ -9,7 +9,6 @@ import useIsMounted from '@/hooks/useIsMounted';
 import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
 import { ChangeEvent, useMemo, useState } from 'react';
-import { createPortal } from 'react-dom';
 import styles from './index.module.scss';
 
 const BindUSDTModal = () => {
@@ -64,9 +63,9 @@ const BindUSDTModal = () => {
     }
   };
 
-  const modalContent = (
+  return (
     <AnimatePresence>
-      {isBindUSDTOpen && (
+      {isBindUSDTOpen && isMounted() && (
         <ModalLayout onClose={closeBindUSDT} backdrop={0.8}>
           <div className={styles.wrapper}>
             <HeaderModalTitle title='绑定USDT' onClick={closeBindUSDT} />
@@ -80,13 +79,6 @@ const BindUSDTModal = () => {
       )}
     </AnimatePresence>
   );
-
-  if (isMounted()) {
-    const element = document.getElementById('modal-root') as HTMLDivElement;
-    if (element) return createPortal(modalContent, element);
-  }
-
-  return null;
 };
 
 export default BindUSDTModal;

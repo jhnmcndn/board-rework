@@ -6,7 +6,6 @@ import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { FC } from 'react';
-import { createPortal } from 'react-dom';
 import ModalLayout from '../ModalLayout';
 import styles from './index.module.scss';
 
@@ -15,9 +14,9 @@ const VersionModal: FC = () => {
   const init = useAccountStore((state) => state.init);
   const isMounted = useIsMounted();
 
-  const modalContent = (
+  return (
     <AnimatePresence>
-      {isVersionOpen && (
+      {isVersionOpen && isMounted() && (
         <ModalLayout closeOnOutsideClick onClose={closeVersion} backdrop={0.5}>
           <div className={styles.versionMainContainer}>
             <span className={styles.notice}>有新版本，是否前往更新</span>
@@ -34,13 +33,6 @@ const VersionModal: FC = () => {
       )}
     </AnimatePresence>
   );
-
-  if (isMounted()) {
-    const element = document.getElementById('modal-root') as HTMLDivElement;
-    if (element) return createPortal(modalContent, element);
-  }
-
-  return null;
 };
 
 export default VersionModal;
