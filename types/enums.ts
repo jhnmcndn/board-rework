@@ -92,3 +92,9 @@ export enum THEME {
   WHITE_GOLD = 'whiteGold',
   YELLOW_WHITE = 'yellowWhite',
 }
+
+export enum RECHARGE_HISTORY {
+  ONLINE = 'rechargeOnline',
+  BANK = 'rechargeBank',
+  USDT = 'rechargeUsdt',
+}
