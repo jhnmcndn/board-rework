@@ -32,13 +32,16 @@ export const HomePage: HomePageComponent = ({
   getBoxPassIsOpen,
 }) => {
   const { setMessageOnSites } = useMessageStore((state) => state);
-  const { theme, setInit, setBoxPassIsSet } = useAccountStore((state) => state);
+  const { setInit, setBoxPassIsSet } = useAccountStore((state) => state);
   const { activeSideBarItem, setGameInfos, setAnnounceText, setSideBar, setActiveSideBarItem, gameInfos } =
     useGameStore((state) => state);
 
   useEffect(() => {
     setInit(init);
 
+    // if messageHomeNoticesData is an object that does not have a 'message' key,
+    // it means that the data is valid and we should set the announce text
+    // to the value of otherData
     if (messageHomeNoticesData && !('message' in messageHomeNoticesData)) {
       setAnnounceText(messageHomeNoticesData.otherData || '');
     }

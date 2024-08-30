@@ -63,7 +63,7 @@
           color: var(--security-input-placeholder);
         }
 
-        &[type=number] {
+        &[type='number'] {
           -moz-appearance: textfield;
         }
       }
@@ -85,6 +85,7 @@
             width: 0.2rem;
             height: 0.25rem;
             object-fit: contain;
+            cursor: pointer;
           }
         }
       }
@@ -109,8 +110,8 @@
           padding: 0.04rem 0.07rem;
           color: var(--security-highlight-text);
           background: var(--security-button-bg);
+          cursor: pointer;
         }
-
       }
     }
 
@@ -131,7 +132,7 @@
       margin-top: 0.2rem;
       height: 0.33rem;
       width: 1rem;
+      cursor: pointer;
     }
   }
-
 }
