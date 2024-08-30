@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  font-size: 0.15rem;
+  color: white;
+}
+
+.mainContent {
+  overflow: auto;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-content: center;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0.1rem;
+
+  &[data-theme='yellowWhite'] {
+    background: #fefeff;
+  }
+}

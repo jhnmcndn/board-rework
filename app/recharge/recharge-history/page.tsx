@@ -1,5 +1,7 @@
+import RechargeHistoryPage from './components/rechargeHistoryPage';
+
 const RechargeHistory = () => {
-  return <div>Recharge History</div>;
+  return <RechargeHistoryPage />;
 };
 
 export default RechargeHistory;
