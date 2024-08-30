@@ -1,4 +1,5 @@
 import Loader from '@/components/Loader';
+import NoData from '@/components/NoData';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
 import { useEffect, useState } from 'react';
 import Announce from '../Announce';
@@ -46,6 +47,8 @@ const MainContentList = () => {
       {isGamesLoading && <Loader load={isGamesLoading} />}
 
       <div className={styles.listContainer}>
+        {activeSideBarItem.id === 9 && gameInfoGroup.length === 0 && !isGamesLoading && <NoData />}
+
         {sideBar.map((item, idx) => {
           if (item.type !== 2 && item.type !== 3) {
             if (item.type === 4) {

@@ -1,6 +1,6 @@
-import { getGameInfos } from '@/api/game';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { useGameStore } from '@/components/Providers/GameStoreProvider';
+import useFetchGame from '@/hooks/useFetchGame';
 import { CategoryListBarProps, GameInfoGroup } from '@/types/app';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
@@ -10,8 +10,9 @@ import styles from './index.module.scss';
 
 const CategoryListBar: FC<CategoryListBarProps> = ({ setActivePlatformId }) => {
   const [activeTab, setActiveTab] = useState(0);
+  const { fetchGameInfo } = useFetchGame();
   const theme = useAccountStore((state) => state.theme);
-  const { gameInfoGroup, activeSideBarItem, setGameInfos, setIsGamesLoading } = useGameStore((state) => state);
+  const { gameInfoGroup, activeSideBarItem } = useGameStore((state) => state);
 
   useEffect(() => {
     var item = document.getElementById('cateListWrapper') as HTMLDivElement;
@@ -24,15 +25,6 @@ const CategoryListBar: FC<CategoryListBarProps> = ({ setActivePlatformId }) => {
       item.removeEventListener('wheel', handleMouseWheel);
     };
   }, []);
-
-  const fetchGameInfo = async (params: { id: number; pid: number }) => {
-    setIsGamesLoading(true);
-    const response = await getGameInfos(params);
-    if (response && !('message' in response)) {
-      setGameInfos(response);
-    }
-    setIsGamesLoading(false);
-  };
 
   const handleOnClick = async (item: GameInfoGroup, index: number) => {
     setActiveTab(index);
