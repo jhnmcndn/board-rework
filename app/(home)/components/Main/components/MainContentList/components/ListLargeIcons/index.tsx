@@ -139,8 +139,8 @@ const ListLargeIcons: FC<ListIconProps> = ({ searchFieldData }) => {
       await fetchGameInfo({ id: activeSideBarItem.id || 1, pid: item.id || 1 });
       setActivePlatform(item);
       setShowPlatform(true);
-      handleScrollIntoView();
     }
+    handleScrollIntoView();
   };
 
   const handleScrollIntoView = () => {
