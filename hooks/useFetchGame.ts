@@ -16,8 +16,10 @@ const useFetchGame = () => {
   const fetchGameInfoGroup = async (id: number) => {
     const response = await getGameInfoGroup(id);
     if (response && !('message' in response)) {
-      setGameInfoGroup(response);
+      setGameInfoGroup(response || []);
+      return;
     }
+    setGameInfoGroup([]);
   };
 
   const fetchGameInfo = async (params: { id: number; pid: number }, item?: RspGameType) => {
@@ -27,9 +29,12 @@ const useFetchGame = () => {
     }
     const response = await getGameInfos(newParams);
     if (response && !('message' in response)) {
-      setGameInfos(response);
+      setGameInfos(response || []);
+      return;
     }
+    setGameInfos([]);
   };
+
   const handleChange = async (item: RspGameType) => {
     setIsGamesLoading(true);
 
