@@ -47,16 +47,11 @@ const ListSmallIcons: FC<ListIconProps> = ({ searchFieldData }) => {
 
   const handleGameClick = (item: RspGameInfo) => {
     if (isDragging) return;
-    var data_Category = item.gameCategory === 'HG' ? true : false;
+    var data_Category = item.gameCategory === 'HG';
 
     authCheck(() => {
-      if (activeSideBarItem.id === 6) {
-        router.push(`/game/${item.lotteryId}`);
-      } else {
-        if (data_Category) {
-        } else {
-          router.push(`/games?id=${item.id}`);
-        }
+      if (!data_Category) {
+        router.push(`/games?id=${item.id}`);
       }
     });
   };
@@ -83,6 +78,7 @@ const ListSmallIcons: FC<ListIconProps> = ({ searchFieldData }) => {
           dragTransition={{
             power: 0.2,
             timeConstant: 50,
+            bounceDamping: 26,
           }}
         >
           <div className={styles.firstRow}>
