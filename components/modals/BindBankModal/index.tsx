@@ -22,12 +22,12 @@ const BindBankModal = () => {
   const [bindBankId, setBindBankId] = useState(139);
   const isMounted = useIsMounted();
 
-  const bankOptions = bankList.map((item) => ({
-    value: item.id,
+  const bankOptions = bankList.map(({ id, bankIcon, bankName }) => ({
+    value: id,
     label: (
       <span>
-        <Image width={20} height={20} src={item.bankIcon || ''} alt='Bank Icons' className={styles.bankIcons} />
-        &nbsp;{item.bankName}
+        <Image width={20} height={20} src={bankIcon || ''} alt='Bank Icons' className={styles.bankIcons} />
+        &nbsp;{bankName}
       </span>
     ),
   }));
@@ -64,25 +64,22 @@ const BindBankModal = () => {
   );
 
   const handleSubmit = async () => {
-    if (!bindRealName) {
-      openAlert('请输入您的姓名');
-    } else if (!bindBankAccount) {
-      openAlert('请输入户行卡号');
-    } else if (!bindBankAddress) {
-      openAlert('请输入开户地址');
-    } else if (bindBankAccount?.length < 16) {
-      openAlert('请输入超过16个银行卡号');
-    } else {
-      const { code, msg } = await setBindCard(bindRealName, bindBankAccount, bindBankAddress, bindBankId);
-      if (code === 200) {
-        fetchBindCardList();
-        openAlert(msg);
-        setTimeout(() => {
-          closeBindBank();
-        }, 500);
-      } else if (code === 500) {
-        openAlert(msg);
-      }
+    const alerts = [
+      { condition: !bindRealName, message: '请输入您的姓名' },
+      { condition: !bindBankAccount, message: '请输入户行卡号' },
+      { condition: !bindBankAddress, message: '请输入开户地址' },
+      { condition: bindBankAccount?.length < 16, message: '请输入超过16个银行卡号' },
+    ];
+
+    for (const { condition, message } of alerts) {
+      if (condition) return openAlert(message);
+    }
+
+    const { code, msg } = await setBindCard(bindRealName, bindBankAccount, bindBankAddress, bindBankId);
+    openAlert(msg);
+    if (code === 200) {
+      fetchBindCardList();
+      setTimeout(closeBindBank, 500);
     }
   };
 
