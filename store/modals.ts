@@ -54,8 +54,11 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   isShareOpen: false,
   openSidebarAnnouncement: 0,
   openContentAnnouncement: 0,
-  openAlert: (alertContent?) => {
-    set((state) => ({ ...state, isAlertOpen: true, alertContent: alertContent || '出了点问题' }));
+  openAlert: (alertContent?: string) => {
+    set((state) => ({ ...state, isAlertOpen: false }));
+    setTimeout(() => {
+      set((state) => ({ ...state, isAlertOpen: true, alertContent: alertContent || '出了点问题' }));
+    }, 0);
   },
   closeAlert: () => set((state) => ({ ...state, isAlertOpen: false, alertContent: '' })),
   openLoginOptions: () => set((state) => ({ ...state, isLoginOptionsOpen: true })),

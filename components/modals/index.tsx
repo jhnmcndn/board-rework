@@ -21,7 +21,6 @@ const ModalRoot = () => {
 
   return (
     <>
-      <AlertModal />
       <LoginOptionsModal />
       <BindBankModal />
       <BindUSDTModal />
@@ -31,6 +30,7 @@ const ModalRoot = () => {
       <AnnouncementModal />
       <CommissionModal />
       <ShareModal />
+      <AlertModal />
     </>
   );
 };
