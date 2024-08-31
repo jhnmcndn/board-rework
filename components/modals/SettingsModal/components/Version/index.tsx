@@ -1,9 +1,9 @@
+import VersionModal from '@/components/modals/VersionModal';
 import { useAccountStore } from '@/components/Providers/AccountStoreProvider';
 import { APP_VERSION } from '@/constants/app';
 import useCopyToClipBoard from '@/hooks/useCopyToClipboard';
-import useModalStore from '@/store/modals';
 import { VersionRowProps } from '@/types/app';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import styles from './index.module.scss';
 
 const VersionRow: FC<VersionRowProps> = ({ label, value, buttonLabel, onButtonClick }) => (
@@ -18,8 +18,8 @@ const VersionRow: FC<VersionRowProps> = ({ label, value, buttonLabel, onButtonCl
 
 const Version: FC = () => {
   const init = useAccountStore((state) => state.init);
-  const { openVersion } = useModalStore();
   const { copyToClipboard } = useCopyToClipBoard();
+  const [isVersionModalOpen, setIsVersionModalOpen] = useState(false);
   const linkUrl = 'https://yb3f68.com/chat/text/chat_1UdkUk.html';
   const version = `V ${APP_VERSION}`;
 
@@ -32,7 +32,13 @@ const Version: FC = () => {
         onButtonClick={() => copyToClipboard(init.webUrl)}
       />
       <VersionRow label='客服线:' value={linkUrl} buttonLabel='复制' onButtonClick={() => copyToClipboard(linkUrl)} />
-      <VersionRow label='当前版本号:' value={version} buttonLabel='获取版本' onButtonClick={() => openVersion()} />
+      <VersionRow
+        label='当前版本号:'
+        value={version}
+        buttonLabel='获取版本'
+        onButtonClick={() => setIsVersionModalOpen(true)}
+      />
+      <VersionModal show={isVersionModalOpen} setShow={setIsVersionModalOpen} />
     </div>
   );
 };

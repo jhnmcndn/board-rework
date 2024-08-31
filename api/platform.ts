@@ -230,6 +230,7 @@ export const getActivityTypes = async () => {
   if (!data.data || 'message' in data.data) return [] satisfies ActivityTypes[];
   return data.data;
 };
+
 export const getActivityInfos = async (activityType: number) => {
   const data = await request<RootResponse<ActivityInfos[]>>({
     route: APP_ROUTE.PLATFORM,
@@ -303,6 +304,7 @@ export const getBoxAccount = async ({ boxPass }: { boxPass: string }) => {
   if (!data.data || 'message' in data.data) return { accountNow: 1234, boxAccount: 4567 } satisfies BoxAccountResponse;
   return data.data;
 };
+
 export const requestOTP = async (phoneNumber: string) => {
   const data = await request<RootResponse<any[]>>({
     route: APP_ROUTE.PLATFORM,

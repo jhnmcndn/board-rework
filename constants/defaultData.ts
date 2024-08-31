@@ -1,38 +1,4 @@
 import { AccountInfo, Init, PayTypeList, RootResponse } from '@/types/app';
-import {
-  EmailIcon,
-  EmailShareButton,
-  FacebookIcon,
-  FacebookShareButton,
-  HatenaIcon,
-  HatenaShareButton,
-  InstapaperIcon,
-  InstapaperShareButton,
-  LineIcon,
-  LineShareButton,
-  LinkedinIcon,
-  LinkedinShareButton,
-  MailruIcon,
-  MailruShareButton,
-  OKIcon,
-  OKShareButton,
-  PocketIcon,
-  PocketShareButton,
-  RedditIcon,
-  RedditShareButton,
-  TelegramIcon,
-  TelegramShareButton,
-  TumblrIcon,
-  TumblrShareButton,
-  TwitterIcon,
-  TwitterShareButton,
-  ViberIcon,
-  ViberShareButton,
-  VKIcon,
-  VKShareButton,
-  WhatsappIcon,
-  WhatsappShareButton,
-} from 'react-share';
 
 export const defaultRootResponse = {
   code: 500,
@@ -82,25 +48,6 @@ export const defaultAccountInfo = {
   phone: undefined,
   newAccount: undefined,
 } satisfies AccountInfo;
-
-export const shareButtons = [
-  { Button: EmailShareButton, Icon: EmailIcon, name: 'Email' },
-  { Button: FacebookShareButton, Icon: FacebookIcon, name: 'Facebook' },
-  { Button: WhatsappShareButton, Icon: WhatsappIcon, name: 'WhatsApp' },
-  { Button: VKShareButton, Icon: VKIcon, name: 'VK' },
-  { Button: HatenaShareButton, Icon: HatenaIcon, name: 'Hatena' },
-  { Button: LinkedinShareButton, Icon: LinkedinIcon, name: 'LinkedIn' },
-  { Button: InstapaperShareButton, Icon: InstapaperIcon, name: 'Instapaper' },
-  { Button: LineShareButton, Icon: LineIcon, name: 'Line' },
-  { Button: MailruShareButton, Icon: MailruIcon, name: 'Mailru' },
-  { Button: OKShareButton, Icon: OKIcon, name: 'OK' },
-  { Button: TelegramShareButton, Icon: TelegramIcon, name: 'Telegram' },
-  { Button: PocketShareButton, Icon: PocketIcon, name: 'Pocket' },
-  { Button: TwitterShareButton, Icon: TwitterIcon, name: 'Twitter' },
-  { Button: ViberShareButton, Icon: ViberIcon, name: 'Viber' },
-  { Button: RedditShareButton, Icon: RedditIcon, name: 'Reddit' },
-  { Button: TumblrShareButton, Icon: TumblrIcon, name: 'Tumblr' },
-];
 
 export const defaultPayTypeList = {
   createBy: '',

@@ -68,10 +68,9 @@
   }
 
   &__btnContainer {
+    @include flex-xy;
     width: 100%;
     margin-top: 0.1rem;
-
-    @include flex-xy;
 
     button {
       background: center / contain no-repeat url('../../../assets/commons/button.png');
