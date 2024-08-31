@@ -7,7 +7,7 @@ import { AccountInfo, ErrorData, RootResponse } from '@/types/app';
 import { getDeviceId, getDeviceInfo, getFromLocalStorage } from '@/utils/helpers';
 
 type LoginMethod = 'device' | 'phone' | 'user-pass' | 'captcha';
-type LoginPayload = { validate?: string; id?: string; password?: string };
+type LoginPayload = { validate: string; id: string; password: string };
 
 const useAuthActions = () => {
   const deviceId = getDeviceId();
@@ -53,7 +53,7 @@ const useAuthActions = () => {
   };
 
   const logout = () => {
-    // TODO add reset for other store data
+    // TODO add reset for other store data if necessary
     setAccountInfo(defaultAccountInfo);
     localStorage.removeItem('token');
     openLoginOptions();

@@ -2,30 +2,35 @@
 
 import copyIcon from '@/assets/blackGold/header/copy.png';
 import ModalLayout from '@/components/modals/ModalLayout';
-import { shareButtons } from '@/constants/defaultData'; // Move share button config to a separate file
+import { shareButtons } from '@/constants/app'; // Move share button config to a separate file
 import useCopyToClipBoard from '@/hooks/useCopyToClipboard';
 import useIsMounted from '@/hooks/useIsMounted';
-import useModalStore from '@/store/modals';
 import { AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import styles from './index.module.scss';
 
-const ShareModal = () => {
+type ShareModalProps = {
+  show: boolean;
+  setShow: (val: boolean) => void;
+};
+
+const ShareModal: FC<ShareModalProps> = ({ show, setShow }) => {
   const isMounted = useIsMounted();
   const { copyToClipboard } = useCopyToClipBoard();
-  const { closeShare, isShareOpen } = useModalStore();
   const [shareUrl, setShareUrl] = useState('www.example.com');
 
   useEffect(() => {
     setShareUrl(localStorage.getItem('shareUrl') || 'www.example.com');
-  }, [isShareOpen]);
+  }, [show]);
+
+  const closeShare = () => setShow(false);
 
   const modalContent = useMemo(
     () => (
       <AnimatePresence>
-        {isShareOpen && isMounted() && (
-          <ModalLayout onClose={closeShare} backdrop={0.8}>
+        {show && isMounted() && (
+          <ModalLayout closeOnOutsideClick onClose={closeShare} backdrop={0.8}>
             <div className={styles.shareModal}>
               <div className={styles.shareModal__content}>
                 <div className={styles.shareModal__copyContainer}>
@@ -50,7 +55,7 @@ const ShareModal = () => {
         )}
       </AnimatePresence>
     ),
-    [isShareOpen, shareUrl, closeShare],
+    [show, shareUrl, closeShare],
   );
 
   return modalContent;

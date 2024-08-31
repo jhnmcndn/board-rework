@@ -5,7 +5,6 @@ interface ModalStore {
   isAlertOpen: boolean;
   openAlert: (newContent: string | undefined) => void;
   closeAlert: () => void;
-  isShareOpen: boolean;
   isLoginOptionsOpen: boolean;
   openLoginOptions: () => void;
   closeLoginOptions: () => void;
@@ -21,17 +20,12 @@ interface ModalStore {
   isWithdrawSuccessOpen: boolean;
   openWithdrawSuccess: () => void;
   closeWithdrawSuccess: () => void;
-  isVersionOpen: boolean;
-  openVersion: () => void;
-  closeVersion: () => void;
   isPassCodeOpen: boolean;
   openPassCode: () => void;
   closePassCode: () => void;
   isCommissionOpen: boolean;
   openCommission: () => void;
   closeCommission: () => void;
-  openShare: () => void;
-  closeShare: () => void;
   openSidebarAnnouncement: number;
   setSidebarAnnouncement: (openSidebarAnnouncement: number) => void;
   openContentAnnouncement: number;
@@ -48,10 +42,8 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   isBindBankOpen: false,
   isBindUSDTOpen: false,
   isWithdrawSuccessOpen: false,
-  isVersionOpen: false,
   isPassCodeOpen: false,
   isCommissionOpen: false,
-  isShareOpen: false,
   openSidebarAnnouncement: 0,
   openContentAnnouncement: 0,
   openAlert: (alertContent?: string) => {
@@ -71,14 +63,10 @@ const useModalStore = create<ModalStore & ModalStoreActions>((set) => ({
   closeBindUSDT: () => set((state) => ({ ...state, isBindUSDTOpen: false })),
   openWithdrawSuccess: () => set((state) => ({ ...state, isWithdrawSuccessOpen: true })),
   closeWithdrawSuccess: () => set((state) => ({ ...state, isWithdrawSuccessOpen: false })),
-  openVersion: () => set((state) => ({ ...state, isVersionOpen: true })),
-  closeVersion: () => set((state) => ({ ...state, isVersionOpen: false })),
   openPassCode: () => set((state) => ({ ...state, isPassCodeOpen: true })),
   closePassCode: () => set((state) => ({ ...state, isPassCodeOpen: false })),
   openCommission: () => set((state) => ({ ...state, isCommissionOpen: true })),
   closeCommission: () => set((state) => ({ ...state, isCommissionOpen: false })),
-  openShare: () => set((state) => ({ ...state, isShareOpen: true })),
-  closeShare: () => set((state) => ({ ...state, isShareOpen: false })),
   setSidebarAnnouncement: (openSidebarAnnouncement) => set(() => ({ openSidebarAnnouncement })),
   setContentAnnouncement: (openContentAnnouncement) => set(() => ({ openContentAnnouncement })),
 }));

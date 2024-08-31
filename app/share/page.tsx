@@ -1,8 +1,8 @@
 'use client';
 
 import { getRecommendDetail } from '@/api/game';
+import ShareModal from '@/components/modals/ShareModal';
 import OtherHeader from '@/components/OtherHeader';
-import useModalStore from '@/store/modals';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import styles from './page.module.scss';
@@ -22,9 +22,9 @@ type RecommendDetailData = {
 };
 
 const Share = () => {
-  const { openShare } = useModalStore();
-  const [recommendDetailData, setRecommendDetailData] = useState<RecommendDetailData>({});
   const [isQrCode, setIsQrCode] = useState(false);
+  const [isShareModalOpen, setIsShareButtonOpen] = useState(false);
+  const [recommendDetailData, setRecommendDetailData] = useState<RecommendDetailData>({});
 
   useEffect(() => {
     updateRecommendDetail();
@@ -37,7 +37,7 @@ const Share = () => {
 
   return (
     <>
-      <OtherHeader headerTitle={'推广代理'} to='/promotion-agent' showPurse />
+      <OtherHeader headerTitle='推广代理' to='/promotion-agent' showPurse />
       <div
         className={styles.shareQRCode}
         style={{
@@ -52,12 +52,13 @@ const Share = () => {
             <div
               className={styles.shareQRCode__qrCodeBtn}
               onClick={() => {
-                openShare();
-                localStorage.setItem('shareUrl', recommendDetailData?.url?.toString() || 'www.example.com');
+                setIsShareButtonOpen(true);
+                localStorage.setItem('shareUrl', `${recommendDetailData?.url}` || 'www.example.com');
               }}
             >
               <span>会员ID:{recommendDetailData?.memberCode}</span>
             </div>
+            <ShareModal show={isShareModalOpen} setShow={setIsShareButtonOpen} />
           </>
         )}
       </div>
